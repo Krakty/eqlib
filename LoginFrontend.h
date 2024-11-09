@@ -255,7 +255,7 @@ namespace eqmain {
 // CXWnd
 //============================================================================
 
-// 2024-10-14 (live) @ 0x1800CFD2B
+// 2024-11-08 (live) @ 0x1800CF69B
 constexpr size_t CXWnd_size = 0x258;
 constexpr size_t CXWnd_vftable_size = 0x2D0;
 
