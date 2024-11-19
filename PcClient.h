@@ -929,73 +929,73 @@ public:
 /*0x3004*/ EQZoneIndex                           currentZoneId;
 /*0x3008*/ uint8_t                               standstate;
 /*0x300c*/ RaidData                              raidData;
-/*0x30e8*/ int                                   ExpansionFlags;
-/*0x30ec*/ bool                                  bSuperPKILL;
-/*0x30ed*/ bool                                  bUnclone;
-/*0x30ee*/ bool                                  bDead;
-/*0x30f0*/ int                                   LD_Timer;
-/*0x30f4*/ int                                   SpellInterruptCount;
-/*0x30f8*/ bool                                  bAutoSplit;
-/*0x30f9*/ bool                                  bTellsOff;
-/*0x30fa*/ bool                                  bGmInvis;
-/*0x30fc*/ int                                   KillMe;
-/*0x3100*/ bool                                  CheaterLdFlag;                // likely this is int SoulMarkCount instead.
-/*0x3101*/ bool                                  NoRent;
-/*0x3102*/ bool                                  Corpse;
-/*0x3103*/ bool                                  ClientGmFlagSet;
-/*0x3104*/ int                                   BankSharedPlat;
-/*0x3108*/ int                                   BankPlat;
-/*0x310c*/ int                                   BankGold;
-/*0x3110*/ int                                   BankSilver;
-/*0x3114*/ int                                   BankCopper;
-/*0x3118*/ int                                   Platinum;
-/*0x311c*/ int                                   Gold;
-/*0x3120*/ int                                   Silver;
-/*0x3124*/ int                                   Copper;
-/*0x3128*/ int                                   STR;
-/*0x312c*/ int                                   STA;
-/*0x3130*/ int                                   CHA;
-/*0x3134*/ int                                   DEX;
-/*0x3138*/ int                                   INT;
-/*0x313c*/ int                                   AGI;
-/*0x3140*/ int                                   WIS;
-/*0x3144*/ int                                   LCK;
-/*0x3148*/ int                                   SavePoison;
-/*0x314c*/ int                                   SaveMagic;
-/*0x3150*/ int                                   SaveDisease;
-/*0x3154*/ int                                   SaveCorruption;
-/*0x3158*/ int                                   SaveFire;
-/*0x315c*/ int                                   SaveCold;
-/*0x3160*/ int                                   SavePhysical;
-/*0x3164*/ int                                   UncappedStr;
-/*0x3168*/ int                                   UncappedSta;
-/*0x316c*/ int                                   UncappedCha;
-/*0x3170*/ int                                   UncappedDex;
-/*0x3174*/ int                                   UncappedInt;
-/*0x3178*/ int                                   UncappedAgi;
-/*0x317c*/ int                                   UncappedWis;
-/*0x3180*/ int                                   UncappedResistPoison;
-/*0x3184*/ int                                   UncappedResistMagic;
-/*0x3188*/ int                                   UncappedResistDisease;
-/*0x318c*/ int                                   UncappedResistCorruption;
-/*0x3190*/ int                                   UncappedResistFire;
-/*0x3194*/ int                                   UncappedResistCold;
-/*0x3198*/ int                                   UncappedResistPhysical;
-/*0x319c*/ int                                   NoBuffStr;
-/*0x31a0*/ int                                   NoBuffSta;
-/*0x31a4*/ int                                   NoBuffCha;
-/*0x31a8*/ int                                   NoBuffDex;
-/*0x31ac*/ int                                   NoBuffInt;
-/*0x31b0*/ int                                   NoBuffAgi;
-/*0x31b4*/ int                                   NoBuffWis;
-/*0x31b8*/ int                                   NoBuffResistPoison;
-/*0x31bc*/ int                                   NoBuffResistMagic;
-/*0x31c0*/ int                                   NoBuffResistDisease;
-/*0x31c4*/ int                                   NoBuffResistCorruption;
-/*0x31c8*/ int                                   NoBuffResistFire;
-/*0x31cc*/ int                                   NoBuffResistCold;
-/*0x31d0*/ int                                   NoBuffResistPhysical;
-/*0x31d4*/
+/*0x30e8*/ int64_t                              ExpansionFlags;
+/*0x30f0*/ bool                                  bSuperPKILL;
+/*0x30f1*/ bool                                  bUnclone;
+/*0x30f2*/ bool                                  bDead;
+/*0x30f4*/ int                                   LD_Timer;
+/*0x30f8*/ int                                   SpellInterruptCount;
+/*0x30fc*/ bool                                  bAutoSplit;
+/*0x30fd*/ bool                                  bTellsOff;
+/*0x30fe*/ bool                                  bGmInvis;
+/*0x3100*/ int                                   KillMe;
+/*0x3104*/ bool                                  CheaterLdFlag;                // likely this is int SoulMarkCount instead.
+/*0x3105*/ bool                                  NoRent;
+/*0x3106*/ bool                                  Corpse;
+/*0x3107*/ bool                                  ClientGmFlagSet;
+/*0x3108*/ int                                   BankSharedPlat;
+/*0x310c*/ int                                   BankPlat;
+/*0x3110*/ int                                   BankGold;
+/*0x3114*/ int                                   BankSilver;
+/*0x3118*/ int                                   BankCopper;
+/*0x311c*/ int                                   Platinum;
+/*0x3120*/ int                                   Gold;
+/*0x3124*/ int                                   Silver;
+/*0x3128*/ int                                   Copper;
+/*0x312c*/ int                                   STR;
+/*0x3130*/ int                                   STA;
+/*0x3134*/ int                                   CHA;
+/*0x3138*/ int                                   DEX;
+/*0x313c*/ int                                   INT;
+/*0x3140*/ int                                   AGI;
+/*0x3144*/ int                                   WIS;
+/*0x3148*/ int                                   LCK;
+/*0x314c*/ int                                   SavePoison;
+/*0x3150*/ int                                   SaveMagic;
+/*0x3154*/ int                                   SaveDisease;
+/*0x3158*/ int                                   SaveCorruption;
+/*0x315c*/ int                                   SaveFire;
+/*0x3160*/ int                                   SaveCold;
+/*0x3164*/ int                                   SavePhysical;
+/*0x3168*/ int                                   UncappedStr;
+/*0x316c*/ int                                   UncappedSta;
+/*0x3170*/ int                                   UncappedCha;
+/*0x3174*/ int                                   UncappedDex;
+/*0x3178*/ int                                   UncappedInt;
+/*0x317c*/ int                                   UncappedAgi;
+/*0x3180*/ int                                   UncappedWis;
+/*0x3184*/ int                                   UncappedResistPoison;
+/*0x3188*/ int                                   UncappedResistMagic;
+/*0x318c*/ int                                   UncappedResistDisease;
+/*0x3190*/ int                                   UncappedResistCorruption;
+/*0x3194*/ int                                   UncappedResistFire;
+/*0x3198*/ int                                   UncappedResistCold;
+/*0x319c*/ int                                   UncappedResistPhysical;
+/*0x31a0*/ int                                   NoBuffStr;
+/*0x31a4*/ int                                   NoBuffSta;
+/*0x31a8*/ int                                   NoBuffCha;
+/*0x31ac*/ int                                   NoBuffDex;
+/*0x31b0*/ int                                   NoBuffInt;
+/*0x31b4*/ int                                   NoBuffAgi;
+/*0x31b8*/ int                                   NoBuffWis;
+/*0x31bc*/ int                                   NoBuffResistPoison;
+/*0x31c0*/ int                                   NoBuffResistMagic;
+/*0x31c4*/ int                                   NoBuffResistDisease;
+/*0x31c8*/ int                                   NoBuffResistCorruption;
+/*0x31cc*/ int                                   NoBuffResistFire;
+/*0x31d0*/ int                                   NoBuffResistCold;
+/*0x31d4*/ int                                   NoBuffResistPhysical;
+/*0x31d8*/
 
 	virtual void Copy(const CharacterBase& other) {}
 	virtual ~CharacterBase() {}
@@ -1009,7 +1009,7 @@ public:
 	__declspec(property(get = get_zoneId)) uint16_t zoneId;
 
 	// Verified
-	EQLIB_OBJECT int IsExpansionFlag(int);
+	EQLIB_OBJECT int IsExpansionFlag(int64_t);
 
 	int GetMemorizedSpell(int index) { return GetCurrentBaseProfile().GetMemorizedSpell(index); }
 	int GetSpellBook(int index) { return GetCurrentBaseProfile().GetSpellBook(index); }
@@ -1674,7 +1674,7 @@ public:
 	int GetDeityBitmask() const { return 1 << (GetDeityReal() - 1); }
 };
 
-// @sizeof(PcClient) == 0x31d8 :: 2024-11-08 (live) @ 0x140273c9b
+// @sizeof(PcClient) == 0x31d8 :: 2024-11-12 (test) @ 0x14027387b
 constexpr size_t PcClient_size = 0x31d8;
 
 class [[offsetcomments]] PcClient : public PcZoneClient
