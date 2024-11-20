@@ -424,8 +424,7 @@ public:
 /*0x1040*/ HashTable<RealEstateItems*, int>       itemLists;
 /*0x1058*/ RealEstateDefinitionManager*           definitions;
 /*0x1060*/ RealEstateCostManager*                 costs;
-/*0x1068*/ RealEstateItemGroupManager*            itemGroups;       // appears to always be empty
-/*0x1070*/
+/*0x1068*/
 };
 
 class [[offsetcomments]] RealEstateManagerClient : public RealEstateManager,
@@ -445,18 +444,18 @@ public:
 	int GetCurrentMovingCrateId() const { return currentMovingCrateId; }
 
 
-/*0x1080*/ uint32_t           lastRefreshTime;
-/*0x1084*/ int                zoneRealEstateId;
-/*0x1088*/ RealEstateType     zoneRealEstateType;
-/*0x108c*/ int                currentRealEstateId;
-/*0x1090*/ int                currentYardId;
-/*0x1094*/ int                currentHouseId;
-/*0x1098*/ int                currentMovingCrateId;
-/*0x109c*/ bool               requestPending;
-/*0x10a0*/ uint32_t           requestTime;
-/*0x10a4*/ bool               printRequestTimes;
-/*0x10a8*/ UniqueIdGen<int>*  idGen;
-/*0x10b0*/
+/*0x1078*/ uint32_t           lastRefreshTime;
+/*0x107c*/ int                zoneRealEstateId;
+/*0x1080*/ RealEstateType     zoneRealEstateType;
+/*0x1084*/ int                currentRealEstateId;
+/*0x1088*/ int                currentYardId;
+/*0x108c*/ int                currentHouseId;
+/*0x1090*/ int                currentMovingCrateId;
+/*0x1094*/ bool               requestPending;
+/*0x1098*/ uint32_t           requestTime;
+/*0x109c*/ bool               printRequestTimes;
+/*0x10a0*/ UniqueIdGen<int>*  idGen;
+/*0x10a8*/
 };
 
 using RealEstateItemClient = RealEstateItem;

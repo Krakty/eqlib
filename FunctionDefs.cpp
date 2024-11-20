@@ -2627,7 +2627,7 @@ FUNCTION_AT_ADDRESS(const char*, ExtendedTargetList::ExtendedTargetRoleName(uint
 //----------------------------------------------------------------------------
 
 #ifdef CharacterBase__IsExpansionFlag_x
-FUNCTION_AT_ADDRESS(int, CharacterBase::IsExpansionFlag(int), CharacterBase__IsExpansionFlag);
+FUNCTION_AT_ADDRESS(int, CharacterBase::IsExpansionFlag(int64_t), CharacterBase__IsExpansionFlag);
 #endif
 
 //----------------------------------------------------------------------------

@@ -220,6 +220,9 @@ const char* szExpansions[NUM_EXPANSIONS + 1] = {
 #if IS_EXPANSION_LEVEL(EXPANSION_LEVEL_LS)
 	"Laurion's Song",
 #endif
+#if IS_EXPANSION_LEVEL(EXPANSION_LEVEL_TOB)
+	"The Outer Brood",
+#endif
 	nullptr
 };
 static_assert(lengthof(szExpansions) - 1 == NUM_EXPANSIONS,

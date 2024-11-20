@@ -42,6 +42,7 @@ public:
 /*0x70*/ T*            target;
 /*0x78*/ eqstd::string str_78;
 /*0x98*/ uint64_t      u64_98;
+/*0xa0*/
 };
 
 class [[offsetcomments]] UIComponent : public BaseComponent<CXWnd>
@@ -63,6 +64,40 @@ public:
 /*0xa4*/
 };
 
+class [[offsetcomments]] UIButtonComponent : public UIComponent
+{
+public:
+	virtual eqstd::string GetTypeName() const override { return "UIButton"; }
+
+};
+
+class [[offsetcomments]] UIStmlComponent : public UIComponent
+{
+public:
+	virtual eqstd::string GetTypeName() const override { return "UIStml"; }
+
+/*0xa0*/
+};
+
+class [[offsetcomments]] UIInvSlotComponent
+{
+public:
+/*0x00*/ eqstd::string name;
+/*0x20*/ eqstd::string fullName;
+/*0x40*/ eqstd::string modelPrefix;
+/*0x60*/ CInvSlotWnd*  parent;
+/*0x68*/ int           i32_68;   // -2
+/*0x6c*/ float         float_6c; // -1.0
+/*0x70*/ float         float_70; // -1.0
+/*0x74*/ int           i32_74;
+/*0x78*/ int           i32_78;
+/*0x7c*/ int           i32_7c;
+/*0x80*/ int           i32_80;
+/*0x88*/ eqstd::string str_88;
+/*0xa8*/
+};
+
+
 class [[offsetcomments]] CGFScreenWnd : public CSidlScreenWnd
 {
 public:
@@ -73,9 +108,9 @@ public:
 
 	virtual void HandleEvent(void* a, void* b);
 
-/*0x2c0*/ UIScreenComponent                                 WindowComponent;
-/*0x368*/ eqstd::unordered_map<eqstd::string, UIComponent*> ChildComponents;
-/*0x3a8*/
+/*0x2d0*/ UIScreenComponent                                 WindowComponent;
+/*0x378*/ eqstd::unordered_map<eqstd::string, UIComponent*> ChildComponents;
+/*0x3b8*/
 };
 
 namespace cohtml {

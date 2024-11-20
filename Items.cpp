@@ -307,7 +307,6 @@ ItemBase::ItemBase()
 	LastCastTime = 0;
 	Power = 0;
 	ItemHash = 0;
-	bRealEstateItemPlaceable = false;
 	StackCount = 1;
 	OrnamentationIcon = 0;
 	MerchantQuantity = 1;

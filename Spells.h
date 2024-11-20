@@ -906,7 +906,7 @@ using PSPELLCALCINFO = SPELLCALCINFO*;
 #pragma pack(push)
 #pragma pack(1)
 
-// @sizeof(EQ_Spell) == 0x210 :: 2024-11-08 (live) @ 0x1401d2037
+// @sizeof(EQ_Spell) == 0x210 :: 2024-11-12 (test) @ 0x1401d2677
 constexpr size_t EQ_Spell_size = 0x210;
 
 class [[offsetcomments]] EQ_Spell
@@ -1282,8 +1282,8 @@ struct [[offsetcomments]] StackingGroupData
 /*0x0c*/
 };
 
-constexpr int TOTAL_SPELL_COUNT = 72000;           // # of spells allocated in memory (09/07/2021 test 6C944E)
-constexpr int TOTAL_SPELL_AFFECT_COUNT = 260000;   // # of spell affects allocated in mem (09/07/2021 test 6C948E)
+constexpr int TOTAL_SPELL_COUNT = 72000;           // # of spells allocated in memory - SpellManager::FreeSpells
+constexpr int TOTAL_SPELL_AFFECT_COUNT = 290000;   // # of spell affects allocated in mem - SpellManager::FreeSpellAffects
 
 class [[offsetcomments]] SpellManager : public FileStatMgr
 {
@@ -1306,8 +1306,8 @@ public:
 	EQLIB_OBJECT const EQ_Spell* GetSpellByGroupAndRank(int Group, int SubGroup, int Rank = -1, bool bLesserRanksOk = false);
 };
 
-// @sizeof(ClientSpellManager) == 0x3ea220 :: 2024-11-08 (live) @ 0x14026183b
-constexpr size_t ClientSpellManager_size = 0x3ea220;
+// @sizeof(ClientSpellManager) == 0x424BA0 :: 2024-11-12 (test) @ 0x14026143b
+constexpr size_t ClientSpellManager_size = 0x424BA0;
 
 class [[offsetcomments]] ClientSpellManager : public SpellManager
 {
@@ -1329,15 +1329,10 @@ public:
 
 /*0x048708*/ EQ_Spell*                    Spells[TOTAL_SPELL_COUNT];
 /*0x0d5108*/ SpellAffectData*             CalcInfo[TOTAL_SPELL_AFFECT_COUNT];
-/*0x2d0e08*/ EQSpellExtra                 SpellExtraData[TOTAL_SPELL_COUNT];
-/*0x3ea208*/ HashTable<StackingGroupData> StackingData;
-/*0x3ea220*/
+/*0x30b788*/ EQSpellExtra                 SpellExtraData[TOTAL_SPELL_COUNT];
+/*0x424b88*/ HashTable<StackingGroupData> StackingData;
+/*0x424ba0*/
 };
-
-inline namespace deprecated {
-	using SPELLMGR DEPRECATE("Use ClientSpellManager instead of SPELLMGR") = ClientSpellManager;
-	using PSPELLMGR DEPRECATE("Use ClientSpellManager* instead of PSPELLMGR") = ClientSpellManager*;
-}
 
 SIZE_CHECK(ClientSpellManager, ClientSpellManager_size);
 
