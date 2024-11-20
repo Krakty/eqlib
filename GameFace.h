@@ -34,6 +34,9 @@ public:
 	virtual void SyncFromJS() {}
 	virtual void SyncToJS() {}
 
+	T* GetTarget() const { return target; }
+	bool IsValid() const { return !name.empty() && target != nullptr; }
+
 /*0x00*/ // vftable
 /*0x08*/ eqstd::string name;
 /*0x28*/ eqstd::string fullName;
@@ -64,14 +67,14 @@ public:
 /*0xa4*/
 };
 
-class [[offsetcomments]] UIButtonComponent : public UIComponent
+class [[offsetcomments]] UIButtonComponent : public BaseComponent<CButtonWnd>
 {
 public:
 	virtual eqstd::string GetTypeName() const override { return "UIButton"; }
 
 };
 
-class [[offsetcomments]] UIStmlComponent : public UIComponent
+class [[offsetcomments]] UIStmlComponent : public BaseComponent<CStmlWnd>
 {
 public:
 	virtual eqstd::string GetTypeName() const override { return "UIStml"; }
@@ -85,7 +88,7 @@ public:
 /*0x00*/ eqstd::string name;
 /*0x20*/ eqstd::string fullName;
 /*0x40*/ eqstd::string modelPrefix;
-/*0x60*/ CInvSlotWnd*  parent;
+/*0x60*/ CInvSlotWnd*  target;
 /*0x68*/ int           i32_68;   // -2
 /*0x6c*/ float         float_6c; // -1.0
 /*0x70*/ float         float_70; // -1.0

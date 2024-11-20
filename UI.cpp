@@ -22,12 +22,14 @@
 namespace eqlib {
 
 //============================================================================
-// Statics
+// Statics/Globals
 //============================================================================
 
 CButtonWnd::VirtualFunctionTable* CButtonWnd::sm_vftable = nullptr;
 CListWnd::VirtualFunctionTable* CListWnd::sm_vftable = nullptr;
 CSidlScreenWnd::VirtualFunctionTable* MapViewMap::sm_vftable = nullptr;
+
+bool gbUseNewUIEngine = false;
 
 //============================================================================
 // Misc stuff
@@ -1088,6 +1090,8 @@ void InitializeInGameUI()
 		// this hotbutton pointer always mirrors the first one in the array
 		pHotButtonWnd = pHotButtonWnds[0];
 	}
+
+	gbUseNewUIEngine = pEverQuestInfo->bUseNewUIEngine;
 }
 
 //----------------------------------------------------------------------------
