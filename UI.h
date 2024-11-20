@@ -810,6 +810,9 @@ public:
 	virtual void UpdateText();
 	virtual void ResizeHeightToText();
 
+	CXStr GetText() const { return Text; }
+	void SetText(const CXStr& text) { Text = text; }
+
 	// data members
 /*0x268*/ bool         bNoWrap;
 /*0x269*/ bool         bAlignRight;
@@ -1406,7 +1409,10 @@ public:
 	EQLIB_OBJECT void StripFirstSTMLLines(int);
 	EQLIB_OBJECT void UpdateHistoryString(int32_t, const CXStr&);
 
-	inline CXStr GetSTMLText() const { return STMLText; }
+	CXStr GetSTMLText() const { return STMLText; }
+
+	CXStr GetText() const { return STMLText; }
+	void SetText(const CXStr& str) { STMLText = str; }
 
 	//----------------------------------------------------------------------------
 	// data members
@@ -3662,7 +3668,7 @@ public:
 /*0x3c8*/ CButtonWnd*        pMoneyButton[4];
 /*0x3e8*/ CButtonWnd*        TradeButton;
 /*0x3f0*/ CButtonWnd*        CancelButton;
-/*0x3f8*/ CLabel*            NPCNameLabel;
+/*0x3f8*/ CStmlWnd*          NPCNameLabel;
 /*0x400*/ CInvSlotWnd*       pInvSlotWnd[MAX_GIVE_SLOTS];
 /*0x420*/ UIButtonComponent  MoneyButtonComponents[4];
 /*0x6a0*/ UIButtonComponent  TradeButtonComponent;
@@ -6388,8 +6394,8 @@ public:
 /*0x03e8*/ CButtonWnd*        MyMoneyButton[4];
 /*0x0408*/ CButtonWnd*        TradeButton;
 /*0x0410*/ CButtonWnd*        CancelButton;
-/*0x0418*/ CLabel*            HisNameLabel;
-/*0x0420*/ CLabel*            MyNameLabel;
+/*0x0418*/ CStmlWnd*          HisNameLabel;
+/*0x0420*/ CStmlWnd*          MyNameLabel;
 /*0x0428*/ CInvSlotWnd*       pInvSlotWnd[MAX_TRADE_SLOTS];
 /*0x04a8*/ UIButtonComponent  HisMoneyComponent[4];     // 4a8
 /*0x0728*/ UIButtonComponent  MyMoneyComponent[4];      // 728
