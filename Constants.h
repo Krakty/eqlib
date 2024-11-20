@@ -364,6 +364,16 @@ enum EQDeity
 };
 #define NUM_DEITIES                              16
 
+enum MoneySlotType
+{
+	eMoneySlotTypeNone = -1,
+	ePlatinumMoneySlotType = 0,
+	eGoldMoneySlotType,
+	eSilverMoneySlotType,
+	eCopperMoneySlotType,
+	eNumMoneySlotTypes = 4,
+};
+
 enum KeyRingType
 {
 	eMount = 0,
