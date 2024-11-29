@@ -1572,7 +1572,7 @@ public:
 /*0x26f8*/ int                                   FreeToPlayUnlocks[33];
 /*0x277c*/ // end PcBase / start CharacterZoneClient
 
-	// basis: 0x2848
+	// basis: 0x2788
 
 	PcProfile* GetCurrentPcProfile() { return (PcProfile*)&GetCurrentBaseProfile(); }
 	PcProfile* GetCurrentPcProfile() const { return (PcProfile*)&GetCurrentBaseProfile(); }
