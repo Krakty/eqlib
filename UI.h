@@ -4743,9 +4743,9 @@ public:
 /*0x430*/ CPageWnd*     pPageHeroForge;                  // KRW_HeroForge_Page
 /*0x438*/ CPageWnd*     pPageTeleportation;              // KRW_TeleportationItems_Page
 /*0x440*/ CPageWnd*     pPageActivated;                  // KRW_ActivatedItems_Page
-/*0x440*/ CTabWnd*      pTabBox;                         // KRW_Subwindows
-/*0x448*/ KeyRingPages  CurrentPage;
-/*0x44c*/
+/*0x448*/ CTabWnd*      pTabBox;                         // KRW_Subwindows
+/*0x450*/ KeyRingPages  CurrentPage;
+/*0x454*/
 };
 
 SIZE_CHECK(CKeyRingWnd, CKeyRingWnd_size);
@@ -6562,10 +6562,10 @@ public:
 	//virtual void Unserialize(CUnserializeBuffer&);
 
 /*0x0008*/ ZoneGuideZone                     zones[ZONE_COUNT];
-/*0xf6b0*/ ArrayClass<ZoneGuideContinent>    continents;
-/*0xf6c8*/ ArrayClass<ZoneGuideZoneType>     zoneTypes;
-/*0xf6e0*/ ArrayClass<ZoneGuideTransferType> transferTypes;
-/*0xf6f8*/
+/*0xf740*/ ArrayClass<ZoneGuideContinent>    continents;
+/*0xf758*/ ArrayClass<ZoneGuideZoneType>     zoneTypes;
+/*0xf770*/ ArrayClass<ZoneGuideTransferType> transferTypes;
+/*0xf788*/
 
 	ZoneGuideZone* GetZone(EQZoneIndex zi)
 	{
@@ -6603,15 +6603,15 @@ class [[offsetcomments]] ZoneGuideManagerClient : public ZoneGuideManagerBase
 	FORCE_SYMBOLS;
 
 public:
-/*0xf6f8*/ ZonePathArray     activePath;
-/*0xf710*/ ZonePathArray     previewPath;
-/*0xf728*/ EQZoneIndex       currentZone;
-/*0xf72c*/ int               heroesJourneyIndex;
-/*0xf730*/ bool              zoneGuideDataSet;
-/*0xf731*/ bool              includeBindZoneInPath;
-/*0xf732*/ bool              autoFindActivePath;
-/*0xf733*/ bool              findActivePath;
-/*0xf734*/
+/*0xf788*/ ZonePathArray     activePath;
+/*0xf7a0*/ ZonePathArray     previewPath;
+/*0xf7b8*/ EQZoneIndex       currentZone;
+/*0xf7bc*/ int               heroesJourneyIndex;
+/*0xf7c0*/ bool              zoneGuideDataSet;
+/*0xf7c1*/ bool              includeBindZoneInPath;
+/*0xf7c2*/ bool              autoFindActivePath;
+/*0xf7c3*/ bool              findActivePath;
+/*0xf7c4*/
 
 	EQLIB_OBJECT static ZoneGuideManagerClient& Instance();
 };
