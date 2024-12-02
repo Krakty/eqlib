@@ -1572,7 +1572,7 @@ public:
 /*0x26f8*/ int                                   FreeToPlayUnlocks[33];
 /*0x277c*/ // end PcBase / start CharacterZoneClient
 
-	// basis: 0x2848
+	// basis: 0x2788
 
 	PcProfile* GetCurrentPcProfile() { return (PcProfile*)&GetCurrentBaseProfile(); }
 	PcProfile* GetCurrentPcProfile() const { return (PcProfile*)&GetCurrentBaseProfile(); }
@@ -1674,7 +1674,7 @@ public:
 	int GetDeityBitmask() const { return 1 << (GetDeityReal() - 1); }
 };
 
-// @sizeof(PcClient) == 0x31d8 :: 2024-11-12 (test) @ 0x14027387b
+// @sizeof(PcClient) == 0x31d8 :: 2024-11-18 (live) @ 0x14027454b
 constexpr size_t PcClient_size = 0x31d8;
 
 class [[offsetcomments]] PcClient : public PcZoneClient

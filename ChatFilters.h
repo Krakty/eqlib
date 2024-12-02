@@ -425,6 +425,7 @@ struct [[offsetcomments]] ChatColorFilterData
 /*0x10*/ int                NameToken;
 /*0x18*/ const char*        IniName;
 /*0x20*/ int                ChatFilterCategories;
+/*0x24*/
 };
 
 // gpChatFilterDefs is an array of this many elements.
