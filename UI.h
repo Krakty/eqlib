@@ -66,12 +66,12 @@ using CPopDialogWnd = CConfirmationDialog;
 
 EQLIB_VAR bool gbUseNewUIEngine;
 
-template <typename T, typename Component>
+template <typename Component, typename T = typename Component::XWndType>
 T* GetNewUIEngineWindow(T* old, const Component& component)
 {
 	if (gbUseNewUIEngine)
 	{
-		return component.name.empty() ? nullptr : component.target;
+		return component.name.empty() ? nullptr : static_cast<T*>(component.target);
 	}
 
 	return old;
@@ -3675,16 +3675,41 @@ public:
 	//----------------------------------------------------------------------------
 	// data members
 
-/*0x3b8*/ CButtonWnd*        pMoneyButton[4];
-/*0x3d8*/ CButtonWnd*        TradeButton;
-/*0x3e0*/ CButtonWnd*        CancelButton;
-/*0x3e8*/ CStmlWnd*          NPCNameLabel;
-/*0x3f0*/ CInvSlotWnd*       pInvSlotWnd[MAX_GIVE_SLOTS];
-/*0x410*/ UIButtonComponent  MoneyButtonComponents[4];
+private:
+	// If New UI is enabled, these members will not be initialized, and the components will be used instead. Use the
+	// Accessors below instead.
+/*0x3b8*/ CButtonWnd*        m_moneyButton[eNumMoneySlotTypes];
+/*0x3d8*/ CButtonWnd*        m_tradeButton;
+/*0x3e0*/ CButtonWnd*        m_cancelButton;
+/*0x3e8*/ CStmlWnd*          m_giveNameLabel;
+/*0x3f0*/ CInvSlotWnd*       m_invSlotWnd[MAX_GIVE_SLOTS];
+
+public:
+	// CButtonWnd* pMoneyButton[4];
+	CButtonWnd* _get_moneyButton(int idx) { return idx < eNumMoneySlotTypes ? GetNewUIEngineWindow(m_moneyButton[idx], MoneyButtonComponent[idx]) : nullptr; }
+	__declspec(property(get = _get_moneyButton)) CButtonWnd* MoneyButton[];
+
+	// CButtonWnd* TradeButton;
+	CButtonWnd* _get_tradeButton() { return GetNewUIEngineWindow(m_tradeButton, TradeButtonComponent); }
+	__declspec(property(get = _get_tradeButton)) CButtonWnd* TradeButton;
+
+	// CButtonWnd* CancelButton;
+	CButtonWnd* _get_cancelButton() { return GetNewUIEngineWindow(m_cancelButton, CancelButtonComponent); }
+	__declspec(property(get = _get_cancelButton)) CButtonWnd* CancelButton;
+
+	// CStmlWnd* NPCNameLabel;
+	CStmlWnd* _get_otherNameLabel() { return GetNewUIEngineWindow(m_giveNameLabel, GiveNameComponent); }
+	__declspec(property(get = _get_otherNameLabel)) CStmlWnd* NPCNameLabel;
+
+	// CInvSlotWnd* pInvSlotWnd[MAX_GIVE_SLOTS];
+	CInvSlotWnd* _get_invSlotWnd(int idx) { return idx < MAX_GIVE_SLOTS ? GetNewUIEngineWindow(m_invSlotWnd[idx], ItemSlotComponents[idx]) : nullptr; }
+	__declspec(property(get = _get_invSlotWnd)) CInvSlotWnd* pInvSlotWnd[];
+
+/*0x410*/ UIButtonComponent  MoneyButtonComponent[eNumMoneySlotTypes];
 /*0x690*/ UIButtonComponent  TradeButtonComponent;
 /*0x730*/ UIButtonComponent  CancelButtonComponent;
 /*0x7d0*/ UIStmlComponent    GiveNameComponent;
-/*0x870*/ UIInvSlotComponent ItemSlotComponents[4];
+/*0x870*/ UIInvSlotComponent ItemSlotComponents[MAX_GIVE_SLOTS];
 /*0xb10*/
 };
 
@@ -6394,22 +6419,58 @@ public:
 
 /*0x03ac*/ unsigned int       NextRefreshTime;
 /*0x03b0*/ bool               bInventoryWasOpen;
-/*0x03b8*/ CButtonWnd*        HisMoneyButton[4];
-/*0x03d8*/ CButtonWnd*        MyMoneyButton[4];
-/*0x03f8*/ CButtonWnd*        TradeButton;
-/*0x0400*/ CButtonWnd*        CancelButton;
-/*0x0408*/ CStmlWnd*          HisNameLabel;
-/*0x0410*/ CStmlWnd*          MyNameLabel;
-/*0x0418*/ CInvSlotWnd*       pInvSlotWnd[MAX_TRADE_SLOTS];
-/*0x0498*/ UIButtonComponent  HisMoneyComponent[4];     // 4a8
-/*0x0718*/ UIButtonComponent  MyMoneyComponent[4];      // 728
-/*0x0998*/ UIButtonComponent  TradeButtonComponent;     // 9a8
-/*0x0a38*/ UIButtonComponent  CancelButtonComponent;    // a48
-/*0x0ad8*/ UIStmlComponent    OtherNameComponent;       // ae8
-/*0x0b78*/ UIStmlComponent    SelfNameComponent;        // b88
-/*0x0c18*/ UIInvSlotComponent TradeSlotComponent[16];   // c28
-/*0x1698*/ long               HisMoney[4];
-/*0x16a8*/ long               MyMoney[4];
+
+private:
+	// If New UI is enabled, these members will not be initialized, and the components will be used instead. Use the
+	// Accessors below instead.
+/*0x03b8*/ CButtonWnd*        m_hisMoneyButton[eNumMoneySlotTypes];
+/*0x03d8*/ CButtonWnd*        m_myMoneyButton[eNumMoneySlotTypes];
+/*0x03f8*/ CButtonWnd*        m_tradeButton;
+/*0x0400*/ CButtonWnd*        m_cancelButton;
+/*0x0408*/ CStmlWnd*          m_hisNameLabel;
+/*0x0410*/ CStmlWnd*          m_myNameLabel;
+/*0x0418*/ CInvSlotWnd*       m_invSlotWnds[MAX_TRADE_SLOTS];
+
+public:
+	// CButtonWnd* HisMoneyButton[eNumMoneySlotTypes]
+	CButtonWnd* _get_hisMoneyButton(int idx) { return idx < eNumMoneySlotTypes ? GetNewUIEngineWindow(m_hisMoneyButton[idx], HisMoneyComponent[idx]) : nullptr; }
+	__declspec(property(get = _get_hisMoneyButton)) CButtonWnd* HisMoneyButton[];
+
+	// CButtonWnd* MyMoneyButton[eNumMoneySlotTypes];
+	CButtonWnd* _get_myMoneyButton(int idx) { return idx < eNumMoneySlotTypes ? GetNewUIEngineWindow(m_myMoneyButton[idx], MyMoneyComponent[idx]) : nullptr; }
+	__declspec(property(get = _get_myMoneyButton)) CButtonWnd* MyMoneyButton[];
+
+	// CButtonWnd* TradeButton;
+	CButtonWnd* _get_tradeButton() { return GetNewUIEngineWindow(m_tradeButton, TradeButtonComponent); }
+	__declspec(property(get = _get_tradeButton)) CButtonWnd* TradeButton;
+
+	// CButtonWnd* CancelButton;
+	CButtonWnd* _get_cancelButton() { return GetNewUIEngineWindow(m_cancelButton, CancelButtonComponent); }
+	__declspec(property(get = _get_cancelButton)) CButtonWnd* CancelButton;
+
+	// CStmlWnd* HisNameLabel;
+	CStmlWnd* _get_hisNameLabel() { return GetNewUIEngineWindow(m_hisNameLabel, OtherNameComponent); }
+	__declspec(property(get = _get_hisNameLabel)) CStmlWnd* HisNameLabel;
+
+	// CStmlWnd* MyNameLabel;
+	CStmlWnd* _get_myNameLabel() { return GetNewUIEngineWindow(m_myNameLabel, SelfNameComponent); }
+	__declspec(property(get = _get_myNameLabel)) CStmlWnd* MyNameLabel;
+
+	// CInvSlotWnd* pInvSlotWnd[MAX_TRADE_SLOTS];
+	CInvSlotWnd* _get_invSlotWnd(int idx) { return idx < MAX_TRADE_SLOTS ? GetNewUIEngineWindow(m_invSlotWnds[idx], TradeSlotComponent[idx]) : nullptr; }
+	__declspec(property(get = _get_invSlotWnd)) CInvSlotWnd* pInvSlotWnd[];
+
+	// If New UI is enabled, these components are used instead:
+/*0x0498*/ UIButtonComponent  HisMoneyComponent[eNumMoneySlotTypes];
+/*0x0718*/ UIButtonComponent  MyMoneyComponent[eNumMoneySlotTypes];
+/*0x0998*/ UIButtonComponent  TradeButtonComponent;
+/*0x0a38*/ UIButtonComponent  CancelButtonComponent;
+/*0x0ad8*/ UIStmlComponent    OtherNameComponent;
+/*0x0b78*/ UIStmlComponent    SelfNameComponent;
+/*0x0c18*/ UIInvSlotComponent TradeSlotComponent[16];
+
+/*0x1698*/ long               HisMoney[eNumMoneySlotTypes];
+/*0x16a8*/ long               MyMoney[eNumMoneySlotTypes];
 /*0x16b8*/ ItemContainer      TradeItems;
 /*0x16e0*/ bool               bHisReadyTrade;           // was HisTradeReady
 /*0x16e1*/ bool               bMyReadyTrade;            // was MyTradeReady

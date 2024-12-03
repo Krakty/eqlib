@@ -30,6 +30,8 @@ template <typename T>
 class BaseComponent
 {
 public:
+	using XWndType = T;
+
 	virtual eqstd::string GetTypeName() const { return ""; }
 	virtual void SyncFromJS() {}
 	virtual void SyncToJS() {}
