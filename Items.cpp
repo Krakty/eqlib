@@ -96,6 +96,8 @@ const char* szContainerInstanceNames[] = {
 	"Unknown(34)",
 	"Teleportation Keyring",
 	"Unknown(36)",
+	"Activated Item Keyring",
+	"Unknown(38)",
 	"Overflow",
 	"Dragon Hoard",
 	"Personal Tradeskill Depot",

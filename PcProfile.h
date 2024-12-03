@@ -204,7 +204,7 @@ public:
 /*0x1684*/ int                                   TattooIndex;
 /*0x1688*/ int                                   FacialAttachmentIndex;
 /*0x168c*/ ItemIndex                             StatKeyRingItemIndex[eKeyRingTypeCount];
-/*0x16ac*/ //BaseProfile
+/*0x16b0*/ //BaseProfile
 
 	// This expects parameter of type eInventorySlot
 	ItemPtr GetInventorySlot(int invSlot) const { return InventoryContainer.GetItem(invSlot); }
@@ -337,8 +337,7 @@ struct PetObjectData;
 
 constexpr int MAX_LINKED_SPELL_TIMERS = 25;
 
-// @sizeof(PcProfile) == 0x6a90 :: 2024-11-18 (live) @ 0x14062b5a4
-constexpr size_t PcProfile_size = 0x6a90;
+constexpr size_t PcProfile_size = 0x6A90; // @sizeof(PcProfile) :: 2024-11-27 (test) @ 0x14062A914
 
 class [[offsetcomments]] PcProfile : public BaseProfile
 {

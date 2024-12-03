@@ -49,8 +49,7 @@ enum EPlace
 	CanPlaceAndGoto,
 };
 
-// @sizeof(zoneHeader) == 0x2a4 :: 2024-11-18 (live) @ 0x140e4fc94
-constexpr size_t zoneHeader_size = 0x2a4;
+constexpr size_t zoneHeader_size = 0x2A4; // @sizeof(zoneHeader) :: 2024-11-27 (test) @ 0x140E50CB4
 
 struct [[offsetcomments]] zoneHeader
 {
@@ -312,8 +311,7 @@ struct [[offsetcomments]] EQGameOptions
 
 
 // size of EverQuestinfo is the distance from this byte to the beginning of the struct
-// @sizeof(EverQuestinfo) == 0x75240 :: 2024-11-18 (live) @ 0x140e4faa0
-constexpr size_t EverQuestinfo_size = 0x75240;
+constexpr size_t EverQuestinfo_size = 0x75240; // @sizeof(EverQuestinfo) :: 2024-11-27 (test) @ 0x140E50AC0
 
 struct [[offsetcomments]] EverQuestinfo
 {
@@ -504,39 +502,40 @@ struct [[offsetcomments]] EverQuestinfo
 /*0x00b04*/ uint32_t          NumMaxCharacters;
 /*0x00b08*/ uint32_t          LegacyExperienceBonus;
 /*0x00b0c*/ int               NumAvailablePersonas;
-/*0x00b10*/ int               bHideAFK;
-/*0x00b14*/ int               bHideAFKPets;
-/*0x00b18*/ int               bHideAFKMercs;
-/*0x00b1c*/ bool              bAutoAFKOn;
-/*0x00b1d*/ bool              bAutoAFKOff;
-/*0x00b1e*/ bool              bIgnoreNumLockState;
-/*0x00b1f*/ bool              bAutoMercPassive;
-/*0x00b20*/ bool              bAutoAddToTaskOverlay;
-/*0x00b21*/ bool              bShowOnlyOpenSteps;
-/*0x00b22*/ bool              bAddMostRecentToTop;
-/*0x00b23*/ bool              bDisplayMOTD;
-/*0x00b24*/ bool              bDisplayFellowshipMOTD;
-/*0x00b25*/ bool              bIgnorePR;
-/*0x00b26*/ bool              bFastCamp;
-/*0x00b27*/ bool              bAdvLootGroupedByNPC;
-/*0x00b28*/ int               AutoSkills[CONCURRENT_SKILLS];
-/*0x00b30*/ ChatFilterData    ChatFilters;
-/*0x00c40*/ EQGameOptions     gOpt;
-/*0x00ce4*/ bool              noSafeDrop;
-/*0x00ce5*/ bool              lootNoDrop;
-/*0x00ce6*/ bool              bEnvSounds;
-/*0x00ce7*/ bool              bAllowContextMenus;
-/*0x00ce8*/ bool              bShowHelpOnLeftClickTarget;
-/*0x00ce9*/ bool              bUseTellWindows;
-/*0x00cea*/ bool              bCtrlBypassesTradeskill;
-/*0x00ceb*/ bool              bAllowAutoDuck;
-/*0x00cec*/ bool              bAllowAutoStand;
-/*0x00ced*/ bool              bAutojoinHelpChannels;
-/*0x00cee*/ bool              bAcceptKickRequests;
-/*0x00cef*/ bool              bSuppressFirstUseAlerts;
-/*0x00cf0*/ bool              bResetUIToDefault;
-/*0x00cf1*/ bool              bAutoShowRewardsWindow;
-/*0x00cf2*/ bool              bAllowPreLuclinMountRiders;
+/*0x00b10*/ int               HasDarkElfRanger;
+/*0x00b14*/ int               bHideAFK;
+/*0x00b18*/ int               bHideAFKPets;
+/*0x00b1c*/ int               bHideAFKMercs;
+/*0x00b20*/ bool              bAutoAFKOn;
+/*0x00b21*/ bool              bAutoAFKOff;
+/*0x00b22*/ bool              bIgnoreNumLockState;
+/*0x00b23*/ bool              bAutoMercPassive;
+/*0x00b24*/ bool              bAutoAddToTaskOverlay;
+/*0x00b25*/ bool              bShowOnlyOpenSteps;
+/*0x00b26*/ bool              bAddMostRecentToTop;
+/*0x00b27*/ bool              bDisplayMOTD;
+/*0x00b28*/ bool              bDisplayFellowshipMOTD;
+/*0x00b29*/ bool              bIgnorePR;
+/*0x00b2a*/ bool              bFastCamp;
+/*0x00b2b*/ bool              bAdvLootGroupedByNPC;
+/*0x00b2c*/ int               AutoSkills[CONCURRENT_SKILLS];
+/*0x00b34*/ ChatFilterData    ChatFilters;
+/*0x00c44*/ EQGameOptions     gOpt;
+/*0x00ce8*/ bool              noSafeDrop;
+/*0x00ce9*/ bool              lootNoDrop;
+/*0x00cea*/ bool              bEnvSounds;
+/*0x00ceb*/ bool              bAllowContextMenus;
+/*0x00cec*/ bool              bShowHelpOnLeftClickTarget;
+/*0x00ced*/ bool              bUseTellWindows;
+/*0x00cee*/ bool              bCtrlBypassesTradeskill;
+/*0x00cef*/ bool              bAllowAutoDuck;
+/*0x00cf0*/ bool              bAllowAutoStand;
+/*0x00cf1*/ bool              bAutojoinHelpChannels;
+/*0x00cf2*/ bool              bAcceptKickRequests;
+/*0x00cf3*/ bool              bSuppressFirstUseAlerts;
+/*0x00cf4*/ bool              bResetUIToDefault;
+/*0x00cf5*/ bool              bAutoShowRewardsWindow;
+/*0x00cf6*/ bool              bAllowPreLuclinMountRiders;
 /*0x00cf8*/ EQCamera*         cameras[EQ_MAX_CAMERAS];
 /*0x00d38*/ bool              keyDown[nEQMappableCommands];
 /*0x00f5b*/ char              LastTellFromList[NUM_REPLY_NAMES][EQ_MAX_NAME];
@@ -703,8 +702,7 @@ public:
 };
 
 
-// @sizeof(CEverQuest) == 0x19708 :: 2024-11-18 (live) @ 0x1403333f3
-constexpr size_t CEverQuest_size = 0x19708;
+constexpr size_t CEverQuest_size = 0x19708; // @sizeof(CEverQuest) :: 2024-11-27 (test) @ 0x140333BF3
 
 class [[offsetcomments]] CEverQuest : public CEverQuestBase, public UniversalChatProxyHandler, public PopDialogHandler
 {

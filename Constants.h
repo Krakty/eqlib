@@ -381,10 +381,11 @@ enum KeyRingType
 	eFamiliar = 2,
 	eHeroForge = 3,
 	eTeleportationItem = 4,
+	eActivatedItem = 5,
 
-	eKeyRingTypeCount = 5,
+	eKeyRingTypeCount = 6,
 	eKeyRingTypeFirst = eMount,
-	eKeyRingTypeLast = eTeleportationItem,
+	eKeyRingTypeLast = eActivatedItem,
 };
 enum UIType;
 
@@ -1057,7 +1058,7 @@ enum class ServerID : int {
 
 
 // zones
-constexpr int ZONE_COUNT = 877;
+constexpr int ZONE_COUNT = 879;
 
 // Math
 
