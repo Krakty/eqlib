@@ -125,7 +125,7 @@ public:
 	/*0x380*/ void* HandleJsEvent;  // Probably something like HandleJSEvent
 	/*0x388*/ void* Unknown0x388;
 	/*0x390*/ void* Unknown0x390;   // Probably Center()
-	};
+	/*0x398*/ };
 
 	// Returns the current instance of this class's vftable. Might represent some other
 	// inherited class (and not CSidlScreenWnd's)
