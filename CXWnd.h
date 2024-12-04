@@ -39,61 +39,65 @@ class CSidlManagerBase;
 class CTextureFont;
 
 // Message types for WndNotifications
-#define XWM_LCLICK                       1
-#define XWM_LMOUSEUP                     2
-#define XWM_RCLICK                       3
-#define XWM_LDBLCLICK                    4
-#define XWM_RDBLCLICK                    5
-#define XWM_HITENTER                     6
-#define XWM_TAB                          7
-#define XWM_SHIFTTAB                     8
-#define XWM_QMARKBOX                     9
-#define XWM_CLOSE                        10
-#define XWM_CHILDCLOSED                  11
-#define XWM_TOOLTIP                      12
-#define XWM_REQUESTINFO                  13
-#define XWM_NEWVALUE                     14
-#define XWM_COLUMNCLICK                  15
-#define XWM_SORTREQUEST                  16
-#define XWM_LISTBOX_EDIT_UPDATE          17
-#define XWM_CLICKSTICKSTART              18
-#define XWM_IS_LINK_ACTIVE               19
-#define XWM_MENUSELECT                   20
-#define XWM_MOUSEOVER                    21
-#define XWM_HISTORY                      22
-#define XWM_LCLICKHOLD                   23
-#define XWM_RCLICKHOLD                   24
-#define XWM_LBUTTONUPAFTERHELD           25
-#define XWM_RBUTTONUPAFTERHELD           26
-#define XWM_LINK                         27
-#define XWM_FINDERITEMOPEN               28
-#define XWM_MAXIMIZEBOX                  29
-#define XWM_TITLEBAR                     30
-#define XWM_ACHIEVEMENTLINK              31
-#define XWM_NOTSURE32                    32
-#define XWM_DIALOGRESPONSELINK           33
-#define XWM_SPELL_LINK                   34
-#define XWM_FOCUS                        35
-#define XWM_LOSTFOCUS                    36
-#define XWM_RELOAD_FROM_SIDL             37
-#define XWM_ACTIVATE                     38
-#define XWM_SLIDER_COMPLETE              39
-#define XWM_SLIDER_COMPLEX_EX            40
-#define XWM_COLORPICKER_COMPLETE         41
-#define XWM_TEXTENTRY_COMPLETE           42
-#define XWM_FILESELECTION_COMPLETE       43
-#define XWM_ICONSELECTION_COMPLETE       44
-#define XWM_RELOAD_INI                   45
-#define XWM_THUMBTRACK                   46
-#define XWM_SELITEM_DOWN                 47
-#define XWM_FIRST_USER                   48
-#define XWM_RSELITEM_DOWN                49
-#define XWM_OUTPUT_TEXT                  50
-#define XWM_COMMANDLINK                  51
-#define XWM_RAIDINVITE_LINK              52
-#define XWM_FACTION_LINK                 53
+enum eWndNotification
+{
+	XWM_LCLICK                       = 1,
+	XWM_LMOUSEUP                     = 2,
+	XWM_RCLICK                       = 3,
+	XWM_LDBLCLICK                    = 4,
+	XWM_RDBLCLICK                    = 5,
+	XWM_HITENTER                     = 6,
+	XWM_TAB                          = 7,
+	XWM_SHIFTTAB                     = 8,
+	XWM_QMARKBOX                     = 9,
+	XWM_CLOSE                        = 10,
+	XWM_CHILDCLOSED                  = 11,
+	XWM_TOOLTIP                      = 12,
+	XWM_REQUESTINFO                  = 13,
+	XWM_NEWVALUE                     = 14,
+	XWM_COLUMNCLICK                  = 15,
+	XWM_SORTREQUEST                  = 16,
+	XWM_LISTBOX_EDIT_UPDATE          = 17,
+	XWM_CLICKSTICKSTART              = 18,
+	XWM_IS_LINK_ACTIVE               = 19,
+	XWM_MENUSELECT                   = 20,
+	XWM_MOUSEOVER                    = 21,
+	XWM_HISTORY                      = 22,
+	XWM_LCLICKHOLD                   = 23,
+	XWM_RCLICKHOLD                   = 24,
+	XWM_LBUTTONUPAFTERHELD           = 25,
+	XWM_RBUTTONUPAFTERHELD           = 26,
+	XWM_LINK                         = 27,
+	XWM_FINDERITEMOPEN               = 28,
+	XWM_MAXIMIZEBOX                  = 29,
+	XWM_TITLEBAR                     = 30,
+	XWM_ACHIEVEMENTLINK              = 31,
+	XWM_NOTSURE32                    = 32,
+	XWM_DIALOGRESPONSELINK           = 33,
+	XWM_SPELL_LINK                   = 34,
+	XWM_FOCUS                        = 35,
+	XWM_LOSTFOCUS                    = 36,
+	XWM_RELOAD_FROM_SIDL             = 37,
+	XWM_ACTIVATE                     = 38,
+	XWM_SLIDER_COMPLETE              = 39,
+	XWM_SLIDER_COMPLEX_EX            = 40,
+	XWM_COLORPICKER_COMPLETE         = 41,
+	XWM_TEXTENTRY_COMPLETE           = 42,
+	XWM_FILESELECTION_COMPLETE       = 43,
+	XWM_ICONSELECTION_COMPLETE       = 44,
+	XWM_RELOAD_INI                   = 45,
+	XWM_THUMBTRACK                   = 46,
+	XWM_SELITEM_DOWN                 = 47,
+	XWM_FIRST_USER                   = 48,
+	XWM_RSELITEM_DOWN                = 49,
+	XWM_OUTPUT_TEXT                  = 50,
+	XWM_COMMANDLINK                  = 51,
+	XWM_RAIDINVITE_LINK              = 52,
+	XWM_FACTION_LINK                 = 53,
 
-#define XWM_USER_DEFINED                 1000
+	XWM_USER_DEFINED                 = 1000,
+};
+
 
 // Defines for CXWnd WindowStyle
 #define CWS_VSCROLL                              0x00000001
