@@ -4738,14 +4738,15 @@ public:
 /*0x328*/ CLabel*       pCountLabel[eNumPages];  // KRW_Mounts_CountLabel, KRW_Illusions_CountLabel, KRW_Familiars_CountLabel, KRW_HeroForge_CountLabel
 /*0x358*/ CButtonWnd*   pBtnStat[eNumPages];     // KRW_Mounts_Selected, KRW_Illusions_Selected, KRW_Familiars_Selected, KRW_HeroForge_SlotButton
 /*0x388*/ CButtonWnd*   pBtnSlot[eNumPages];     // KRW_Mounts_SlotButton, KRW_Illusions_SlotButton, KRW_Familiars_SlotButton
-/*0x3b8*/ uint8_t       Unknown0x3b8[eNumPages];
-/*0x3be*/ uint8_t       Unknown0x3be[eNumPages];
-/*0x3c4*/ int           Unknown0x3c4[eNumPages];
+/*0x3b8*/ bool          bListDirty[eNumPages];
+/*0x3be*/ bool          bStatDirty[eNumPages];
+/*0x3c4*/ int           ForcedSelection[eNumPages];
 /*0x3e0*/ CButtonWnd*   pItemBtnTemplate;                // KRW_ItemBtnTemplate
 /*0x3e8*/ CButtonWnd*   pBtnFamiliarLeave;               // KRW_Familiars_LeaveButton
 /*0x3f0*/ CButtonWnd*   pBtnFamiliarAutoLeave;           // KRW_Familiars_AutoLeaveButton
 /*0x3f8*/ CListWnd*     pKeysList;                       // KRW_Keys_List
-/*0x400*/ uint8_t       Unknown0x2b4[0x8];
+/*0x400*/ bool          KeysListDirty;
+/*0x404*/ int           ForcedKeysSelection;
 /*0x408*/ int           LastUpdateTime;                  // timestamp of when the current tab was last updated.
 /*0x410*/ CPageWnd*     pPageMounts;                     // KRW_Mounts_Page
 /*0x418*/ CPageWnd*     pPageIllusions;                  // KRW_Illusions_Page
