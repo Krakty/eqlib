@@ -744,6 +744,7 @@ enum HotButtonTypes
 	HotButtonType_IllusionLink,
 	HotButtonType_FamiliarLink,
 	HotButtonType_TeleportationLink,
+	HotButtonType_ActivatedItemLink,
 };
 
 EQLIB_OBJECT const char* HotButtonTypeToString(HotButtonTypes type);
