@@ -280,6 +280,7 @@ const char* HotButtonTypeToString(HotButtonTypes type)
 	case HotButtonType_IllusionLink: return "IllusionLink";
 	case HotButtonType_FamiliarLink: return "FamiliarLink";
 	case HotButtonType_TeleportationLink: return "TeleportationLink";
+	case HotButtonType_ActivatedItemLink: return "ActivatedItemLink";
 	default:
 		return "Unknown";
 	}

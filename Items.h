@@ -226,32 +226,32 @@ public:
 
 	EQLIB_OBJECT ItemGlobalIndex() = default;
 
-	inline ItemGlobalIndex(const ItemGlobalIndex& other)
+	ItemGlobalIndex(const ItemGlobalIndex& other)
 		: Location(other.Location)
 		, Index(other.Index)
 	{}
 
-	inline ItemGlobalIndex(ItemContainerInstance location, const ItemIndex& index)
+	ItemGlobalIndex(ItemContainerInstance location, const ItemIndex& index)
 		: Location(location)
 		, Index(index)
 	{}
 
-	inline ItemGlobalIndex(ItemContainerInstance location, int slot1, int slot2 = -1, int slot3 = -1)
+	ItemGlobalIndex(ItemContainerInstance location, int slot1, int slot2 = -1, int slot3 = -1)
 		: Location(location)
 		, Index(static_cast<short>(slot1), static_cast<short>(slot2), static_cast<short>(slot3))
 	{}
 
-	inline void SetLocation(ItemContainerInstance location) { Location = location; }
-	inline ItemContainerInstance GetLocation() const { return Location; }
+	void SetLocation(ItemContainerInstance location) { Location = location; }
+	ItemContainerInstance GetLocation() const { return Location; }
 
-	inline void SetIndex(const ItemIndex& index) { Index = index; }
-	inline ItemIndex& GetIndex() { return Index; }
-	inline const ItemIndex& GetIndex() const { return Index; }
+	void SetIndex(const ItemIndex& index) { Index = index; }
+	ItemIndex& GetIndex() { return Index; }
+	const ItemIndex& GetIndex() const { return Index; }
 
-	inline short GetTopSlot() const { return GetIndex().GetTopSlot(); }
-	inline short GetSlot(int depth) const { return GetIndex().GetSlot(depth); }
+	short GetTopSlot() const { return GetIndex().GetTopSlot(); }
+	short GetSlot(int depth) const { return GetIndex().GetSlot(depth); }
 
-	inline ItemGlobalIndex GetParent() const
+	ItemGlobalIndex GetParent() const
 	{
 		ItemGlobalIndex copy = *this;
 
@@ -259,27 +259,28 @@ public:
 		return copy;
 	}
 
-	inline bool IsKeyRingLocation() const
+	bool IsKeyRingLocation() const
 	{
 		return Location == eItemContainerMountKeyRingItems
 			|| Location == eItemContainerIllusionKeyRingItems
 			|| Location == eItemContainerFamiliarKeyRingItems
-			|| Location == eItemContainerTeleportationKeyRingItems;
+			|| Location == eItemContainerTeleportationKeyRingItems
+			|| Location == eItemContainerActivatedKeyRingItems;
 	}
 
-	inline bool IsEquippedLocation() const
+	bool IsEquippedLocation() const
 	{
 		return Location == eItemContainerPossessions
 			&& Index.IsBase()
 			&& Index.GetTopSlot() <= InvSlot_LastWornItem;
 	}
 
-	inline bool IsValidIndex() const
+	bool IsValidIndex() const
 	{
 		return IsValidLocation() && Index.IsValid();
 	}
 
-	inline bool IsValidLocation() const
+	bool IsValidLocation() const
 	{
 		return Location >= 0 && Location < eNumItemContainers;
 	}
