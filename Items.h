@@ -226,32 +226,32 @@ public:
 
 	EQLIB_OBJECT ItemGlobalIndex() = default;
 
-	inline ItemGlobalIndex(const ItemGlobalIndex& other)
+	ItemGlobalIndex(const ItemGlobalIndex& other)
 		: Location(other.Location)
 		, Index(other.Index)
 	{}
 
-	inline ItemGlobalIndex(ItemContainerInstance location, const ItemIndex& index)
+	ItemGlobalIndex(ItemContainerInstance location, const ItemIndex& index)
 		: Location(location)
 		, Index(index)
 	{}
 
-	inline ItemGlobalIndex(ItemContainerInstance location, int slot1, int slot2 = -1, int slot3 = -1)
+	ItemGlobalIndex(ItemContainerInstance location, int slot1, int slot2 = -1, int slot3 = -1)
 		: Location(location)
 		, Index(static_cast<short>(slot1), static_cast<short>(slot2), static_cast<short>(slot3))
 	{}
 
-	inline void SetLocation(ItemContainerInstance location) { Location = location; }
-	inline ItemContainerInstance GetLocation() const { return Location; }
+	void SetLocation(ItemContainerInstance location) { Location = location; }
+	ItemContainerInstance GetLocation() const { return Location; }
 
-	inline void SetIndex(const ItemIndex& index) { Index = index; }
-	inline ItemIndex& GetIndex() { return Index; }
-	inline const ItemIndex& GetIndex() const { return Index; }
+	void SetIndex(const ItemIndex& index) { Index = index; }
+	ItemIndex& GetIndex() { return Index; }
+	const ItemIndex& GetIndex() const { return Index; }
 
-	inline short GetTopSlot() const { return GetIndex().GetTopSlot(); }
-	inline short GetSlot(int depth) const { return GetIndex().GetSlot(depth); }
+	short GetTopSlot() const { return GetIndex().GetTopSlot(); }
+	short GetSlot(int depth) const { return GetIndex().GetSlot(depth); }
 
-	inline ItemGlobalIndex GetParent() const
+	ItemGlobalIndex GetParent() const
 	{
 		ItemGlobalIndex copy = *this;
 
@@ -259,27 +259,28 @@ public:
 		return copy;
 	}
 
-	inline bool IsKeyRingLocation() const
+	bool IsKeyRingLocation() const
 	{
 		return Location == eItemContainerMountKeyRingItems
 			|| Location == eItemContainerIllusionKeyRingItems
 			|| Location == eItemContainerFamiliarKeyRingItems
-			|| Location == eItemContainerTeleportationKeyRingItems;
+			|| Location == eItemContainerTeleportationKeyRingItems
+			|| Location == eItemContainerActivatedKeyRingItems;
 	}
 
-	inline bool IsEquippedLocation() const
+	bool IsEquippedLocation() const
 	{
 		return Location == eItemContainerPossessions
 			&& Index.IsBase()
 			&& Index.GetTopSlot() <= InvSlot_LastWornItem;
 	}
 
-	inline bool IsValidIndex() const
+	bool IsValidIndex() const
 	{
 		return IsValidLocation() && Index.IsValid();
 	}
 
-	inline bool IsValidLocation() const
+	bool IsValidLocation() const
 	{
 		return Location >= 0 && Location < eNumItemContainers;
 	}
@@ -794,7 +795,7 @@ public:
 	}
 };
 
-constexpr size_t ItemDefinition_size = 0x640; // @sizeof(ItemDefinition) :: 2024-11-27 (test) @ 0x14020EDE8
+constexpr size_t ItemDefinition_size = 0x640; // @sizeof(ItemDefinition) :: 2024-12-05 (live) @ 0x14020E728
 
 class [[offsetcomments]] ItemDefinition
 {
@@ -1061,44 +1062,44 @@ class [[offsetcomments]] ItemBase : public IChildItemContainer
 {
 public:
 // @start: ItemBase Members
-/*0x008*/ ItemContainer         Contents;
-/*0x030*/ bool                  bCopied;
-/*0x038*/ CXStr                 ConvertItemName;
-/*0x040*/ ItemEvolutionDataPtr  pEvolutionData;
-/*0x050*/ int                   ScriptIndex;
-/*0x058*/ int64_t               Price;
-/*0x060*/ SoeUtil::String       SaveString;
-/*0x078*/ unsigned int          LastCastTime;
-/*0x07c*/ bool                  bCollected;
-/*0x080*/ unsigned int          NewArmorID;
-/*0x088*/ int64_t               DontKnow;
-/*0x090*/ int                   StackCount;
-/*0x094*/ int                   ActorTag2;
-/*0x098*/ int64_t               MerchantSlot;
-/*0x0a0*/ int                   OrnamentationIcon;
-/*0x0a4*/ int                   NoteStatus;
-/*0x0a8*/ int                   ArmorType;
+/*0x008*/ int64_t               MerchantSlot;
+/*0x010*/ int                   StackCount;
+/*0x014*/ int                   ScriptIndex;
+/*0x018*/ bool                  bCollected;
+/*0x01c*/ unsigned int          RespawnTime;
+/*0x020*/ int                   RealEstateID;
+/*0x028*/ CXStr                 ConvertItemName;
+/*0x030*/ bool                  bDisableAugTexture;
+/*0x034*/ int                   ID;
+/*0x038*/ int                   NoDropFlag;
+/*0x040*/ int64_t               Price;
+/*0x048*/ int                   AugFlag;
+/*0x04c*/ unsigned int          LastCastTime;
+/*0x050*/ int                   ActorTag2;
+/*0x054*/ unsigned int          ItemHash;
+/*0x058*/ unsigned int          NewArmorID;
+/*0x060*/ ItemContainer         Contents;
+/*0x088*/ ITEMINFO*             Item1;
+/*0x090*/ int64_t               DontKnow;
+/*0x098*/ EqItemGuid            ItemGUID;
 /*0x0ac*/ unsigned int          Tint;
-/*0x0b0*/ int                   ConvertItemID;
-/*0x0b4*/ int                   Power;
-/*0x0b8*/ int                   Luck;
-/*0x0c0*/ ITEMINFO*             Item1;
-/*0x0c8*/ bool                  bRankDisabled;
-/*0x0cc*/ int                   AugFlag;
-/*0x0d0*/ bool                  bDisableAugTexture;
-/*0x0d4*/ int                   Charges;
-/*0x0d8*/ int                   ID;
-/*0x0dc*/ bool                  bItemNeedsUpdate;
-/*0x0e0*/ ItemGlobalIndex       GlobalIndex;
-/*0x0ec*/ int                   ActorTag1;
-/*0x0f0*/ unsigned int          RespawnTime;
-/*0x0f4*/ int                   NoDropFlag;
-/*0x0f8*/ bool                  bConvertable;
-/*0x0fc*/ int                   Open;
-/*0x100*/ EqItemGuid            ItemGUID;
-/*0x114*/ unsigned int          ItemHash;
-/*0x118*/ int                   RealEstateID;
-/*0x11c*/ int                   MerchantQuantity;
+/*0x0b0*/ int                   Power;
+/*0x0b4*/ int                   Luck;
+/*0x0b8*/ int                   Open;
+/*0x0bc*/ int                   ConvertItemID;
+/*0x0c0*/ bool                  bConvertable;
+/*0x0c4*/ int                   MerchantQuantity;
+/*0x0c8*/ int                   ActorTag1;
+/*0x0cc*/ int                   Charges;
+/*0x0d0*/ bool                  bItemNeedsUpdate;
+/*0x0d4*/ int                   OrnamentationIcon;
+/*0x0d8*/ SoeUtil::String       SaveString;
+/*0x0f0*/ bool                  bRankDisabled;
+/*0x0f4*/ int                   ArmorType;
+/*0x0f8*/ bool                  bCopied;
+/*0x0fc*/ int                   NoteStatus;
+/*0x100*/ ItemGlobalIndex       GlobalIndex;
+/*0x110*/ ItemEvolutionDataPtr  pEvolutionData;
 /*0x120*/
 // @end: ItemBase Members
 
@@ -1243,7 +1244,7 @@ public:
 	__declspec(property(get = get_Item2)) ItemDefinition* Item2;
 };
 
-constexpr size_t ItemClient_size = 0x138; // @sizeof(ItemClient) :: 2024-11-27 (test) @ 0x1401DA699
+constexpr size_t ItemClient_size = 0x138; // @sizeof(ItemClient) :: 2024-12-05 (live) @ 0x1401DA529
 
 class [[offsetcomments]] ItemClient : public ItemBase
 {
