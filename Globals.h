@@ -204,7 +204,6 @@ EQLIB_VAR uintptr_t pinstSwitchManager;
 EQLIB_VAR uintptr_t pinstTarget;
 EQLIB_VAR uintptr_t pinstTargetIndicator;
 EQLIB_VAR uintptr_t pinstTaskMember;
-EQLIB_VAR uintptr_t pinstTrackTarget;
 EQLIB_VAR uintptr_t pinstTradeTarget;
 EQLIB_VAR uintptr_t pinstViewActor;
 EQLIB_VAR uintptr_t pinstWorldData;
