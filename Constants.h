@@ -456,7 +456,7 @@ constexpr int NUM_GROUP_ROLE_SETS = 10;
 constexpr int NUM_XTARGET_SETS = 30;
 
 constexpr int NUM_RACES = 17;
-constexpr int NUM_BLOCKED_BUFFS = 40;
+constexpr int NUM_BLOCKED_BUFFS = 60;
 
 // The number of lbuffs that are displayable in the buffs window. Also used to
 // hold these buffs in the profile.
