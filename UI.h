@@ -5567,7 +5567,9 @@ public:
 /*0x3c0*/ bool               GHold;
 /*0x3c1*/ bool               Focus;
 /*0x3c2*/ bool               SpellHold;
-/*0x3c4*/
+/*0x3c3*/ bool               Resume;
+/*0x3c4*/ bool               ProcHold;
+/*0x3c8*/
 };
 
 SIZE_CHECK(CPetInfoWnd, CPetInfoWnd_size);
