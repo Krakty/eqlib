@@ -238,12 +238,26 @@ private:
 	using VirtualFunctionTable = typename Target::VirtualFunctionTable;
 	using Trampoline = detail::TrampolineSelectorT<Target>;
 
-	inline static typename VirtualFunctionTable* s_virtualTablePatched = nullptr;
+	inline static VirtualFunctionTable* s_virtualTablePatched = nullptr;
 	inline static bool s_patchingVFTable = false;
 	inline static bool s_hooked = false;
 
-	static VirtualFunctionTable* GetVTableForDerivedClass()
+#if defined(_M_AMD64) // x64 will get this from assembly
+	static VirtualFunctionTable* GetVTableForDerivedClassASM();
+#else
+	static VirtualFunctionTable* GetVTableForDerivedClassASM()
 	{
+		return nullptr;
+	}
+#endif
+
+	static VirtualFunctionTable* GetVTableForDerivedClass(void* p)
+	{
+		if (VirtualFunctionTable* data = GetVTableForDerivedClassASM())
+		{
+			return data;
+		}
+
 		Derived d;
 		VirtualFunctionTable* derivedTable = d.GetVFTable();
 
@@ -260,7 +274,7 @@ private:
 		{
 			tableBytes = std::make_unique<uint8_t[]>(detail::vtableBytesCopySize);
 
-			VirtualFunctionTable* derivedTable = GetVTableForDerivedClass();
+			VirtualFunctionTable* derivedTable = GetVTableForDerivedClass(pThis);
 			VirtualFunctionTable* origTable = pThis->GetVFTable();
 
 			// Initialize the vtable with the original bytes.
