@@ -403,8 +403,8 @@ struct [[offsetcomments]] PCSharedTaskData
 {
 /*0x00*/ int          ActiveSharedTaskID;
 /*0x04*/ bool         bIsMonsterMission;
-/*0x08*/ PCTaskStatus Status;                              // size 0x70
-/*0x78*/ ArrayClass<MonsterMissionTemplate> Templates;  // size is 0x10
+/*0x08*/ PCTaskStatus Status;
+/*0x78*/ ArrayClass<MonsterMissionTemplate> Templates;
 /*0x90*/ float        RewardAdjustment;
 /*0x94*/
 };
@@ -1575,8 +1575,8 @@ public:
 /*0x26a8*/ int                                   MercAAPoints;                 // number of unspent merc AA points
 /*0x26ac*/ int                                   MercAAPointsSpent;            // number of spent merc AA points
 /*0x26b0*/ ArrayClass<MercenaryAbilityInfo*>     MercenaryAbilities;
-/*0x26c8*/ UnknownCharacterStruct1*              Unknown26c8; // Size: 0x28
-/*0x26d0*/ AchievementTable                      CompletedAchievements; //26d0
+/*0x26c8*/ UnknownCharacterStruct1*              Unknown26c8;
+/*0x26d0*/ AchievementTable                      CompletedAchievements;
 /*0x26e8*/ AchievementSubComponentCountTable     CompletedEventBasedSubComponents;
 /*0x2700*/ AchievementSubComponentCountTable     OpenEventBasedSubComponents;
 /*0x2718*/ int                                   LastFellowshipJoin;
@@ -1651,7 +1651,7 @@ class [[offsetcomments]] PcZoneClient : public PcBase, public CharacterZoneClien
 {
 /*0x2dd0*/ // vftable
 public:
-/*0x2dd8*/ uint32_t                              Flags[3]; // 2dd8
+/*0x2dd8*/ uint32_t                              Flags[3];
 /*0x2de4*/ uint32_t                              TransfersReceived;
 /*0x2de8*/ int                                   LastLanguageSpoken;
 /*0x2dec*/ int                                   CurPowerSourceDrain;
@@ -1687,7 +1687,7 @@ public:
 	int GetDeityBitmask() const { return 1 << (GetDeityReal() - 1); }
 };
 
-constexpr size_t PcClient_size = 0x3218; // @sizeof(PcClient) :: 2025-01-07 (test) @ 0x1402759AB
+constexpr size_t PcClient_size = 0x3218; // @sizeof(PcClient) :: 2025-01-09 (live) @ 0x14027595B
 
 class [[offsetcomments]] PcClient : public PcZoneClient
 {
