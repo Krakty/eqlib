@@ -246,8 +246,8 @@ public:
 	ForeignPointer clone() const { return ForeignPointer<T, Conversions...>(get_offset()); }
 
 	// If the pointer is convertible, then this object is convertible
-	template <typename U, typename = std::enable_if_t<std::is_convertible_v<T, U>, void>>
-	operator ForeignPointer<U>& ()
+	template <typename U>
+	ForeignPointer<U>& ref()
 	{
 		return reinterpret_cast<ForeignPointer<U>&>(*this);
 	}
