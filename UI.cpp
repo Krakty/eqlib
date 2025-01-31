@@ -1089,7 +1089,7 @@ void InitializeInGameUI()
 		InitializeWindowsFromScreenManager(pDisplay->charselectScreens);
 
 		// this hotbutton pointer always mirrors the first one in the array
-		pHotButtonWnd = pHotButtonWnds[0];
+		pHotButtonWnd.reset(pHotButtonWnds[0]);
 	}
 
 	gbUseNewUIEngine = pEverQuestInfo->bUseNewUIEngine;
