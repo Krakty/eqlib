@@ -835,46 +835,278 @@ SharedPtr<T> MakeShared(Args&&... args)
 {
 	SharedPtr<T> p;
 	p.m_rep = new (SoeUtil::Alloc(sizeof(Internal::SharedData) + sizeof(T) + __alignof(T))) Internal::SharedData();
-	p.m_ptr = new (p.m_rep->get_inplace_storage<T>()) T(std::forward<Args>(args)...);
+	p.m_ptr = new (p.m_rep->template get_inplace_storage<T>()) T(std::forward<Args>(args)...);
 	return p;
 }
 
 //----------------------------------------------------------------------------
 
+#pragma region SoeUtil::Map
+
+template <typename Key, typename Value, int PoolType = -1>
+class Map;
+
 template <typename Key, typename Value>
-class Map
+class Map<Key, Value, -1>
 {
 public:
 	using key_type = Key;
-	using value_type = Value;
+	using mapped_type = Value;
 
-	Map()
+	struct ValuePair
 	{
-	}
+		key_type    key;
+		mapped_type value;
+	};
+	using value_type = ValuePair;
 
-	virtual ~Map()
-	{
-	}
+	Map() = default;
+	virtual ~Map() = default;
 
+	Value* Find(const Key& key) const;
+
+	Value* GetFirst() const;
+	Value* GetLast() const;
+	Value* GetNext(const Value* pValue) const;
+	Value* GetPrev(const Value* pValue) const;
+
+	const Key& GetKeyOf(const Value* pValue) const;
+	int GetCount() const { return m_count; }
+	bool IsEmpty() const { return m_count == 0; }
+
+private:
 	virtual bool IsSwapAllowed() const { return true; }
 	virtual uint8_t* Allocate() { return nullptr; }
 	virtual void Free(uint8_t*) {}
 
-	struct Node
+	struct Node : value_type
 	{
-		value_type value;
-		key_type key;
-
 		Node* parent;
 		Node* left;
 		Node* right;
 		uint32_t red : 1;
-		uint32_t position : 32;
+		uint32_t position : 31;
 	};
 
-/*0x08*/ Node* root = nullptr;
-/*0x10*/ int count = 0;
+	static Node* GetNode(const Value* pValue);
+	static Node* GetNextNode(const Node* pNode);
+	static Node* GetPrevNode(const Node* pNode);
+
+public:
+#pragma region SoeUtil::Map::ConstIterator
+	template <int direction = 0>
+	class ConstIterator
+	{
+	public:
+		using iterator_category = std::bidirectional_iterator_tag;
+
+		using value_type = Map::value_type;
+		using difference_type = std::ptrdiff_t;
+		using pointer = const value_type*;
+		using reference = const value_type&;
+
+		ConstIterator() = default;
+		ConstIterator(const Node* value) : m_value(value) {}
+
+		[[nodiscard]] reference operator*() const
+		{
+			return static_cast<reference>(*m_value);
+		}
+
+		[[nodiscard]] pointer operator->() const
+		{
+			return static_cast<pointer>(&m_value);
+		}
+
+		ConstIterator& operator++();
+		ConstIterator& operator--();
+
+		bool operator==(const ConstIterator& other) const { return m_value == other.m_value; }
+		bool operator!=(const ConstIterator& other) const { return m_value != other.m_value; }
+
+	private:
+		const Node* m_value = nullptr;
+	};
+#pragma endregion
+
+	using iterator = ConstIterator<0>;
+	using const_iterator = ConstIterator<0>;
+	using reverse_iterator = ConstIterator<1>;
+	using const_reverse_iterator = ConstIterator<1>;
+
+	iterator begin() { return iterator(GetFirst()); }
+	const_iterator begin() const { return const_iterator(GetNode(GetFirst())); }
+	const_iterator cbegin() const { return const_iterator(GetNode(GetFirst())); }
+
+	iterator end() { return iterator(nullptr); }
+	const_iterator end() const { return const_iterator(nullptr); }
+	const_iterator cend() const { return const_iterator(nullptr); }
+
+	reverse_iterator rbegin() { return reverse_iterator(GetNode(GetLast())); }
+	const_reverse_iterator rbegin() const { return const_reverse_iterator(GetNode(GetLast())); }
+	const_reverse_iterator crbegin() const { return const_reverse_iterator(GetNode(GetLast())); }
+
+	reverse_iterator rend() { return reverse_iterator(nullptr); }
+	const_reverse_iterator rend() const { return const_reverse_iterator(nullptr); }
+	const_reverse_iterator crend() const { return const_reverse_iterator(nullptr); }
+
+/*0x08*/ Node* m_root = nullptr;
+/*0x10*/ int   m_count = 0;
+	// Pool
 };
+
+template <typename Key, typename Value>
+template <int direction>
+typename Map<Key, Value>::template ConstIterator<direction>& Map<Key, Value>::ConstIterator<direction>::operator++()
+{
+	if constexpr (direction == 0)
+		m_value = GetNextNode(m_value);
+	else
+		m_value = GetPrevNode(m_value);
+
+	return *this;
+}
+
+template <typename Key, typename Value>
+template <int direction>
+typename Map<Key, Value>::template ConstIterator<direction>& Map<Key, Value>::ConstIterator<direction>::operator--()
+{
+	if constexpr (direction == 0)
+		m_value = GetPrevNode(m_value);
+	else
+		m_value = GetNextNode(m_value);
+
+	return *this;
+}
+
+template <typename Key, typename Value>
+typename Map<Key, Value>::Node* Map<Key, Value>::GetNode(const Value* pValue)
+{
+	return pValue ? (Node*)((uint8_t*)pValue - offsetof(Node, value)) : nullptr;
+}
+
+template <typename Key, typename Value>
+typename Map<Key, Value>::Node* Map<Key, Value>::GetNextNode(const Node* pValue)
+{
+	if (pValue->right)
+	{
+		Node* node = pValue->right;
+		while (node->left)
+		{
+			node = node->left;
+		}
+		return node;
+	}
+
+	Node* parent = pValue->parent;
+	while (parent && pValue == parent->right)
+	{
+		pValue = parent;
+		parent = pValue->parent;
+	}
+
+	return parent;
+}
+
+template <typename Key, typename Value>
+typename Map<Key, Value>::Node* Map<Key, Value>::GetPrevNode(const Node* pValue)
+{
+	if (pValue->left)
+	{
+		Node* node = pValue->left;
+		while (node->right)
+		{
+			node = node->right;
+		}
+		return node;
+	}
+
+	Node* parent = pValue->parent;
+	while (parent && pValue == parent->left)
+	{
+		pValue = parent;
+		parent = pValue->parent;
+	}
+	return parent;
+}
+
+template <typename Key, typename Value>
+Value* Map<Key, Value>::Find(const Key& key) const
+{
+	Node* node = m_root;
+
+	while (node != nullptr)
+	{
+		if (key < node->key)
+		{
+			node = node->left;
+		}
+		else if (node->key < key)
+		{
+			node = node->right;
+		}
+		else
+		{
+			return &node->value;
+		}
+	}
+
+	return nullptr;
+}
+
+template <typename Key, typename Value>
+Value* Map<Key, Value>::GetFirst() const
+{
+	Node* node = m_root;
+	Node* value = nullptr;
+
+	while (node != nullptr)
+	{
+		value = node;
+		node = node->left;
+	}
+
+	return value ? &value->value : nullptr;
+}
+
+template <typename Key, typename Value>
+Value* Map<Key, Value>::GetLast() const
+{
+	Node* node = m_root;
+	Node* value = nullptr;
+
+	while (node != nullptr)
+	{
+		value = node;
+		node = node->right;
+	}
+	return value ? &value->value : nullptr;
+}
+
+template <typename Key, typename Value>
+const Key& Map<Key, Value>::GetKeyOf(const Value* pValue) const
+{
+	Node* node = GetNode(pValue);
+	return node->key;
+}
+
+template <typename Key, typename Value>
+Value* Map<Key, Value>::GetNext(const Value* pValue) const
+{
+	Node* node = GetNextNode(GetNode(pValue));
+	return node ? &node->value : nullptr;
+}
+
+template <typename Key, typename Value>
+Value* Map<Key, Value>::GetPrev(const Value* pValue) const
+{
+	Node* node = GetPrevNode(GetNode(pValue));
+	return node ? &node->value : nullptr;
+}
+
+#pragma endregion SoeUtil::Map
+
+//----------------------------------------------------------------------------
 
 template <typename Key>
 class Set
