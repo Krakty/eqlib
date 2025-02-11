@@ -841,9 +841,95 @@ SharedPtr<T> MakeShared(Args&&... args)
 
 //----------------------------------------------------------------------------
 
+
+template <typename KeyType, typename ValueType> class EmbeddedMapLink;
+template <typename KeyType, typename ValueType, EmbeddedMapLink<KeyType, ValueType> ValueType::* Link> class EmbeddedMap;
+
+template <typename KeyType, typename ValueType>
+class EmbeddedMapLink
+{
+public:
+	EmbeddedMapLink() = default;
+	~EmbeddedMapLink() = default;
+
+	EmbeddedMapLink(const EmbeddedMapLink& other) = delete;
+	EmbeddedMapLink& operator=(const EmbeddedMapLink& other) = delete;
+
+	KeyType m_key;
+	ValueType* m_parent = nullptr;
+	ValueType* m_left = nullptr;
+	ValueType* m_right = nullptr;
+	uint32_t m_red : 1;
+	uint32_t m_position : 31;
+};
+
+// Size: 0x10
+template <typename KeyType, typename ValueType, EmbeddedMapLink<KeyType, ValueType> ValueType::* Link>
+class EmbeddedMap
+{
+public:
+	using key_type = KeyType;
+	using mapped_type = ValueType;
+	using link_type = EmbeddedMapLink<KeyType, ValueType>;
+
+	EmbeddedMap() = default;
+	~EmbeddedMap() = default;
+
+/*0x00*/ ValueType* m_root;
+/*0x08*/ int m_count;
+/*0x0c*/
+};
+
+constexpr int AlignedSize(int size, int alignment)
+{
+	return (size + alignment - 1) & ~(alignment - 1);
+}
+
+
+//----------------------------------------------------------------------------
+
+template <int Size, int EmbeddedCount = 0, int Alignment = 4>
+class MemoryPool
+{
+public:
+	MemoryPool()
+	{
+		m_compact = false;
+		m_freeList = nullptr;
+
+	}
+	~MemoryPool();
+
+	struct Node
+	{
+		union
+		{
+			uint8_t aligned_storage[AlignedSize(Size, Alignment)];
+			Node* next;
+		};
+	};
+
+	struct Block
+	{
+		EmbeddedMapLink<Node*, Block> link;
+		int created;
+		int available;
+	};
+
+/*0x00*/ EmbeddedMap<Node*, Block, &Block::m_link> m_blocks;
+/*0x10*/ Node* m_freeList;
+/*0x18*/ int m_freeListCount;
+/*0x1c*/ bool m_compact;
+
+/*0x1d*/ uint8_t m_storage[EmbeddedCount > 0 ? EmbeddedCount * sizeof(Node) + Alignment : 1];
+/*0x28*/ // minimum size
+};
+
+//----------------------------------------------------------------------------
+
 #pragma region SoeUtil::Map
 
-template <typename Key, typename Value, int PoolType = -1>
+template <typename Key, typename Value, int EmbeddedCount = -1>
 class Map;
 
 template <typename Key, typename Value>
@@ -874,18 +960,23 @@ public:
 	int GetCount() const { return m_count; }
 	bool IsEmpty() const { return m_count == 0; }
 
+	mapped_type* operator[](const Key& key) { return Find(key); }
+	const mapped_type* operator[](const Key& key) const { return Find(key); }
+
 private:
 	virtual bool IsSwapAllowed() const { return true; }
 	virtual uint8_t* Allocate() { return nullptr; }
 	virtual void Free(uint8_t*) {}
 
+	// Node size: 1c + sizeof(Key)+sizeof(Value)
 	struct Node : value_type
 	{
-		Node* parent;
-		Node* left;
-		Node* right;
-		uint32_t red : 1;
-		uint32_t position : 31;
+	/*+0x00*/ Node* parent;
+	/*+0x08*/ Node* left;
+	/*+0x10*/ Node* right;
+	/*+0x18*/ uint32_t red : 1;
+	/*+0x18*/ uint32_t position : 31;
+	/*+0x1c*/
 	};
 
 	static Node* GetNode(const Value* pValue);
@@ -924,8 +1015,30 @@ public:
 		bool operator==(const ConstIterator& other) const { return m_value == other.m_value; }
 		bool operator!=(const ConstIterator& other) const { return m_value != other.m_value; }
 
-	private:
+	protected:
 		const Node* m_value = nullptr;
+	};
+#pragma endregion
+
+#pragma region SoeUtil::Map::ValueIterator
+	class ValueIterator : public ConstIterator<0>
+	{
+	public:
+		using ConstIterator<0>::ConstIterator;
+
+		using value_type = const Map::mapped_type*;
+		using difference_type = std::ptrdiff_t;
+		using pointer = value_type;
+		using reference = value_type;
+
+		[[nodiscard]] reference operator*() const
+		{
+			return &m_value->value;
+		}
+		[[nodiscard]] pointer operator->() const
+		{
+			return &m_value->value;
+		}
 	};
 #pragma endregion
 
@@ -950,9 +1063,29 @@ public:
 	const_reverse_iterator rend() const { return const_reverse_iterator(nullptr); }
 	const_reverse_iterator crend() const { return const_reverse_iterator(nullptr); }
 
+	template <typename IteratorType>
+	struct IterRange
+	{
+		IteratorType first;
+		IteratorType second;
+
+		IterRange(IteratorType first_, IteratorType second_) : first(first_), second(second_) {}
+
+		auto begin() { return first; }
+		auto end() { return second; }
+	};
+
+	using value_iterator = ValueIterator;
+
+	using ItemRange = IterRange<const_iterator>;
+	using ValueRange = IterRange<value_iterator>;
+
+	auto items() const { return IterRange(cbegin(), cend()); }
+	ValueRange values() const { return ValueRange(value_iterator(GetNode(GetFirst())), value_iterator(nullptr)); }
+
 /*0x08*/ Node* m_root = nullptr;
 /*0x10*/ int   m_count = 0;
-	// Pool
+/*0x18*/
 };
 
 template <typename Key, typename Value>
