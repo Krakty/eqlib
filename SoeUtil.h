@@ -1026,18 +1026,18 @@ public:
 	public:
 		using ConstIterator<0>::ConstIterator;
 
-		using value_type = const Map::mapped_type*;
+		using value_type = Map::mapped_type*;
 		using difference_type = std::ptrdiff_t;
 		using pointer = value_type;
 		using reference = value_type;
 
 		[[nodiscard]] reference operator*() const
 		{
-			return &m_value->value;
+			return (Map::mapped_type*)&m_value->value;
 		}
 		[[nodiscard]] pointer operator->() const
 		{
-			return &m_value->value;
+			return (Map::mapped_type*)&m_value->value;
 		}
 	};
 #pragma endregion
