@@ -906,7 +906,7 @@ using PSPELLCALCINFO = SPELLCALCINFO*;
 #pragma pack(push)
 #pragma pack(1)
 
-constexpr size_t EQ_Spell_size = 0x210; // @sizeof(EQ_Spell) :: 2025-01-09 (live) @ 0x1401D39E7
+constexpr size_t EQ_Spell_size = 0x210; // @sizeof(EQ_Spell) :: 2025-02-03 (test) @ 0x1401D5EF7
 
 class [[offsetcomments]] EQ_Spell
 {
@@ -1199,7 +1199,7 @@ struct [[offsetcomments]] SpellEffectStage
 /*0x44*/
 };
 
-struct [[offsetcomments]] NewSpellEffect
+struct [[offsetcomments]] SpellEffectNew
 {
 /*0x000*/ char               szSpellEffectName[0x40];
 /*0x040*/ SpellEffectStage   Stages[3];
@@ -1208,11 +1208,11 @@ struct [[offsetcomments]] NewSpellEffect
 
 struct [[offsetcomments]] StageType
 {
-/*0x000*/ char               BlitSprite[3][0x20];
-/*0x060*/ char               AttachTag[0x20];
+/*0x000*/ char               BlitSprite[3][32];
+/*0x060*/ char               AttachTag[32];
 /*0x080*/ int                DAGnum[3];
 /*0x08c*/ int                pcloud[3];
-/*0x098*/ char               SpriteTAG[0xc][0x20];
+/*0x098*/ char               SpriteTAG[12][32];
 /*0x218*/ int                SpritEffect;
 /*0x21c*/ int                SoundNum;
 /*0x220*/ ARGBCOLOR          Tint[3];
@@ -1232,29 +1232,29 @@ struct [[offsetcomments]] StageType
 /*0x280*/ float              Velocity[3];
 /*0x28c*/ ULONG              Rate[3];
 /*0x298*/ float              Scale[3];
-/*0x2a4*/ EQRGB              SpriteRGB[0xc];
-/*0x2c8*/ float              RollRate[0xc];
-/*0x2f8*/ short              HdgOffset[0xc];
-/*0x310*/ short              PitchOffset[0xc];
-/*0x328*/ float              Distance[0xc];
+/*0x2a4*/ EQRGB              SpriteRGB[12];
+/*0x2c8*/ float              RollRate[12];
+/*0x2f8*/ short              HdgOffset[12];
+/*0x310*/ short              PitchOffset[12];
+/*0x328*/ float              Distance[12];
 /*0x358*/ short              EffectType[12];
 /*0x370*/ float              ScaleFactor[12];
 /*0x3a0*/
 };
 
-struct [[offsetcomments]] OldSpellEffect
+struct [[offsetcomments]] SpellEffect
 {
-/*0x000*/ int                Tgts;
-/*0x004*/ int                Perm;
+/*0x000*/ int                tgts;
+/*0x004*/ int                permanent;
 /*0x008*/ StageType          stages[3];
 /*0xae8*/
 };
 
-class [[offsetcomments]] EQSpellExtra
+class [[offsetcomments]] EQ_SpellExtra
 {
 public:
-/*0x00*/ OldSpellEffect*    OldSpellEff;
-/*0x08*/ NewSpellEffect*    NewSpellEff;
+/*0x00*/ SpellEffect*       OldSpellEff;
+/*0x08*/ SpellEffectNew*    NewSpellEff;
 /*0x10*/
 };
 
@@ -1281,23 +1281,32 @@ struct [[offsetcomments]] StackingGroupData
 /*0x0c*/
 };
 
-constexpr int TOTAL_SPELL_COUNT = 72000;           // # of spells allocated in memory - SpellManager::FreeSpells
-constexpr int TOTAL_SPELL_AFFECT_COUNT = 290000;   // # of spell affects allocated in mem - SpellManager::FreeSpellAffects
+// These values no longer match the client implementation, and as such they are deprecated.
+constexpr const char* TOTAL_SPELL_COUNT = "Spells no longer have a fixed size array and thus this constant is no longer usable";
+constexpr const char* TOTAL_SPELL_AFFECT_COUNT = "Spells no longer have a fixed size array and thus this constant is no longer usable";
+// To get the number of spells, use pSpellMgr->GetSpellCount();
+// To get the max spell ID, use pSpellMgr->GetMaxSpellID();
+// To iterate over all spells, use pSpellMgr->Spells in a range-based for loop.
+// Direct access to the spells array is no longer supported.
 
 class [[offsetcomments]] SpellManager : public FileStatMgr
 {
 public:
-/*0x00020*/ int              SpellsCrc32[TOTAL_SPELL_COUNT];
-/*0x46520*/ EQ_Spell*        MissingSpell;
-/*0x46528*/ SpellAffectData* MissingSpellAffect;
-/*0x46530*/ SpellAffectData* MissingSpellAffectAC;
-/*0x46538*/ int              MissingSpellCrc32;
-/*0x4653c*/ int              SpellFileCRC;
-/*0x46540*/ int              SpellAssocFileCRC;
-/*0x46544*/ int              SpellStackingFileCRC;
-/*0x46548*/ SpellRequirementAssociationManager ReqAssocManager;
-/*0x486f0*/ HashTable<int, int> SpellGroups;
-/*0x48708*/
+/*0x0020*/ SoeUtil::Map<int, int> SpellsCrc32;
+/*0x0038*/ EQ_Spell*              MissingSpell;
+/*0x0040*/ SpellAffectData*       MissingSpellAffect;
+/*0x0048*/ SpellAffectData*       MissingSpellAffectAC;
+/*0x0050*/ int                    MissingSpellCrc32;
+/*0x0054*/ int                    SpellFileCRC;
+/*0x0058*/ int                    SpellAssocFileCRC;
+/*0x005c*/ int                    SpellStackingFileCRC;
+/*0x0060*/ uint32_t               SpellCount;
+/*0x0064*/ int                    MaxSpellID;
+/*0x0068*/ uint32_t               SpellAffectsCount;
+/*0x006c*/ bool                   InitRequired;
+/*0x0070*/ SpellRequirementAssociationManager ReqAssocManager;
+/*0x2218*/ HashTable<int, int>    SpellGroups;
+/*0x2230*/
 
 	SpellManager(char*);
 	virtual ~SpellManager() {}
@@ -1305,7 +1314,7 @@ public:
 	EQLIB_OBJECT const EQ_Spell* GetSpellByGroupAndRank(int Group, int SubGroup, int Rank = -1, bool bLesserRanksOk = false);
 };
 
-constexpr size_t ClientSpellManager_size = 0x424BA0; // @sizeof(ClientSpellManager) :: 2025-01-09 (live) @ 0x14026351B
+constexpr size_t ClientSpellManager_size = 0x2290; // @sizeof(ClientSpellManager) :: 2025-02-03 (test) @ 0x140265C5B
 
 class [[offsetcomments]] ClientSpellManager : public SpellManager
 {
@@ -1323,13 +1332,21 @@ public:
 /*0x48*/ EQLIB_OBJECT virtual SpellAffectData* GetSpellAffect(int index);
 /*0x50*/ EQLIB_OBJECT virtual SpellAffectData* GetSpellAffectEmpty(bool);
 
-	bool AllSpellsLoaded() const { return SpellStackingFileCRC != 0 && Spells[TOTAL_SPELL_COUNT - 1] != nullptr; }
+	bool AllSpellsLoaded() const { return !InitRequired; }
 
-/*0x048708*/ EQ_Spell*                    Spells[TOTAL_SPELL_COUNT];
-/*0x0d5108*/ SpellAffectData*             CalcInfo[TOTAL_SPELL_AFFECT_COUNT];
-/*0x30b788*/ EQSpellExtra                 SpellExtraData[TOTAL_SPELL_COUNT];
-/*0x424b88*/ HashTable<StackingGroupData> StackingData;
-/*0x424ba0*/
+	int GetMaxSpellID() const { return MaxSpellID; }
+	uint32_t GetSpellCount() const { return SpellCount; }
+	uint32_t GetSpellAffectsCount() const { return SpellAffectsCount; }
+
+	SoeUtil::Map<int, EQ_Spell>::ValueRange __getSpellRange() const { return m_spells.values(); }
+	__declspec(property(get = __getSpellRange)) SoeUtil::Map<int, EQ_Spell>::ValueRange Spells;
+
+private:
+/*0x2230*/ SoeUtil::Map<int, EQ_Spell>        m_spells;
+/*0x2248*/ SoeUtil::Map<int, SpellAffectData> m_spellAffects;
+/*0x2260*/ SoeUtil::Map<int, EQ_SpellExtra>   m_spellExtraData;
+/*0x2278*/ HashTable<StackingGroupData>       m_stackingData;
+/*0x2290*/
 };
 
 SIZE_CHECK(ClientSpellManager, ClientSpellManager_size);
