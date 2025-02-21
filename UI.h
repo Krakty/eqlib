@@ -4770,6 +4770,9 @@ public:
 		ePageLast = ePageActivatedItemsKeyRing,
 	};
 
+	EQLIB_OBJECT static ECursorAttachmentType GetLinkType(KeyRingType type);
+	EQLIB_OBJECT static KeyRingType GetKeyRingType(ItemContainerInstance container);
+
 /*0x2d0*/ CListWnd*     pList[eNumPages];        // KRW_Mounts_List, KRW_Illusions_List, KRW_Familiars_List, KRW_HeroForge_List
 /*0x300*/ CLabel*       pStatLabel[eNumPages];   // KRW_Mounts_StatsNameLabel, KRW_Illusions_StatNameLabel, KRW_Familiars_StatNameLabel,
 /*0x330*/ CLabel*       pCountLabel[eNumPages];  // KRW_Mounts_CountLabel, KRW_Illusions_CountLabel, KRW_Familiars_CountLabel, KRW_HeroForge_CountLabel
