@@ -676,6 +676,40 @@ CListWnd* CKeyRingWnd::GetKeyRingList(KeyRingType type) const
 	return pList[type];
 }
 
+ECursorAttachmentType CKeyRingWnd::GetLinkType(KeyRingType type)
+{
+	switch (type)
+	{
+	case eMount: return eCursorAttachment_MountKeyRingLink;
+	case eIllusion: return eCursorAttachment_IllusionKeyRingLink;
+	case eFamiliar: return eCursorAttachment_FamiliarKeyRingLink;
+	case eTeleportationItem: return eCursorAttachment_TeleportationKeyRingLink;
+	case eActivatedItem: return eCursorAttachment_ActivatedKeyRingLink;
+	case eHeroForge: return eCursorAttachment_ItemLink;
+	default: break;
+	}
+
+	return eCursorAttachment_None;
+}
+
+KeyRingType CKeyRingWnd::GetKeyRingType(ItemContainerInstance container)
+{
+	// Check if this item qualifies to be on a keyring
+	KeyRingType keyRingType = eKeyRingTypeInvalid;
+
+	switch (container)
+	{
+	case eItemContainerMountKeyRingItems: keyRingType = eMount; break;
+	case eItemContainerIllusionKeyRingItems: keyRingType = eIllusion; break;
+	case eItemContainerFamiliarKeyRingItems: keyRingType = eFamiliar; break;
+	case eItemContainerTeleportationKeyRingItems: keyRingType = eTeleportationItem; break;
+	case eItemContainerActivatedKeyRingItems: keyRingType = eActivatedItem; break;
+	default: break;
+	}
+
+	return keyRingType;
+}
+
 //============================================================================
 // CMapViewWnd
 //============================================================================

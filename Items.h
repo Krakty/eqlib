@@ -264,6 +264,7 @@ public:
 		return Location == eItemContainerMountKeyRingItems
 			|| Location == eItemContainerIllusionKeyRingItems
 			|| Location == eItemContainerFamiliarKeyRingItems
+			|| Location == eItemContainerHeroForgeKeyRingItems
 			|| Location == eItemContainerTeleportationKeyRingItems
 			|| Location == eItemContainerActivatedKeyRingItems;
 	}
