@@ -22,8 +22,8 @@
 
 #define CEQGBitmap__GetFirstBitmap_x                               0x180003210
 
-#define CParticleSystem__Render_x                                  0x1800A7820
-#define CParticleSystem__CreateSpellEmitter_x                      0x180097470
+#define CParticleSystem__Render_x                                  0x1800A7810
+#define CParticleSystem__CreateSpellEmitter_x                      0x180097460
 
 #define CRender__RenderScene_x                                     0x1800C5030
 #define CRender__RenderBlind_x                                     0x1800C4EF0
