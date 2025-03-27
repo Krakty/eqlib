@@ -255,7 +255,7 @@ namespace eqmain {
 // CXWnd
 //============================================================================
 
-constexpr size_t CXWnd_size = 0x248; // @sizeof(CXWnd, eqmain) :: 2025-03-17 (live) @ 0x1800D5CDB
+constexpr size_t CXWnd_size = 0x260; // @sizeof(CXWnd, eqmain) :: 2025-03-19 (test) @ 0x1800D664B
 constexpr size_t CXWnd_vftable_size = 0x2D0;
 
 class [[offsetcomments]] CXWnd
@@ -661,112 +661,112 @@ public:
 	};
 
 // @start: CXWnd Members
-/*0x030*/ uint8_t            FadeToAlpha;
-/*0x034*/ int                BottomOffset;
-/*0x038*/ bool               bClipToParent;
-/*0x040*/ CTextObjectInterface* pTipTextObject;
-/*0x048*/ CXRect             ClientRect;
-/*0x058*/ bool               bAction;
-/*0x05c*/ int                HScrollPos;
-/*0x060*/ CXSize             MinClientSize;
-/*0x068*/ CStaticTintedBlendAnimationTemplate* TitlePiece;
-/*0x070*/ uint32_t           LastTimeMouseOver;
-/*0x074*/ int                Transition;
-/*0x078*/ CXRect             OldLocation;
-/*0x088*/ bool               bBringToTopWhenClicked;
-/*0x08c*/ uint32_t           BlinkFadeFreq;
-/*0x090*/ CXWndDrawTemplate* DrawTemplate;
-/*0x098*/ int                LeftOffset;
-/*0x09c*/ bool               bTiled;
-/*0x09d*/ bool               bHCenterTooltip;
-/*0x09e*/ bool               Unlockable;
-/*0x09f*/ bool               bTopAnchoredToTop;
+/*0x030*/ int                LeftOffset;
+/*0x038*/ CTextureAnimation* IconTextureAnim;
+/*0x040*/ COLORREF           BGColor;
+/*0x044*/ uint32_t           BlinkFadeDuration;
+/*0x048*/ bool               bIsTransitioning;
+/*0x04c*/ CXRect             ClientRect;
+/*0x05c*/ CXRect             IconRect;
+/*0x06c*/ bool               bUseInLayoutHorizontal;
+/*0x06d*/ bool               bClickThroughMenuItemStatus;
+/*0x070*/ uint32_t           BGType;
+/*0x074*/ uint32_t           FadeDuration;
+/*0x078*/ uint8_t            Alpha;
+/*0x07c*/ int                TopOffset;
+/*0x080*/ bool               Enabled;
+/*0x081*/ bool               MouseOver;
+/*0x082*/ bool               bClientClipRectChanged;
+/*0x083*/ bool               Fades;
+/*0x084*/ bool               bUseInLayoutVertical;
+/*0x088*/ int                DeleteCount;
+/*0x08c*/ int                HScrollMax;
+/*0x090*/ CStaticTintedBlendAnimationTemplate* TitlePiece;
+/*0x098*/ uint32_t           LastTimeMouseOver;
 /*0x0a0*/ CLayoutStrategy*   pLayoutStrategy;
-/*0x0a8*/ CXStr              XMLToolTip;
-/*0x0b0*/ CXRect             TransitionRect;
-/*0x0c0*/ CXRect             IconRect;
-/*0x0d0*/ CXWnd*             FocusProxy;
-/*0x0d8*/ CXRect             ClipRectClient;
-/*0x0e8*/ int64_t            Data;
-/*0x0f0*/ int                RightOffset;
-/*0x0f4*/ bool               bActive;
-/*0x0f5*/ bool               bRightAnchoredToLeft;
-/*0x0f8*/ int                HScrollMax;
-/*0x0fc*/ bool               bClientRectChanged;
-/*0x0fd*/ bool               bLeftAnchoredToLeft;
-/*0x100*/ uint32_t           BGType;
-/*0x104*/ bool               Minimized;
-/*0x108*/ ControllerBase*    pController;
-/*0x110*/ bool               bNeedsSaving;
-/*0x111*/ bool               bUseInLayoutVertical;
-/*0x112*/ bool               bMaximizable;
-/*0x114*/ COLORREF           BGColor;
-/*0x118*/ uint8_t            StartAlpha;
-/*0x119*/ bool               bEnableShowBorder;
-/*0x11c*/ int                VScrollMax;
-/*0x120*/ bool               Fades;
-/*0x121*/ bool               bEscapableLocked;
-/*0x122*/ bool               bIsTransitioning;
-/*0x124*/ uint32_t           BlinkFadeStartTime;
-/*0x128*/ uint8_t            FadeAlpha;
-/*0x129*/ bool               bClickThroughMenuItemStatus;
-/*0x12a*/ bool               dShow;
-/*0x12c*/ int                ZLayer;
-/*0x130*/ CTextObjectInterface* pTextObject;
-/*0x138*/ int                TopOffset;
-/*0x13c*/ int                managerArrayIndex;
-/*0x140*/ CXStr              Tooltip;
-/*0x148*/ bool               bIsParentOrContextMenuWindow;
-/*0x14c*/ int                BlinkDuration;
-/*0x150*/ CXStr              WindowText;
-/*0x158*/ bool               bShowBorder;
-/*0x159*/ bool               bCaptureTitle;
-/*0x160*/ CStaticTintedBlendAnimationTemplate* TitlePiece2;
-/*0x168*/ CTextureAnimation* IconTextureAnim;
-/*0x170*/ bool               bClickThroughToBackground;
-/*0x171*/ bool               bMarkedForDelete;
-/*0x172*/ uint8_t            Alpha;
-/*0x174*/ uint32_t           BackgroundDrawType;
-/*0x178*/ bool               Enabled;
-/*0x17c*/ COLORREF           CRNormal;
-/*0x180*/ uint32_t           WindowStyle;
-/*0x184*/ CXRect             Location;
-/*0x194*/ bool               bShowClickThroughMenuItem;
-/*0x198*/ ArrayClass2<uint32_t> RuntimeTypes;
-/*0x1b8*/ int                BlinkStartTimer;
-/*0x1bc*/ bool               bMaximized;
-/*0x1bd*/ bool               Locked;
-/*0x1c0*/ uint32_t           TransitionStartTick;
-/*0x1c4*/ int                VScrollPos;
-/*0x1c8*/ bool               bClickThrough;
-/*0x1c9*/ bool               bUseInLayoutHorizontal;
+/*0x0a8*/ uint32_t           TransitionStartTick;
+/*0x0ac*/ bool               bAction;
+/*0x0ad*/ bool               bBringToTopWhenClicked;
+/*0x0b0*/ CXStr              Tooltip;
+/*0x0b8*/ CStaticTintedBlendAnimationTemplate* TitlePiece2;
+/*0x0c0*/ bool               bCaptureTitle;
+/*0x0c4*/ CXSize             MaxClientSize;
+/*0x0cc*/ bool               Faded;
+/*0x0d0*/ CXRect             TransitionRect;
+/*0x0e0*/ bool               dShow;
+/*0x0e1*/ uint8_t            FadeToAlpha;
+/*0x0e2*/ bool               bIsParentOrContextMenuWindow;
+/*0x0e3*/ bool               bEscapableLocked;
+/*0x0e8*/ CXWndDrawTemplate* DrawTemplate;
+/*0x0f0*/ bool               Locked;
+/*0x0f4*/ CXRect             OldLocation;
+/*0x104*/ CXSize             MinClientSize;
+/*0x10c*/ CXRect             Location;
+/*0x11c*/ int                BlinkState;
+/*0x120*/ bool               bKeepOnScreen;
+/*0x121*/ bool               bNeedsSaving;
+/*0x124*/ uint32_t           WindowStyle;
+/*0x128*/ int                ParentAndContextMenuArrayIndex;
+/*0x12c*/ uint8_t            bResizableMask;
+/*0x130*/ int                managerArrayIndex;
+/*0x134*/ uint32_t           FadeDelay;
+/*0x138*/ bool               bMaximizable;
+/*0x13c*/ COLORREF           DisabledBackground;
+/*0x140*/ bool               ValidCXWnd;
+/*0x148*/ CXStr              DataStr;
+/*0x150*/ bool               bFullyScreenClipped;
+/*0x154*/ uint32_t           BackgroundDrawType;
+/*0x158*/ ArrayClass2<uint32_t> RuntimeTypes;
+/*0x178*/ uint8_t            FadeAlpha;
+/*0x179*/ bool               bMaximized;
+/*0x17a*/ bool               bClickThroughToBackground;
+/*0x17c*/ uint32_t           TransitionDuration;
+/*0x180*/ uint32_t           XMLIndex;
+/*0x184*/ int                RightOffset;
+/*0x188*/ uint8_t            StartAlpha;
+/*0x18c*/ int                VScrollMax;
+/*0x190*/ int                BlinkStartTimer;
+/*0x194*/ bool               bBottomAnchoredToTop;
+/*0x198*/ uint32_t           BlinkFadeFreq;
+/*0x19c*/ bool               bRightAnchoredToLeft;
+/*0x19d*/ bool               Minimized;
+/*0x19e*/ bool               bScreenClipRectChanged;
+/*0x1a0*/ int                HScrollPos;
+/*0x1a4*/ bool               bClipToParent;
+/*0x1a8*/ int64_t            Data;
+/*0x1b0*/ bool               bClientRectChanged;
+/*0x1b1*/ bool               bTiled;
+/*0x1b2*/ bool               bShowClickThroughMenuItem;
+/*0x1b4*/ CXRect             ClipRectScreen;
+/*0x1c4*/ bool               bEnableShowBorder;
+/*0x1c8*/ int                BottomOffset;
 /*0x1d0*/ CTextureFont*      pFont;
-/*0x1d8*/ int                ParentAndContextMenuArrayIndex;
-/*0x1dc*/ bool               ValidCXWnd;
-/*0x1dd*/ bool               bKeepOnScreen;
-/*0x1de*/ bool               bScreenClipRectChanged;
-/*0x1e0*/ uint32_t           LastBlinkFadeRefreshTime;
-/*0x1e4*/ bool               bFullyScreenClipped;
-/*0x1e5*/ uint8_t            TargetAlpha;
-/*0x1e8*/ CXWnd*             ParentWindow;
-/*0x1f0*/ CXStr              DataStr;
-/*0x1f8*/ COLORREF           DisabledBackground;
-/*0x1fc*/ bool               bBottomAnchoredToTop;
-/*0x1fd*/ bool               MouseOver;
-/*0x200*/ uint32_t           BlinkFadeDuration;
-/*0x204*/ uint8_t            bResizableMask;
-/*0x208*/ int                BlinkState;
-/*0x20c*/ uint32_t           XMLIndex;
-/*0x210*/ uint32_t           FadeDuration;
-/*0x214*/ CXSize             MaxClientSize;
-/*0x21c*/ bool               Faded;
-/*0x220*/ uint32_t           FadeDelay;
-/*0x224*/ int                DeleteCount;
-/*0x228*/ uint32_t           TransitionDuration;
-/*0x22c*/ bool               bClientClipRectChanged;
-/*0x230*/ CXRect             ClipRectScreen;
-/*0x240*/ bool               bEscapable;
-/*0x244*/
+/*0x1d8*/ bool               bMarkedForDelete;
+/*0x1dc*/ COLORREF           CRNormal;
+/*0x1e0*/ int                Transition;
+/*0x1e8*/ CXStr              WindowText;
+/*0x1f0*/ CXRect             ClipRectClient;
+/*0x200*/ int                VScrollPos;
+/*0x204*/ int                ZLayer;
+/*0x208*/ ControllerBase*    pController;
+/*0x210*/ bool               bHCenterTooltip;
+/*0x218*/ CXWnd*             FocusProxy;
+/*0x220*/ CXStr              XMLToolTip;
+/*0x228*/ int                BlinkDuration;
+/*0x230*/ CTextObjectInterface* pTipTextObject;
+/*0x238*/ CXWnd*             ParentWindow;
+/*0x240*/ uint32_t           BlinkFadeStartTime;
+/*0x244*/ bool               bActive;
+/*0x245*/ bool               bClickThrough;
+/*0x246*/ bool               bLeftAnchoredToLeft;
+/*0x247*/ bool               bShowBorder;
+/*0x248*/ uint32_t           LastBlinkFadeRefreshTime;
+/*0x24c*/ bool               Unlockable;
+/*0x250*/ CTextObjectInterface* pTextObject;
+/*0x258*/ uint8_t            TargetAlpha;
+/*0x259*/ bool               bTopAnchoredToTop;
+/*0x25a*/ bool               bEscapable;
+/*0x25c*/
 // @end: CXWnd Members
 };
 
@@ -803,12 +803,12 @@ public:
 class [[offsetcomments]] CListWnd : public CXWnd
 {
 public:
-/*0x248*/ int                 Unknown0x1f0;
-/*0x250*/ ArrayClass<SListWndLine> ItemsArray;
-/*0x268*/ ArrayClass<SListWndColumn> Columns;
-/*0x280*/ int                 CurSel;
-/*0x284*/ int                 CurCol;
-/*0x288*/
+/*0x260*/ int                 Unknown0x1f0;
+/*0x268*/ ArrayClass<SListWndLine> ItemsArray;
+/*0x280*/ ArrayClass<SListWndColumn> Columns;
+/*0x298*/ int                 CurSel;
+/*0x29c*/ int                 CurCol;
+/*0x2a0*/
 	CXStr GetItemText(int row, int col)
 	{
 		if (row < 0 || row >= ItemsArray.Count)
