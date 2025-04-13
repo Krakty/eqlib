@@ -284,7 +284,7 @@ struct [[offsetcomments]] LabelCache
 //============================================================================
 //============================================================================
 
-constexpr size_t EQGroundItem_size = 0xA0; // @sizeof(EQGroundItem) :: 2025-03-19 (test) @ 0x1401F2148
+constexpr size_t EQGroundItem_size = 0xA0; // @sizeof(EQGroundItem) :: 2025-04-07 (test) @ 0x1401F4B9B
 
 class [[offsetcomments]] EQGroundItem
 {
@@ -532,7 +532,7 @@ struct [[offsetcomments]] CTaskElement
 
 const int MAX_TASK_ELEMENTS = 20;
 
-constexpr size_t CTaskEntry_size = 0x3D70; // @sizeof(CTaskEntry) :: 2025-03-19 (test) @ 0x140501836
+constexpr size_t CTaskEntry_size = 0x3D70; // @sizeof(CTaskEntry) :: 2025-04-07 (test) @ 0x140506506
 
 struct [[offsetcomments]] CTaskEntry
 {
@@ -1129,7 +1129,7 @@ public:
 /*0x1d8*/
 };
 
-constexpr size_t EQWorldData_size = 0x1F88; // @sizeof(EQWorldData) :: 2025-03-19 (test) @ 0x14025B919
+constexpr size_t EQWorldData_size = 0x1F88; // @sizeof(EQWorldData) :: 2025-04-07 (test) @ 0x14025F449
 
 class [[offsetcomments]] EQWorldData
 {
@@ -1580,10 +1580,13 @@ enum eDatabaseStringType
 	eMercenarySubCategoryDescription = 23,
 	eMercenaryStanceName = 24,
 
+	eSpellLineName = 27,
+
 	eMercenaryAbilityType = 36,
 	eMercenaryAbilityName = 37,
 	eMercenaryAbilityDescription = 38,
 
+	eSpellStackingGroup = 40,
 	eClaimFeatureDescription = 41,
 
 	eFactionName = 45,
@@ -1645,7 +1648,7 @@ using SKILL = EQ_Skill;
 using PSKILL = EQ_Skill*;
 
 
-constexpr size_t SkillManager_size = 0x376A00; // @sizeof(SkillManager) :: 2025-03-19 (test) @ 0x14025BA59
+constexpr size_t SkillManager_size = 0x376A00; // @sizeof(SkillManager) :: 2025-04-07 (test) @ 0x14025F589
 
 class [[offsetcomments]] SkillManager
 {

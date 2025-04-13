@@ -258,14 +258,14 @@ MQColor gDefaultUserDefinedColors[NUM_USER_COLORS] = {
 	MQColor(255, 255, 255), // 25 Other miss other
 	MQColor(128, 0,   128), // 26 Who slash command results
 	MQColor(255, 255, 255), // 27 Yell for help
-	MQColor(0,   114, 255), // 28 Spell Damage
+	MQColor(0,   0,   225), // 28 Spell Damage
 	MQColor(240, 240, 0),   // 29 Spell worn off
 	MQColor(0,   140, 0),   // 30 Money Splits
 	MQColor(90,  90,  255), // 31 Loot Messages
 	MQColor(255, 0,   0),   // 32 Dice Roll (/random) - Mine
 	MQColor(90,  90,  255), // 33 Others spells
-	MQColor(255, 0,   0),   // 34 Spell Failures
-	MQColor(215, 154, 66),  // 35 Chat Channel
+	MQColor(255, 0,   0),   // 34 Spell Failures (Yours)
+	MQColor(215, 154, 66),  // 35 Chat Channel Info
 	MQColor(110, 143, 176), // 36 Chat Channel 1
 	MQColor(110, 143, 176), // 37 Chat Channel 2
 	MQColor(110, 143, 176), // 38 Chat Channel 3
@@ -276,9 +276,9 @@ MQColor gDefaultUserDefinedColors[NUM_USER_COLORS] = {
 	MQColor(110, 143, 176), // 43 Chat Channel 8
 	MQColor(110, 143, 176), // 44 Chat Channel 9
 	MQColor(110, 143, 176), // 45 Chat Channel 10
-	MQColor(255, 255, 255), // 46 Melee Crits
-	MQColor(255, 255, 255), // 47 Spell Crits
-	MQColor(255, 0,   0),   // 48 Too far away (melee)
+	MQColor(255, 255, 255), // 46 Your Hits (Critical)
+	MQColor(240, 240, 120), // 47 Direct Damage (Your Critical Hits)
+	MQColor(255, 0,   0),   // 48 Melee Warnings
 	MQColor(255, 0,   0),   // 49 NPC Rampage
 	MQColor(255, 0,   0),   // 50 NPC Flurry
 	MQColor(255, 0,   0),   // 51 NPC Enrage
@@ -323,13 +323,13 @@ MQColor gDefaultUserDefinedColors[NUM_USER_COLORS] = {
 	MQColor(255, 255, 255), // 90 Guild messages
 	MQColor(255, 255, 255), // 91 Mercenary Messages
 	MQColor(255, 127, 0),   // 92 Achievement Links
-	MQColor(255, 255, 255), // 93 Emote achievement messages
-	MQColor(255, 255, 255), // 94 Guild achievement messages
+	MQColor(255, 255, 255), // 93 Achievements (You)
+	MQColor(255, 255, 255), // 94 Achievements (Others)
 	MQColor(255, 255, 255), // 95 PvP Messages
 	MQColor(192, 0,   0),   // 96 Hotbutton Cooldown Overlay
-	MQColor(0,   255, 0),   // 97 Aggro Labels - Low
-	MQColor(255, 255, 0),   // 98 Aggro Labels - Warning
-	MQColor(255, 0,   0),   // 99 Aggro Labels - Most
+	MQColor(0,   255, 0),   // 97 Aggro Meter Labels - Low
+	MQColor(255, 255, 0),   // 98 Aggro Meter Labels - Warning
+	MQColor(255, 0,   0),   // 99 Aggro Meter Labels - Most
 	MQColor(24,  224, 255), // 100 Dialog [Response] Links
 	MQColor(255, 255, 255), // 101 Your Flurry
 	MQColor(255, 255, 255), // 102 Debug Output
@@ -349,12 +349,12 @@ MQColor gDefaultUserDefinedColors[NUM_USER_COLORS] = {
 	MQColor(255, 100, 25),  // 116 Destroyed Items
 	MQColor(66,  78,  244), // 117 Auras (You)
 	MQColor(66,  78,  244), // 118 Auras (Others)
-	MQColor(0,   114, 255), // 119 Heals (You)
-	MQColor(0,   67,  255), // 120 Heals (Others)
-	MQColor(0,   114, 255), // 121 DoTs (Yours)
+	MQColor(0,   255, 100), // 119 Heals (Yours)
+	MQColor(70,  150, 70),  // 120 Heals (Others)
+	MQColor(100, 50,  255), // 121 DoTs (Yours)
 	MQColor(0,   67,  255), // 122 DoTs (Others)
 	MQColor(70,  70,  255), // 123 Bard Songs on Pets
-	MQColor(0,   67,  255), // 124 Direct Damage (Others)
+	MQColor(180, 150, 125), // 124 Direct Damage (Others)
 	MQColor(90,  90,  255), // 125 Spell Emotes
 	MQColor(255, 127, 0),   // 126 Faction Links
 	MQColor(90,  90,  255), // 127 Taunt Messages
@@ -363,8 +363,25 @@ MQColor gDefaultUserDefinedColors[NUM_USER_COLORS] = {
 	MQColor(255, 0,   0),   // 130 Item Stat Negative
 	MQColor(100, 255, 37),  // 131 Encounter Lock Attackable
 	MQColor(128, 128, 128), // 132 Encounter Lock Unattackable
-	MQColor(255, 255, 255), // 133 Food And Drink
-	MQColor(255, 255, 0),   // 134 Raid Victory
+	MQColor(255, 255, 255), // 133 Food and Drink Messages
+	MQColor(255, 255, 0),   // 134 Raid Victory Messages
+	MQColor(255, 0,   0),   // 135 Unknown (135)
+	MQColor(255, 255, 0),   // 136 Unknown (136)
+	MQColor(255, 255, 255), // 137 Unknown (137)
+	MQColor(0,   64,  255), // 138 Unknown (138)
+	MQColor(0,   255, 255), // 139 Unknown (139)
+	MQColor(0,   128, 0),   // 140 Unknown (140)
+	MQColor(128, 128, 128), // 141 Unknown (141)
+	MQColor(255, 150, 50),  // 142 Direct Damage (Yours)
+	MQColor(255, 200, 200), // 143 Direct Damage (Other Critical Hits)
+	MQColor(150, 115, 255), // 144 DoTs (Your Critical Hits)
+	MQColor(0,   255, 160), // 145 DoTs (Other Critical Hits)
+	MQColor(170, 50,  255), // 146 DoTs (You Being Hit)
+	MQColor(0,   255, 200), // 147 Heals Received
+	MQColor(200, 255, 100), // 148 Heals (Your Critical Heals)
+	MQColor(100, 220, 100), // 149 Heals (Other Critical Heals)
+	MQColor(255, 255, 255), // 150 Others Hits (Critical)
+	MQColor(175, 0,   0),   // 151 Spell Failures (Others)
 };
 
 

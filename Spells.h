@@ -906,7 +906,7 @@ using PSPELLCALCINFO = SPELLCALCINFO*;
 #pragma pack(push)
 #pragma pack(1)
 
-constexpr size_t EQ_Spell_size = 0x210; // @sizeof(EQ_Spell) :: 2025-03-19 (test) @ 0x1401D69F7
+constexpr size_t EQ_Spell_size = 0x214; // @sizeof(EQ_Spell) :: 2025-04-07 (test) @ 0x1401D9287
 
 class [[offsetcomments]] EQ_Spell
 {
@@ -1044,12 +1044,13 @@ public:
 /*0x0ec*/ int                  SpellGroup = 0;
 /*0x0f0*/ int                  SpellSubGroup = 0;
 /*0x0f4*/ int                  SpellRank = 0;
+/*0x0f8*/ int                  SpellLineID;                   // DB Str Type 27
 /*0x0f8*/ int                  SpellClass = 0;
 /*0x0fc*/ int                  SpellSubClass = 0;
 /*0x100*/ int                  SpellReqAssociationID = 0;
 /*0x104*/ int                  CasterRequirementID = 0;
-/*0x108*/ int                  MaxResist = 0;
 /*0x10c*/ int                  MinResist = 0;
+/*0x108*/ int                  MaxResist = 0;
 /*0x110*/ int                  MinSpreadTime = 0;
 /*0x114*/ int                  MaxSpreadTime = 0;
 /*0x118*/ int                  SpreadRadius = 0;
@@ -1314,7 +1315,7 @@ public:
 	EQLIB_OBJECT const EQ_Spell* GetSpellByGroupAndRank(int Group, int SubGroup, int Rank = -1, bool bLesserRanksOk = false);
 };
 
-constexpr size_t ClientSpellManager_size = 0x2290; // @sizeof(ClientSpellManager) :: 2025-03-19 (test) @ 0x140266C7B
+constexpr size_t ClientSpellManager_size = 0x2290; // @sizeof(ClientSpellManager) :: 2025-04-07 (test) @ 0x14026A80B
 
 class [[offsetcomments]] ClientSpellManager : public SpellManager
 {
