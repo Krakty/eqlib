@@ -18,21 +18,21 @@
 // EQGraphics.dll offsets
 //
 
-#define __eqgraphics_fopen_x                                       0x180267168
+#define __eqgraphics_fopen_x                                       0x180266B38
 
 #define CEQGBitmap__GetFirstBitmap_x                               0x180003210
 
 #define CParticleSystem__Render_x                                  0x1800A7810
 #define CParticleSystem__CreateSpellEmitter_x                      0x180097460
 
-#define CRender__RenderScene_x                                     0x1800C5030
-#define CRender__RenderBlind_x                                     0x1800C4EF0
-#define CRender__ResetDevice_x                                     0x1800C5BA0
-#define CRender__UpdateDisplay_x                                   0x1800C6E30
+#define CRender__RenderScene_x                                     0x1800C5050
+#define CRender__RenderBlind_x                                     0x1800C4F10
+#define CRender__ResetDevice_x                                     0x1800C5BC0
+#define CRender__UpdateDisplay_x                                   0x1800C6E50
 #define __bRenderSceneCalled_x                                     0x180339020
 
-#define C2DPrimitiveManager__AddCachedText_x                       0x1800DF1C0
-#define C2DPrimitiveManager__Render_x                              0x1800E0360
+#define C2DPrimitiveManager__AddCachedText_x                       0x1800DF1E0
+#define C2DPrimitiveManager__Render_x                              0x1800E0380
 
 #define ObjectPreviewView__Render_x                                0x180026340
 
