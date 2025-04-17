@@ -146,7 +146,7 @@ public:
 	PlayerBuffInfoWrapper& operator=(const PlayerBuffInfoWrapper&) = delete;
 
 	PlayerBuffInfoWrapper(PlayerBuffInfoWrapper&& rhs) noexcept : m_index(rhs.m_index), m_buffInfo(rhs.m_buffInfo) {}
-	PlayerBuffInfoWrapper& operator=(PlayerBuffInfoWrapper&& rhs) noexcept { m_index = rhs.m_index; m_buffInfo = rhs.m_buffInfo; }
+	PlayerBuffInfoWrapper& operator=(PlayerBuffInfoWrapper&& rhs) noexcept { m_index = rhs.m_index; m_buffInfo = rhs.m_buffInfo; return *this; }
 
 	explicit operator bool() const { return m_buffInfo != nullptr; }
 

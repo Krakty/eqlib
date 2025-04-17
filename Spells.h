@@ -20,6 +20,9 @@
 #include "Items.h"
 #include "Requirements.h"
 
+#include "eqlib/eqstd/map.h"
+#include "eqlib/eqstd/vector.h"
+
 namespace eqlib {
 
 class PlayerZoneClient;
@@ -1293,20 +1296,8 @@ constexpr const char* TOTAL_SPELL_AFFECT_COUNT = "Spells no longer have a fixed 
 class [[offsetcomments]] SpellManager : public FileStatMgr
 {
 public:
-	// potentially 0x20 in size
-	struct Unknown_Data
-	{
-		uint64_t data1;
-		uint64_t data2;
-		uint64_t data3;
-		uint64_t data4;
-	};
-
-	struct UnknownContainer
-	{
-		uint64_t data1;
-		Unknown_Data* data2;
-	};
+	// Mapping of Spell Line IDs to list of spells with that spell line.
+	using SpellLineMap = eqstd::map<int, eqstd::vector<int>>;
 
 /*0x0020*/ SoeUtil::Map<int, int> SpellsCrc32;
 /*0x0038*/ EQ_Spell*              MissingSpell;
@@ -1322,7 +1313,7 @@ public:
 /*0x006c*/ bool                   InitRequired;
 /*0x0070*/ SpellRequirementAssociationManager ReqAssocManager;
 /*0x2218*/ HashTable<int, int>    SpellGroups;
-/*0x2230*/ UnknownContainer       Unknown;
+/*0x2230*/ SpellLineMap           SpellLines;
 /*0x2240*/
 
 	SpellManager(char*);
