@@ -1738,7 +1738,9 @@ struct [[offsetcomments]] AdvancedLootItem
 /*0x91*/ bool                 AlwaysNeed;
 /*0x92*/ bool                 AlwaysGreed;
 /*0x93*/ bool                 Never;
-/*0x94*/
+/*0x98*/ uint64_t             Unk0;
+/*0xa0*/ uint64_t             Unk1;
+/*0xa8*/
 };
 
 inline namespace deprecated {
