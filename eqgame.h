@@ -39,7 +39,7 @@
 #define __do_loot_x                                                0x14021EC50
 #define __gfMaxZoomCameraDistance_x                                0x1408F1CB8
 #define __gfMaxCameraDistance_x                                    0x140A98FB8
-#define __CurrentSocial_x                                          0x0 // CActionsWnd::StopSocial
+#define __CurrentSocial_x                                          0x140BE695C // CActionsWnd::StopSocial
 #define __BindList_x                                               0x140D22720
 #define g_eqCommandStates_x                                        0x140D23790
 #define __CommandList_x                                            0x140D239C0
