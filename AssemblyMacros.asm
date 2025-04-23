@@ -165,18 +165,52 @@
 
 	; const CItemDisplayWndOverride::`vftable'
 	extern ??_7%1@@6B@
-	; eqlib::WindowOverride<CItemDisplayWndOverride,eqlib::CItemDisplayWnd>::GetVTableForDerivedClass()
-	global ?GetVTableForDerivedClassASM@?$WindowOverride@V%1@@V%2@eqlib@@@eqlib@@CAPEAUVirtualFunctionTable@%3@2@XZ
-	?GetVTableForDerivedClassASM@?$WindowOverride@V%1@@V%2@eqlib@@@eqlib@@CAPEAUVirtualFunctionTable@%3@2@XZ:
+
+	; eqlib::WindowOverride<class CItemDisplayWndOverride,class eqlib::CItemDisplayWnd,struct eqlib::CSidlScreenWnd::VirtualFunctionTable>::GetVTableForDerivedClassASM(void)
+	global ?GetVTableForDerivedClassASM@?$WindowOverride@V%1@@V%2@eqlib@@UVirtualFunctionTable@%3@3@@eqlib@@CAPEAUVirtualFunctionTable@%3@2@XZ
+	?GetVTableForDerivedClassASM@?$WindowOverride@V%1@@V%2@eqlib@@UVirtualFunctionTable@%3@3@@eqlib@@CAPEAUVirtualFunctionTable@%3@2@XZ:
 		lea rax, [rel ??_7%1@@6B@]
 		ret	
 
+	; eqlib::WindowOverride<class CItemDisplayWndOverride,class eqlib::CItemDisplayWnd,struct eqlib::CSidlScreenWnd::VirtualFunctionTable>::WindowOverride<class CItemDisplayWndOverride,class eqlib::CItemDisplayWnd,struct eqlib::CSidlScreenWnd::VirtualFunctionTable>(void)
+	global ??0?$WindowOverride@V%1@@V%2@eqlib@@UVirtualFunctionTable@%3@3@@eqlib@@QEAA@XZ
+	??0?$WindowOverride@V%1@@V%2@eqlib@@UVirtualFunctionTable@%3@3@@eqlib@@QEAA@XZ:
+		ret
+
 %endmacro
 
-%else
+%else ; !ARCH_X64
 
-; x86 can use inline assembly, so these macros are not needed on x86
+; Expand the window override assembly functions for the window
+; param 1: Name of the override class
+; param 2: Name of the class we are overriding
+; param 3: Name of the parent class (CXWnd, CSidlScreenWnd, or CGFScreenWnd)
 %macro create_window_override_funcs 3
-%endmacro
+	%ifidn %3,CGFScreenWnd
+		create_window_override_funcs_impl %1, %2, CSidlScreenWnd
+	%else
+		create_window_override_funcs_impl %1, %2, %3
+	%endif
+%endmacro ; create_window_override_funcs
 
-%endif
+%macro create_window_override_funcs_impl 3
+
+	; x86 doesn't have a CGFScreenWnd
+	%define CGFScreenWnd CSidlScreenWnd
+
+	; const CItemDisplayWndOverride::`vftable'
+	extern ??_7%1@@6B@
+	; eqlib::WindowOverride<CItemDisplayWndOverride,eqlib::CItemDisplayWnd>::GetVTableForDerivedClass()
+	global ?GetVTableForDerivedClassASM@?$WindowOverride@V%1@@V%2@eqlib@@UVirtualFunctionTable@CSidlScreenWnd@3@@eqlib@@CAPAUVirtualFunctionTable@%3@2@XZ
+	?GetVTableForDerivedClassASM@?$WindowOverride@V%1@@V%2@eqlib@@UVirtualFunctionTable@CSidlScreenWnd@3@@eqlib@@CAPAUVirtualFunctionTable@%3@2@XZ:
+		lea eax, [??_7%1@@6B@]
+		ret	
+
+	; public: __thiscall eqlib::WindowOverride<class CItemDisplayWndOverride,class eqlib::CItemDisplayWnd,struct eqlib::CSidlScreenWnd::VirtualFunctionTable>::WindowOverride<class CItemDisplayWndOverride,class eqlib::CItemDisplayWnd,struct eqlib::CSidlScreenWnd::VirtualFunctionTable>(void)
+	global ??0?$WindowOverride@V%1@@V%2@eqlib@@UVirtualFunctionTable@%3@3@@eqlib@@QAE@XZ
+	??0?$WindowOverride@V%1@@V%2@eqlib@@UVirtualFunctionTable@%3@3@@eqlib@@QAE@XZ:
+		ret
+
+%endmacro ; create_window_override_funcs_impl
+
+%endif ; !ARCH_X64

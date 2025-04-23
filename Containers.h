@@ -2205,14 +2205,4 @@ public:
 
 //----------------------------------------------------------------------------
 
-// this needs to go somewhere
-class CharacterPropertyHash : public HashTable<int>
-{
-public:
-
-};
-
-
-//----------------------------------------------------------------------------
-
 } // namespace eqlib

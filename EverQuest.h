@@ -49,7 +49,7 @@ enum EPlace
 	CanPlaceAndGoto,
 };
 
-constexpr size_t zoneHeader_size = 0x2A4; // @sizeof(zoneHeader) :: 2025-04-07 (test) @ 0x140E63CD4
+constexpr size_t zoneHeader_size = 0x2A4; // @sizeof(zoneHeader) :: 2025-04-17 (live) @ 0x140E64CD4
 
 struct [[offsetcomments]] zoneHeader
 {
@@ -311,7 +311,7 @@ struct [[offsetcomments]] EQGameOptions
 
 
 // size of EverQuestinfo is the distance from this byte to the beginning of the struct
-constexpr size_t EverQuestinfo_size = 0x75250; // @sizeof(EverQuestinfo) :: 2025-04-07 (test) @ 0x140E63AE0
+constexpr size_t EverQuestinfo_size = 0x75250; // @sizeof(EverQuestinfo) :: 2025-04-17 (live) @ 0x140E64AE0
 
 struct [[offsetcomments]] EverQuestinfo
 {
@@ -523,22 +523,22 @@ struct [[offsetcomments]] EverQuestinfo
 /*0x00b37*/ bool              bAdvLootGroupedByNPC;
 /*0x00b38*/ int               AutoSkills[CONCURRENT_SKILLS];
 /*0x00b40*/ ChatFilterData    ChatFilters;
-/*0x00c50*/ EQGameOptions     gOpt;
-/*0x00cf4*/ bool              noSafeDrop;
-/*0x00cf5*/ bool              lootNoDrop;
-/*0x00cf6*/ bool              bEnvSounds;
-/*0x00cf7*/ bool              bAllowContextMenus;
-/*0x00cf8*/ bool              bShowHelpOnLeftClickTarget;
-/*0x00cf9*/ bool              bUseTellWindows;
-/*0x00cfa*/ bool              bCtrlBypassesTradeskill;
-/*0x00cfb*/ bool              bAllowAutoDuck;
-/*0x00cfc*/ bool              bAllowAutoStand;
-/*0x00cfd*/ bool              bAutojoinHelpChannels;
-/*0x00cfe*/ bool              bAcceptKickRequests;
-/*0x00cff*/ bool              bSuppressFirstUseAlerts;
-/*0x00d00*/ bool              bResetUIToDefault;
-/*0x00d01*/ bool              bAutoShowRewardsWindow;
-/*0x00d02*/ bool              bAllowPreLuclinMountRiders;
+/*0x00c54*/ EQGameOptions     gOpt;
+/*0x00cf8*/ bool              noSafeDrop;
+/*0x00cf9*/ bool              lootNoDrop;
+/*0x00cfa*/ bool              bEnvSounds;
+/*0x00cfb*/ bool              bAllowContextMenus;
+/*0x00cfc*/ bool              bShowHelpOnLeftClickTarget;
+/*0x00cfd*/ bool              bUseTellWindows;
+/*0x00cfe*/ bool              bCtrlBypassesTradeskill;
+/*0x00cff*/ bool              bAllowAutoDuck;
+/*0x00d00*/ bool              bAllowAutoStand;
+/*0x00d01*/ bool              bAutojoinHelpChannels;
+/*0x00d02*/ bool              bAcceptKickRequests;
+/*0x00d03*/ bool              bSuppressFirstUseAlerts;
+/*0x00d04*/ bool              bResetUIToDefault;
+/*0x00d05*/ bool              bAutoShowRewardsWindow;
+/*0x00d06*/ bool              bAllowPreLuclinMountRiders;
 /*0x00d08*/ EQCamera*         cameras[EQ_MAX_CAMERAS];
 /*0x00d48*/ bool              keyDown[nEQMappableCommands];
 /*0x00f6b*/ char              LastTellFromList[NUM_REPLY_NAMES][EQ_MAX_NAME];
@@ -705,7 +705,7 @@ public:
 };
 
 
-constexpr size_t CEverQuest_size = 0x19708; // @sizeof(CEverQuest) :: 2025-04-07 (test) @ 0x14033EE63
+constexpr size_t CEverQuest_size = 0x19708; // @sizeof(CEverQuest) :: 2025-04-17 (live) @ 0x14033F733
 
 class [[offsetcomments]] CEverQuest : public CEverQuestBase, public UniversalChatProxyHandler, public PopDialogHandler
 {
