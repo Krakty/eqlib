@@ -326,6 +326,19 @@ struct [[offsetcomments]] PZCPhysicsInfo
 // @end: PZCPhysicsInfo Members
 };
 
+
+// this needs to go somewhere
+class CharacterPropertyHash : public HashTable<int>
+{
+public:
+	CharacterPropertyHash() : HashTable(50)
+	{
+	}
+
+
+};
+
+
 class PlayerHashTable
 {
 public:
@@ -469,14 +482,13 @@ public:
 
 	EQLIB_OBJECT unsigned int GetId() const { return SpawnID; }
 
-	unsigned int** get_BodyType() { return *(unsigned int***)&Properties; }
-	__declspec(property(get = get_BodyType)) unsigned int** BodyType;
+	// Check if Player has all the provided properties.
+	EQLIB_OBJECT bool HasProperty(int, int = 0, int = 0);
 
 	// These are methods that originated from EQPlayer. They might not
 	// all still exist.
 	EQLIB_OBJECT bool IsAMount();
 	EQLIB_OBJECT bool MyFeetAreOnGround();
-	EQLIB_OBJECT bool HasProperty(int, int = 0, int = 0);
 	EQLIB_OBJECT bool IsTargetable();
 	EQLIB_OBJECT bool CanSee(const PlayerBase&);
 	EQLIB_OBJECT bool CanSee(const CVector3& pos);
