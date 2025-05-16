@@ -120,10 +120,11 @@ public:
 /*0x20*/ int                   Level;
 /*0x24*/ bool                  bIsOffline;
 /*0x28*/ uint32_t              UniquePlayerID;
-/*0x2c*/ bool                  bRoleStates[MaxGroupRoles];
-/*0x34*/ uint32_t              CurrentRoleBits;                      // (Roles & 0x1) = MainTank, 0x2 = MainAssist, 0x4 = Puller 0x8 = Mark NPC 0x10 = Master Looter
-/*0x38*/ eqtime_t              OnlineTimestamp;
-/*0x40*/
+/*0x30*/ uint64_t              Unknown0x30;
+/*0x38*/ bool                  bRoleStates[MaxGroupRoles];
+/*0x40*/ uint32_t              CurrentRoleBits;                      // (Roles & 0x1) = MainTank, 0x2 = MainAssist, 0x4 = Puller 0x8 = Mark NPC 0x10 = Master Looter
+/*0x48*/ eqtime_t              OnlineTimestamp;
+/*0x50*/
 
 	CGroupMemberBase();
 	virtual ~CGroupMemberBase();
@@ -174,6 +175,8 @@ private:
 	void ClearRoles();
 };
 
+constexpr size_t CGroupMember_size = 0x68; // @sizeof(CGroupMember) :: 2025-05-13 (test) @ 0x1402D59E1
+
 class [[offsetcomments]] CGroupMember : public CGroupMemberBase
 {
 public:
@@ -189,9 +192,10 @@ public:
 	virtual CGroupMember* AsMemberClient() override { return this; }
 	PlayerClient* GetPlayer() { return pPlayer; }
 
-	ALT_MEMBER_GETTER(PlayerClient*, pPlayer, pSpawn);
+	ALT_MEMBER_GETTER(PlayerClient*, pPlayer, pSpawn)
 };
 
+SIZE_CHECK(CGroupMember, CGroupMember_size);
 
 inline namespace deprecated {
 	using GROUPMEMBER DEPRECATE("Use CGroupMember instead of GROUPMEMBER") = CGroupMember;
