@@ -120,10 +120,11 @@ public:
 /*0x20*/ int                   Level;
 /*0x24*/ bool                  bIsOffline;
 /*0x28*/ uint32_t              UniquePlayerID;
-/*0x2c*/ bool                  bRoleStates[MaxGroupRoles];
-/*0x34*/ uint32_t              CurrentRoleBits;                      // (Roles & 0x1) = MainTank, 0x2 = MainAssist, 0x4 = Puller 0x8 = Mark NPC 0x10 = Master Looter
-/*0x38*/ eqtime_t              OnlineTimestamp;
-/*0x40*/
+/*0x30*/ uint64_t              Unknown0x30;
+/*0x38*/ bool                  bRoleStates[MaxGroupRoles];
+/*0x40*/ uint32_t              CurrentRoleBits;                      // (Roles & 0x1) = MainTank, 0x2 = MainAssist, 0x4 = Puller 0x8 = Mark NPC 0x10 = Master Looter
+/*0x48*/ eqtime_t              OnlineTimestamp;
+/*0x50*/
 
 	CGroupMemberBase();
 	virtual ~CGroupMemberBase();
@@ -134,32 +135,32 @@ public:
 	virtual CGroupMember* AsMemberClient() { return nullptr; }
 	virtual void RemovedFromGroup(uint32_t id) = 0;
 
-	inline bool IsOffline() const { return bIsOffline; }
-	inline eqtime_t GetOnlineTimestamp() const { return OnlineTimestamp; }
-	inline bool GetRole(eGroupRoles role) const { return bRoleStates[role]; }
-	inline const char* GetName() const { return Name.c_str(); }
-	inline const char* GetOwnerName() const { return OwnerName.c_str(); }
-	inline int GetLevel() const { return Level; }
+	bool IsOffline() const { return bIsOffline; }
+	eqtime_t GetOnlineTimestamp() const { return OnlineTimestamp; }
+	bool GetRole(eGroupRoles role) const { return bRoleStates[role]; }
+	const char* GetName() const { return Name.c_str(); }
+	const char* GetOwnerName() const { return OwnerName.c_str(); }
+	int GetLevel() const { return Level; }
 
-	inline bool IsMainTank() const { return GetRole(GroupRoleTank); }
-	inline bool IsMainAssist() const { return GetRole(GroupRoleAssist); }
-	inline bool IsPuller() const { return GetRole(GroupRolePuller); }
-	inline bool IsMarkNPC() const { return GetRole(GroupRoleMarkNPC); }
-	inline bool IsMasterLooter() const { return GetRole(GroupRoleMasterLooter); }
+	bool IsMainTank() const { return GetRole(GroupRoleTank); }
+	bool IsMainAssist() const { return GetRole(GroupRoleAssist); }
+	bool IsPuller() const { return GetRole(GroupRolePuller); }
+	bool IsMarkNPC() const { return GetRole(GroupRoleMarkNPC); }
+	bool IsMasterLooter() const { return GetRole(GroupRoleMasterLooter); }
 
 	// Compat wrappers for old member types/names
 	__declspec(property(get = getPName)) CXStr* pName;
 	DEPRECATE("CGroupMemberBase: Use Name instead of pName")
-	inline CXStr* getPName() { return &Name; }
+	CXStr* getPName() { return &Name; }
 
 	__declspec(property(get = getPOwner)) CXStr* pOwner;
 	DEPRECATE("CGroupMemberBase: Use OwnerName instead of pOwner")
-	inline CXStr* getPOwner() { return &OwnerName; }
+	CXStr* getPOwner() { return &OwnerName; }
 
 	// Compat wrapper for Mercenary
 	__declspec(property(get = getMercenary)) uint8_t Mercenary;
 	DEPRECATE("CGroupMemberBase: Use Type instead of Mercenary")
-	inline uint8_t getMercenary() { return (uint8_t)Type; }
+	uint8_t getMercenary() { return (uint8_t)Type; }
 
 	ALT_MEMBER_GETTER(bool, bIsOffline, Offline);
 	ALT_MEMBER_GETTER(uint32_t, CurrentRoleBits, Roles);
@@ -174,13 +175,15 @@ private:
 	void ClearRoles();
 };
 
+constexpr size_t CGroupMember_size = 0x68; // @sizeof(CGroupMember) :: 2025-05-13 (test) @ 0x1402D59E1
+
 class [[offsetcomments]] CGroupMember : public CGroupMemberBase
 {
 public:
-/*0x40*/ CharacterZoneClient*  pCharacter;
-/*0x48*/ PlayerClient*         pPlayer;
-/*0x50*/ int                   GroupIndex;
-/*0x54*/
+/*0x50*/ CharacterZoneClient*  pCharacter;
+/*0x58*/ PlayerClient*         pPlayer;
+/*0x60*/ int                   GroupIndex;
+/*0x64*/
 
 	CGroupMember();
 	virtual ~CGroupMember();
@@ -189,9 +192,10 @@ public:
 	virtual CGroupMember* AsMemberClient() override { return this; }
 	PlayerClient* GetPlayer() { return pPlayer; }
 
-	ALT_MEMBER_GETTER(PlayerClient*, pPlayer, pSpawn);
+	ALT_MEMBER_GETTER(PlayerClient*, pPlayer, pSpawn)
 };
 
+SIZE_CHECK(CGroupMember, CGroupMember_size);
 
 inline namespace deprecated {
 	using GROUPMEMBER DEPRECATE("Use CGroupMember instead of GROUPMEMBER") = CGroupMember;
@@ -217,15 +221,16 @@ public:
 	CGroupMember* GetGroupLeader() const { return m_groupLeader; }
 	EQLIB_OBJECT CGroupMember* GetGroupMember(int index) const;
 
-	inline uint32_t GetID() const { return m_id; }
+	uint32_t GetID() const { return m_id; }
+	uint32_t GetMaxGroupSize() const { return MAX_GROUP_SIZE; }
 
 	// iterator support for stl containers and algorithms
-	inline auto begin() { return std::begin(m_groupMembers); }
-	inline auto begin() const { return std::cbegin(m_groupMembers); }
-	inline auto cbegin() const { return std::cbegin(m_groupMembers); }
-	inline auto end() { return std::end(m_groupMembers); }
-	inline auto end() const { return std::cend(m_groupMembers); }
-	inline auto cend() { return std::cend(m_groupMembers); }
+	auto begin() { return std::begin(m_groupMembers); }
+	auto begin() const { return std::cbegin(m_groupMembers); }
+	auto cbegin() const { return std::cbegin(m_groupMembers); }
+	auto end() { return std::end(m_groupMembers); }
+	auto end() const { return std::cend(m_groupMembers); }
+	auto cend() { return std::cend(m_groupMembers); }
 
 	ALT_MEMBER_GETTER_ARRAY_DEPRECATED(CGroupMember*, MAX_GROUP_SIZE, m_groupMembers, pMember,
 		"CGroupBase: Use Group->GetGroupMember instead of accessing pMembers");
@@ -1687,7 +1692,7 @@ public:
 	int GetDeityBitmask() const { return 1 << (GetDeityReal() - 1); }
 };
 
-constexpr size_t PcClient_size = 0x3218; // @sizeof(PcClient) :: 2025-04-17 (live) @ 0x14027D18B
+constexpr size_t PcClient_size = 0x3218; // @sizeof(PcClient) :: 2025-05-13 (test) @ 0x14027D0FB
 
 class [[offsetcomments]] PcClient : public PcZoneClient
 {
