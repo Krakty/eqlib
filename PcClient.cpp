@@ -493,8 +493,8 @@ uint32_t PcClient::GetDowntime()
 	if (DowntimeStart == 0)
 		return 0;
 
-	int elapsed = GetFastTime() - DowntimeStart;
-	int remaining = static_cast<int>(Downtime) - elapsed;
+	int elapsed = static_cast<int>(time(nullptr) - DowntimeStart);
+	int remaining = Downtime - elapsed;
 
 	if (remaining > 0)
 	{
