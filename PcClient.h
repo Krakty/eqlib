@@ -1700,11 +1700,11 @@ class [[offsetcomments]] PcClient : public PcZoneClient
 public:
 	EQLIB_OBJECT PcClient();
 
-/*0x2e18*/ ExtendedTargetList*                   pExtendedTargetList;          // cannot be null
-/*0x2e20*/ bool                                  InCombat;
-/*0x2e24*/ uint32_t                              Downtime;
-/*0x2e28*/ uint32_t                              DowntimeStart;
-/*0x2e2c*/ bool                                  bOverrideAvatarProximity;
+/*0x2e18*/ ExtendedTargetList*                   pExtendedTargetList;          // cannot be null // 2e18
+/*0x2e20*/ int64_t                               DowntimeStart;
+/*0x2e28*/ int32_t                               Downtime;
+/*0x2e2c*/ bool                                  InCombat;
+/*0x2e2d*/ bool                                  bOverrideAvatarProximity;
 /*0x2e30*/ CGroup*                               Group;
 /*0x2e38*/ bool                                  bIAmCreatingGroup;
 /*0x2e40*/ ItemArray                             ItemsPendingID;
