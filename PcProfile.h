@@ -337,7 +337,7 @@ struct PetObjectData;
 
 constexpr int MAX_LINKED_SPELL_TIMERS = 25;
 
-constexpr size_t PcProfile_size = 0x6A90; // @sizeof(PcProfile) :: 2025-06-16 (live) @ 0x140652734
+constexpr size_t PcProfile_size = 0x6A90; // @sizeof(PcProfile) :: 2025-07-07 (test) @ 0x140653BD4
 
 class [[offsetcomments]] PcProfile : public BaseProfile
 {
