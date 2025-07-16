@@ -796,7 +796,7 @@ public:
 	}
 };
 
-constexpr size_t ItemDefinition_size = 0x640; // @sizeof(ItemDefinition) :: 2025-07-07 (test) @ 0x140215E4B
+constexpr size_t ItemDefinition_size = 0x640; // @sizeof(ItemDefinition) :: 2025-07-10 (live) @ 0x140215D7B
 
 class [[offsetcomments]] ItemDefinition
 {
@@ -1063,45 +1063,45 @@ class [[offsetcomments]] ItemBase : public IChildItemContainer
 {
 public:
 // @start: ItemBase Members
-/*0x008*/ ItemContainer         Contents;
-/*0x030*/ int                   OrnamentationIcon;
-/*0x038*/ ITEMINFO*             Item1;
-/*0x040*/ int                   NoteStatus;
-/*0x048*/ int64_t               Price;
-/*0x050*/ CXStr                 ConvertItemName;
-/*0x058*/ unsigned int          NewArmorID;
-/*0x05c*/ int                   ID;
-/*0x060*/ int                   ActorTag1;
-/*0x064*/ int                   StackCount;
-/*0x068*/ unsigned int          Tint;
-/*0x070*/ ItemEvolutionDataPtr  pEvolutionData;
-/*0x080*/ int64_t               DontKnow;
-/*0x088*/ bool                  bConvertable;
-/*0x089*/ bool                  bItemNeedsUpdate;
-/*0x08a*/ bool                  bCollected;
-/*0x08c*/ int                   ScriptIndex;
-/*0x090*/ int                   Luck;
-/*0x094*/ int                   RealEstateID;
-/*0x098*/ EqItemGuid            ItemGUID;
-/*0x0ac*/ int                   Charges;
-/*0x0b0*/ ItemGlobalIndex       GlobalIndex;
-/*0x0bc*/ int                   ConvertItemID;
-/*0x0c0*/ bool                  bRankDisabled;
-/*0x0c4*/ unsigned int          LastCastTime;
-/*0x0c8*/ int                   Power;
-/*0x0cc*/ unsigned int          RespawnTime;
-/*0x0d0*/ unsigned int          ItemHash;
-/*0x0d8*/ int64_t               MerchantSlot;
-/*0x0e0*/ int                   MerchantQuantity;
+/*0x008*/ unsigned int          ItemHash;
+/*0x00c*/ int                   Luck;
+/*0x010*/ bool                  bDisableAugTexture;
+/*0x011*/ bool                  bCollected;
+/*0x014*/ int                   MerchantQuantity;
+/*0x018*/ bool                  bRankDisabled;
+/*0x01c*/ unsigned int          Tint;
+/*0x020*/ int                   OrnamentationIcon;
+/*0x024*/ int                   ScriptIndex;
+/*0x028*/ CXStr                 ConvertItemName;
+/*0x030*/ int                   RealEstateID;
+/*0x034*/ int                   NoteStatus;
+/*0x038*/ ItemContainer         Contents;
+/*0x060*/ unsigned int          NewArmorID;
+/*0x064*/ int                   AugFlag;
+/*0x068*/ unsigned int          RespawnTime;
+/*0x06c*/ int                   ActorTag1;
+/*0x070*/ int64_t               MerchantSlot;
+/*0x078*/ int                   Charges;
+/*0x07c*/ int                   StackCount;
+/*0x080*/ ItemGlobalIndex       GlobalIndex;
+/*0x08c*/ int                   Power;
+/*0x090*/ unsigned int          LastCastTime;
+/*0x094*/ EqItemGuid            ItemGUID;
+/*0x0a8*/ ITEMINFO*             Item1;
+/*0x0b0*/ int                   ConvertItemID;
+/*0x0b8*/ ItemEvolutionDataPtr  pEvolutionData;
+/*0x0c8*/ int64_t               DontKnow;
+/*0x0d0*/ int                   ID;
+/*0x0d4*/ int                   ArmorType;
+/*0x0d8*/ int                   ActorTag2;
+/*0x0dc*/ int                   Open;
+/*0x0e0*/ bool                  bConvertable;
 /*0x0e4*/ int                   NoDropFlag;
-/*0x0e8*/ int                   Open;
-/*0x0ec*/ bool                  bDisableAugTexture;
-/*0x0f0*/ int                   ActorTag2;
-/*0x0f4*/ int                   ArmorType;
-/*0x0f8*/ int                   AugFlag;
-/*0x0fc*/ bool                  bCopied;
-/*0x100*/ SoeUtil::String       SaveString;
-/*0x118*/
+/*0x0e8*/ SoeUtil::String       SaveString;
+/*0x100*/ int64_t               Price;
+/*0x108*/ bool                  bItemNeedsUpdate;
+/*0x109*/ bool                  bCopied;
+/*0x10c*/
 // @end: ItemBase Members
 
 	EQLIB_OBJECT ItemBase();
@@ -1245,7 +1245,7 @@ public:
 	__declspec(property(get = get_Item2)) ItemDefinition* Item2;
 };
 
-constexpr size_t ItemClient_size = 0x130; // @sizeof(ItemClient) :: 2025-07-07 (test) @ 0x1401E08D9
+constexpr size_t ItemClient_size = 0x128; // @sizeof(ItemClient) :: 2025-07-10 (live) @ 0x1401E0929
 
 class [[offsetcomments]] ItemClient : public ItemBase
 {
@@ -1259,9 +1259,9 @@ public:
 
 	EQLIB_OBJECT static ItemPtr Create() { return eqstd::make_shared<ItemClient>(); }
 
-/*0x118*/ ItemDefinitionPtr SharedItemDef;
-/*0x128*/ CXStr             ClientString;
-/*0x130*/
+/*0x110*/ ItemDefinitionPtr SharedItemDef;
+/*0x120*/ CXStr             ClientString;
+/*0x128*/
 };
 
 SIZE_CHECK(ItemClient, ItemClient_size);
