@@ -175,7 +175,7 @@ private:
 	void ClearRoles();
 };
 
-constexpr size_t CGroupMember_size = 0x68; // @sizeof(CGroupMember) :: 2025-07-23 (test) @ 0x1402D6C14
+constexpr size_t CGroupMember_size = 0x68; // @sizeof(CGroupMember) :: 2025-08-11 (test) @ 0x1402D8B2D
 
 class [[offsetcomments]] CGroupMember : public CGroupMemberBase
 {
@@ -1692,7 +1692,7 @@ public:
 	int GetDeityBitmask() const { return 1 << (GetDeityReal() - 1); }
 };
 
-constexpr size_t PcClient_size = 0x3218; // @sizeof(PcClient) :: 2025-07-23 (test) @ 0x14027E1BB
+constexpr size_t PcClient_size = 0x3218; // @sizeof(PcClient) :: 2025-08-11 (test) @ 0x14027FE9B
 
 class [[offsetcomments]] PcClient : public PcZoneClient
 {
