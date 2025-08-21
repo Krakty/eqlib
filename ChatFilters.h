@@ -14,7 +14,7 @@
 
 #pragma once
 
-#include "Config.h"
+#include "eqlib/Config.h"
 #include "mq/base/Color.h"
 
 namespace eqlib {
