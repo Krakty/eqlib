@@ -16,6 +16,7 @@
 #include "UI.h"
 #include "EQClasses.h"
 #include "Globals.h"
+#include "./src/Logging.h"
 
 #include <spdlog/spdlog.h>
 
@@ -1073,7 +1074,7 @@ static void InitializeWindowsFromScreenManager(ScreenWndManager& mgr)
 			if (range.first == range.second)
 			{
 				// was not found.
-				SPDLOG_WARN("A window was created that is not being tracked: '{}' at {}",
+				LOG_WARN("A window was created that is not being tracked: '{}' at {}",
 					windowName, (void*)ppWindow);
 			}
 			else
