@@ -306,7 +306,7 @@ public:
 // CButtonWnd
 //============================================================================
 
-constexpr size_t CButtonWnd_size = 0x348; // @sizeof(CButtonWnd) :: 2025-08-14 (live) @ 0x1405D3530
+constexpr size_t CButtonWnd_size = 0x348; // @sizeof(CButtonWnd) :: 2025-08-26 (live) @ 0x1405D3D60
 
 class [[offsetcomments]] CButtonWnd : public CXWnd
 {
@@ -446,8 +446,8 @@ public:
 	EQLIB_OBJECT void SetRadioLook();
 
 	// protected
-/*0x340*/ bool bOrgState;
-/*0x344*/
+/*0x348*/ bool bOrgState;
+/*0x34c*/
 };
 
 //============================================================================
@@ -841,8 +841,8 @@ public:
 	virtual void UpdateText() override;
 
 	// data members
-/*0x290*/ int          EQType;
-/*0x294*/
+/*0x298*/ int          EQType;
+/*0x29c*/
 };
 
 inline namespace deprecated {
@@ -1523,13 +1523,13 @@ public:
 	CLayoutWnd(CXWnd*, uint32_t, const CXRect&, const CXStr&);
 	virtual ~CLayoutWnd();
 
-/*0x2c8*/ uint32_t             spacing;
-/*0x2cc*/ bool                 expandLast;
-/*0x2d0*/ int                  paddingLeft;
-/*0x2d4*/ int                  paddingRight;
-/*0x2d8*/ int                  paddingTop;
-/*0x2dc*/ int                  paddingBottom;
-/*0x2e0*/ };
+/*0x2d0*/ uint32_t             spacing;
+/*0x2d4*/ bool                 expandLast;
+/*0x2d8*/ int                  paddingLeft;
+/*0x2dc*/ int                  paddingRight;
+/*0x2e0*/ int                  paddingTop;
+/*0x2e4*/ int                  paddingBottom;
+/*0x2e8*/ };
 
 // Horizontal and Vertical layouts are basically the same, but transposed.
 class [[offsetcomments]] CHorizontalLayoutWnd : public CLayoutWnd
@@ -1550,14 +1550,14 @@ public:
 class [[offsetcomments]] CVerticalLayoutWnd : public CLayoutWnd
 {
 public:
-/*0x2e0*/ ArrayClass<CXWnd*>         visibleChildren;
-/*0x2f8*/ ArrayClass<CXRect>         dividerRects;
-/*0x310*/ int                        activeDivider;
-/*0x314*/ bool                       dividerHover;
-/*0x315*/ bool                       dividerMoving;
-/*0x318*/ int                        oldPosCoord;              // X for horizontal, Y for vertical
-/*0x31c*/ bool                       bStyle_Dividers;          // the Style_Dividers property from XML
-/*0x320*/
+/*0x2e8*/ ArrayClass<CXWnd*>         visibleChildren;
+/*0x300*/ ArrayClass<CXRect>         dividerRects;
+/*0x318*/ int                        activeDivider;
+/*0x31c*/ bool                       dividerHover;
+/*0x31d*/ bool                       dividerMoving;
+/*0x320*/ int                        oldPosCoord;              // X for horizontal, Y for vertical
+/*0x324*/ bool                       bStyle_Dividers;          // the Style_Dividers property from XML
+/*0x328*/
 };
 
 class [[offsetcomments]] CTileLayoutWnd : public CLayoutWnd
@@ -1795,58 +1795,58 @@ public:
 	//----------------------------------------------------------------------------
 	// data members
 
-/*0x2d8*/ CVerticalLayoutWnd*       pLayout;                 // ADLW_ScreenLayout
-/*0x2e0*/ CListWnd*                 pPersonalLootList;       // ADLW_PLLList
-/*0x2e8*/ CButtonWnd*               pPersonalSetBtn;         // ADLW_PLLSetBtn
-/*0x2f0*/ CComboWnd*                pPersonalSetCombo;       // ADLW_PLLSetCmbo
-/*0x2f8*/ CButtonWnd*               pLootAllBtn;             // ADLW_PLL_LootAllBtn
-/*0x300*/ CButtonWnd*               pLeaveAllBtn;            // ADLW_PLL_LeaveAllBtn
-/*0x308*/ CXWnd*                    pCLLWnd;                 // ADLW_CLLWnd
-/*0x310*/ CListWnd*                 pConstructLootList;      // ADLW_CLLList
-/*0x318*/ CButtonWnd*               pConstructSetBtn;        // ADLW_CLLSetBtn
-/*0x320*/ CComboWnd*                pConstructSetCombo;      // ADLW_CLLSetCmbo
-/*0x328*/ CButtonWnd*               pContructLeaveAllBtn;    // ADLW_CLL_LeaveAllBtn
-/*0x330*/ CCheckBoxWnd*             pApplyFiltersChk;        // ADLW_ApplyFiltersCheck
-/*0x338*/ CCheckBoxWnd*             pGroupedByNpcChk;        // ADLW_GroupedByNpcCheckbox
-/*0x340*/ CButtonWnd*               pEditFiltersBtn;         // ADLW_EditFitlersBtn
-/*0x348*/ CButtonWnd*               pLootSettingsBtn;        // ADLW_LootSettingsBtn
-/*0x350*/ CLabelWnd*                pCalculatedMasterLooter; // ADLW_CalculatedMasterLooter
-/*0x358*/ CButtonWnd*               pItemBtnTemplate;        // ADLW_ItemBtnTemplate
-/*0x360*/ CButtonWnd*               pStatusTemplate;         // ADLW_StatusTemplate
-/*0x368*/ CButtonWnd*               pNeverBtnTemplate;       // ADLW_NvrBtnTemplate
-/*0x370*/ CButtonWnd*               pLootBtnTemplate;        // ADLW_LootBtnTemplate
-/*0x378*/ CButtonWnd*               pLeaveBtnTemplate;       // ADLW_LeaveBtnTemplate
-/*0x380*/ CButtonWnd*               pFreeGrabBtnTemplate;    // ADLW_FreeGrabBtnTemplate
-/*0x388*/ CCheckBoxWnd*             pCheckBoxTemplate;       // ADLW_CheckBoxTemplate
-/*0x390*/ CButtonWnd*               pTextLinkTemplate;       // ADLW_TextLinkTemplate
-/*0x398*/ CButtonWnd*               pManageBtnTemplate;      // ADLW_ManageBtnTemplate
-/*0x3a0*/ CButtonWnd*               pActionBtnTemplate;      // ADLW_ActionBtnTemplate
-/*0x3a8*/ int                       PLLNPCColumnWidth;
-/*0x3ac*/ int                       CLLNPCColumnWidth;
-/*0x3b0*/ int                       CLLRNDColumnWidth;
-/*0x3b4*/ int                       CLLManageColumnWidth;
-/*0x3b8*/ int                       CLLActionColumnWidth;
-/*0x3bc*/ int                       PLLANColumnWidth;
-/*0x3c0*/ int                       PLLAGColumnWidth;
-/*0x3c4*/ int                       PLLNeverColumnWidth;
-/*0x3c8*/ int                       CLLANColumnWidth;
-/*0x3cc*/ int                       CLLAGColumnWidth;
-/*0x3d0*/ int                       CLLNeverColumnWidth;
-/*0x3d8*/ AdvancedLootItemList*     pCLootList;
-/*0x3e0*/ AdvancedLootItemList*     pPLootList;
-/*0x3e8*/ uint32_t                  LastUpdateTime;
-/*0x3ec*/ uint32_t                  LastTransactionCheck;
-/*0x3f0*/ bool                      bPopupPending;
-/*0x3f4*/ int                       Unknown1;
-/*0x3f8*/ int                       Unknown2;
-/*0x3fc*/ bool                      bFirstTimeShowingCLL;
-/*0x400*/ int                       TotalLootCount;
-/*0x404*/ bool                      bAutoInventoryQuantity;
-/*0x408*/ int                       CLLActionMenu;
-/*0x40c*/ int                       CLLActionMenuQty;
-/*0x410*/ int                       PLLActionMenu;
-/*0x414*/ bool                      bUnknown3;
-/*0x418*/
+/*0x2e0*/ CVerticalLayoutWnd*       pLayout;                 // ADLW_ScreenLayout
+/*0x2e8*/ CListWnd*                 pPersonalLootList;       // ADLW_PLLList
+/*0x2f0*/ CButtonWnd*               pPersonalSetBtn;         // ADLW_PLLSetBtn
+/*0x2f8*/ CComboWnd*                pPersonalSetCombo;       // ADLW_PLLSetCmbo
+/*0x300*/ CButtonWnd*               pLootAllBtn;             // ADLW_PLL_LootAllBtn
+/*0x308*/ CButtonWnd*               pLeaveAllBtn;            // ADLW_PLL_LeaveAllBtn
+/*0x310*/ CXWnd*                    pCLLWnd;                 // ADLW_CLLWnd
+/*0x318*/ CListWnd*                 pConstructLootList;      // ADLW_CLLList
+/*0x320*/ CButtonWnd*               pConstructSetBtn;        // ADLW_CLLSetBtn
+/*0x328*/ CComboWnd*                pConstructSetCombo;      // ADLW_CLLSetCmbo
+/*0x330*/ CButtonWnd*               pContructLeaveAllBtn;    // ADLW_CLL_LeaveAllBtn
+/*0x338*/ CCheckBoxWnd*             pApplyFiltersChk;        // ADLW_ApplyFiltersCheck
+/*0x340*/ CCheckBoxWnd*             pGroupedByNpcChk;        // ADLW_GroupedByNpcCheckbox
+/*0x348*/ CButtonWnd*               pEditFiltersBtn;         // ADLW_EditFitlersBtn
+/*0x350*/ CButtonWnd*               pLootSettingsBtn;        // ADLW_LootSettingsBtn
+/*0x358*/ CLabelWnd*                pCalculatedMasterLooter; // ADLW_CalculatedMasterLooter
+/*0x360*/ CButtonWnd*               pItemBtnTemplate;        // ADLW_ItemBtnTemplate
+/*0x368*/ CButtonWnd*               pStatusTemplate;         // ADLW_StatusTemplate
+/*0x370*/ CButtonWnd*               pNeverBtnTemplate;       // ADLW_NvrBtnTemplate
+/*0x378*/ CButtonWnd*               pLootBtnTemplate;        // ADLW_LootBtnTemplate
+/*0x380*/ CButtonWnd*               pLeaveBtnTemplate;       // ADLW_LeaveBtnTemplate
+/*0x388*/ CButtonWnd*               pFreeGrabBtnTemplate;    // ADLW_FreeGrabBtnTemplate
+/*0x390*/ CCheckBoxWnd*             pCheckBoxTemplate;       // ADLW_CheckBoxTemplate
+/*0x398*/ CButtonWnd*               pTextLinkTemplate;       // ADLW_TextLinkTemplate
+/*0x3a0*/ CButtonWnd*               pManageBtnTemplate;      // ADLW_ManageBtnTemplate
+/*0x3a8*/ CButtonWnd*               pActionBtnTemplate;      // ADLW_ActionBtnTemplate
+/*0x3b0*/ int                       PLLNPCColumnWidth;
+/*0x3b4*/ int                       CLLNPCColumnWidth;
+/*0x3b8*/ int                       CLLRNDColumnWidth;
+/*0x3bc*/ int                       CLLManageColumnWidth;
+/*0x3c0*/ int                       CLLActionColumnWidth;
+/*0x3c4*/ int                       PLLANColumnWidth;
+/*0x3c8*/ int                       PLLAGColumnWidth;
+/*0x3cc*/ int                       PLLNeverColumnWidth;
+/*0x3d0*/ int                       CLLANColumnWidth;
+/*0x3d4*/ int                       CLLAGColumnWidth;
+/*0x3d8*/ int                       CLLNeverColumnWidth;
+/*0x3e0*/ AdvancedLootItemList*     pCLootList;
+/*0x3e8*/ AdvancedLootItemList*     pPLootList;
+/*0x3f0*/ uint32_t                  LastUpdateTime;
+/*0x3f4*/ uint32_t                  LastTransactionCheck;
+/*0x3f8*/ bool                      bPopupPending;
+/*0x3fc*/ int                       Unknown1;
+/*0x400*/ int                       Unknown2;
+/*0x404*/ bool                      bFirstTimeShowingCLL;
+/*0x408*/ int                       TotalLootCount;
+/*0x40c*/ bool                      bAutoInventoryQuantity;
+/*0x410*/ int                       CLLActionMenu;
+/*0x414*/ int                       CLLActionMenuQty;
+/*0x418*/ int                       PLLActionMenu;
+/*0x41c*/ bool                      bUnknown3;
+/*0x420*/
 };
 
 inline namespace deprecated {
@@ -1893,14 +1893,14 @@ public:
 	CBandolierWnd();
 	virtual ~CBandolierWnd();
 
-/*0x2d0*/ CButtonWnd*        pAddButton;
-/*0x2d8*/ CButtonWnd*        pDeleteButton;
-/*0x2e0*/ CButtonWnd*        pUseButton;
-/*0x2e8*/ CButtonWnd*        pMkHotButton;
-/*0x2f0*/ CButtonWnd*        pAutoSwapButton;
-/*0x2f8*/ CButtonWnd*        pDisplayButtons[MAX_BANDOLIER_SLOTS];
-/*0x318*/ CListWnd*          pWeaponSetList;
-/*0x320*/
+/*0x2d8*/ CButtonWnd*        pAddButton;
+/*0x2e0*/ CButtonWnd*        pDeleteButton;
+/*0x2e8*/ CButtonWnd*        pUseButton;
+/*0x2f0*/ CButtonWnd*        pMkHotButton;
+/*0x2f8*/ CButtonWnd*        pAutoSwapButton;
+/*0x300*/ CButtonWnd*        pDisplayButtons[MAX_BANDOLIER_SLOTS];
+/*0x320*/ CListWnd*          pWeaponSetList;
+/*0x328*/
 };
 
 //============================================================================
@@ -2005,41 +2005,41 @@ public:
 		Column_Offering,
 	};
 
-/*0x2c8*/ CStmlWnd*                    pstmlStatus;               // StatusText
-/*0x2d0*/ CListWnd*                    plistItems;                // ItemSearchList
-/*0x2d8*/ CListWnd*                    plistInventory;            // InventoryList
-/*0x2e0*/ CListWnd*                    plistCompensation;         // CompensationList
-/*0x2e8*/ CListWnd*                    plistBuyLines;             // BuyLineList
-/*0x2f0*/ CEditWnd*                    peditSearch;               // ItemSearchEdit
-/*0x2f8*/ CButtonWnd*                  pbtnSearch;                // ItemSearchButton
-/*0x300*/ CButtonWnd*                  pbtnAddItem;               // InventoryAddButton
-/*0x308*/ CButtonWnd*                  pbtnRemoveItem;            // InventoryRemoveButton
-/*0x310*/ CButtonWnd*                  pbtnPlat;                  // CompensationPlat
-/*0x318*/ CButtonWnd*                  pbtnGold;                  // CompensationGold
-/*0x320*/ CButtonWnd*                  pbtnSilver;                // CompensationSilver
-/*0x328*/ CButtonWnd*                  pbtnCopper;                // CompensationCopper
-/*0x330*/ CButtonWnd*                  pbtnCreate;                // BuyLineAddButton
-/*0x338*/ CEditWnd*                    peditCount;                // CountEdit
-/*0x340*/ CButtonWnd*                  pbtnRemoveLine;            // BuyLineRemoveButton
-/*0x348*/ CButtonWnd*                  pbtnUpdateLine;            // BuyLineModifyButton
-/*0x350*/ CButtonWnd*                  pbtnActiveLine;            // BuyLineActiveButton
-/*0x358*/ CButtonWnd*                  pbtnActivateAllLines;      // BuyLineActivateAllButton
-/*0x360*/ CButtonWnd*                  pbtnListLines;             // ListLinesButton
-/*0x368*/ CButtonWnd*                  pbtnClearStatus;           // ClearStatusButton
-/*0x370*/ CButtonWnd*                  pbtnStartStop;             // StartStopButton
-/*0x378*/ CButtonWnd*                  pbtnOfflineMode;           // OfflineModeButton
-/*0x380*/ CEditWnd*                    peditWelcome;              // WelcomeEdit
-/*0x388*/ CButtonWnd*                  pbtnUpdateWelcome;         // UpdateWelcomeButton
-/*0x390*/ CButtonWnd*                  pbtnRefreshInventory;      // InventoryRefreshButton
-/*0x398*/ CLayoutWnd*                  pLayout;                   // Layout
-/*0x3a0*/ CLayoutWnd*                  pStatusLayout;             // StatusLayout
-/*0x3a8*/ uint32_t                     lastUpdateTime;
-/*0x3b0*/ eqtime_t                     lastSearchTime;
-/*0x3b8*/ uint32_t                     quantityRequest;
-/*0x3c0*/ ArrayClass2<BarterInventoryItem> InventoryItems;
-/*0x3e0*/ ArrayClass2<BarterSearchedItem> SearchedItems;
-/*0x400*/ BarterBuyLine                CurrentBuyLine;
-/*0x4c8*/
+/*0x2d0*/ CStmlWnd*                    pstmlStatus;               // StatusText
+/*0x2d8*/ CListWnd*                    plistItems;                // ItemSearchList
+/*0x2e0*/ CListWnd*                    plistInventory;            // InventoryList
+/*0x2e8*/ CListWnd*                    plistCompensation;         // CompensationList
+/*0x2f0*/ CListWnd*                    plistBuyLines;             // BuyLineList
+/*0x2f8*/ CEditWnd*                    peditSearch;               // ItemSearchEdit
+/*0x300*/ CButtonWnd*                  pbtnSearch;                // ItemSearchButton
+/*0x308*/ CButtonWnd*                  pbtnAddItem;               // InventoryAddButton
+/*0x310*/ CButtonWnd*                  pbtnRemoveItem;            // InventoryRemoveButton
+/*0x318*/ CButtonWnd*                  pbtnPlat;                  // CompensationPlat
+/*0x320*/ CButtonWnd*                  pbtnGold;                  // CompensationGold
+/*0x328*/ CButtonWnd*                  pbtnSilver;                // CompensationSilver
+/*0x330*/ CButtonWnd*                  pbtnCopper;                // CompensationCopper
+/*0x338*/ CButtonWnd*                  pbtnCreate;                // BuyLineAddButton
+/*0x340*/ CEditWnd*                    peditCount;                // CountEdit
+/*0x348*/ CButtonWnd*                  pbtnRemoveLine;            // BuyLineRemoveButton
+/*0x350*/ CButtonWnd*                  pbtnUpdateLine;            // BuyLineModifyButton
+/*0x358*/ CButtonWnd*                  pbtnActiveLine;            // BuyLineActiveButton
+/*0x360*/ CButtonWnd*                  pbtnActivateAllLines;      // BuyLineActivateAllButton
+/*0x368*/ CButtonWnd*                  pbtnListLines;             // ListLinesButton
+/*0x370*/ CButtonWnd*                  pbtnClearStatus;           // ClearStatusButton
+/*0x378*/ CButtonWnd*                  pbtnStartStop;             // StartStopButton
+/*0x380*/ CButtonWnd*                  pbtnOfflineMode;           // OfflineModeButton
+/*0x388*/ CEditWnd*                    peditWelcome;              // WelcomeEdit
+/*0x390*/ CButtonWnd*                  pbtnUpdateWelcome;         // UpdateWelcomeButton
+/*0x398*/ CButtonWnd*                  pbtnRefreshInventory;      // InventoryRefreshButton
+/*0x3a0*/ CLayoutWnd*                  pLayout;                   // Layout
+/*0x3a8*/ CLayoutWnd*                  pStatusLayout;             // StatusLayout
+/*0x3b0*/ uint32_t                     lastUpdateTime;
+/*0x3b8*/ eqtime_t                     lastSearchTime;
+/*0x3c0*/ uint32_t                     quantityRequest;
+/*0x3c8*/ ArrayClass2<BarterInventoryItem> InventoryItems;
+/*0x3e8*/ ArrayClass2<BarterSearchedItem> SearchedItems;
+/*0x408*/ BarterBuyLine                CurrentBuyLine;
+/*0x4d0*/
 };
 
 //============================================================================
@@ -2068,29 +2068,29 @@ public:
 		Column_Max,
 	};
 
-/*0x2c8*/ HashTable<BarterBuyerSearchData> Buyers;
-/*0x2e0*/ CListWnd*                    plistInventory;                 // InventoryList
-/*0x2e8*/ CListWnd*                    plistBuyLines;                  // BuyLineList
-/*0x2f0*/ CListWnd*                    plistDetails;                   // DetailsList
-/*0x2f8*/ CEditWnd*                    peditSearch;                    // ItemSearchEdit
-/*0x300*/ CButtonWnd*                  pbtnRefreshInventory;           // RefreshInventoryButton
-/*0x308*/ CButtonWnd*                  pbtnSearch;                     // SearchButton
-/*0x310*/ CButtonWnd*                  pbtnWelcome;                    // WelcomeButon
-/*0x318*/ CButtonWnd*                  pbtnGreeting;                   // GreetingButton
-/*0x320*/ CButtonWnd*                  pbtnFind;                       // FindButton
-/*0x328*/ CButtonWnd*                  pbtnHide;                       // HideButton
-/*0x330*/ CButtonWnd*                  pbtnBuyLineInspectItem;         // BuyLineInspectButton
-/*0x338*/ CButtonWnd*                  pbtnCompensationInspectItem;    // CompensationInspectButton
-/*0x340*/ CButtonWnd*                  pbtnCompensationPreviewItem;    // CompensationPreviewButton
-/*0x348*/ CButtonWnd*                  pbtnSellButton;                 // SellButton
-/*0x350*/ CButtonWnd*                  pbtnResetButton;                // ResetButton
-/*0x358*/ CComboWnd*                   pcomboPlayersCombo;             // PlayerCombo
-/*0x360*/ CLayoutWnd*                  pLayout;                        // Layout
-/*0x368*/ CLayoutWnd*                  pMatchLayout;                   // BuyLineLayout
-/*0x370*/ bool                         NeedsUpdate;
-/*0x378*/ ArrayClass<BarterBuyLine>    BuyLines;
-/*0x390*/ ArrayClass2<BarterInventoryItem> InventoryItems;
-/*0x3b0*/ // more members
+/*0x2d0*/ HashTable<BarterBuyerSearchData> Buyers;
+/*0x2e8*/ CListWnd*                    plistInventory;                 // InventoryList
+/*0x2f0*/ CListWnd*                    plistBuyLines;                  // BuyLineList
+/*0x2f8*/ CListWnd*                    plistDetails;                   // DetailsList
+/*0x300*/ CEditWnd*                    peditSearch;                    // ItemSearchEdit
+/*0x308*/ CButtonWnd*                  pbtnRefreshInventory;           // RefreshInventoryButton
+/*0x310*/ CButtonWnd*                  pbtnSearch;                     // SearchButton
+/*0x318*/ CButtonWnd*                  pbtnWelcome;                    // WelcomeButon
+/*0x320*/ CButtonWnd*                  pbtnGreeting;                   // GreetingButton
+/*0x328*/ CButtonWnd*                  pbtnFind;                       // FindButton
+/*0x330*/ CButtonWnd*                  pbtnHide;                       // HideButton
+/*0x338*/ CButtonWnd*                  pbtnBuyLineInspectItem;         // BuyLineInspectButton
+/*0x340*/ CButtonWnd*                  pbtnCompensationInspectItem;    // CompensationInspectButton
+/*0x348*/ CButtonWnd*                  pbtnCompensationPreviewItem;    // CompensationPreviewButton
+/*0x350*/ CButtonWnd*                  pbtnSellButton;                 // SellButton
+/*0x358*/ CButtonWnd*                  pbtnResetButton;                // ResetButton
+/*0x360*/ CComboWnd*                   pcomboPlayersCombo;             // PlayerCombo
+/*0x368*/ CLayoutWnd*                  pLayout;                        // Layout
+/*0x370*/ CLayoutWnd*                  pMatchLayout;                   // BuyLineLayout
+/*0x378*/ bool                         NeedsUpdate;
+/*0x380*/ ArrayClass<BarterBuyLine>    BuyLines;
+/*0x398*/ ArrayClass2<BarterInventoryItem> InventoryItems;
+/*0x3b8*/ // more members
 };
 
 //============================================================================
@@ -2301,7 +2301,7 @@ enum BuffWindowType
 	BuffWindowShortDuration,
 };
 
-constexpr size_t CBuffWindow_size = 0x350; // @sizeof(CBuffWindow) :: 2025-08-14 (live) @ 0x1401938DF
+constexpr size_t CBuffWindow_size = 0x350; // @sizeof(CBuffWindow) :: 2025-08-26 (live) @ 0x140193AEF
 
 class [[offsetcomments]] CBuffWindow : public CSidlScreenWnd, public WndEventHandler
 {
@@ -3205,7 +3205,7 @@ enum ECursorAttachmentType
 	eCursorAttachment_ActivatedKeyRingLink,
 };
 
-constexpr size_t CCursorAttachment_size = 0x628; // @sizeof(CCursorAttachment) :: 2025-08-14 (live) @ 0x140192C78
+constexpr size_t CCursorAttachment_size = 0x628; // @sizeof(CCursorAttachment) :: 2025-08-26 (live) @ 0x140192E88
 
 class [[offsetcomments]] CCursorAttachment : public CGFScreenWnd, public WndEventHandler
 {
@@ -3373,7 +3373,7 @@ public:
 // CFindItemWnd
 //============================================================================
 
-constexpr size_t CFindItemWnd_size = 0x3F8; // @sizeof(CFindItemWnd) :: 2025-08-14 (live) @ 0x140194306
+constexpr size_t CFindItemWnd_size = 0x3F8; // @sizeof(CFindItemWnd) :: 2025-08-26 (live) @ 0x140194516
 
 class [[offsetcomments]] CFindItemWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -3458,7 +3458,7 @@ enum FindLocationType {
 };
 EQLIB_API const char* FindLocationTypeToString(FindLocationType type);
 
-constexpr size_t CFindLocationWnd_size = 0x7A8; // @sizeof(CFindLocationWnd) :: 2025-08-14 (live) @ 0x140194AC4
+constexpr size_t CFindLocationWnd_size = 0x7A8; // @sizeof(CFindLocationWnd) :: 2025-08-26 (live) @ 0x140194CD4
 
 class [[offsetcomments]] CFindLocationWnd : public CGFScreenWnd
 {
@@ -3672,7 +3672,7 @@ public:
 // CGiveWnd
 //============================================================================
 
-constexpr size_t CGiveWnd_size = 0xB20; // @sizeof(CGiveWnd) :: 2025-08-14 (live) @ 0x140194576
+constexpr size_t CGiveWnd_size = 0xB20; // @sizeof(CGiveWnd) :: 2025-08-26 (live) @ 0x140194786
 
 class [[offsetcomments]] CGiveWnd : public CGFScreenWnd, public PopDialogHandler, public WndEventHandler
 {
@@ -3861,7 +3861,7 @@ public:
 // CGroupWnd
 //============================================================================
 
-constexpr size_t CGroupWnd_size = 0x700; // @sizeof(CGroupWnd) :: 2025-08-14 (live) @ 0x1401933F7
+constexpr size_t CGroupWnd_size = 0x700; // @sizeof(CGroupWnd) :: 2025-08-26 (live) @ 0x140193607
 
 class [[offsetcomments]] CGroupWnd : public CGFScreenWnd
 {
@@ -4278,44 +4278,44 @@ public:
 	//----------------------------------------------------------------------------
 	// data members
 
-/*0x2d0*/ CXWnd*          NoSpinnerBarTemplate;            // HB_NoSpinnerBarTemplate
-/*0x2d8*/ CXWnd*          HorizontalBarTemplate;           // HB_HorizontalBarTemplate
-/*0x2e0*/ CXWnd*          VerticalBarTemplate;             // HB_VerticalBarTemplate
-/*0x2e8*/ CTileLayoutWnd* HotButtonLayout;                 // HB_HotButtonLayout
-/*0x2f0*/ CXWnd*          HorizontalBarPageButtons;        // HB_HorizontalBarPageButtons
-/*0x2f8*/ CXWnd*          VerticalBarPageButtons;          // HB_VerticalBarPageButtons
-/*0x300*/ CButtonWnd*     PageUpButton;                    // HB_PageUpButton
-/*0x308*/ CLabel*         HorizontalCurrentPageLabel;      // HB_HorizontalCurrentPageLabel
-/*0x310*/ CButtonWnd*     PageDownButton;                  // HB_PageDownButton
-/*0x318*/ CButtonWnd*     PageLeftButton;                  // HB_PageLeftButton
-/*0x320*/ CLabel*         VerticalCurrentPageLabel;        // HB_VerticalCurrentPageLabel
-/*0x328*/ CButtonWnd*     PageRightButton;                 // HB_PageRightButton
-/*0x330*/ int             Page;
-/*0x338*/ CHotButton*     Buttons[HOTBUTTONS_PER_PAGE];    // HB_Button%d
-/*0x398*/ int             LoadLoadoutContextIndex;
-/*0x39c*/ int             SaveLoadoutContextIndex;
-/*0x3a0*/ int             DeleteLoadoutContextIndex;
-/*0x3a4*/ int             SaveLoadoutIndex;
-/*0x3a8*/ int             ShowKeyMapIndex;
-/*0x3ac*/ int             ShowSpinnerIndex;
-/*0x3b0*/ int             ButtonPercent;
-/*0x3b4*/ int             OpenNewBarIndex;
-/*0x3b8*/ bool            ShowKeyMap;
-/*0x3b9*/ bool            ShowSpinner;
-/*0x3ba*/ bool            LastShowSpinner;
-/*0x3bc*/ FontStyles      TextFontStyle;
-/*0x3c0*/ CXStr           KeyMapStrings[HOTBUTTONS_PER_PAGE];
-/*0x420*/ CButtonWnd*     FileButton;                      // HB_FileButton
-/*0x428*/ CContextMenu*   MainMenu;
-/*0x430*/ CContextMenu*   LoadMenu;
-/*0x438*/ CContextMenu*   SaveMenu;
-/*0x440*/ CContextMenu*   DeleteMenu;
-/*0x448*/ bool            HorizontalBar;
-/*0x44c*/ uint32_t        Timer;
-/*0x450*/ int             HotWindowIndex;
-/*0x454*/ int             ConfirmId;
-/*0x458*/ bool            KeepCurrentSize;
-/*0x45c*/
+/*0x2d8*/ CXWnd*          NoSpinnerBarTemplate;            // HB_NoSpinnerBarTemplate
+/*0x2e0*/ CXWnd*          HorizontalBarTemplate;           // HB_HorizontalBarTemplate
+/*0x2e8*/ CXWnd*          VerticalBarTemplate;             // HB_VerticalBarTemplate
+/*0x2f0*/ CTileLayoutWnd* HotButtonLayout;                 // HB_HotButtonLayout
+/*0x2f8*/ CXWnd*          HorizontalBarPageButtons;        // HB_HorizontalBarPageButtons
+/*0x300*/ CXWnd*          VerticalBarPageButtons;          // HB_VerticalBarPageButtons
+/*0x308*/ CButtonWnd*     PageUpButton;                    // HB_PageUpButton
+/*0x310*/ CLabel*         HorizontalCurrentPageLabel;      // HB_HorizontalCurrentPageLabel
+/*0x318*/ CButtonWnd*     PageDownButton;                  // HB_PageDownButton
+/*0x320*/ CButtonWnd*     PageLeftButton;                  // HB_PageLeftButton
+/*0x328*/ CLabel*         VerticalCurrentPageLabel;        // HB_VerticalCurrentPageLabel
+/*0x330*/ CButtonWnd*     PageRightButton;                 // HB_PageRightButton
+/*0x338*/ int             Page;
+/*0x340*/ CHotButton*     Buttons[HOTBUTTONS_PER_PAGE];    // HB_Button%d
+/*0x3a0*/ int             LoadLoadoutContextIndex;
+/*0x3a4*/ int             SaveLoadoutContextIndex;
+/*0x3a8*/ int             DeleteLoadoutContextIndex;
+/*0x3ac*/ int             SaveLoadoutIndex;
+/*0x3b0*/ int             ShowKeyMapIndex;
+/*0x3b4*/ int             ShowSpinnerIndex;
+/*0x3b8*/ int             ButtonPercent;
+/*0x3bc*/ int             OpenNewBarIndex;
+/*0x3c0*/ bool            ShowKeyMap;
+/*0x3c1*/ bool            ShowSpinner;
+/*0x3c2*/ bool            LastShowSpinner;
+/*0x3c4*/ FontStyles      TextFontStyle;
+/*0x3c8*/ CXStr           KeyMapStrings[HOTBUTTONS_PER_PAGE];
+/*0x428*/ CButtonWnd*     FileButton;                      // HB_FileButton
+/*0x430*/ CContextMenu*   MainMenu;
+/*0x438*/ CContextMenu*   LoadMenu;
+/*0x440*/ CContextMenu*   SaveMenu;
+/*0x448*/ CContextMenu*   DeleteMenu;
+/*0x450*/ bool            HorizontalBar;
+/*0x454*/ uint32_t        Timer;
+/*0x458*/ int             HotWindowIndex;
+/*0x45c*/ int             ConfirmId;
+/*0x460*/ bool            KeepCurrentSize;
+/*0x464*/
 };
 
 //============================================================================
@@ -4361,10 +4361,10 @@ public:
 	EQLIB_OBJECT void Init();
 	EQLIB_OBJECT void UpdateMoneyDisplay();
 
-/*0x03c4*/ uint8_t     Unknown0x03ac[0xdbc];
-/*0x1180*/ int64_t     VitalityCap;
-/*0x1188*/ int         AAVitalityCap;
-/*0x118c*/
+/*0x03cc*/ uint8_t     Unknown0x03ac[0xdbc];
+/*0x1188*/ int64_t     VitalityCap;
+/*0x1190*/ int         AAVitalityCap;
+/*0x1194*/
 };
 
 inline namespace deprecated {
@@ -4566,7 +4566,7 @@ enum ItemDisplayFlags
 	FROM_BARTER_SEARCH = 0x00000010
 };
 
-constexpr size_t CItemDisplayWnd_size = 0xAA8; // @sizeof(CItemDisplayWnd) :: 2025-08-14 (live) @ 0x1404267F4
+constexpr size_t CItemDisplayWnd_size = 0xAA8; // @sizeof(CItemDisplayWnd) :: 2025-08-26 (live) @ 0x140426EF4
 
 class [[offsetcomments]] CItemDisplayWnd : public CSidlScreenWnd
 {
@@ -4746,7 +4746,7 @@ public:
 // CKeyRingWnd
 //============================================================================
 
-constexpr size_t CKeyRingWnd_size = 0x468; // @sizeof(CKeyRingWnd) :: 2025-08-14 (live) @ 0x140193D65
+constexpr size_t CKeyRingWnd_size = 0x468; // @sizeof(CKeyRingWnd) :: 2025-08-26 (live) @ 0x140193F75
 
 class [[offsetcomments]] CKeyRingWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -4811,14 +4811,14 @@ SIZE_CHECK(CKeyRingWnd, CKeyRingWnd_size);
 class [[offsetcomments]] ClaimWindow : public CSidlScreenWnd, public PopDialogHandler
 {
 public:
-/*0x2d0*/ ClaimFeatureDataCollection claimFeatureData;
-/*0x2e8*/ CListWnd*                  pListFeatures;           // ClaimFeatureList
-/*0x2f0*/ CListWnd*                  pListItems;              // ClaimListItems
-/*0x2f8*/ CButtonWnd*                pRefreshButton;          // ClaimRefreshButton
-/*0x300*/ CButtonWnd*                pClaimButton;            // ClaimClaimButton
-/*0x308*/ CButtonWnd*                pCancelButton;           // ClaimCancelButton
-/*0x310*/ CStmlWnd*                  pItemDescription;        // ClaimItemDescription
-/*0x318*/
+/*0x2d8*/ ClaimFeatureDataCollection claimFeatureData;
+/*0x2f0*/ CListWnd*                  pListFeatures;           // ClaimFeatureList
+/*0x2f8*/ CListWnd*                  pListItems;              // ClaimListItems
+/*0x300*/ CButtonWnd*                pRefreshButton;          // ClaimRefreshButton
+/*0x308*/ CButtonWnd*                pClaimButton;            // ClaimClaimButton
+/*0x310*/ CButtonWnd*                pCancelButton;           // ClaimCancelButton
+/*0x318*/ CStmlWnd*                  pItemDescription;        // ClaimItemDescription
+/*0x320*/
 };
 
 //============================================================================
@@ -4838,7 +4838,7 @@ public:
 
 struct loot_msg;
 
-constexpr size_t CLootWnd_size = 0xCC0; // @sizeof(CLootWnd) :: 2025-08-14 (live) @ 0x140194034
+constexpr size_t CLootWnd_size = 0xCC0; // @sizeof(CLootWnd) :: 2025-08-26 (live) @ 0x140194244
 
 class [[offsetcomments]] CLootWnd : public CSidlScreenWnd, public PopDialogHandler, public WndEventHandler
 {
@@ -5055,7 +5055,7 @@ public:
 	static VirtualFunctionTable* sm_vftable;
 };
 
-constexpr size_t CMapViewWnd_size = 0x858; // @sizeof(CMapViewWnd) :: 2025-08-14 (live) @ 0x140193759
+constexpr size_t CMapViewWnd_size = 0x858; // @sizeof(CMapViewWnd) :: 2025-08-26 (live) @ 0x140193969
 
 class [[offsetcomments]] CMapViewWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -5477,7 +5477,7 @@ public:
 
 constexpr const int MAX_PET_BUTTONS = 14;
 
-constexpr size_t CPetInfoWnd_size = 0x3D0; // @sizeof(CPetInfoWnd) :: 2025-08-14 (live) @ 0x14019321F
+constexpr size_t CPetInfoWnd_size = 0x3D0; // @sizeof(CPetInfoWnd) :: 2025-08-26 (live) @ 0x14019342F
 
 class [[offsetcomments]] CPetInfoWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -5616,7 +5616,7 @@ enum ECombatState
 };
 
 
-constexpr size_t CPlayerWnd_size = 0x408; // @sizeof(CPlayerWnd) :: 2025-08-14 (live) @ 0x140193B8D
+constexpr size_t CPlayerWnd_size = 0x408; // @sizeof(CPlayerWnd) :: 2025-08-26 (live) @ 0x140193D9D
 
 class [[offsetcomments]] CPlayerWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -6011,7 +6011,7 @@ enum ESpellDisplayType
 	SpellDisplayType_TargetBuff,
 };
 
-constexpr size_t CSpellDisplayWnd_size = 0x3B8; // @sizeof(CSpellDisplayWnd) :: 2025-08-14 (live) @ 0x1404F6F8E
+constexpr size_t CSpellDisplayWnd_size = 0x3B8; // @sizeof(CSpellDisplayWnd) :: 2025-08-26 (live) @ 0x1404F777E
 
 class [[offsetcomments]] CSpellDisplayWnd : public CSidlScreenWnd
 {
@@ -6113,7 +6113,7 @@ public:
 // CTargetWnd
 //============================================================================
 
-constexpr size_t CTargetWnd_size = 0x3C8; // @sizeof(CTargetWnd) :: 2025-08-14 (live) @ 0x140193A2E
+constexpr size_t CTargetWnd_size = 0x3C8; // @sizeof(CTargetWnd) :: 2025-08-26 (live) @ 0x140193C3E
 
 class [[offsetcomments]] CTargetWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -6421,7 +6421,7 @@ public:
 // CTradeWnd
 //============================================================================
 
-constexpr size_t CTradeWnd_size = 0x16F8; // @sizeof(CTradeWnd) :: 2025-08-14 (live) @ 0x14019421C
+constexpr size_t CTradeWnd_size = 0x16F8; // @sizeof(CTradeWnd) :: 2025-08-26 (live) @ 0x14019442C
 
 class [[offsetcomments]] CTradeWnd : public CGFScreenWnd, public WndEventHandler
 {
@@ -6688,7 +6688,7 @@ public:
 
 using ZonePathArray = ArrayClass<ZonePathData>;
 
-constexpr size_t ZoneGuideManagerClient_size = 0xFA50; // @sizeof(ZoneGuideManagerClient) :: 2025-08-14 (live) @ 0x14034B4DF
+constexpr size_t ZoneGuideManagerClient_size = 0xFA50; // @sizeof(ZoneGuideManagerClient) :: 2025-08-26 (live) @ 0x14034BB5F
 
 class [[offsetcomments]] ZoneGuideManagerClient : public ZoneGuideManagerBase
 {
@@ -6778,10 +6778,10 @@ public:
 class [[offsetcomments]] CZonePathWnd : public CSidlScreenWnd, public WndEventHandler
 {
 public:
-/*0x2cc*/ EQZoneIndex             currentZone;
-/*0x2d0*/ bool                    zonePathDirty;
-/*0x2d8*/ CListWnd*               listZones;
-/*0x2e0*/
+/*0x2d4*/ EQZoneIndex             currentZone;
+/*0x2d8*/ bool                    zonePathDirty;
+/*0x2e0*/ CListWnd*               listZones;
+/*0x2e8*/
 };
 
 //============================================================================
@@ -7093,12 +7093,12 @@ public:
 
 	virtual void UpdateCascadeMenuItems() {}
 
-/*0x2c8*/ CButtonWnd*       EQButtonWnd;
-/*0x2d0*/ CButtonWnd*       SCButtonWnd;
-/*0x2d8*/ CButtonWnd*       FlashSaleButtonWnd;
-/*0x2e0*/ CascadeItemArray* CascadeMenuItems;
-/*0x2e8*/ int               MenuId;
-/*0x2ec*/
+/*0x2d0*/ CButtonWnd*       EQButtonWnd;
+/*0x2d8*/ CButtonWnd*       SCButtonWnd;
+/*0x2e0*/ CButtonWnd*       FlashSaleButtonWnd;
+/*0x2e8*/ CascadeItemArray* CascadeMenuItems;
+/*0x2f0*/ int               MenuId;
+/*0x2f4*/
 };
 
 //----------------------------------------------------------------------------
