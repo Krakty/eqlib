@@ -61,7 +61,7 @@
 #define __CurrentMapLabel_x                                        0x140EFA760
 #define __LabelCache_x                                             0x140EFB330
 #define __ChatFilterDefs_x                                         0x140A3A790
-#define Teleport_Table_Size_x                                      0x0
+#define Teleport_Table_Size_x                                      0x140E63390
 #define Teleport_Table_x                                           0x140E63820
 
 ////
