@@ -133,7 +133,7 @@
 %endmacro
 
 %macro expand_cgfscreenwnd_overrides 2
-	; CGCScreenWnd virtual functions
+	; CGFScreenWnd virtual functions
 	make_override 0x380, ?HandleJsEvent@?$CGFScreenWndTrampoline@V%1@eqlib@@@detail@eqlib@@UEAAXPEAX0@Z, %2
 	make_override 0x388, ?Unknown0x388@?$CGFScreenWndTrampoline@V%1@eqlib@@@detail@eqlib@@UEAAXXZ, %2
 	make_override 0x390, ?Unknown0x390@?$CGFScreenWndTrampoline@V%1@eqlib@@@detail@eqlib@@UEAAXAEBVCXRect@3@@Z, %2
