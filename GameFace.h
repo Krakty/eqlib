@@ -75,7 +75,7 @@ public:
 	virtual eqstd::string GetTypeName() const override { return "UIButton"; }
 
 /*0xa0*/ uint32_t      u32_a0;
-/*0xa8*/
+/*0xa4*/
 };
 
 class [[offsetcomments]] UIListComponent : public BaseComponent<CListWnd>
@@ -124,9 +124,9 @@ public:
 	virtual void Unknown0x388();
 	virtual void Unknown0x390(const CXRect& rect);
 
-/*0x2c0*/ UIScreenComponent                                 WindowComponent;
-/*0x368*/ eqstd::unordered_map<eqstd::string, UIComponent*> ChildComponents;
-/*0x3a8*/
+/*0x2c8*/ UIScreenComponent                                 WindowComponent;
+/*0x370*/ eqstd::unordered_map<eqstd::string, UIComponent*> ChildComponents;
+/*0x3b0*/
 
 	struct [[offsetcomments]] VirtualFunctionTable : public CSidlScreenWnd::VirtualFunctionTable
 	{
