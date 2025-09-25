@@ -997,6 +997,7 @@ static std::unordered_multimap<std::string_view, ForeignPointer<CSidlScreenWnd>&
 	{ "NameChangeMercWnd",                      pNameChangeMercWnd.ref<CSidlScreenWnd>() },
 	{ "NameChangePetWnd",                       pNameChangePetWnd.ref<CSidlScreenWnd>() },
 	{ "NameChangeWnd",                          pNameChangeWnd.ref<CSidlScreenWnd>() },
+	{ "NameReservationWnd",                     pNameReservationWnd.ref<CSidlScreenWnd>() },
 	{ "NoteWindow",                             pNoteWnd.ref<CSidlScreenWnd>() },
 	{ "ObjectPreviewWnd",                       pObjectPreviewWnd.ref<CSidlScreenWnd>() },
 	{ "OptionsWindow",                          pOptionsWnd.ref<CSidlScreenWnd>() },
