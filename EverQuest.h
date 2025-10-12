@@ -684,7 +684,7 @@ struct [[offsetcomments]] CharSelectInfo
 	/*0x154*/ int          ParentId;
 	/*0x158*/ bool         bTooHighLevel;
 	/*0x159*/ bool         bPreFTP;
-	/*0x15c*/ long         SomethingLogin;
+	/*0x15c*/ int          LastLogin;
 	/*0x160*/ bool         bUseable;
 	/*0x161*/ bool         bHeroicCharacter;
 	/*0x162*/ bool         bShrouded;
