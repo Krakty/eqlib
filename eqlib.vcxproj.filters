@@ -57,27 +57,6 @@
     <ClInclude Include="eqstd\xmemory.h">
       <Filter>Header Files\eqstd</Filter>
     </ClInclude>
-    <ClInclude Include="..\eqdata\actordef.h">
-      <Filter>Header Files\eqdata</Filter>
-    </ClInclude>
-    <ClInclude Include="..\eqdata\combines.h">
-      <Filter>Header Files\eqdata</Filter>
-    </ClInclude>
-    <ClInclude Include="..\eqdata\dikeys.h">
-      <Filter>Header Files\eqdata</Filter>
-    </ClInclude>
-    <ClInclude Include="..\eqdata\factionnames.h">
-      <Filter>Header Files\eqdata</Filter>
-    </ClInclude>
-    <ClInclude Include="..\eqdata\itemclasses.h">
-      <Filter>Header Files\eqdata</Filter>
-    </ClInclude>
-    <ClInclude Include="..\eqdata\skills.h">
-      <Filter>Header Files\eqdata</Filter>
-    </ClInclude>
-    <ClInclude Include="..\eqdata\spelleffects.h">
-      <Filter>Header Files\eqdata</Filter>
-    </ClInclude>
     <ClInclude Include="eqstd\memory.h">
       <Filter>Header Files\eqstd</Filter>
     </ClInclude>
@@ -281,6 +260,27 @@
     </ClInclude>
     <ClInclude Include="src\Logging.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\eqdata\actordef.h">
+      <Filter>Header Files\eqdata</Filter>
+    </ClInclude>
+    <ClInclude Include="include\eqdata\combines.h">
+      <Filter>Header Files\eqdata</Filter>
+    </ClInclude>
+    <ClInclude Include="include\eqdata\dikeys.h">
+      <Filter>Header Files\eqdata</Filter>
+    </ClInclude>
+    <ClInclude Include="include\eqdata\factionnames.h">
+      <Filter>Header Files\eqdata</Filter>
+    </ClInclude>
+    <ClInclude Include="include\eqdata\itemclasses.h">
+      <Filter>Header Files\eqdata</Filter>
+    </ClInclude>
+    <ClInclude Include="include\eqdata\skills.h">
+      <Filter>Header Files\eqdata</Filter>
+    </ClInclude>
+    <ClInclude Include="include\eqdata\spelleffects.h">
+      <Filter>Header Files\eqdata</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

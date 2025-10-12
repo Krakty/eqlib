@@ -135,13 +135,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\eqdata\actordef.h" />
-    <ClInclude Include="..\eqdata\combines.h" />
-    <ClInclude Include="..\eqdata\dikeys.h" />
-    <ClInclude Include="..\eqdata\factionnames.h" />
-    <ClInclude Include="..\eqdata\itemclasses.h" />
-    <ClInclude Include="..\eqdata\skills.h" />
-    <ClInclude Include="..\eqdata\spelleffects.h" />
     <ClInclude Include="Achievements.h" />
     <ClInclude Include="Allocator.h" />
     <ClInclude Include="AltAbilities.h" />
@@ -173,6 +166,13 @@
     <ClInclude Include="Expansions.h" />
     <ClInclude Include="GameFace.h" />
     <ClInclude Include="GraphicsResources.h" />
+    <ClInclude Include="include\eqdata\actordef.h" />
+    <ClInclude Include="include\eqdata\combines.h" />
+    <ClInclude Include="include\eqdata\dikeys.h" />
+    <ClInclude Include="include\eqdata\factionnames.h" />
+    <ClInclude Include="include\eqdata\itemclasses.h" />
+    <ClInclude Include="include\eqdata\skills.h" />
+    <ClInclude Include="include\eqdata\spelleffects.h" />
     <ClInclude Include="include\eqlib\ComputedPointer.h" />
     <ClInclude Include="include\eqlib\Config.h" />
     <ClInclude Include="include\eqlib\ForeignPointer.h" />

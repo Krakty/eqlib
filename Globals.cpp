@@ -31,13 +31,13 @@ namespace eqlib {
 //============================================================================
 
 const char* szCombineTypes[] = {
-#include "../eqdata/combines.h"
+#include "eqdata/combines.h"
 	nullptr
 };
 size_t MAX_COMBINES = lengthof(szCombineTypes);
 
 const char* szItemClasses[] = {
-#include "../eqdata/itemclasses.h"
+#include "eqdata/itemclasses.h"
 	nullptr
 };
 size_t MAX_ITEMCLASSES = lengthof(szItemClasses);
@@ -45,24 +45,24 @@ const char** szItemTypes = szItemClasses;
 size_t MAX_ITEMTYPES = lengthof(szItemClasses);
 
 const char* szSPATypes[] = {
-#include "../eqdata/spelleffects.h"
+#include "eqdata/spelleffects.h"
 	nullptr
 };
 size_t MAX_SPELLEFFECTS = lengthof(szSPATypes) - 1;
 
 const char* szFactionNames[] = {
-#include "../eqdata/factionnames.h"
+#include "eqdata/factionnames.h"
 	nullptr
 };
 size_t MAX_FACTIONNAMES = lengthof(szFactionNames) - 1;
 
 ACTORDEFENTRY ActorDefList[] = {
-#include "../eqdata/actordef.h"
+#include "eqdata/actordef.h"
 	0, 0, "NULL"
 };
 
 DIKEYID gDiKeyID[] = {
-#include "../eqdata/dikeys.h"
+#include "eqdata/dikeys.h"
 	{ 0, 0 }
 };
 
