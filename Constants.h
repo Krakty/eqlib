@@ -441,7 +441,7 @@ constexpr int NUM_HOTBUTTON_PAGES = 10;
 constexpr int HOTBUTTONS_PER_PAGE = 12;
 
 // KeypressHandler__HandleKeyUp_x has this one
-constexpr int nEQMappableCommands = 547;
+constexpr int nEQMappableCommands = 552;
 
 // found using __BindList_x
 constexpr int nNormalEQMappableCommands = nEQMappableCommands - 22;

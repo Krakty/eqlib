@@ -906,10 +906,7 @@ struct [[offsetcomments]] SpellAffectData
 using SPELLCALCINFO = SpellAffectData;
 using PSPELLCALCINFO = SPELLCALCINFO*;
 
-#pragma pack(push)
-#pragma pack(1)
-
-constexpr size_t EQ_Spell_size = 0x214; // @sizeof(EQ_Spell) :: 2025-09-24 (test) @ 0x1401D9ED7
+constexpr size_t EQ_Spell_size = 0x218; // @sizeof(EQ_Spell) :: 2025-10-07 (test) @ 0x1401DA1E7
 
 class [[offsetcomments]] EQ_Spell
 {
@@ -1070,59 +1067,59 @@ public:
 /*0x150*/ int                  Scribable = 1;
 /*0x154*/ eSpellNoOverwrite    NoOverwrite = NoOverwrite_Default;
 /*0x158*/ eSpellRecourseType   SpellRecourseType = SpellRecourseType_AlwaysHit;
-/*0x15c*/ uint8_t              ClassLevel[MAX_CLASSES + 1];
-/*0x180*/ uint8_t              LightType = 0;
-/*0x181*/ eSpellType           SpellType = SpellType_Detrimental; // 0=detrimental, 1=Beneficial, 2=Beneficial, Group Only
-/*0x182*/ uint8_t              Resist = 0;                    // enum eResistType
-/*0x183*/ uint8_t              TargetType = 0;                // enum eSpellTargetType
-/*0x184*/ uint8_t              CastDifficulty = 0;
-/*0x185*/ uint8_t              Skill = 0;
-/*0x186*/ uint8_t              ZoneType = 0;                  // 01=Outdoors, 02=dungeons, ff=Any
-/*0x187*/ uint8_t              Environment = 0;
-/*0x188*/ uint8_t              TimeOfDay = 0;                 // 0=any, 1=day only, 2=night only
-/*0x189*/ uint8_t              CastingAnim = 0;
-/*0x18a*/ uint8_t              AnimVariation = 0;
-/*0x18b*/ uint8_t              TargetAnim = 0;
-/*0x18c*/ uint8_t              TravelType = 0;
-/*0x18d*/ uint8_t              CancelOnSit = 0;
-/*0x18e*/ bool                 CountdownHeld = false;
-/*0x18f*/ char                 Name[64];
-/*0x1cf*/ char                 Extra[32];                     // This is 'Extra' from Lucy (portal shortnames etc) official = NPC_FILENAME
-/*0x1ef*/ bool                 ShowWearOffMessage = false;
-/*0x1f0*/ uint8_t              NPCChanceofKnowingSpell = 0;   // if this is 0 there is no way an npc can cast this spell...
-/*0x1f1*/ bool                 SneakAttack = false;
-/*0x1f2*/ bool                 NotFocusable = false;          // ignores all(?) focus effects
-/*0x1f3*/ bool                 NoHate = false;
-/*0x1f4*/ bool                 StacksWithSelf = false;
-/*0x1f5*/ bool                 CannotBeScribed = false;       // this is used by /outputfile missingspells
-/*0x1f6*/ bool                 NoBuffBlock = false;
-/*0x1f7*/ bool                 NoStripOnDeath = false;
-/*0x1f8*/ bool                 NoRemove = false;              // spell can't be clicked off? -> 1f4
-/*0x1f9*/ bool                 NoNPCLOS = false;              // NPC skips LOS checks
-/*0x1fa*/ bool                 Feedbackable = false;
-/*0x1fb*/ bool                 Reflectable = false;
-/*0x1fc*/ bool                 NoPartialSave = false;
-/*0x1fd*/ bool                 NoResist = false;
-/*0x1fe*/ bool                 UsesPersistentParticles = false;
-/*0x1ff*/ bool                 DurationWindow = false;        // 0=Long, 1=Short
-/*0x200*/ bool                 Uninterruptable = false;
-/*0x201*/ bool                 NotStackableDot = false;
-/*0x202*/ bool                 Deletable = false;
-/*0x203*/ bool                 BypassRegenCheck = false;
-/*0x204*/ bool                 CanCastInCombat = false;
-/*0x205*/ bool                 CanCastOutOfCombat = false;
-/*0x206*/ bool                 NoHealDamageItemMod = false;   // disable worn focus bonuses
-/*0x207*/ bool                 OnlyDuringFastRegen = false;
-/*0x208*/ bool                 CastNotStanding = false;
-/*0x209*/ bool                 CanMGB = false;
-/*0x20a*/ bool                 NoDispell = false;
-/*0x20b*/ bool                 AffectInanimate = false;       // ldon trap spells etc
-/*0x20c*/ bool                 IsSkill = false;
-/*0x20d*/ bool                 bStacksWithDiscs = false;      // this was first seen in may 8 2017 test client, its checked if it's false at 0x451790. Ex: The Monk ability 'Drunken Monkey Style' or 'Breather'. see patch notes for that patch...
-/*0x20e*/ bool                 bShowDoTMessage = false;
-/*0x20f*/ uint8_t              CRC32Marker = 0;
-/*0x210*/ float                DistanceMod = 0.0f;            // set to (DistanceModEnd.Y- DistanceModEnd.X) / (DistanceModStart.Y - DistanceModStart.X).
-/*0x214*/
+/*0x15c*/ uint32_t             CastDifficulty = 0;
+/*0x160*/ uint8_t              ClassLevel[MAX_CLASSES + 1];
+/*0x184*/ uint8_t              LightType = 0; // 184
+/*0x185*/ eSpellType           SpellType = SpellType_Detrimental; // 0=detrimental, 1=Beneficial, 2=Beneficial, Group Only
+/*0x186*/ uint8_t              Resist = 0;                    // enum eResistType
+/*0x187*/ uint8_t              TargetType = 0;                // enum eSpellTargetType
+/*0x188*/ uint8_t              Skill = 0;
+/*0x189*/ uint8_t              ZoneType = 0;                  // 01=Outdoors, 02=dungeons, ff=Any
+/*0x18a*/ uint8_t              Environment = 0;
+/*0x18b*/ uint8_t              TimeOfDay = 0;                 // 0=any, 1=day only, 2=night only
+/*0x18c*/ uint8_t              CastingAnim = 0;
+/*0x18d*/ uint8_t              AnimVariation = 0;
+/*0x18e*/ uint8_t              TargetAnim = 0;
+/*0x18f*/ uint8_t              TravelType = 0;
+/*0x190*/ uint8_t              CancelOnSit = 0;
+/*0x191*/ bool                 CountdownHeld = false;
+/*0x192*/ char                 Name[64];
+/*0x1d2*/ char                 Extra[32];                     // This is 'Extra' from Lucy (portal shortnames etc) official = NPC_FILENAME
+/*0x1f2*/ bool                 ShowWearOffMessage = false;
+/*0x1f3*/ uint8_t              NPCChanceofKnowingSpell = 0;   // if this is 0 there is no way an npc can cast this spell...
+/*0x1f4*/ bool                 SneakAttack = false;
+/*0x1f5*/ bool                 NotFocusable = false;          // ignores all(?) focus effects
+/*0x1f6*/ bool                 NoHate = false;
+/*0x1f7*/ bool                 StacksWithSelf = false;
+/*0x1f8*/ bool                 CannotBeScribed = false;       // this is used by /outputfile missingspells
+/*0x1f9*/ bool                 NoBuffBlock = false;
+/*0x1fa*/ bool                 NoStripOnDeath = false;
+/*0x1fb*/ bool                 NoRemove = false;              // spell can't be clicked off?
+/*0x1fc*/ bool                 NoNPCLOS = false;              // NPC skips LOS checks
+/*0x1fd*/ bool                 Feedbackable = false;
+/*0x1fe*/ bool                 Reflectable = false;
+/*0x1ff*/ bool                 NoPartialSave = false;
+/*0x200*/ bool                 NoResist = false;
+/*0x201*/ bool                 UsesPersistentParticles = false;
+/*0x202*/ bool                 DurationWindow = false;        // 0=Long, 1=Short
+/*0x203*/ bool                 Uninterruptable = false;
+/*0x204*/ bool                 NotStackableDot = false;
+/*0x205*/ bool                 Deletable = false;
+/*0x206*/ bool                 BypassRegenCheck = false;
+/*0x207*/ bool                 CanCastInCombat = false;
+/*0x208*/ bool                 CanCastOutOfCombat = false;
+/*0x209*/ bool                 NoHealDamageItemMod = false;   // disable worn focus bonuses
+/*0x20a*/ bool                 OnlyDuringFastRegen = false;
+/*0x20b*/ bool                 CastNotStanding = false;
+/*0x20c*/ bool                 CanMGB = false;
+/*0x20d*/ bool                 NoDispell = false;
+/*0x20e*/ bool                 AffectInanimate = false;       // ldon trap spells etc
+/*0x20f*/ bool                 IsSkill = false;
+/*0x210*/ bool                 bStacksWithDiscs = false;      // this was first seen in may 8 2017 test client, its checked if it's false at 0x451790. Ex: The Monk ability 'Drunken Monkey Style' or 'Breather'. see patch notes for that patch...
+/*0x211*/ bool                 bShowDoTMessage = false;
+/*0x212*/ uint8_t              CRC32Marker = 0;
+/*0x214*/ float                DistanceMod = 0.0f;            // set to (DistanceModEnd.Y- DistanceModEnd.X) / (DistanceModStart.Y - DistanceModStart.X).
+/*0x218*/
 
 	ALT_MEMBER_ALIAS_DEPRECATED(int, Deity, Diety, "Diety is misspelled, use Deity instead.")
 	ALT_MEMBER_ALIAS_DEPRECATED(int, EnduranceUpkeep, EndurUpkeep, "EndurUpkeep has been replaced with EnduranceUpkeep.")
@@ -1146,8 +1143,6 @@ public:
 };
 using SPELL = EQ_Spell;
 using PSPELL = EQ_Spell*;
-
-#pragma pack(pop) // EQ_Spell
 
 SIZE_CHECK(EQ_Spell, EQ_Spell_size);
 
@@ -1322,7 +1317,7 @@ public:
 	EQLIB_OBJECT const EQ_Spell* GetSpellByGroupAndRank(int Group, int SubGroup, int Rank = -1, bool bLesserRanksOk = false);
 };
 
-constexpr size_t ClientSpellManager_size = 0x22A0; // @sizeof(ClientSpellManager) :: 2025-09-24 (test) @ 0x14026D970
+constexpr size_t ClientSpellManager_size = 0x22A0; // @sizeof(ClientSpellManager) :: 2025-10-07 (test) @ 0x14026DC30
 
 class [[offsetcomments]] ClientSpellManager : public SpellManager
 {

@@ -284,7 +284,7 @@ struct [[offsetcomments]] LabelCache
 //============================================================================
 //============================================================================
 
-constexpr size_t EQGroundItem_size = 0xA0; // @sizeof(EQGroundItem) :: 2025-09-24 (test) @ 0x1401F63ED
+constexpr size_t EQGroundItem_size = 0xA0; // @sizeof(EQGroundItem) :: 2025-10-07 (test) @ 0x1401F67A5
 
 class [[offsetcomments]] EQGroundItem
 {
@@ -532,7 +532,7 @@ struct [[offsetcomments]] CTaskElement
 
 const int MAX_TASK_ELEMENTS = 20;
 
-constexpr size_t CTaskEntry_size = 0x3D70; // @sizeof(CTaskEntry) :: 2025-09-24 (test) @ 0x14050E006
+constexpr size_t CTaskEntry_size = 0x3D70; // @sizeof(CTaskEntry) :: 2025-10-07 (test) @ 0x14050EF16
 
 struct [[offsetcomments]] CTaskEntry
 {
@@ -1129,7 +1129,7 @@ public:
 /*0x1d8*/
 };
 
-constexpr size_t EQWorldData_size = 0x1F88; // @sizeof(EQWorldData) :: 2025-09-24 (test) @ 0x1402623E0
+constexpr size_t EQWorldData_size = 0x1F88; // @sizeof(EQWorldData) :: 2025-10-07 (test) @ 0x1402626F6
 
 class [[offsetcomments]] EQWorldData
 {
@@ -1248,9 +1248,9 @@ public:
 	EQLIB_OBJECT void SaveKeymapping(unsigned int, const KeyCombo&, int);
 
 /*0x0000*/ KeyCombo     NormalKey[nEQMappableCommands];
-/*0x088c*/ KeyCombo     AltKey[nEQMappableCommands];
-/*0x1118*/ char         CommandState[nEQMappableCommands];
-/*0x133c*/
+/*0x08a0*/ KeyCombo     AltKey[nEQMappableCommands];
+/*0x1140*/ char         CommandState[nEQMappableCommands];
+/*0x1368*/
 };
 
 #if HAS_ADVANCED_LOOT
@@ -1648,7 +1648,7 @@ using SKILL = EQ_Skill;
 using PSKILL = EQ_Skill*;
 
 
-constexpr size_t SkillManager_size = 0x376A00; // @sizeof(SkillManager) :: 2025-09-24 (test) @ 0x140262520
+constexpr size_t SkillManager_size = 0x376A00; // @sizeof(SkillManager) :: 2025-10-07 (test) @ 0x140262836
 
 class [[offsetcomments]] SkillManager
 {
