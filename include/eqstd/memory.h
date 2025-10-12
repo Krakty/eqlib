@@ -9,8 +9,8 @@
 
 #include "mq/base/Traits.h"
 #include "eqlib/Allocator.h"
-#include "eqlib/eqstd/type_traits.h"
-#include "eqlib/eqstd/xmemory.h"
+#include "eqstd/type_traits.h"
+#include "eqstd/xmemory.h"
 
 #include <atomic>
 #include <memory>

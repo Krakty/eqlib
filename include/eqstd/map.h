@@ -9,9 +9,9 @@
 
 #include "eqlib/Allocator.h"
 
-#include "eqlib/eqstd/utility.h"
-#include "eqlib/eqstd/xmemory.h"
-#include "eqlib/eqstd/xtree.h"
+#include "eqstd/utility.h"
+#include "eqstd/xmemory.h"
+#include "eqstd/xtree.h"
 
 #include <type_traits>
 

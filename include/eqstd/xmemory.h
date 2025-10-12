@@ -8,9 +8,9 @@
 #pragma once
 
 #include "eqlib/Allocator.h"
-#include "eqlib/eqstd/type_traits.h"
-#include "eqlib/eqstd/utility.h"
-#include "eqlib/eqstd/xutility.h"
+#include "eqstd/type_traits.h"
+#include "eqstd/utility.h"
+#include "eqstd/xutility.h"
 
 #include <xmemory>
 #include <limits>

@@ -20,8 +20,8 @@
 #include "Items.h"
 #include "Requirements.h"
 
-#include "eqlib/eqstd/map.h"
-#include "eqlib/eqstd/vector.h"
+#include "eqstd/map.h"
+#include "eqstd/vector.h"
 
 namespace eqlib {
 

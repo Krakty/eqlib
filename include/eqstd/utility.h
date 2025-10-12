@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "eqlib/eqstd/type_traits.h"
+#include "eqstd/type_traits.h"
 
 #include <tuple>
 #include <utility>
