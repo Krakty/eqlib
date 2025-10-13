@@ -9,4 +9,10 @@
       <AdditionalIncludeDirectories>$(eqlibRoot)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup>
+    <NASM>
+      <IncludePaths>$(eqlibRoot)include</IncludePaths>
+      <AdditionalDependencies>$(eqlibRoot)include\eqlib\AssemblyMacros.asm;%(AdditionalDependencies)</AdditionalDependencies>
+    </NASM>
+  </ItemDefinitionGroup>
 </Project>

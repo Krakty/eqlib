@@ -18,9 +18,16 @@
 #include "MemoryPatcherImpl.h"
 
 #include "eqlib/Events.h"
-#include "eqlib/Offsets.h"
+#include "eqlib/game/Constants.h"
+#include "eqlib/game/EverQuest.h"
+#include "eqlib/game/EQClasses.h"
+#include "eqlib/game/Globals.h"
+#include "eqlib/game/Objects.h"
+#include "eqlib/game/UI.h"
 
-#include "eqlib/Globals.h"
+#if defined(COMMENT_UPDATER)
+#include "eqlib/EQLib.h"
+#endif
 
 #include "mq/base/Enum.h"
 #include "mq/base/WString.h"
