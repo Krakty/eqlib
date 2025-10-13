@@ -594,8 +594,9 @@ struct [[offsetcomments]] EverQuestinfo
 /*0x75248*/ float             TributeMod3;
 /*0x7524c*/ float             TributeMod4;
 /*0x75250*/ bool              bUseNewUIEngine;
-/*0x75251*/ bool              bAutoAttack;
-/*0x75252*/ bool              bAutoRangeAttack;
+/*0x75251*/ bool              bSaveDefaultMapWarningDisplayed; // Flag to show warning only once.
+/*0x75252*/ bool              bAutoAttack;
+/*0x75253*/ bool              bAutoRangeAttack;
 /*0x75254*/ int               ItemPending;
 /*0x75258*/ int               RequestPending;
 /*0x7525c*/
