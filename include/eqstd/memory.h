@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include "mq/base/Traits.h"
-#include "eqlib/Allocator.h"
+#include "eqlib/game/Allocator.h"
+
 #include "eqstd/type_traits.h"
 #include "eqstd/xmemory.h"
 
