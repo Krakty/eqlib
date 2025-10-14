@@ -10,10 +10,10 @@
     <eqlibClientDefine Condition="'$(eqlibClientTarget)' == ''"></eqlibClientDefine>
 
     <eqlibResourceDefine Condition="'$(eqlibClientTarget)' == 'Live'">EQLIB_TARGET=\"Live\"</eqlibResourceDefine>
-    <eqlibResourceDefine Condition="'$(eqlibClientTarget)' == 'Test'">EQLIB_TARGET="Test"</eqlibResourceDefine>
-    <eqlibResourceDefine Condition="'$(eqlibClientTarget)' == 'Emu'">EQLIB_TARGET="Emu"</eqlibResourceDefine>
-    <eqlibResourceDefine Condition="'$(eqlibClientTarget)' == 'Beta'">EQLIB_TARGET="Beta"</eqlibResourceDefine>
-    <eqlibResourceDefine Condition="'$(eqlibClientTarget)' == ''">EQLIB_TARGET="Unknown"</eqlibResourceDefine>
+    <eqlibResourceDefine Condition="'$(eqlibClientTarget)' == 'Test'">EQLIB_TARGET=\"Test\"</eqlibResourceDefine>
+    <eqlibResourceDefine Condition="'$(eqlibClientTarget)' == 'Emu'">EQLIB_TARGET=\"Emu\"</eqlibResourceDefine>
+    <eqlibResourceDefine Condition="'$(eqlibClientTarget)' == 'Beta'">EQLIB_TARGET=\"Beta\"</eqlibResourceDefine>
+    <eqlibResourceDefine Condition="'$(eqlibClientTarget)' == ''">EQLIB_TARGET=\"Unknown\"</eqlibResourceDefine>
 
     <eqlibRoot>$(MSBuildThisFileDirectory)</eqlibRoot>
   </PropertyGroup>
