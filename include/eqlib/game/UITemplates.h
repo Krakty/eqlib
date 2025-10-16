@@ -374,12 +374,13 @@ class [[offsetcomments]] CLabelTemplate : public CControlTemplate
 public:
 	EQLIB_OBJECT CLabelTemplate(CParamLabel*);
 
-/*0x0c8*/ bool                     bNoWrap;
-/*0x0c9*/ bool                     bAlignCenter;
-/*0x0ca*/ bool                     bAlignRight;
-/*0x0cb*/ bool                     bResizeHeightToText;
-/*0x0d0*/ CXStr                    strPrependText;
-/*0x0d8*/ CXStr                    strAppendText;
+/*0xc8*/ bool                     bNoWrap;
+/*0xc9*/ bool                     bAlignCenter;
+/*0xca*/ bool                     bAlignRight;
+/*0xcb*/ bool                     bResizeHeightToText;
+/*0xd0*/ CXStr                    strPrependText;
+/*0xd8*/ CXStr                    strAppendText;
+/*0xe0*/
 };
 
 class CListboxColumnTemplate
