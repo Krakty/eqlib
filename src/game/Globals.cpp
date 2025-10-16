@@ -1245,6 +1245,7 @@ ForeignPointer<CMusicPlayerWnd>                  pMusicPlayerWnd;
 ForeignPointer<CSidlScreenWnd>                   pNameChangeMercWnd;
 ForeignPointer<CSidlScreenWnd>                   pNameChangePetWnd;
 ForeignPointer<CSidlScreenWnd>                   pNameChangeWnd;
+ForeignPointer<CSidlScreenWnd>                   pNameReservationWnd;
 ForeignPointer<CNoteWnd>                         pNoteWnd;
 ForeignPointer<CSidlScreenWnd>                   pObjectPreviewWnd;
 ForeignPointer<COptionsWnd>                      pOptionsWnd;

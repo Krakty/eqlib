@@ -125,7 +125,7 @@ struct [[offsetcomments]] CTaskElement
 
 const int MAX_TASK_ELEMENTS = 20;
 
-constexpr size_t CTaskEntry_size = 0x3D70; // @sizeof(CTaskEntry) :: 2025-09-11 (live) @ 0x14050F316
+constexpr size_t CTaskEntry_size = 0x3D70; // @sizeof(CTaskEntry) :: 2025-10-07 (test) @ 0x14050EF16
 
 struct [[offsetcomments]] CTaskEntry
 {

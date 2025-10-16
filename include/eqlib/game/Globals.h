@@ -946,6 +946,7 @@ EQLIB_VAR ForeignPointer<CMusicPlayerWnd>            pMusicPlayerWnd;
 EQLIB_VAR ForeignPointer<CSidlScreenWnd>             pNameChangeMercWnd;
 EQLIB_VAR ForeignPointer<CSidlScreenWnd>             pNameChangePetWnd;
 EQLIB_VAR ForeignPointer<CSidlScreenWnd>             pNameChangeWnd;
+EQLIB_VAR ForeignPointer<CSidlScreenWnd>             pNameReservationWnd;
 EQLIB_VAR ForeignPointer<CNoteWnd>                   pNoteWnd;
 EQLIB_VAR ForeignPointer<CSidlScreenWnd>             pObjectPreviewWnd;
 EQLIB_VAR ForeignPointer<COptionsWnd>                pOptionsWnd;

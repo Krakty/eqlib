@@ -130,9 +130,9 @@ public:
 	EQLIB_OBJECT void SaveKeymapping(unsigned int, const KeyCombo&, int);
 
 /*0x0000*/ KeyCombo     NormalKey[nEQMappableCommands];
-/*0x088c*/ KeyCombo     AltKey[nEQMappableCommands];
-/*0x1118*/ char         CommandState[nEQMappableCommands];
-/*0x133c*/
+/*0x08a0*/ KeyCombo     AltKey[nEQMappableCommands];
+/*0x1140*/ char         CommandState[nEQMappableCommands];
+/*0x1368*/
 };
 
 } // namespace eqlib
