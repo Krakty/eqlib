@@ -719,7 +719,7 @@
 #define KeypressHandler__ClearCommandStateArray_x                  0x1402B9F20  // KeypressHandler::Flush
 #define KeypressHandler__HandleKeyDown_x                           0x1402BA0B0
 #define KeypressHandler__HandleKeyUp_x                             0x1402BA1D0
-#define KeypressHandler__SaveKeymapping_x                          0x0  // FileKeymappingSave
+#define KeypressHandler__SaveKeymapping_x                          0x1402B9DB0  // FileKeymappingSave
 
 // PlayerPointManager
 #define PlayerPointManager__GetAltCurrency_x                       0x140679A70  // PlayerPointManager::GetPoints
@@ -849,7 +849,7 @@
 
 // CResolutionHandler
 #define CResolutionHandler__GetWindowedStyle_x                     0x14032D260
-#define CResolutionHandler__UpdateResolution_x                     0x0
+#define CResolutionHandler__UpdateResolution_x                     0x140591DC0
 
 // CColorPickerWnd
 #define CColorPickerWnd__Open_x                                    0x1403B6460
