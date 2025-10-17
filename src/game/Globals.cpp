@@ -1749,6 +1749,6 @@ CCachedFont* CCachedFont::Get(int fontStyle)
 
 } // namespace eqlib
 
-#if __has_include("../private/EQLib-globals-private.cpp")
-#include "../private/EQLib-globals-private.cpp"
+#if __has_include("../../private/EQLib-globals-private.cpp")
+#include "../../private/EQLib-globals-private.cpp"
 #endif

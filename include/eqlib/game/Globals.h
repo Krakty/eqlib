@@ -1108,6 +1108,6 @@ EQLIB_API void CleanupEQGraphicsOffsets();
 
 } // namespace eqlib
 
-#if __has_include("../private/EQLib-globals-private.h")
-#include "../private/EQLib-globals-private.h"
+#if __has_include("../../../../private/EQLib-globals-private.h")
+#include "../../../../private/EQLib-globals-private.h"
 #endif

@@ -929,6 +929,6 @@
 #define CGFScreenWnd__CGFScreenWnd1_x                              0x140071690
 #define CGFScreenWnd__dCGFScreenWnd_x                              0x140071840
 
-#if __has_include("../private/eqgame-private.h")
-#include "../private/eqgame-private.h"
+#if __has_include("../../../../private/eqgame-private.h")
+#include "../../../../private/eqgame-private.h"
 #endif
