@@ -1578,6 +1578,6 @@ inline namespace deprecated {
 
 } // namespace eqlib
 
-#if __has_include("../private/EQClasses-private.h")
-#include "../private/EQClasses-private.h"
+#if __has_include("../../../../private/EQClasses-private.h")
+#include "../../../../private/EQClasses-private.h"
 #endif

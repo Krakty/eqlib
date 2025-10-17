@@ -33,6 +33,6 @@
 #define EQMain__pinstLoginController_x                             0x18017C490
 #define EQMain__pinstLoginServerAPI_x                              0x18017C470
 
-#if __has_include("../private/eqmain-private.h")
-#include "../private/eqmain-private.h"
+#if __has_include("../../../../private/eqmain-private.h")
+#include "../../../../private/eqmain-private.h"
 #endif

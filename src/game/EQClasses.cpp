@@ -610,6 +610,6 @@ void UdpLibrary::UdpPlatformGuardObject::Leave() const
 
 } // namespace eqlib
 
-#if __has_include("../private/EQClasses-private.cpp")
-#include "../private/EQClasses-private.cpp"
+#if __has_include("../../private/EQClasses-private.cpp")
+#include "../../private/EQClasses-private.cpp"
 #endif
