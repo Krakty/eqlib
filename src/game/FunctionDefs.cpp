@@ -753,20 +753,6 @@ FUNCTION_AT_ADDRESS(EQGroundItemListManager&, EQGroundItemListManager::Instance(
 #endif
 
 //----------------------------------------------------------------------------
-// EQItemList
-//----------------------------------------------------------------------------
-
-#ifdef EQItemList__dEQItemList_x
-FUNCTION_AT_ADDRESS(EQItemList::~EQItemList(), EQItemList__dEQItemList);
-#endif
-#ifdef EQItemList__get_item_x
-FUNCTION_AT_ADDRESS(EQItemList*, EQItemList::get_item(long), EQItemList__get_item);
-#endif
-#ifdef EQItemList__is_item_actor_x
-FUNCTION_AT_ADDRESS(EQItemList*, EQItemList::is_item_actor(struct T3D_tagACTORINSTANCE*), EQItemList__is_item_actor);
-#endif
-
-//----------------------------------------------------------------------------
 // CTribute
 //----------------------------------------------------------------------------
 

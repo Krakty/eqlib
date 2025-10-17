@@ -188,11 +188,11 @@ int64_t CGuild::GetGuildIndex(const char* name)
 }
 
 //============================================================================
-// EQItemList
+// EQGroundItemListManager
 //============================================================================
 
-#ifdef EQItemList__EQItemList_x
-CONSTRUCTOR_AT_ADDRESS(EQItemList::EQItemList(), EQItemList__EQItemList);
+#ifdef EQGroundItem__EQGroundItem_x
+CONSTRUCTOR_AT_ADDRESS(EQGroundItem::EQGroundItem(), EQGroundItem__EQGroundItem);
 #endif
 
 //============================================================================

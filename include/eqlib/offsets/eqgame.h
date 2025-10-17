@@ -679,11 +679,14 @@
 #define PcZoneClient__RemoveMyAffect_x                             0x1402EBCE0
 
 // EQGroundItemListManager
-#define EQItemList__EQItemList_x                                   0x14021DE30  // EQGroundItem::EQGroundItem
-#define EQItemList__add_item_x                                     0x14021DFE0  // EQGroundItemListManager::Add
-#define EQItemList__delete_item_x                                  0x14021E140  // EQGroundItemListManager::Delete
-#define EQItemList__FreeItemList_x                                 0x14021E080  // EQGroundItemListManager::Clear
-#define EQItemList__add_object_x                                   0x140258C70  // EQPlacedItemListManager::Add
+#define EQGroundItem__EQGroundItem_x                               0x14021DE30
+#define EQGroundItemListManager__Add_x                             0x14021DFE0
+#define EQGroundItemListManager__Clear_x                           0x14021E080
+#define EQGroundItemListManager__Delete_x                          0x14021E140
+#define EQGroundItemListManager__Instance_x                        0x14021E1D0
+
+// EQPlacedItemManager
+#define EQPlacedItemManager__Add_x                                 0x140258C70
 
 // CTribute
 #define CTribute__GetActiveFavorCost_x                             0x140185F70
@@ -900,9 +903,6 @@
 
 // RealEstateManagerClient
 #define RealEstateManagerClient__Instance_x                        0x1403276E0
-
-// EQGroundItemListManager
-#define EQGroundItemListManager__Instance_x                        0x14021E1D0
 
 // KeyCombo
 #define KeyCombo__GetTextDescription_x                             0x1405A2630
