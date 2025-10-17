@@ -8,7 +8,7 @@ extern CMapViewWnd__CMapViewWnd
 extern CChatWindow__CChatWindow
 ;extern ItemClient__ItemClient
 extern ItemClient__dItemClient
-extern EQItemList__EQItemList
+extern EQGroundItem__EQGroundItem
 
 section .text
 
@@ -64,10 +64,10 @@ export ??1ItemClient@eqlib@@UEAA@XZ
 
 ;---------------------------------------------------------------------------------------
 
-global ??0EQItemList@eqlib@@QEAA@XZ
-export ??0EQItemList@eqlib@@QEAA@XZ
-??0EQItemList@eqlib@@QEAA@XZ:
-	mov rax, [qword EQItemList__EQItemList]
+global ??0EQGroundItem@eqlib@@QEAA@XZ
+export ??0EQGroundItem@eqlib@@QEAA@XZ
+??0EQGroundItem@eqlib@@QEAA@XZ:
+	mov rax, [qword EQGroundItem__EQGroundItem]
 	jmp rax
 	
 

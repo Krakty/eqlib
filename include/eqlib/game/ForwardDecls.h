@@ -302,6 +302,7 @@ class EQAnimation;
 class EQEffect;
 class EqEmitterData;
 class EQGroundItemListManager;
+class EQGroundItem;
 class EQItemList;
 class EQMissile;
 class EqMobileEmitter;

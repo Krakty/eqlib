@@ -2363,7 +2363,7 @@ public:
 	CTextObjectInterface* GetLimitUseText(int buffIndex) const { return GetBuffInfo(buffIndex).GetLimitUseText(); }
 
 	using BuffIterator = PlayerBuffInfoWrapper::Iterator<BuffWindowPlayerBuffInfoWrapper>;
-	eqlib::IteratorRange<BuffIterator> GetBuffRange() const { return eqlib::make_iterator_range(BuffIterator(Buffs, 0), BuffIterator(Buffs, Buffs.GetSize())); }
+	mq::IteratorRange<BuffIterator> GetBuffRange() const { return mq::make_iterator_range(BuffIterator(Buffs, 0), BuffIterator(Buffs, Buffs.GetSize())); }
 
 	#pragma region Deprecated Accessors
 	//
@@ -5554,7 +5554,7 @@ public:
 	CTextureAnimation* GetBuffIcon(int buffIndex) const { return GetBuffInfo(buffIndex).GetBuffIcon(); }
 
 	using BuffIterator = PlayerBuffInfoWrapper::Iterator<PlayerBuffInfoWrapper>;
-	eqlib::IteratorRange<BuffIterator> GetBuffRange() const { return eqlib::make_iterator_range(BuffIterator(Buffs, 0), BuffIterator(Buffs, Buffs.GetSize())); }
+	mq::IteratorRange<BuffIterator> GetBuffRange() const { return mq::make_iterator_range(BuffIterator(Buffs, 0), BuffIterator(Buffs, Buffs.GetSize())); }
 
 	#pragma region Deprecated accessors
 	//
@@ -6190,7 +6190,7 @@ public:
 	CTextureAnimation* GetBuffIcon(int buffIndex) const { return GetBuffInfo(buffIndex).GetBuffIcon(); }
 
 	using BuffIterator = PlayerBuffInfoWrapper::Iterator<PlayerBuffInfoWrapper>;
-	eqlib::IteratorRange<BuffIterator> GetBuffRange() const { return eqlib::make_iterator_range(BuffIterator(Buffs, 0), BuffIterator(Buffs, Buffs.GetSize())); }
+	mq::IteratorRange<BuffIterator> GetBuffRange() const { return mq::make_iterator_range(BuffIterator(Buffs, 0), BuffIterator(Buffs, Buffs.GetSize())); }
 
 #pragma region Deprecated accessors
 	//
