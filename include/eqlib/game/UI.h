@@ -4939,7 +4939,7 @@ struct [[offsetcomments]] MapViewLabel
 /*0x18*/ CVector3      Location;
 /*0x24*/ ARGBCOLOR     Color;
 /*0x28*/ int           Size;                     // 1-3;
-/*0x30*/ char*         Label;
+/*0x30*/ const char*   Label;
 /*0x38*/ int           Layer;                    // 0-3;
 /*0x3c*/ int           Width;
 /*0x40*/ int           Height;
