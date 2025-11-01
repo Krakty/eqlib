@@ -314,6 +314,8 @@ bool swap(Array<T>& a, Array<T>& b)
 template <typename T = char>
 class IString
 {
+	static inline char s_emptyString[] = "";
+
 public:
 	IString()
 	{
@@ -386,7 +388,7 @@ public:
 	{
 		decrement_ref_count();
 
-		m_data = "";
+		m_data = s_emptyString;
 		m_space = 0;
 		m_length = 0;
 	}
@@ -512,8 +514,6 @@ private:
 	}
 
 private:
-	static inline char s_emptyString[] = "";
-
 /*0x08*/ T* m_data = s_emptyString;
 /*0x10*/ int m_length = 0;
 /*0x14*/ int m_space = 0;
@@ -1038,11 +1038,11 @@ public:
 
 		[[nodiscard]] reference operator*() const
 		{
-			return (Map::mapped_type*)&m_value->value;
+			return (Map::mapped_type*)&this->m_value->value;
 		}
 		[[nodiscard]] pointer operator->() const
 		{
-			return (Map::mapped_type*)&m_value->value;
+			return (Map::mapped_type*)&this->m_value->value;
 		}
 	};
 #pragma endregion
