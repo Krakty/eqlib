@@ -3036,6 +3036,7 @@ namespace eqstd {
 		return _Last;
 	}
 
+#if 0
 	template <class _VbIt>
 	[[nodiscard]] _CONSTEXPR20 _Iter_diff_t<_VbIt> _Count_vbool(_VbIt _First, const _VbIt _Last, const bool _Val) noexcept {
 		if (_First == _Last) {
@@ -3075,5 +3076,6 @@ namespace eqstd {
 				return _Count;
 			});
 	}
+#endif
 
 } // namespace eqstd
