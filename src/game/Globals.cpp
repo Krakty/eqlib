@@ -382,6 +382,7 @@ MQColor gDefaultUserDefinedColors[NUM_USER_COLORS] = {
 	MQColor(100, 220, 100), // 149 Heals (Other Critical Heals)
 	MQColor(255, 255, 255), // 150 Others Hits (Critical)
 	MQColor(175, 0,   0),   // 151 Spell Failures (Others)
+	MQColor(255, 0,   0),   // 152 Locked Inventory Slots
 };
 
 

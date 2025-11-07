@@ -385,10 +385,11 @@ enum KeyRingType
 	eHeroForge = 3,
 	eTeleportationItem = 4,
 	eActivatedItem = 5,
+	eEquipmentKeyRing = 6,
 
-	eKeyRingTypeCount = 6,
+	eKeyRingTypeCount = 7,
 	eKeyRingTypeFirst = eMount,
-	eKeyRingTypeLast = eActivatedItem,
+	eKeyRingTypeLast = eEquipmentKeyRing,
 };
 enum UIType;
 
@@ -431,7 +432,7 @@ constexpr int HOTBUTTONS_PER_PAGE = 12;
 constexpr int MAX_HOTBUTTON_WNDS = 12;
 
 // KeypressHandler__HandleKeyUp_x has this one
-constexpr int nEQMappableCommands = 552;
+constexpr int nEQMappableCommands = 553;
 // found using __BindList_x
 constexpr int nNormalEQMappableCommands = nEQMappableCommands - 22;
 

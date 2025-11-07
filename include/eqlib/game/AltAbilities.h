@@ -35,7 +35,7 @@ struct AltAbilityEffectData
 	int slot;
 };
 
-constexpr size_t CAltAbilityData_size = 0xE0; // @sizeof(CAltAbilityData) :: 2025-10-22 (test) @ 0x1402144FD
+constexpr size_t CAltAbilityData_size = 0xE0; // @sizeof(CAltAbilityData) :: 2025-11-03 (test) @ 0x140216B1D
 
 class [[offsetcomments]] CAltAbilityData
 {
