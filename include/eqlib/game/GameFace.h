@@ -41,7 +41,7 @@ public:
 
 /*0x00*/ // vftable
 /*0x08*/ eqstd::string name;
-/*0x28*/ eqstd::string fullName;
+/*0x28*/ eqstd::string fullName;    // itemPath?
 /*0x48*/ eqstd::string modelPrefix;
 /*0x68*/ CGFScreenWnd* parent;
 /*0x70*/ T*            target;

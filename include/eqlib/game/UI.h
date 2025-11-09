@@ -4370,6 +4370,8 @@ inline namespace deprecated {
 
 class CInvSlotWnd;
 
+constexpr size_t CInvSlot_size = 0x28; // @sizeof(CInvSlot) :: 2025-11-03 (test) @ 0x140411DF2
+
 class [[offsetcomments]] CInvSlot
 {
 public:
@@ -4378,12 +4380,12 @@ public:
 
 	EQLIB_OBJECT bool IllegalBigBank(int);
 	EQLIB_OBJECT void HandleLButtonDown(const CXPoint&);
-	EQLIB_OBJECT void HandleLButtonHeld(const CXPoint&);
-	EQLIB_OBJECT void HandleLButtonUp(const CXPoint&, bool);
+	EQLIB_OBJECT void HandleLButtonUp(const CXPoint& point, bool bHotButton, bool isLinkedItem, const KeyCombo& keyCombo);
+	EQLIB_OBJECT void HandleLButtonHeld(const CXPoint& point, const KeyCombo& keyCombo);
 	EQLIB_OBJECT void HandleLButtonUpAfterHeld(const CXPoint&);
 	EQLIB_OBJECT void HandleRButtonDown(const CXPoint&);
+	EQLIB_OBJECT void HandleRButtonUp(const CXPoint& point, bool bHotButton, bool isLinkedItem, const KeyCombo& keyCombo);
 	EQLIB_OBJECT void HandleRButtonHeld(const CXPoint&);
-	EQLIB_OBJECT void HandleRButtonUp(const CXPoint&);
 	EQLIB_OBJECT void HandleRButtonUpAfterHeld(const CXPoint&);
 	EQLIB_OBJECT void SetInvSlotWnd(CInvSlotWnd*);
 	EQLIB_OBJECT void SetItem(const ItemPtr&);
@@ -4402,17 +4404,20 @@ public:
 /*0x10*/ CTextureAnimation* pInvSlotAnimation;
 /*0x18*/ int                Index;                    // InvSlot
 /*0x1c*/ bool               bEnabled;                 // Valid
-/*0x20*/
+/*0x1d*/ bool               bUsable;
+/*0x1e*/ bool               bLocked;
+/*0x20*/ uint32_t           LastUpdate;
+/*0x24*/
 };
 
-inline namespace deprecated {
-	using EQINVSLOT DEPRECATE("Use CInvSlot instead of EQINVSLOT") = CInvSlot;
-	using PEQINVSLOT DEPRECATE("Use CInvSlot* instead PEQINVSLOT") = CInvSlot*;
-}
+SIZE_CHECK(CInvSlot, CInvSlot_size);
 
-const int MAX_INV_SLOTS = 2304;
 
 //----------------------------------------------------------------------------
+
+constexpr int MAX_INV_SLOTS = 4000;  // CInvSlotMgr::CreateInvSlot
+
+constexpr size_t CInvSlotMgr_size = 0x7D88; // @sizeof(CInvSlotMgr) :: 2025-11-03 (test) @ 0x1401950A2
 
 class [[offsetcomments]] CInvSlotMgr
 {
@@ -4438,23 +4443,24 @@ public:
 	//----------------------------------------------------------------------------
 	// data members
 
-/*0x0008*/ CInvSlot*    SlotArray[MAX_INV_SLOTS]; // size 0x2400 //see 72E00F in Nov 06 2018 Test
-/*0x4808*/ int          TotalSlots;
-/*0x480c*/ int          unknown;
-/*0x4810*/ unsigned int LastUpdate;
-/*0x4818*/ CInvSlot*    pSelectedItem;
-/*0x4820*/ CInvSlot*    pFindSelectedItem;
-/*0x4828*/ bool         bToggleBagsOpen;
-/*0x4829*/ bool         bToggleBankBagsOpen;
-/*0x482c*/
+/*0x0008*/ CInvSlot*    SlotArray[MAX_INV_SLOTS];
+/*0x7d08*/ int          TotalSlots;
+/*0x7d0c*/ int          LastUpdatedSlot;                 // Index of last frame updated (limited to 200 per frame)
+/*0x7d10*/ unsigned int LastUpdateTime;                  // Timestamp of last slot update (limited to 5 times a second)
+/*0x7d18*/ CInvSlot*    pSelectedItem;
+/*0x7d20*/ CInvSlot*    pFindSelectedItem;
+/*0x7d28*/ bool         bToggleBagsOpen;
+/*0x7d29*/ bool         bToggleBankBagsOpen;
+/*0x7d30*/ SoeUtil::Map<uint32_t, ItemGlobalIndex>        LockedSlots;     // Multimap of container slot to locked items in container
+/*0x7d48*/ eqstd::unordered_map<eqstd::string, CInvSlot*> RegisteredSlots; // Gameface-registered inventory slots
 };
 
-inline namespace deprecated {
-	using EQINVSLOTMGR DEPRECATE("Use CInvSlotMgr instead of EQINVSLOTMGR") = CInvSlotMgr;
-	using PEQINVSLOTMGR DEPRECATE("Use CInvSlotMgr* instead of PEQINVSLOTMGR") = CInvSlotMgr*;
-}
+SIZE_CHECK(CInvSlotMgr, CInvSlotMgr_size);
+
 
 //----------------------------------------------------------------------------
+
+constexpr size_t CInvSlotWnd_size = 0x458; // @sizeof(CInvSlotMgr) :: 2025-11-03 (test) @ 0x1404F724C
 
 class [[offsetcomments]] CInvSlotWnd : public CButtonWnd
 {
@@ -4484,27 +4490,24 @@ public:
 	// data members
 
 	// size: 0xa8
-	struct [[offsetcomments]] GameFaceComponent
+	struct [[offsetcomments]] InvSlotComponent
 	{
-	/*0x00*/ eqstd::string   str_00;
-	/*0x20*/ eqstd::string   str_20;
-	/*0x40*/ eqstd::string   str_40;
-	/*0x60*/ uint64_t        u64_60;
+	/*0x00*/ eqstd::string   name;
+	/*0x20*/ eqstd::string   itemPath;
+	/*0x40*/ eqstd::string   modelPrefix;
+	/*0x60*/ CInvSlotWnd*    pInvSlot;
 	/*0x68*/ uint32_t        u32_68;
 	/*0x6c*/ uint32_t        u32_6c;
 	/*0x70*/ uint32_t        u32_70;
 	/*0x74*/ uint32_t        u32_74;
 	/*0x78*/ uint32_t        u32_78;
-	/*0x7c*/ uint32_t        u32_7c;
+	/*0x7c*/ uint32_t        color;
 	/*0x80*/ uint32_t        u32_80;
-	/*0x88*/ uint64_t        u64_88;
-	/*0x90*/ uint64_t        u64_90;
-	/*0x98*/ uint64_t        u64_98;
-	/*0xa0*/ uint64_t        u64_a0;
+	/*0x88*/ eqstd::string   tooltip;
 	/*0xa8*/
 	};
 
-/*0x340*/ GameFaceComponent  component;
+/*0x340*/ InvSlotComponent   component;
 /*0x3e8*/ CTextureAnimation* pBackground;
 /*0x3f0*/ ItemGlobalIndex    ItemLocation;            // WindowType = ItemLocation.Location, InvSlot = ItemLocation.GetTopSlot()
 /*0x400*/ ItemPtr            LinkedItem;              // If the slot is linked to a specific item
@@ -4540,10 +4543,8 @@ public:
 	ALT_MEMBER_GETTER_COPY(short, ItemLocation.GetIndex().GetSlot(2), GlobalSlot);
 };
 
-inline namespace deprecated {
-	using EQINVSLOTWND DEPRECATE("Use CInvSlotWnd instead of EQINVSLOTWND") = CInvSlotWnd;
-	using PEQINVSLOTWND DEPRECATE("Use CInvSlotWnd* instead of PEQINVSLOTWND") = CInvSlotWnd*;
-}
+SIZE_CHECK(CInvSlotWnd, CInvSlotWnd_size);
+
 
 //============================================================================
 // CItemDisplayWnd

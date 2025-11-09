@@ -252,7 +252,7 @@ struct [[offsetcomments]] SDeviceInputProxy
 
 /*0x0000*/ MouseData mouse;
 /*0x00fc*/ EventData events;
-/*0x1bf0*/
+/*0x1bfc*/
 };
 
 enum SDeviceInputState

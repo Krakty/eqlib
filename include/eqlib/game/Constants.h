@@ -714,6 +714,12 @@ constexpr int MAX_BANDOLIER_SLOTS = BandolierSlot_Max;
 enum eContainerType
 {
 	ContainerType_Quiver = 2,
+	ContainerType_Bandolier = 8,
+
+	ContainerType_Tradeskill = 58,
+	ContainerType_Collectible = 59,
+	ContainerType_NoDeposit = 60,
+	ContainerType_CashLoot = 62,
 };
 
 // AltCurrency values
