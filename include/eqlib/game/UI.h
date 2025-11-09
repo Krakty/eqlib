@@ -4445,7 +4445,7 @@ public:
 
 /*0x0008*/ CInvSlot*    SlotArray[MAX_INV_SLOTS];
 /*0x7d08*/ int          TotalSlots;
-/*0x7d0c*/ int          LastUpdatedSlot;                 // Index of last frame updated (limited to 200 per frame)
+/*0x7d0c*/ int          LastUpdatedSlot;                 // Index of last slot updated (limited to 200 per frame)
 /*0x7d10*/ unsigned int LastUpdateTime;                  // Timestamp of last slot update (limited to 5 times a second)
 /*0x7d18*/ CInvSlot*    pSelectedItem;
 /*0x7d20*/ CInvSlot*    pFindSelectedItem;
@@ -4453,6 +4453,7 @@ public:
 /*0x7d29*/ bool         bToggleBankBagsOpen;
 /*0x7d30*/ SoeUtil::Map<uint32_t, ItemGlobalIndex>        LockedSlots;     // Multimap of container slot to locked items in container
 /*0x7d48*/ eqstd::unordered_map<eqstd::string, CInvSlot*> RegisteredSlots; // Gameface-registered inventory slots
+/*0x7d88*/
 };
 
 SIZE_CHECK(CInvSlotMgr, CInvSlotMgr_size);

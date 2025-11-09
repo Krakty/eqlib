@@ -305,11 +305,11 @@ struct [[offsetcomments]] EQGameOptions
 /*0x9c*/ bool              parcelLimitLogoutConfirm;
 /*0x9d*/ bool              saveSetConfirm;
 /*0x9e*/ bool              sellCashLootConfirm;
-/*0x9e*/ bool              blinkActiveChatWindow;
-/*0x9f*/ bool              tradeskillLoreEquippedWarning;
+/*0x9f*/ bool              blinkActiveChatWindow;
+/*0xa0*/ bool              tradeskillLoreEquippedWarning;
 /*0xa1*/ bool              autoShowRewardsWindow;
-/*0xa0*/ int               loadScreenMode;
-/*0xa4*/
+/*0xa4*/ int               loadScreenMode;
+/*0xa8*/
 };
 
 
