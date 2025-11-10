@@ -167,7 +167,7 @@
 #define __eq_delete_x                                              0x1406C7028
 #define __eq_new_x                                                 0x1406C7280
 #define __CopyLayout_x                                             0x1402C02C0
-#define __ThrottleFrameRate_x                                      0x140275BEE
+#define __ThrottleFrameRate_x                                      0x140275C4C
 #define __ThrottleFrameRateEnd_x                                   0x140275C52
 
 ////
