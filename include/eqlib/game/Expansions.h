@@ -14,6 +14,8 @@
 
 #pragma once
 
+#include <cstdint>
+
 namespace eqlib {
 
 #define EXPANSION_LEVEL_CLASSIC         0   // No Expansion
@@ -48,6 +50,7 @@ namespace eqlib {
 #define EXPANSION_LEVEL_NOS             29  // Night of Shadows
 #define EXPANSION_LEVEL_LS              30  // Laurion's Song
 #define EXPANSION_LEVEL_TOB             31  // The Outer Brood
+#define EXPANSION_LEVEL_SOR             32  // The Shattering of Ro
 
 enum EQExpansion
 {
@@ -83,6 +86,7 @@ enum EQExpansion
 	EQExpansionNOS                  = EXPANSION_LEVEL_NOS,
 	EQExpansionLS                   = EXPANSION_LEVEL_LS,
 	EQExpansionTOB                  = EXPANSION_LEVEL_TOB,
+	EQExpansionSOR                  = EXPANSION_LEVEL_SOR,
 };
 
 #define EQ_EXPANSION(x)             (1ll << (x - 1))
@@ -120,10 +124,11 @@ enum EQExpansion
 #define EXPANSION_NOS               EQ_EXPANSION(EXPANSION_LEVEL_NOS)
 #define EXPANSION_LS                EQ_EXPANSION(EXPANSION_LEVEL_LS)
 #define EXPANSION_TOB               EQ_EXPANSION(EXPANSION_LEVEL_TOB)
+#define EXPANSION_SOR               EQ_EXPANSION(EXPANSION_LEVEL_SOR)
 
 // Enumeration defining expansion bit mask representing expansion flags. Often used to
 // determine expansion ownership or requirements.
-enum EQExpansionOwned
+enum EQExpansionOwned : uint64_t
 {
 	EQExpansionNoneOwned            = 0,
 	EQExpansionKunarkOwned          = EXPANSION_RoK,
@@ -157,6 +162,7 @@ enum EQExpansionOwned
 	EQExpansionNOSOwned             = EXPANSION_NOS,
 	EQExpansionLSOwned              = EXPANSION_LS,
 	EQExpansionTOBOwned             = EXPANSION_TOB,
+	EQExpansionSOROwned             = EXPANSION_SOR,
 
 	// Mask representing all expansions
 	EQExpansionHighestOwnedPlusOne_,
