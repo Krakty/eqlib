@@ -41,7 +41,7 @@ public:
 
 /*0x00*/ // vftable
 /*0x08*/ eqstd::string name;
-/*0x28*/ eqstd::string fullName;
+/*0x28*/ eqstd::string fullName;    // itemPath?
 /*0x48*/ eqstd::string modelPrefix;
 /*0x68*/ CGFScreenWnd* parent;
 /*0x70*/ T*            target;
@@ -124,9 +124,9 @@ public:
 	virtual void Unknown0x388();
 	virtual void Unknown0x390(const CXRect& rect);
 
-/*0x2b0*/ UIScreenComponent                                 WindowComponent;
-/*0x358*/ eqstd::unordered_map<eqstd::string, UIComponent*> ChildComponents;
-/*0x398*/
+/*0x2c8*/ UIScreenComponent                                 WindowComponent;
+/*0x370*/ eqstd::unordered_map<eqstd::string, UIComponent*> ChildComponents;
+/*0x3b0*/
 
 	struct [[offsetcomments]] VirtualFunctionTable : public CSidlScreenWnd::VirtualFunctionTable
 	{

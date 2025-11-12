@@ -375,6 +375,8 @@ ItemContainer& PcBase::GetKeyRingItems(KeyRingType type)
 		return TeleportationKeyRingItems;
 	if (type == eActivatedItem)
 		return ActivatedKeyRingItems;
+	if (type == eEquipmentKeyRing)
+		return EquipmentKeyRingItems;
 
 	return MountKeyRingItems;
 }

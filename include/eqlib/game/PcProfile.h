@@ -205,7 +205,7 @@ public:
 /*0x1684*/ int                                   TattooIndex;
 /*0x1688*/ int                                   FacialAttachmentIndex;
 /*0x168c*/ ItemIndex                             StatKeyRingItemIndex[eKeyRingTypeCount];
-/*0x16b0*/ //BaseProfile
+/*0x16b8*/ //BaseProfile
 
 	// This expects parameter of type eInventorySlot
 	ItemPtr GetInventorySlot(int invSlot) const { return InventoryContainer.GetItem(invSlot); }
@@ -338,64 +338,64 @@ struct PetObjectData;
 
 constexpr int MAX_LINKED_SPELL_TIMERS = 25;
 
-constexpr size_t PcProfile_size = 0x6A90; // @sizeof(PcProfile) :: 2025-10-13 (live) @ 0x14065A974
+constexpr size_t PcProfile_size = 0x6A98; // @sizeof(PcProfile) :: 2025-11-03 (test) @ 0x140662A54
 
 class [[offsetcomments]] PcProfile : public BaseProfile
 {
 	FORCE_SYMBOLS;
 
 public:
-/*0x16b0*/ WorldLocation                         BoundLocations[5];
-/*0x1714*/ ArmorProperties                       ArmorType[22];
-/*0x18cc*/ AbilityInfo                           AAList[AA_CHAR_MAX_REAL];                         // AlternateAbilities
-/*0x26dc*/ uint32_t                              BodyColor[9];
-/*0x2700*/ int                                   FactionTable[2048];
-/*0x4700*/ int                                   CombatAbilities[NUM_COMBAT_ABILITIES];            // KnownCombatAbilities
-/*0x4bb0*/ uint32_t                              SpellRecastTimer[15];
-/*0x4bec*/ uint32_t                              CombatAbilityTimers[NUM_COMBAT_ABILITY_TIMERS];
-/*0x4c50*/ TList<CombatAbilityTimer>             CombatAbilityTimersList;
-/*0x4c60*/ uint32_t                              LinkedSpellTimers[MAX_LINKED_SPELL_TIMERS];
-/*0x4cc4*/ uint32_t                              ItemRecastTimers[100];
-/*0x4e54*/ uint32_t                              AATimers[100];
-/*0x4fe4*/ BandolierSet                          Bandolier[MAX_BANDOLIER_ITEMS];
-/*0x68e4*/ BenefitSelection                      ActiveTributeBenefits[5];
-/*0x690c*/ BenefitSelection                      ActiveTrophyTributeBenefits[10];
-/*0x6960*/ ItemContainer                         GuildTributeBenefitItems;
-/*0x6988*/ ItemContainer                         GuildTrophyTributeBenefitItems;
-/*0x69b0*/ ItemContainer                         TradeskillDepotItems;
-/*0x69d8*/ ArrayClass<CXStr>                     MercenarySaveStrings;
-/*0x69f0*/ AssociatedNPCSaveStringNode*          PetSaveString;
-/*0x69f8*/ int                                   Deity;
-/*0x69fc*/ bool                                  bPVPFlag;
-/*0x69fd*/ uint8_t                               HighestLevel;
-/*0x6a00*/ int                                   Drunkenness;                            // inebriation
-/*0x6a04*/ uint8_t                               HairColor;
-/*0x6a05*/ uint8_t                               BeardColor;
-/*0x6a08*/ int                                   NpcTintIndex;
-/*0x6a0c*/ uint8_t                               LeftEye;
-/*0x6a0d*/ uint8_t                               RightEye;
-/*0x6a0e*/ uint8_t                               Hair;
-/*0x6a0f*/ uint8_t                               Beard;
-/*0x6a10*/ uint8_t                               OldFace;
-/*0x6a14*/ int                                   AAPoints;
-/*0x6a18*/ SoeUtil::String                       PocketPetSaveString;
-/*0x6a30*/ CXStr                                 ItemBuffer;
-/*0x6a38*/ uint32_t                              LastShield;
-/*0x6a3c*/ bool                                  bSneak;
-/*0x6a3d*/ bool                                  bHide;
-/*0x6a40*/ int                                   AAPointsSpent;
-/*0x6a44*/ int                                   AAPointsAssigned[6];                    // none, general, arch, class, special, focus, merc
-/*0x6a60*/ PetObjectData*                        pPetData;
-/*0x6a68*/ int                                   PrimaryActor;
-/*0x6a6c*/ int                                   SecondaryActor;
-/*0x6a70*/ bool                                  bUseTemplateFaction;
-/*0x6a74*/ int                                   TitlePrefixID;
-/*0x6a78*/ int                                   TitleSuffixID;
-/*0x6a7c*/ bool                                  bAreHandsMagic;
-/*0x6a80*/ int                                   SoleEnabledZoneID;
-/*0x6a84*/ int                                   NewBodyTint;
-/*0x6a88*/ int                                   CurrentMercenaryIndex;
-/*0x6a8c*/
+/*0x16b8*/ WorldLocation                         BoundLocations[5];
+/*0x171c*/ ArmorProperties                       ArmorType[22];
+/*0x18d4*/ AbilityInfo                           AAList[AA_CHAR_MAX_REAL];                         // AlternateAbilities
+/*0x26e4*/ uint32_t                              BodyColor[9];
+/*0x2708*/ int                                   FactionTable[2048];
+/*0x4708*/ int                                   CombatAbilities[NUM_COMBAT_ABILITIES];            // KnownCombatAbilities
+/*0x4bb8*/ uint32_t                              SpellRecastTimer[15];
+/*0x4bf4*/ uint32_t                              CombatAbilityTimers[NUM_COMBAT_ABILITY_TIMERS];
+/*0x4c58*/ TList<CombatAbilityTimer>             CombatAbilityTimersList;
+/*0x4c68*/ uint32_t                              LinkedSpellTimers[MAX_LINKED_SPELL_TIMERS];
+/*0x4ccc*/ uint32_t                              ItemRecastTimers[100];
+/*0x4e5c*/ uint32_t                              AATimers[100];
+/*0x4fec*/ BandolierSet                          Bandolier[MAX_BANDOLIER_ITEMS];
+/*0x68ec*/ BenefitSelection                      ActiveTributeBenefits[5];
+/*0x6914*/ BenefitSelection                      ActiveTrophyTributeBenefits[10];
+/*0x6968*/ ItemContainer                         GuildTributeBenefitItems;
+/*0x6990*/ ItemContainer                         GuildTrophyTributeBenefitItems;
+/*0x69b8*/ ItemContainer                         TradeskillDepotItems;
+/*0x69e0*/ ArrayClass<CXStr>                     MercenarySaveStrings;
+/*0x69f8*/ AssociatedNPCSaveStringNode*          PetSaveString;
+/*0x6a00*/ int                                   Deity;
+/*0x6a04*/ bool                                  bPVPFlag;
+/*0x6a05*/ uint8_t                               HighestLevel;
+/*0x6a08*/ int                                   Drunkenness;                            // inebriation
+/*0x6a0c*/ uint8_t                               HairColor;
+/*0x6a0d*/ uint8_t                               BeardColor;
+/*0x6a10*/ int                                   NpcTintIndex;
+/*0x6a14*/ uint8_t                               LeftEye;
+/*0x6a15*/ uint8_t                               RightEye;
+/*0x6a16*/ uint8_t                               Hair;
+/*0x6a17*/ uint8_t                               Beard;
+/*0x6a18*/ uint8_t                               OldFace;
+/*0x6a1c*/ int                                   AAPoints;
+/*0x6a20*/ SoeUtil::String                       PocketPetSaveString;
+/*0x6a38*/ CXStr                                 ItemBuffer;
+/*0x6a40*/ uint32_t                              LastShield;
+/*0x6a44*/ bool                                  bSneak;
+/*0x6a45*/ bool                                  bHide;
+/*0x6a48*/ int                                   AAPointsSpent;
+/*0x6a4c*/ int                                   AAPointsAssigned[6];                    // none, general, arch, class, special, focus, merc
+/*0x6a68*/ PetObjectData*                        pPetData;
+/*0x6a70*/ int                                   PrimaryActor;
+/*0x6a74*/ int                                   SecondaryActor;
+/*0x6a78*/ bool                                  bUseTemplateFaction;
+/*0x6a7c*/ int                                   TitlePrefixID;
+/*0x6a80*/ int                                   TitleSuffixID;
+/*0x6a84*/ bool                                  bAreHandsMagic;
+/*0x6a88*/ int                                   SoleEnabledZoneID;
+/*0x6a8c*/ int                                   NewBodyTint;
+/*0x6a90*/ int                                   CurrentMercenaryIndex;
+/*0x6a94*/
 
 	AbilityInfo& GetAlternateAbility(int index) { return AAList[index]; }
 	const AbilityInfo& GetAlternateAbility(int index) const { return AAList[index]; }

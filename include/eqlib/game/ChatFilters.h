@@ -182,8 +182,9 @@ namespace eqlib {
 #define USERCOLOR_HEALS_OTHERS_CRITICAL          404 // 149 - Heals (Other Critical Heals)
 #define USERCOLOR_MELEE_OTHERS_CRITICAL          405 // 150 - Others Hits (Critical)
 #define USERCOLOR_SPELL_FAILURES_OTHER           406 // 151 - Spell Failures (Others)
+#define USERCOLOR_LOCKED_INVENTORY_SLOTS         407 // 152 - Locked Inventory Slots
 
-constexpr int NUM_USER_COLORS = 151;
+constexpr int NUM_USER_COLORS = 152;
 
 // s_aDefaultUserDefinedColor
 EQLIB_VAR mq::MQColor gDefaultUserDefinedColors[NUM_USER_COLORS];
@@ -281,6 +282,7 @@ enum eChatFilters
 	FILTER_HEALS_OTHERS_CRITICAL,
 	FILTER_MELEE_OTHERS_CRITICAL,
 	FILTER_SPELL_FAILURES_OTHER,
+	FILTER_LOCKED_INVENTORY_SLOTS,
 
 	NUM_CHAT_FILTERS,
 };
@@ -430,7 +432,7 @@ struct [[offsetcomments]] ChatColorFilterData
 };
 
 // gpChatFilterDefs is an array of this many elements.
-constexpr int CHAT_COLORFILTER_COUNT = 145;
+constexpr int CHAT_COLORFILTER_COUNT = 157;
 
 EQLIB_VAR ChatColorFilterData* gpChatFilterDefs;
 

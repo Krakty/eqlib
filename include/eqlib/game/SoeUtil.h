@@ -1052,7 +1052,7 @@ public:
 	using reverse_iterator = ConstIterator<1>;
 	using const_reverse_iterator = ConstIterator<1>;
 
-	iterator begin() { return iterator(GetFirst()); }
+	iterator begin() { return iterator(GetNode(GetFirst())); }
 	const_iterator begin() const { return const_iterator(GetNode(GetFirst())); }
 	const_iterator cbegin() const { return const_iterator(GetNode(GetFirst())); }
 

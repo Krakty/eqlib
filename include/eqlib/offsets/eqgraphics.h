@@ -18,25 +18,25 @@
 // EQGraphics.dll offsets
 //
 
-#define __eqgraphics_fopen_x                                       0x18027B128
+#define __eqgraphics_fopen_x                                       0x18027C298
 
 #define CEQGBitmap__GetFirstBitmap_x                               0x180003280
 
-#define CParticleSystem__Render_x                                  0x1800B0310
-#define CParticleSystem__CreateSpellEmitter_x                      0x18009FF60
+#define CParticleSystem__Render_x                                  0x1800B0510
+#define CParticleSystem__CreateSpellEmitter_x                      0x1800A0160
 
-#define CRender__RenderScene_x                                     0x1800D7A80
-#define CRender__RenderBlind_x                                     0x1800D7940
-#define CRender__ResetDevice_x                                     0x1800D85F0
-#define CRender__UpdateDisplay_x                                   0x1800D9880
-#define __bRenderSceneCalled_x                                     0x180357310
+#define CRender__RenderScene_x                                     0x1800D7C80
+#define CRender__RenderBlind_x                                     0x1800D7B40
+#define CRender__ResetDevice_x                                     0x1800D87F0
+#define CRender__UpdateDisplay_x                                   0x1800D9A80
+#define __bRenderSceneCalled_x                                     0x180510330
 
-#define C2DPrimitiveManager__AddCachedText_x                       0x1800F1C50
-#define C2DPrimitiveManager__Render_x                              0x1800F2DF0
+#define C2DPrimitiveManager__AddCachedText_x                       0x1800F1E50
+#define C2DPrimitiveManager__Render_x                              0x1800F2FF0
 
 #define ObjectPreviewView__Render_x                                0x180026740
 
-#define EQGraphics_DebugAPI_Ptr_x                                  0x1803BB8A8
+#define EQGraphics_DebugAPI_Ptr_x                                  0x1805748C8
 
 #if __has_include("../../../../private/eqgraphics-private.h")
 #include "../../../../private/eqgraphics-private.h"

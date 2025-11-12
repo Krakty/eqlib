@@ -694,6 +694,7 @@ ECursorAttachmentType CKeyRingWnd::GetLinkType(KeyRingType type)
 	case eTeleportationItem: return eCursorAttachment_TeleportationKeyRingLink;
 	case eActivatedItem: return eCursorAttachment_ActivatedKeyRingLink;
 	case eHeroForge: return eCursorAttachment_ItemLink;
+	case eEquipmentKeyRing: return eCursorAttachment_EquipmentKeyRingLink;
 	default: break;
 	}
 
@@ -712,6 +713,7 @@ KeyRingType CKeyRingWnd::GetKeyRingType(ItemContainerInstance container)
 	case eItemContainerFamiliarKeyRingItems: keyRingType = eFamiliar; break;
 	case eItemContainerTeleportationKeyRingItems: keyRingType = eTeleportationItem; break;
 	case eItemContainerActivatedKeyRingItems: keyRingType = eActivatedItem; break;
+	case eItemContainerEquipmentKeyRingItems: keyRingType = eEquipmentKeyRing; break;
 	default: break;
 	}
 

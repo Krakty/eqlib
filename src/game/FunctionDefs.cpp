@@ -5336,7 +5336,7 @@ FUNCTION_AT_ADDRESS(void, CInvSlot::HandleLButtonUp(CXPoint, bool), CInvSlot__Ha
 FUNCTION_AT_ADDRESS(void, CInvSlot::HandleLButtonHeld(CXPoint), CInvSlot__HandleLButtonHeld);
 #endif
 #ifdef CInvSlot__HandleRButtonUp_x
-FUNCTION_AT_ADDRESS(void, CInvSlot::HandleRButtonUp(const CXPoint&), CInvSlot__HandleRButtonUp);
+FUNCTION_AT_ADDRESS(void, CInvSlot::HandleRButtonUp(const CXPoint&, bool bHotButton, bool isLinkedItem, const KeyCombo& keyCombo), CInvSlot__HandleRButtonUp);
 #endif
 #ifdef CInvSlot__HandleRButtonHeld_x
 FUNCTION_AT_ADDRESS(void, CInvSlot::HandleRButtonHeld(CXPoint), CInvSlot__HandleRButtonHeld);
