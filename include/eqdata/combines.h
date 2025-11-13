@@ -73,3 +73,5 @@
 	"Tradeskill Bag",         // 58 - Extraplanar Trade Satchel
 	"Collectible Bag",        // 59
 	"No Deposit",             // 60
+	"Unknown (61)",           // 61
+	"Cash Loot Bag",          // 62
