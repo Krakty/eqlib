@@ -294,6 +294,7 @@
     <ClInclude Include="include\eqstd\list.h" />
     <ClInclude Include="include\eqstd\map.h" />
     <ClInclude Include="include\eqstd\memory.h" />
+    <ClInclude Include="include\eqstd\mutex.h" />
     <ClInclude Include="include\eqstd\string.h" />
     <ClInclude Include="include\eqstd\type_traits.h" />
     <ClInclude Include="include\eqstd\unordered_map.h" />

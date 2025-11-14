@@ -26,6 +26,7 @@
 #endif
 
 #include "eqstd/vector.h"
+#include "eqstd/mutex.h"
 
 namespace eqlib {
 
@@ -95,9 +96,10 @@ public:
 	virtual UINT Release();
 
 /*0x08*/ T*                  Object;
-/*0x10*/ uint32_t            TypeHash;
 /*0x18*/ const char*         TypeName;
-/*0x20*/ int                 RefCount;
+/*0x10*/ uint32_t            TypeHash;
+/*0x20*/ eqstd::mutex        Mutex;
+/*0x70*/ uint32_t            Refcount;
 };
 
 // size: 0x1448
@@ -120,11 +122,11 @@ SIZE_CHECK(SwapChain, SwapChain_size);
 class [[offsetcomments]] SwapChainImpl : public ObjectBase<SwapChainImpl>
 {
 public:
-/*0x28*/ Device*             Device;
-/*0x30*/ void*               Something; // wrong (not swap chain)
-/*0x38*/
+/*0x78*/ Device*             Device;
+/*0x80*/ void*               Something; // wrong (not swap chain)
+/*0x88*/
 };
-constexpr size_t SwapChainImpl_size = 0x38;
+constexpr size_t SwapChainImpl_size = 0x88;
 SIZE_CHECK(SwapChainImpl, SwapChainImpl_size);
 
 class [[offsetcomments]] Device
@@ -189,10 +191,11 @@ public:
 /*0x150*/ virtual HRESULT WINAPI Unknown0x150() = 0;
 #pragma endregion
 
-/*0x28*/ Device*             Device;
-/*0x30*/
+/*0x78*/ Device*             Device;
+/*0x80*/ uint32_t            ThreadID;
+/*0x84*/
 };
-constexpr size_t DeviceImpl_size = 0x30;
+constexpr size_t DeviceImpl_size = 0x88;
 SIZE_CHECK(DeviceImpl, DeviceImpl_size);
 
 // size: 0x60
@@ -258,17 +261,19 @@ constexpr size_t Texture_size = 0xa0;
 SIZE_CHECK(Texture, Texture_size);
 
 
+// size: 0x88
+
 class [[offsetcomments]] TextureImpl : public ObjectBase<TextureImpl>
 {
 public:
-/*0x28*/ SwapChainImpl*      SwapChain;
-/*0x30*/ Texture*            Texture;
-/*0x38*/
+/*0x78*/ SwapChainImpl*      SwapChain;
+/*0x80*/ Texture*            Texture;
+/*0x88*/
 
 	ID3D11Texture2D* GetTexture2D() const { return Texture ? Texture->GetTexture2D() : nullptr; }
 	ID3D11ShaderResourceView* GetShaderResourceView() const { return Texture ? Texture->GetShaderResourceView() : nullptr; }
 };
-constexpr size_t TextureImpl_size = 0x38;
+constexpr size_t TextureImpl_size = 0x88;
 SIZE_CHECK(TextureImpl, TextureImpl_size);
 
 } // namespace DX11
