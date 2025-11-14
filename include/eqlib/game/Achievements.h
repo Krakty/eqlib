@@ -16,6 +16,7 @@
 #pragma once
 
 #include "eqlib/Common.h"
+#include "eqlib/SizeChecks.h"
 
 #include "eqlib/game/Containers.h"
 #include "eqlib/game/CXStr.h"
@@ -286,6 +287,8 @@ using AchievementStateInfoArray = ArrayClass<SingleAchievementIdAndInfo>;
 //============================================================================
 // Achievement Manager
 
+constexpr size_t AchievementManager_size = 0xA8; // @sizeof(AchievementManager) :: 2025-11-10 (live) @ 0x140092748
+
 class [[offsetcomments]] AchievementManager
 {
 public:
@@ -407,11 +410,12 @@ public:
 
 /*0x08*/ ArrayClass2<AchievementCategory>   categories;
 /*0x28*/ ArrayClass2<Achievement>           achievements;
+/*0x48*/ bool                               valid;
 
 	//----------------------------------------------------------------------------
 	// AchievementManagerClient
 
-/*0x48*/ AchievementsAndComponentsInfoArray achievementClientInfoArray;
+/*0x50*/ AchievementsAndComponentsInfoArray achievementClientInfoArray;
 /*0x60*/ AchievementsAndComponentsInfoArray achievementsClientComparisonInfoArray;
 /*0x78*/ bool                               achievementClientReadOnlyDataSet;
 /*0x79*/ bool                               achievementClientStatesSet;
@@ -426,5 +430,7 @@ public:
 /*0x98*/ uint32_t                           comparisonOpenAchievementCount;
 /*0x9c*/
 };
+
+SIZE_CHECK(AchievementManager, AchievementManager_size);
 
 } // namespace eqlib
