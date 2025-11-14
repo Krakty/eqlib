@@ -308,17 +308,17 @@ public:
 struct [[offsetcomments]] PZCPhysicsInfo
 {
 // @start: PZCPhysicsInfo Members
-/*0x0c*/ float Z;
+/*0x00*/ float Z;
 /*0x04*/ int Heading : 12;
-/*0x10*/ float DeltaX;
-/*0x14*/ int Acceleration : 10;
-/*0x00*/ float DeltaY;
-/*0x18*/ float X;
-/*0x1c*/ float Y;
-/*0x20*/ int ZHeading : 12;
-/*0x08*/ float DeltaZ;
-/*0x04*/ int DeltaHeading : 10;
-
+/*0x08*/ float DeltaX;
+/*0x0c*/ int Acceleration : 10;
+/*0x10*/ float DeltaY;
+/*0x14*/ float X;
+/*0x18*/ float Y;
+/*0x1c*/ int ZHeading : 12;
+/*0x20*/ float DeltaZ;
+/*0x24*/ int DeltaHeading : 10;
+/*0x28*/
 // @end: PZCPhysicsInfo Members
 };
 
@@ -736,7 +736,7 @@ struct BardQueueUnknown
 // PlayerClient
 //============================================================================
 
-constexpr size_t PlayerClient_size = 0x20C0; // @sizeof(PlayerClient) :: 2025-11-10 (live) @ 0x1402FE28E
+constexpr size_t PlayerClient_size = 0x20C0; // @sizeof(PlayerClient) :: 2025-11-13 (live) @ 0x1402FE28E
 
 class [[offsetcomments]] PlayerClient : public PlayerZoneClient
 {

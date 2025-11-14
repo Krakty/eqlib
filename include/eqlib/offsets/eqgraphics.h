@@ -18,25 +18,25 @@
 // EQGraphics.dll offsets
 //
 
-#define __eqgraphics_fopen_x                                       0x18027C298
+#define __eqgraphics_fopen_x                                       0x18027E198
 
 #define CEQGBitmap__GetFirstBitmap_x                               0x180003280
 
-#define CParticleSystem__Render_x                                  0x1800B0510
-#define CParticleSystem__CreateSpellEmitter_x                      0x1800A0160
+#define CParticleSystem__Render_x                                  0x1800B0B30
+#define CParticleSystem__CreateSpellEmitter_x                      0x1800A0770
 
-#define CRender__RenderScene_x                                     0x1800D7C80
-#define CRender__RenderBlind_x                                     0x1800D7B40
-#define CRender__ResetDevice_x                                     0x1800D87F0
-#define CRender__UpdateDisplay_x                                   0x1800D9A80
-#define __bRenderSceneCalled_x                                     0x180510330
+#define CRender__RenderScene_x                                     0x1800D8440
+#define CRender__RenderBlind_x                                     0x1800D8300
+#define CRender__ResetDevice_x                                     0x1800D8FB0
+#define CRender__UpdateDisplay_x                                   0x1800DA250
+#define __bRenderSceneCalled_x                                     0x180512330
 
-#define C2DPrimitiveManager__AddCachedText_x                       0x1800F1E50
-#define C2DPrimitiveManager__Render_x                              0x1800F2FF0
+#define C2DPrimitiveManager__AddCachedText_x                       0x1800F2700
+#define C2DPrimitiveManager__Render_x                              0x1800F38B0
 
-#define ObjectPreviewView__Render_x                                0x180026740
+#define ObjectPreviewView__Render_x                                0x180026820
 
-#define EQGraphics_DebugAPI_Ptr_x                                  0x1805748C8
+#define EQGraphics_DebugAPI_Ptr_x                                  0x1805768C8
 
 #if __has_include("../../../../private/eqgraphics-private.h")
 #include "../../../../private/eqgraphics-private.h"
