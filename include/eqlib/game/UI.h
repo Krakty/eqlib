@@ -312,7 +312,7 @@ public:
 // CButtonWnd
 //============================================================================
 
-constexpr size_t CButtonWnd_size = 0x338; // @sizeof(CButtonWnd) :: 2025-11-13 (live) @ 0x1405DF8B0
+constexpr size_t CButtonWnd_size = 0x338; // @sizeof(CButtonWnd) :: 2025-11-17 (live) @ 0x1405DF8B0
 
 class [[offsetcomments]] CButtonWnd : public CXWnd
 {
@@ -2302,7 +2302,7 @@ enum BuffWindowType
 	BuffWindowShortDuration,
 };
 
-constexpr size_t CBuffWindow_size = 0x340; // @sizeof(CBuffWindow) :: 2025-11-13 (live) @ 0x140195E4F
+constexpr size_t CBuffWindow_size = 0x340; // @sizeof(CBuffWindow) :: 2025-11-17 (live) @ 0x140195E4F
 
 class [[offsetcomments]] CBuffWindow : public CSidlScreenWnd, public WndEventHandler
 {
@@ -3201,7 +3201,7 @@ enum ECursorAttachmentType
 	eCursorAttachment_EquipmentKeyRingLink,
 };
 
-constexpr size_t CCursorAttachment_size = 0x618; // @sizeof(CCursorAttachment) :: 2025-11-13 (live) @ 0x1401951E8
+constexpr size_t CCursorAttachment_size = 0x618; // @sizeof(CCursorAttachment) :: 2025-11-17 (live) @ 0x1401951E8
 
 class [[offsetcomments]] CCursorAttachment : public CGFScreenWnd, public WndEventHandler
 {
@@ -3366,7 +3366,7 @@ public:
 // CFindItemWnd
 //============================================================================
 
-constexpr size_t CFindItemWnd_size = 0x3F0; // @sizeof(CFindItemWnd) :: 2025-11-13 (live) @ 0x140196876
+constexpr size_t CFindItemWnd_size = 0x3F0; // @sizeof(CFindItemWnd) :: 2025-11-17 (live) @ 0x140196876
 
 class [[offsetcomments]] CFindItemWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -3452,7 +3452,7 @@ enum FindLocationType {
 };
 EQLIB_API const char* FindLocationTypeToString(FindLocationType type);
 
-constexpr size_t CFindLocationWnd_size = 0x7B0; // @sizeof(CFindLocationWnd) :: 2025-11-13 (live) @ 0x140197034
+constexpr size_t CFindLocationWnd_size = 0x7B0; // @sizeof(CFindLocationWnd) :: 2025-11-17 (live) @ 0x140197034
 
 class [[offsetcomments]] CFindLocationWnd : public CGFScreenWnd
 {
@@ -3666,7 +3666,7 @@ public:
 // CGiveWnd
 //============================================================================
 
-constexpr size_t CGiveWnd_size = 0xB40; // @sizeof(CGiveWnd) :: 2025-11-13 (live) @ 0x140196AE6
+constexpr size_t CGiveWnd_size = 0xB40; // @sizeof(CGiveWnd) :: 2025-11-17 (live) @ 0x140196AE6
 
 class [[offsetcomments]] CGiveWnd : public CGFScreenWnd, public PopDialogHandler, public WndEventHandler
 {
@@ -3855,7 +3855,7 @@ public:
 // CGroupWnd
 //============================================================================
 
-constexpr size_t CGroupWnd_size = 0x6F0; // @sizeof(CGroupWnd) :: 2025-11-13 (live) @ 0x140195967
+constexpr size_t CGroupWnd_size = 0x6F0; // @sizeof(CGroupWnd) :: 2025-11-17 (live) @ 0x140195967
 
 class [[offsetcomments]] CGroupWnd : public CGFScreenWnd
 {
@@ -4370,7 +4370,7 @@ inline namespace deprecated {
 
 class CInvSlotWnd;
 
-constexpr size_t CInvSlot_size = 0x28; // @sizeof(CInvSlot) :: 2025-11-13 (live) @ 0x1404113D2
+constexpr size_t CInvSlot_size = 0x28; // @sizeof(CInvSlot) :: 2025-11-17 (live) @ 0x1404113D2
 
 class [[offsetcomments]] CInvSlot
 {
@@ -4417,7 +4417,7 @@ SIZE_CHECK(CInvSlot, CInvSlot_size);
 
 constexpr int MAX_INV_SLOTS = 4000;  // CInvSlotMgr::CreateInvSlot
 
-constexpr size_t CInvSlotMgr_size = 0x7D88; // @sizeof(CInvSlotMgr) :: 2025-11-13 (live) @ 0x140194D82
+constexpr size_t CInvSlotMgr_size = 0x7D88; // @sizeof(CInvSlotMgr) :: 2025-11-17 (live) @ 0x140194D82
 
 class [[offsetcomments]] CInvSlotMgr
 {
@@ -4461,7 +4461,7 @@ SIZE_CHECK(CInvSlotMgr, CInvSlotMgr_size);
 
 //----------------------------------------------------------------------------
 
-constexpr size_t CInvSlotWnd_size = 0x450; // @sizeof(CInvSlotWnd) :: 2025-11-13 (live) @ 0x1404F672C
+constexpr size_t CInvSlotWnd_size = 0x450; // @sizeof(CInvSlotWnd) :: 2025-11-17 (live) @ 0x1404F672C
 
 class [[offsetcomments]] CInvSlotWnd : public CButtonWnd
 {
@@ -4560,7 +4560,7 @@ enum ItemDisplayFlags
 	FROM_BARTER_SEARCH = 0x00000010
 };
 
-constexpr size_t CItemDisplayWnd_size = 0xA98; // @sizeof(CItemDisplayWnd) :: 2025-11-13 (live) @ 0x1404315A4
+constexpr size_t CItemDisplayWnd_size = 0xA98; // @sizeof(CItemDisplayWnd) :: 2025-11-17 (live) @ 0x1404315A4
 
 class [[offsetcomments]] CItemDisplayWnd : public CSidlScreenWnd
 {
@@ -4740,7 +4740,7 @@ public:
 // CKeyRingWnd
 //============================================================================
 
-constexpr size_t CKeyRingWnd_size = 0x498; // @sizeof(CKeyRingWnd) :: 2025-11-13 (live) @ 0x1401962D5
+constexpr size_t CKeyRingWnd_size = 0x498; // @sizeof(CKeyRingWnd) :: 2025-11-17 (live) @ 0x1401962D5
 
 class [[offsetcomments]] CKeyRingWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -4866,7 +4866,7 @@ public:
 
 struct loot_msg;
 
-constexpr size_t CLootWnd_size = 0xCB0; // @sizeof(CLootWnd) :: 2025-11-13 (live) @ 0x1401965A4
+constexpr size_t CLootWnd_size = 0xCB0; // @sizeof(CLootWnd) :: 2025-11-17 (live) @ 0x1401965A4
 
 class [[offsetcomments]] CLootWnd : public CSidlScreenWnd, public PopDialogHandler, public WndEventHandler
 {
@@ -5083,7 +5083,7 @@ public:
 	static VirtualFunctionTable* sm_vftable;
 };
 
-constexpr size_t CMapViewWnd_size = 0x838; // @sizeof(CMapViewWnd) :: 2025-11-13 (live) @ 0x140195CC9
+constexpr size_t CMapViewWnd_size = 0x838; // @sizeof(CMapViewWnd) :: 2025-11-17 (live) @ 0x140195CC9
 
 class [[offsetcomments]] CMapViewWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -5505,7 +5505,7 @@ public:
 
 constexpr const int MAX_PET_BUTTONS = 14;
 
-constexpr size_t CPetInfoWnd_size = 0x3C0; // @sizeof(CPetInfoWnd) :: 2025-11-13 (live) @ 0x14019578F
+constexpr size_t CPetInfoWnd_size = 0x3C0; // @sizeof(CPetInfoWnd) :: 2025-11-17 (live) @ 0x14019578F
 
 class [[offsetcomments]] CPetInfoWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -5644,7 +5644,7 @@ enum ECombatState
 };
 
 
-constexpr size_t CPlayerWnd_size = 0x3F8; // @sizeof(CPlayerWnd) :: 2025-11-13 (live) @ 0x1401960FD
+constexpr size_t CPlayerWnd_size = 0x3F8; // @sizeof(CPlayerWnd) :: 2025-11-17 (live) @ 0x1401960FD
 
 class [[offsetcomments]] CPlayerWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -6039,7 +6039,7 @@ enum ESpellDisplayType
 	SpellDisplayType_TargetBuff,
 };
 
-constexpr size_t CSpellDisplayWnd_size = 0x3A8; // @sizeof(CSpellDisplayWnd) :: 2025-11-13 (live) @ 0x14050304E
+constexpr size_t CSpellDisplayWnd_size = 0x3A8; // @sizeof(CSpellDisplayWnd) :: 2025-11-17 (live) @ 0x14050304E
 
 class [[offsetcomments]] CSpellDisplayWnd : public CSidlScreenWnd
 {
@@ -6141,7 +6141,7 @@ public:
 // CTargetWnd
 //============================================================================
 
-constexpr size_t CTargetWnd_size = 0x3B8; // @sizeof(CTargetWnd) :: 2025-11-13 (live) @ 0x140195F9E
+constexpr size_t CTargetWnd_size = 0x3B8; // @sizeof(CTargetWnd) :: 2025-11-17 (live) @ 0x140195F9E
 
 class [[offsetcomments]] CTargetWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -6449,7 +6449,7 @@ public:
 // CTradeWnd
 //============================================================================
 
-constexpr size_t CTradeWnd_size = 0x1738; // @sizeof(CTradeWnd) :: 2025-11-13 (live) @ 0x14019678C
+constexpr size_t CTradeWnd_size = 0x1738; // @sizeof(CTradeWnd) :: 2025-11-17 (live) @ 0x14019678C
 
 class [[offsetcomments]] CTradeWnd : public CGFScreenWnd, public WndEventHandler
 {
@@ -6716,7 +6716,7 @@ public:
 
 using ZonePathArray = ArrayClass<ZonePathData>;
 
-constexpr size_t ZoneGuideManagerClient_size = 0xFA50; // @sizeof(ZoneGuideManagerClient) :: 2025-11-13 (live) @ 0x14034FFCF
+constexpr size_t ZoneGuideManagerClient_size = 0xFA50; // @sizeof(ZoneGuideManagerClient) :: 2025-11-17 (live) @ 0x14034FFCF
 
 class [[offsetcomments]] ZoneGuideManagerClient : public ZoneGuideManagerBase
 {

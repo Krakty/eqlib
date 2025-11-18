@@ -263,7 +263,7 @@ namespace eqmain {
 // CXWnd
 //============================================================================
 
-constexpr size_t CXWnd_size = 0x258; // @sizeof(CXWnd, eqmain) :: 2025-11-13 (live) @ 0x1800D799B
+constexpr size_t CXWnd_size = 0x258; // @sizeof(CXWnd, eqmain) :: 2025-11-17 (live) @ 0x1800D7F5B
 constexpr size_t CXWnd_vftable_size = 0x2D0;
 
 class [[offsetcomments]] CXWnd
