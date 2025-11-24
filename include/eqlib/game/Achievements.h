@@ -287,7 +287,7 @@ using AchievementStateInfoArray = ArrayClass<SingleAchievementIdAndInfo>;
 //============================================================================
 // Achievement Manager
 
-constexpr size_t AchievementManager_size = 0xA8; // @sizeof(AchievementManager) :: 2025-11-17 (live) @ 0x140092748
+constexpr size_t AchievementManager_size = 0xA8; // @sizeof(AchievementManager) :: 2025-11-19 (test) @ 0x140092748
 
 class [[offsetcomments]] AchievementManager
 {
@@ -415,20 +415,20 @@ public:
 	//----------------------------------------------------------------------------
 	// AchievementManagerClient
 
-/*0x48*/ AchievementsAndComponentsInfoArray achievementClientInfoArray;
-/*0x60*/ AchievementsAndComponentsInfoArray achievementsClientComparisonInfoArray;
-/*0x78*/ bool                               achievementClientReadOnlyDataSet;
-/*0x79*/ bool                               achievementClientStatesSet;
-/*0x7a*/ bool                               comparisonAchievementStatesSet;
-/*0x7c*/ uint32_t                           completedAchievementScore;
-/*0x80*/ uint32_t                           completedAchievementCount;
-/*0x84*/ uint32_t                           lockedAchievemmentCount;
-/*0x88*/ uint32_t                           openAchievementCount;
-/*0x8c*/ uint32_t                           comparisonCompletedAchievementScore;
-/*0x90*/ uint32_t                           comparisonCompletedAchievementCount;
-/*0x94*/ uint32_t                           comparisonLockedAchievementCount;
-/*0x98*/ uint32_t                           comparisonOpenAchievementCount;
-/*0x9c*/
+/*0x50*/ AchievementsAndComponentsInfoArray achievementClientInfoArray;
+/*0x68*/ AchievementsAndComponentsInfoArray achievementsClientComparisonInfoArray;
+/*0x80*/ bool                               achievementClientReadOnlyDataSet;
+/*0x81*/ bool                               achievementClientStatesSet;
+/*0x82*/ bool                               comparisonAchievementStatesSet;
+/*0x84*/ uint32_t                           completedAchievementScore;
+/*0x88*/ uint32_t                           completedAchievementCount;
+/*0x8c*/ uint32_t                           lockedAchievemmentCount;
+/*0x90*/ uint32_t                           openAchievementCount;
+/*0x94*/ uint32_t                           comparisonCompletedAchievementScore;
+/*0x98*/ uint32_t                           comparisonCompletedAchievementCount;
+/*0x9c*/ uint32_t                           comparisonLockedAchievementCount;
+/*0xa0*/ uint32_t                           comparisonOpenAchievementCount;
+/*0xa4*/
 };
 
 SIZE_CHECK(AchievementManager, AchievementManager_size);
