@@ -349,6 +349,9 @@
     <ClInclude Include="src\resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\eqstd\mutex.h">
+      <Filter>Header Files\eqstd</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\pch.cpp">

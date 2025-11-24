@@ -287,7 +287,7 @@ using AchievementStateInfoArray = ArrayClass<SingleAchievementIdAndInfo>;
 //============================================================================
 // Achievement Manager
 
-constexpr size_t AchievementManager_size = 0xA8; // @sizeof(AchievementManager) :: 2025-11-03 (test) @ 0x1400929D8
+constexpr size_t AchievementManager_size = 0xA8; // @sizeof(AchievementManager) :: 2025-11-17 (live) @ 0x140092748
 
 class [[offsetcomments]] AchievementManager
 {
@@ -415,7 +415,7 @@ public:
 	//----------------------------------------------------------------------------
 	// AchievementManagerClient
 
-/*0x50*/ AchievementsAndComponentsInfoArray achievementClientInfoArray;
+/*0x48*/ AchievementsAndComponentsInfoArray achievementClientInfoArray;
 /*0x60*/ AchievementsAndComponentsInfoArray achievementsClientComparisonInfoArray;
 /*0x78*/ bool                               achievementClientReadOnlyDataSet;
 /*0x79*/ bool                               achievementClientStatesSet;
