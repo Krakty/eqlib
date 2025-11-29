@@ -1908,6 +1908,8 @@ public:
 // CBankWnd
 //============================================================================
 
+constexpr size_t CBankWnd_size = 0x440; // @sizeof(CBankWnd) :: 2025-11-24 (test) @ 0x140197027
+
 class [[offsetcomments]] CBankWnd : public CSidlScreenWnd, public WndEventHandler
 {
 public:
@@ -1920,15 +1922,15 @@ public:
 /*0x2f8*/ CInvSlotWnd* InvSlotWindows[NUM_BANK_SLOTS];
 /*0x3b8*/ CLabel*      SharedBankLabel;
 /*0x3c0*/ CInvSlotWnd* SharedSlotWindows[NUM_SHAREDBANK_SLOTS];
-/*0x3f0*/ CButtonWnd*  DoneButton;                // DoneButton
-/*0x3f8*/ CButtonWnd*  ChangeButton;              // ChangeButton
-/*0x400*/ CButtonWnd*  AutoButton;                // AutoButton
-/*0x408*/ CButtonWnd*  AltStorageButton;          // AltStorageButton
-/*0x410*/ CButtonWnd*  FindItemButton;            // FindItemButton
-/*0x418*/ CButtonWnd*  DragonHoardButton;         // DragonHoard
-/*0x420*/ CButtonWnd*  TradeskillDepotButton;     // TradeskillDepot
-/*0x428*/ int          BankSize;
-/*0x42c*/
+/*0x400*/ CButtonWnd*  DoneButton;                // DoneButton
+/*0x408*/ CButtonWnd*  ChangeButton;              // ChangeButton
+/*0x410*/ CButtonWnd*  AutoButton;                // AutoButton
+/*0x418*/ CButtonWnd*  AltStorageButton;          // AltStorageButton
+/*0x420*/ CButtonWnd*  FindItemButton;            // FindItemButton
+/*0x428*/ CButtonWnd*  DragonHoardButton;         // DragonHoard
+/*0x430*/ CButtonWnd*  TradeskillDepotButton;     // TradeskillDepot
+/*0x438*/ int          BankSize;
+/*0x43c*/
 
 	CBankWnd(CXWnd*, CXStr);
 	virtual ~CBankWnd();
@@ -1944,6 +1946,8 @@ public:
 	EQLIB_OBJECT void ClickedMoneyButton(int, int);
 	EQLIB_OBJECT void UpdateMoneyDisplay();
 };
+
+SIZE_CHECK(CBankWnd, CBankWnd_size);
 
 //============================================================================
 // CBarterWnd
