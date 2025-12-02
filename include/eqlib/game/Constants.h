@@ -453,7 +453,7 @@ constexpr int XKF_RALT               = 8;
 // left, right, mid, aux1-5
 constexpr int NUM_MOUSE_BUTTONS = 8;
 
-constexpr int MAX_PC_LEVEL = 125;
+constexpr int MAX_PC_LEVEL = 130;
 constexpr int MAX_NPC_LEVEL = 200;
 constexpr int MAX_SPELL_LEVEL = 255;
 constexpr int NUM_SPELL_GEMS = 14;
@@ -612,7 +612,7 @@ constexpr int NUM_WORN_ITEMS = InvSlot_LastWornItem - InvSlot_FirstWornItem + 1;
 static_assert(InvSlot_LastWornItem < 32,
               "InvSlot_LastWornItem is >= 32. This is problematic for EquipSlots on ItemDefinition!");
 
-constexpr int NUM_SHAREDBANK_SLOTS = 6;
+constexpr int NUM_SHAREDBANK_SLOTS = 8;
 
 constexpr int NUM_BANK_SLOTS = 24;
 constexpr int MAX_GIVE_SLOTS = 4;
@@ -778,9 +778,11 @@ enum ALTCURRENCY
 	ALTCURRENCY_TIMELESSTOKEN = 59, // LS Anniversary
 	ALTCURRENCY_SCALEWROUGHTEMBLEM = 60, // ToB
 	ALTCURRENCY_BROODOFFICERSEMBLEM = 61, // ToB
+	ALTCURRENCY_RIFTTOUCHEDSIGILS = 62, // SOR
+	ALTCURRENCY_FORGOTTENRUINEDCOINS = 63, // SOR
 
 	ALTCURRENCY_FIRST = ALTCURRENCY_DOUBLOONS,
-	ALTCURRENCY_LAST = ALTCURRENCY_BROODOFFICERSEMBLEM,
+	ALTCURRENCY_LAST = ALTCURRENCY_FORGOTTENRUINEDCOINS,
 
 	ALTCURRENCY_CROWNS = 999999,
 
