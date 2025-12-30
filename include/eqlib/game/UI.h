@@ -3029,7 +3029,9 @@ inline namespace deprecated {
 	using PEQCONTAINERWINDOW DEPRECATE("Use CContainerWnd* instead of PEQCONTAINERWINDOW") = CContainerWnd*;
 }
 
-constexpr int MAX_CONTAINERS = 43;
+constexpr int MAX_CONTAINERS = 45;
+
+constexpr size_t CContainerMgr_size = 0x1B0; // @sizeof(CContainerMgr) :: 2025-11-24 (live) @ 0x140195C99
 
 class [[offsetcomments]] CContainerMgr
 {
@@ -3058,18 +3060,20 @@ public:
 	// data members
 
 /*0x008*/ CContainerWnd*     pContainerWnds[MAX_CONTAINERS];
-/*0x160*/ ArrayClass<CContainerWnd*> ContainerWndsToDelete;
-/*0x178*/ ItemPtr            WorldContainer;
-/*0x188*/ DWORD              WorldContainerSerialNumber;
-/*0x18c*/ int                WorldContainerRealEstateID;
-/*0x190*/ int                WorldContainerRealEstateItemID;
-/*0x194*/ DWORD              Timer;
-/*0x198*/ bool               bShowDone;
-/*0x19c*/
+/*0x170*/ ArrayClass<CContainerWnd*> ContainerWndsToDelete;
+/*0x188*/ ItemPtr            WorldContainer;
+/*0x198*/ DWORD              WorldContainerSerialNumber;
+/*0x19c*/ int                WorldContainerRealEstateID;
+/*0x1a0*/ int                WorldContainerRealEstateItemID;
+/*0x1a4*/ DWORD              Timer;
+/*0x1a8*/ bool               bShowDone;
+/*0x1ac*/
 
 	ItemClient* getter_pWorldContainer() { return WorldContainer.get(); }
 	__declspec(property(get = getter_pWorldContainer)) ItemClient* pWorldContainer;
 };
+
+SIZE_CHECK(CContainerMgr, CContainerMgr_size);
 
 //============================================================================
 // CContextMenuManager
