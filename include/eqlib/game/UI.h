@@ -3031,7 +3031,7 @@ inline namespace deprecated {
 
 constexpr int MAX_CONTAINERS = 45;
 
-constexpr size_t CContainerMgr_size = 0x1B0; // @sizeof(CContainerMgr) :: 2025-12-09 (test) @ 0x140195C79
+constexpr size_t CContainerMgr_size = 0x1B0; // @sizeof(CContainerMgr) :: 2025-11-24 (live) @ 0x140195C99
 
 class [[offsetcomments]] CContainerMgr
 {
