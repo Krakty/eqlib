@@ -1244,6 +1244,277 @@ Value* Map<Key, Value>::GetPrev(const Value* pValue) const
 
 #pragma endregion SoeUtil::Map
 
+
+#pragma region SoeUtil::HashMap
+
+inline int Hash(int value)
+{
+	return static_cast<int>(value);
+}
+
+inline int Hash(unsigned int value)
+{
+	return static_cast<int>(value);
+}
+
+// HashMap, no embedded storage
+
+template <typename Key, typename Value>
+class HashMap
+{
+public:
+	using key_type = Key;
+	using mapped_type = Value;
+
+	struct ValuePair
+	{
+		key_type    key;
+		mapped_type value;
+	};
+	using value_type = ValuePair;
+
+	HashMap() = default;
+	virtual ~HashMap() = default;
+
+	Value* Find(const Key& key) const;
+
+	Value* GetFirst() const;
+	Value* GetLast() const;
+	Value* GetNext(const Value* pValue) const;
+	Value* GetPrev(const Value* pValue) const;
+
+	const Key& GetKeyOf(const Value* pValue) const;
+	int GetCount() const { return m_count; }
+	bool IsEmpty() const { return m_count == 0; }
+
+	mapped_type* operator[](const Key& key) { return Find(key); }
+	const mapped_type* operator[](const Key& key) const { return Find(key); }
+
+private:
+	virtual uint8_t* Allocate() { return nullptr; }
+	virtual void Free(uint8_t*) {}
+	virtual bool IsSwapAllowed() const { return true; }
+
+	struct Node : value_type
+	{
+	/*+0x00*/ Node* hashNext;
+	/*+0x10*/ Node* next;
+	/*+0x18*/ Node* prev;
+	/*+0x20*/
+	};
+
+	static Node* GetNode(const Value* pValue);
+	static Node* GetNextNode(const Node* pNode);
+	static Node* GetPrevNode(const Node* pNode);
+
+public:
+#pragma region SoeUtil::HashMap::ConstIterator
+	template <int direction = 0>
+	class ConstIterator
+	{
+	public:
+		using iterator_category = std::bidirectional_iterator_tag;
+
+		using value_type = HashMap::value_type;
+		using difference_type = std::ptrdiff_t;
+		using pointer = const value_type*;
+		using reference = const value_type&;
+
+		ConstIterator() = default;
+		ConstIterator(const Node* value) : m_value(value) {}
+
+		[[nodiscard]] reference operator*() const
+		{
+			return static_cast<reference>(*m_value);
+		}
+
+		[[nodiscard]] pointer operator->() const
+		{
+			return static_cast<pointer>(&m_value);
+		}
+
+		ConstIterator& operator++();
+		ConstIterator& operator--();
+
+		bool operator==(const ConstIterator& other) const { return m_value == other.m_value; }
+		bool operator!=(const ConstIterator& other) const { return m_value != other.m_value; }
+
+	protected:
+		const Node* m_value = nullptr;
+	};
+#pragma endregion
+
+#pragma region SoeUtil::HashMap::ValueIterator
+	class ValueIterator : public ConstIterator<0>
+	{
+	public:
+		using ConstIterator<0>::ConstIterator;
+
+		using value_type = HashMap::mapped_type*;
+		using difference_type = std::ptrdiff_t;
+		using pointer = value_type;
+		using reference = value_type;
+
+		[[nodiscard]] reference operator*() const
+		{
+			return (HashMap::mapped_type*)&this->m_value->value;
+		}
+		[[nodiscard]] pointer operator->() const
+		{
+			return (HashMap::mapped_type*)&this->m_value->value;
+		}
+	};
+#pragma endregion
+
+	using iterator = ConstIterator<0>;
+	using const_iterator = ConstIterator<0>;
+	using reverse_iterator = ConstIterator<1>;
+	using const_reverse_iterator = ConstIterator<1>;
+
+	iterator begin() { return iterator(GetNode(GetFirst())); }
+	const_iterator begin() const { return const_iterator(GetNode(GetFirst())); }
+	const_iterator cbegin() const { return const_iterator(GetNode(GetFirst())); }
+
+	iterator end() { return iterator(nullptr); }
+	const_iterator end() const { return const_iterator(nullptr); }
+	const_iterator cend() const { return const_iterator(nullptr); }
+
+	reverse_iterator rbegin() { return reverse_iterator(GetNode(GetLast())); }
+	const_reverse_iterator rbegin() const { return const_reverse_iterator(GetNode(GetLast())); }
+	const_reverse_iterator crbegin() const { return const_reverse_iterator(GetNode(GetLast())); }
+
+	reverse_iterator rend() { return reverse_iterator(nullptr); }
+	const_reverse_iterator rend() const { return const_reverse_iterator(nullptr); }
+	const_reverse_iterator crend() const { return const_reverse_iterator(nullptr); }
+
+	template <typename IteratorType>
+	struct IterRange
+	{
+		IteratorType first;
+		IteratorType second;
+
+		IterRange(IteratorType first_, IteratorType second_) : first(first_), second(second_) {}
+
+		auto begin() { return first; }
+		auto end() { return second; }
+	};
+
+	using value_iterator = ValueIterator;
+
+	using ItemRange = IterRange<const_iterator>;
+	using ValueRange = IterRange<value_iterator>;
+
+	auto items() const { return IterRange(cbegin(), cend()); }
+	ValueRange values() const { return ValueRange(value_iterator(GetNode(GetFirst())), value_iterator(nullptr)); }
+
+/*0x00*/ // `vftable'
+/*0x08*/ size_t    m_count;
+/*0x10*/ Node*     m_head;
+/*0x18*/ Node*     m_tail;
+/*0x20*/ Node**    m_buckets;
+/*0x28*/ size_t    m_dynamicSize;
+/*0x30*/ size_t    m_maxDynamicSize;        // 0xffffffffffffffff
+/*0x38*/
+};
+
+template <typename Key, typename Value>
+template <int direction>
+typename HashMap<Key, Value>::template ConstIterator<direction>& HashMap<Key, Value>::ConstIterator<direction>::operator++()
+{
+	if constexpr (direction == 0)
+		m_value = GetNextNode(m_value);
+	else
+		m_value = GetPrevNode(m_value);
+
+	return *this;
+}
+
+template <typename Key, typename Value>
+template <int direction>
+typename HashMap<Key, Value>::template ConstIterator<direction>& HashMap<Key, Value>::ConstIterator<direction>::operator--()
+{
+	if constexpr (direction == 0)
+		m_value = GetPrevNode(m_value);
+	else
+		m_value = GetNextNode(m_value);
+
+	return *this;
+}
+
+template <typename Key, typename Value>
+typename HashMap<Key, Value>::Node* HashMap<Key, Value>::GetNode(const Value* pValue)
+{
+	return pValue ? (Node*)((uint8_t*)pValue - offsetof(Node, value)) : nullptr;
+}
+
+template <typename Key, typename Value>
+typename HashMap<Key, Value>::Node* HashMap<Key, Value>::GetNextNode(const Node* pValue)
+{
+	return pValue->next;
+}
+
+template <typename Key, typename Value>
+typename HashMap<Key, Value>::Node* HashMap<Key, Value>::GetPrevNode(const Node* pValue)
+{
+	return pValue->prev;
+}
+
+template <typename Key, typename Value>
+Value* HashMap<Key, Value>::Find(const Key& key) const
+{
+	uint32_t hashValue = Hash(key);
+	uint32_t bucket = hashValue & (m_dynamicSize - 1);
+
+	Node* bucketNode = m_buckets[bucket];
+	while (bucketNode)
+	{
+		if (bucketNode->key == key)
+			return &bucketNode->value;
+
+		bucketNode = bucketNode->hashNext;
+	}
+
+	return nullptr;
+}
+
+template <typename Key, typename Value>
+Value* HashMap<Key, Value>::GetFirst() const
+{
+	return m_head ? &m_head->value : nullptr;
+}
+
+template <typename Key, typename Value>
+Value* HashMap<Key, Value>::GetLast() const
+{
+	return m_tail ? &m_tail->value : nullptr;
+}
+
+template <typename Key, typename Value>
+const Key& HashMap<Key, Value>::GetKeyOf(const Value* pValue) const
+{
+	Node* node = GetNode(pValue);
+	return node->key;
+}
+
+template <typename Key, typename Value>
+Value* HashMap<Key, Value>::GetNext(const Value* pValue) const
+{
+	Node* node = GetNextNode(GetNode(pValue));
+	return node ? &node->value : nullptr;
+}
+
+template <typename Key, typename Value>
+Value* HashMap<Key, Value>::GetPrev(const Value* pValue) const
+{
+	Node* node = GetPrevNode(GetNode(pValue));
+	return node ? &node->value : nullptr;
+}
+
+#pragma endregion SoeUtil::HashMap
+
+//----------------------------------------------------------------------------
+
+
 //----------------------------------------------------------------------------
 
 template <typename Key>
