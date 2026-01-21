@@ -287,7 +287,7 @@ using AchievementStateInfoArray = ArrayClass<SingleAchievementIdAndInfo>;
 //============================================================================
 // Achievement Manager
 
-constexpr size_t AchievementManager_size = 0xA8; // @sizeof(AchievementManager) :: 2025-12-09 (test) @ 0x140092748
+constexpr size_t AchievementManager_size = 0x140; // @sizeof(AchievementManager) :: 2026-01-13 (test) @ 0x1400931D5
 
 class [[offsetcomments]] AchievementManager
 {
@@ -344,15 +344,11 @@ public:
 
 	const Achievement* GetAchievementById(int id) const
 	{
-		if (id < 0)
+		auto iter = achievements.find(id);
+		if (iter == achievements.end())
 			return nullptr;
 
-		for (const Achievement& achieve : achievements)
-		{
-			if (achieve.id == id)
-				return &achieve;
-		}
-		return nullptr;
+		return &iter->second;
 	}
 
 	EQLIB_OBJECT int GetAchievementIndexByName(std::string_view name) const;
@@ -362,24 +358,23 @@ public:
 		if (id < 0)
 			return -1;
 
-		for (int index = 0; index < achievements.GetLength(); ++index)
-		{
-			const Achievement& achieve = achievements[index];
+		auto iter = idToIndexMap.find(id);
+		if (iter == idToIndexMap.end())
+			return -1;
 
-			if (achieve.id == id)
-				return index;
-		}
-		return -1;
+		return iter->second;
 	}
 
 	const Achievement* GetAchievementByIndex(int index) const
 	{
-		if (index >= 0 && index < achievements.GetLength())
-			return &achievements[index];
-		return nullptr;
+		auto iter = indexToIdMap.find(index);
+		if (iter == indexToIdMap.end())
+			return nullptr;
+
+		return GetAchievementById(iter->second);
 	}
 
-	int GetAchievementCount() const { return achievements.GetLength(); }
+	int GetAchievementCount() const { return static_cast<int>(achievements.size()); }
 
 	//----------------------------------------------------------------------------
 	// Client info access
@@ -408,27 +403,28 @@ public:
 	//----------------------------------------------------------------------------
 	// AchievementManager
 
-/*0x08*/ ArrayClass2<AchievementCategory>   categories;
-/*0x28*/ ArrayClass2<Achievement>           achievements;
-/*0x48*/ bool                               valid;
+/*0x008*/ ArrayClass2<AchievementCategory>               categories;
+/*0x028*/ eqstd::unordered_map<int, Achievement>         achievements;
+/*0x068*/ eqstd::unordered_map<int, int>                 idToIndexMap;
+/*0x0a8*/ eqstd::unordered_map<int, int>                 indexToIdMap;
 
 	//----------------------------------------------------------------------------
 	// AchievementManagerClient
 
-/*0x50*/ AchievementsAndComponentsInfoArray achievementClientInfoArray;
-/*0x68*/ AchievementsAndComponentsInfoArray achievementsClientComparisonInfoArray;
-/*0x80*/ bool                               achievementClientReadOnlyDataSet;
-/*0x81*/ bool                               achievementClientStatesSet;
-/*0x82*/ bool                               comparisonAchievementStatesSet;
-/*0x84*/ uint32_t                           completedAchievementScore;
-/*0x88*/ uint32_t                           completedAchievementCount;
-/*0x8c*/ uint32_t                           lockedAchievemmentCount;
-/*0x90*/ uint32_t                           openAchievementCount;
-/*0x94*/ uint32_t                           comparisonCompletedAchievementScore;
-/*0x98*/ uint32_t                           comparisonCompletedAchievementCount;
-/*0x9c*/ uint32_t                           comparisonLockedAchievementCount;
-/*0xa0*/ uint32_t                           comparisonOpenAchievementCount;
-/*0xa4*/
+/*0x0e8*/ AchievementsAndComponentsInfoArray achievementClientInfoArray;
+/*0x100*/ AchievementsAndComponentsInfoArray achievementsClientComparisonInfoArray;
+/*0x118*/ bool                               achievementClientReadOnlyDataSet;
+/*0x119*/ bool                               achievementClientStatesSet;
+/*0x11a*/ bool                               comparisonAchievementStatesSet;
+/*0x11c*/ uint32_t                           completedAchievementScore;
+/*0x120*/ uint32_t                           completedAchievementCount;
+/*0x124*/ uint32_t                           lockedAchievemmentCount;
+/*0x128*/ uint32_t                           openAchievementCount;
+/*0x12c*/ uint32_t                           comparisonCompletedAchievementScore;
+/*0x130*/ uint32_t                           comparisonCompletedAchievementCount;
+/*0x134*/ uint32_t                           comparisonLockedAchievementCount;
+/*0x138*/ uint32_t                           comparisonOpenAchievementCount;
+/*0x13c*/
 };
 
 SIZE_CHECK(AchievementManager, AchievementManager_size);

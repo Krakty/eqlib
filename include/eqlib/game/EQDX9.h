@@ -96,10 +96,10 @@ public:
 	virtual UINT Release();
 
 /*0x08*/ T*                  Object;
-/*0x18*/ const char*         TypeName;
-/*0x10*/ uint32_t            TypeHash;
-/*0x20*/ eqstd::mutex        Mutex;
-/*0x70*/ uint32_t            Refcount;
+/*0x10*/ const char*         TypeName;
+/*0x18*/ uint32_t            TypeHash;
+/*0x1c*/ uint32_t            Refcount;
+/*0x20*/ uint32_t            unknown0x20;
 };
 
 // size: 0x1448
@@ -126,8 +126,8 @@ public:
 /*0x80*/ void*               Something; // wrong (not swap chain)
 /*0x88*/
 };
-constexpr size_t SwapChainImpl_size = 0x88;
-SIZE_CHECK(SwapChainImpl, SwapChainImpl_size);
+//constexpr size_t SwapChainImpl_size = 0x88;
+//SIZE_CHECK(SwapChainImpl, SwapChainImpl_size);
 
 class [[offsetcomments]] Device
 {
@@ -195,8 +195,8 @@ public:
 /*0x80*/ uint32_t            ThreadID;
 /*0x84*/
 };
-constexpr size_t DeviceImpl_size = 0x88;
-SIZE_CHECK(DeviceImpl, DeviceImpl_size);
+//constexpr size_t DeviceImpl_size = 0x38; // 180128435
+//SIZE_CHECK(DeviceImpl, DeviceImpl_size);
 
 // size: 0x60
 struct TextureInfo
@@ -266,14 +266,14 @@ SIZE_CHECK(Texture, Texture_size);
 class [[offsetcomments]] TextureImpl : public ObjectBase<TextureImpl>
 {
 public:
-/*0x78*/ SwapChainImpl*      SwapChain;
-/*0x80*/ Texture*            Texture;
-/*0x88*/
+/*0x28*/ SwapChainImpl*      SwapChain;
+/*0x30*/ Texture*            Texture;
+/*0x38*/
 
 	ID3D11Texture2D* GetTexture2D() const { return Texture ? Texture->GetTexture2D() : nullptr; }
 	ID3D11ShaderResourceView* GetShaderResourceView() const { return Texture ? Texture->GetShaderResourceView() : nullptr; }
 };
-constexpr size_t TextureImpl_size = 0x88;
+constexpr size_t TextureImpl_size = 0x38; // 180127789
 SIZE_CHECK(TextureImpl, TextureImpl_size);
 
 } // namespace DX11

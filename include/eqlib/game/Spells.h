@@ -907,7 +907,7 @@ struct [[offsetcomments]] SpellAffectData
 using SPELLCALCINFO = SpellAffectData;
 using PSPELLCALCINFO = SPELLCALCINFO*;
 
-constexpr size_t EQ_Spell_size = 0x218; // @sizeof(EQ_Spell) :: 2025-12-09 (test) @ 0x1401DCB17
+constexpr size_t EQ_Spell_size = 0x218; // @sizeof(EQ_Spell) :: 2026-01-13 (test) @ 0x1401DEE07
 
 class [[offsetcomments]] EQ_Spell
 {
@@ -1318,7 +1318,9 @@ public:
 	EQLIB_OBJECT const EQ_Spell* GetSpellByGroupAndRank(int Group, int SubGroup, int Rank = -1, bool bLesserRanksOk = false);
 };
 
-constexpr size_t ClientSpellManager_size = 0x22A0; // @sizeof(ClientSpellManager) :: 2025-12-09 (test) @ 0x140271530
+using SpellHashMap = SoeUtil::HashMap<int, EQ_Spell>;
+
+constexpr size_t ClientSpellManager_size = 0x22C0; // @sizeof(ClientSpellManager) :: 2026-01-13 (test) @ 0x140275050
 
 class [[offsetcomments]] ClientSpellManager : public SpellManager
 {
@@ -1342,15 +1344,15 @@ public:
 	uint32_t GetSpellCount() const { return SpellCount; }
 	uint32_t GetSpellAffectsCount() const { return SpellAffectsCount; }
 
-	SoeUtil::Map<int, EQ_Spell>::ValueRange __getSpellRange() const { return m_spells.values(); }
-	__declspec(property(get = __getSpellRange)) SoeUtil::Map<int, EQ_Spell>::ValueRange Spells;
+	SpellHashMap::ValueRange __getSpellRange() const { return m_spells.values(); }
+	__declspec(property(get = __getSpellRange)) SpellHashMap::ValueRange Spells;
 
 private:
-/*0x2240*/ SoeUtil::Map<int, EQ_Spell>        m_spells;
-/*0x2258*/ SoeUtil::Map<int, SpellAffectData> m_spellAffects;
-/*0x2270*/ SoeUtil::Map<int, EQ_SpellExtra>   m_spellExtraData;
-/*0x2288*/ HashTable<StackingGroupData>       m_stackingData;
-/*0x22a0*/
+/*0x2240*/ SpellHashMap                       m_spells;
+/*0x2278*/ SoeUtil::Map<int, SpellAffectData> m_spellAffects;
+/*0x2290*/ SoeUtil::Map<int, EQ_SpellExtra>   m_spellExtraData;
+/*0x22a8*/ HashTable<StackingGroupData>       m_stackingData;
+/*0x22c0*/
 };
 
 SIZE_CHECK(ClientSpellManager, ClientSpellManager_size);

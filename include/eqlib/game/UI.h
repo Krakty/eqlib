@@ -312,7 +312,7 @@ public:
 // CButtonWnd
 //============================================================================
 
-constexpr size_t CButtonWnd_size = 0x340; // @sizeof(CButtonWnd) :: 2025-12-09 (test) @ 0x1405DFBA0
+constexpr size_t CButtonWnd_size = 0x340; // @sizeof(CButtonWnd) :: 2026-01-13 (test) @ 0x1405E6A60
 
 class [[offsetcomments]] CButtonWnd : public CXWnd
 {
@@ -1908,29 +1908,110 @@ public:
 // CBankWnd
 //============================================================================
 
-constexpr size_t CBankWnd_size = 0x450; // @sizeof(CBankWnd) :: 2025-12-09 (test) @ 0x140197157
+constexpr size_t CBankWnd_size = 0x2358; // @sizeof(CBankWnd) :: 2026-01-13 (test) @ 0x140199227
 
-class [[offsetcomments]] CBankWnd : public CSidlScreenWnd, public WndEventHandler
+class [[offsetcomments]] CBankWnd : public CGFScreenWnd, public WndEventHandler
 {
 public:
-/*0x2cc*/ int          MoneyButtonIndex;
-/*0x2d0*/ unsigned int NextRefreshTime;
-/*0x2d4*/ bool         bInventoryWasActive;
-/*0x2d5*/ bool         bRealEstateManagementWasActive;
-/*0x2d8*/ CButtonWnd*  MoneyButtons[5];           // including shared plat
-/*0x300*/ CLabel*      BankerNameLabel;
-/*0x308*/ CInvSlotWnd* InvSlotWindows[NUM_BANK_SLOTS];
-/*0x3c8*/ CLabel*      SharedBankLabel;
-/*0x3d0*/ CInvSlotWnd* SharedSlotWindows[NUM_SHAREDBANK_SLOTS];
-/*0x410*/ CButtonWnd*  DoneButton;                // DoneButton
-/*0x418*/ CButtonWnd*  ChangeButton;              // ChangeButton
-/*0x420*/ CButtonWnd*  AutoButton;                // AutoButton
-/*0x428*/ CButtonWnd*  AltStorageButton;          // AltStorageButton
-/*0x430*/ CButtonWnd*  FindItemButton;            // FindItemButton
-/*0x438*/ CButtonWnd*  DragonHoardButton;         // DragonHoard
-/*0x440*/ CButtonWnd*  TradeskillDepotButton;     // TradeskillDepot
-/*0x448*/ int          BankSize;
-/*0x44c*/
+/*0x03b4*/ int                    MoneyButtonIndex;
+/*0x03b8*/ unsigned int           NextRefreshTime;
+/*0x03bc*/ bool                   bInventoryWasActive;
+/*0x03bd*/ bool                   bRealEstateManagementWasActive;
+
+private:
+	// If New UI is enabled, these members will not be initialized, and the components will be used instead.
+	// Use the accessors below instead of directly accessing the member variables.
+/*0x03c0*/ CButtonWnd*            m_moneyButtons[5];                           // including shared plat
+/*0x03e8*/ CLabel*                m_bankerNameLabel;
+/*0x03f0*/ CInvSlotWnd*           m_invSlotWindows[NUM_BANK_SLOTS];
+/*0x04b0*/ CLabel*                m_sharedBankLabel;
+/*0x04b8*/ CInvSlotWnd*           m_sharedSlotWindows[NUM_SHAREDBANK_SLOTS];
+/*0x04f8*/ CButtonWnd*            m_doneButton;                                // DoneButton
+/*0x0500*/ CButtonWnd*            m_changeButton;                              // ChangeButton
+/*0x0508*/ CButtonWnd*            m_autoButton;                                // AutoButton
+/*0x0510*/ CButtonWnd*            m_altStorageButton;                          // AltStorageButton
+/*0x0518*/ CButtonWnd*            m_findItemButton;                            // FindItemButton
+/*0x0520*/ CButtonWnd*            m_dragonHoardButton;                         // DragonHoard
+/*0x0528*/ CButtonWnd*            m_tradeskillDepotButton;                     // TradeskillDepot
+
+public:
+	// CButtonWnd* MoneyButtons[5];
+	CButtonWnd* _get_moneyButton(int index)
+	{
+		if (index < 0 || index >= 5)
+			return nullptr;
+		return GetNewUIEngineWindow(m_moneyButtons[index], moneyButtonComponents[index]);
+	}
+	__declspec(property(get = _get_moneyButton)) CButtonWnd* MoneyButtons[];
+
+	// CLabel* BankerNameLabel;
+	CLabel* _get_bankerNameLabel() { return GetNewUIEngineWindow(m_bankerNameLabel, bankerNameComponent); }
+	__declspec(property(get = _get_bankerNameLabel)) CLabel* BankerNameLabel;
+
+	// CInvSlotWnd* InvSlotWindows[NUM_BANK_SLOTS];
+	CInvSlotWnd* _get_invSlotWindow(int index)
+	{
+		if (index < 0 || index >= NUM_BANK_SLOTS)
+			return nullptr;
+		return GetNewUIEngineWindow(m_invSlotWindows[index], invSlotComponents[index]);
+	}
+	__declspec(property(get = _get_invSlotWindow)) CInvSlotWnd* InvSlotWindows[];
+
+	// CLabel* SharedBankLabel;
+	CLabel* _get_sharedBankLabel() { return GetNewUIEngineWindow(m_sharedBankLabel, sharedBankLabelComponent); }
+	__declspec(property(get = _get_sharedBankLabel)) CLabel* SharedBankLabel;
+
+	// CInvSlotWnd* SharedSlotWindows[NUM_SHAREDBANK_SLOTS];
+	CInvSlotWnd* _get_sharedSlotWindow(int index)
+	{
+		if (index < 0 || index >= NUM_SHAREDBANK_SLOTS)
+			return nullptr;
+		return GetNewUIEngineWindow(m_sharedSlotWindows[index], sharedSlotComponents[index]);
+	}
+	__declspec(property(get = _get_sharedSlotWindow)) CInvSlotWnd* SharedSlotWindows[];
+
+	// CButtonWnd* DoneButton;
+	CButtonWnd* _get_doneButton() { return GetNewUIEngineWindow(m_doneButton, doneButtonComponent); }
+	__declspec(property(get = _get_doneButton)) CButtonWnd* DoneButton;
+
+	// CButtonWnd* ChangeButton;
+	CButtonWnd* _get_changeButton() { return GetNewUIEngineWindow(m_changeButton, changeButtonComponent); }
+	__declspec(property(get = _get_changeButton)) CButtonWnd* ChangeButton;
+
+	// CButtonWnd* AutoButton;
+	CButtonWnd* _get_autoButton() { return GetNewUIEngineWindow(m_autoButton, autoButtonComponent); }
+	__declspec(property(get = _get_autoButton)) CButtonWnd* AutoButton;
+
+	// CButtonWnd* AltStorageButton;
+	CButtonWnd* _get_altStorageButton() { return GetNewUIEngineWindow(m_altStorageButton, altStorageButtonComponent); }
+	__declspec(property(get = _get_altStorageButton)) CButtonWnd* AltStorageButton;
+
+	// CButtonWnd* FindItemButton;
+	CButtonWnd* _get_findItemButton() { return GetNewUIEngineWindow(m_findItemButton, findItemButtonComponent); }
+	__declspec(property(get = _get_findItemButton)) CButtonWnd* FindItemButton;
+
+	// CButtonWnd* DragonHoardButton;
+	CButtonWnd* _get_dragonHoardButton() { return GetNewUIEngineWindow(m_dragonHoardButton, dragonHoardButtonComponent); }
+	__declspec(property(get = _get_dragonHoardButton)) CButtonWnd* DragonHoardButton;
+
+	// CButtonWnd* TradeskillDepotButton;
+	CButtonWnd* _get_tradeskillDepotButton() { return GetNewUIEngineWindow(m_tradeskillDepotButton, tradeskillDepotButtonComponent); }
+	__declspec(property(get = _get_tradeskillDepotButton)) CButtonWnd* TradeskillDepotButton;
+
+/*0x0530*/ UIButtonComponent      doneButtonComponent;                         // BNK_DoneButton
+/*0x05d8*/ UIButtonComponent      changeButtonComponent;                       // BNK_ChangeButton
+/*0x0680*/ UIButtonComponent      autoButtonComponent;                         // BNK_AutoButton
+/*0x0728*/ UIButtonComponent      altStorageButtonComponent;                   // BNK_AltStorageButton
+/*0x07d0*/ UIButtonComponent      findItemButtonComponent;                     // BNK_FindItemButton
+/*0x0878*/ UIButtonComponent      dragonHoardButtonComponent;                  // BNK_DragonHoard
+/*0x0920*/ UIButtonComponent      tradeskillDepotButtonComponent;              // BNK_TradeskillDepot
+/*0x09c8*/ UIButtonComponent      moneyButtonComponents[5];                    // BNK_Money%d / BNK_SharedMoney%d
+/*0x0d10*/ UIInvSlotComponent     invSlotComponents[NUM_BANK_SLOTS];           // BNK_BankSlot%d
+/*0x1cd0*/ UIInvSlotComponent     sharedSlotComponents[NUM_SHAREDBANK_SLOTS];  // BNK_SharedBankSlot%d
+/*0x2210*/ UILabelComponent       sharedBankLabelComponent;                    // BNK_SharedBankLabel
+/*0x22b0*/ UILabelComponent       bankerNameComponent;                         // BNK_BankerName
+/*0x2350*/ int                    BankSize;
+/*0x2354*/
 
 	CBankWnd(CXWnd*, CXStr);
 	virtual ~CBankWnd();
@@ -2306,7 +2387,7 @@ enum BuffWindowType
 	BuffWindowShortDuration,
 };
 
-constexpr size_t CBuffWindow_size = 0x348; // @sizeof(CBuffWindow) :: 2025-12-09 (test) @ 0x140196C80
+constexpr size_t CBuffWindow_size = 0x348; // @sizeof(CBuffWindow) :: 2026-01-13 (test) @ 0x140198D50
 
 class [[offsetcomments]] CBuffWindow : public CSidlScreenWnd, public WndEventHandler
 {
@@ -3031,7 +3112,7 @@ inline namespace deprecated {
 
 constexpr int MAX_CONTAINERS = 45;
 
-constexpr size_t CContainerMgr_size = 0x1B0; // @sizeof(CContainerMgr) :: 2025-11-24 (live) @ 0x140195C99
+constexpr size_t CContainerMgr_size = 0x1B0; // @sizeof(CContainerMgr) :: 2026-01-13 (test) @ 0x140197D49
 
 class [[offsetcomments]] CContainerMgr
 {
@@ -3209,7 +3290,7 @@ enum ECursorAttachmentType
 	eCursorAttachment_EquipmentKeyRingLink,
 };
 
-constexpr size_t CCursorAttachment_size = 0x620; // @sizeof(CCursorAttachment) :: 2025-12-09 (test) @ 0x140196019
+constexpr size_t CCursorAttachment_size = 0x620; // @sizeof(CCursorAttachment) :: 2026-01-13 (test) @ 0x1401980E9
 
 class [[offsetcomments]] CCursorAttachment : public CGFScreenWnd, public WndEventHandler
 {
@@ -3374,7 +3455,7 @@ public:
 // CFindItemWnd
 //============================================================================
 
-constexpr size_t CFindItemWnd_size = 0x3F8; // @sizeof(CFindItemWnd) :: 2025-12-09 (test) @ 0x14019757C
+constexpr size_t CFindItemWnd_size = 0x3F8; // @sizeof(CFindItemWnd) :: 2026-01-13 (test) @ 0x14019964C
 
 class [[offsetcomments]] CFindItemWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -3460,7 +3541,7 @@ enum FindLocationType {
 };
 EQLIB_API const char* FindLocationTypeToString(FindLocationType type);
 
-constexpr size_t CFindLocationWnd_size = 0x7B8; // @sizeof(CFindLocationWnd) :: 2025-12-09 (test) @ 0x140197D3A
+constexpr size_t CFindLocationWnd_size = 0x7B8; // @sizeof(CFindLocationWnd) :: 2026-01-13 (test) @ 0x140199E0A
 
 class [[offsetcomments]] CFindLocationWnd : public CGFScreenWnd
 {
@@ -3674,7 +3755,7 @@ public:
 // CGiveWnd
 //============================================================================
 
-constexpr size_t CGiveWnd_size = 0xB48; // @sizeof(CGiveWnd) :: 2025-12-09 (test) @ 0x1401977EC
+constexpr size_t CGiveWnd_size = 0xB48; // @sizeof(CGiveWnd) :: 2026-01-13 (test) @ 0x1401998BC
 
 class [[offsetcomments]] CGiveWnd : public CGFScreenWnd, public PopDialogHandler, public WndEventHandler
 {
@@ -3863,7 +3944,7 @@ public:
 // CGroupWnd
 //============================================================================
 
-constexpr size_t CGroupWnd_size = 0x6F8; // @sizeof(CGroupWnd) :: 2025-12-09 (test) @ 0x140196798
+constexpr size_t CGroupWnd_size = 0x6F8; // @sizeof(CGroupWnd) :: 2026-01-13 (test) @ 0x140198868
 
 class [[offsetcomments]] CGroupWnd : public CGFScreenWnd
 {
@@ -4378,7 +4459,7 @@ inline namespace deprecated {
 
 class CInvSlotWnd;
 
-constexpr size_t CInvSlot_size = 0x28; // @sizeof(CInvSlot) :: 2025-12-09 (test) @ 0x1404113E2
+constexpr size_t CInvSlot_size = 0x28; // @sizeof(CInvSlot) :: 2026-01-13 (test) @ 0x140417522
 
 class [[offsetcomments]] CInvSlot
 {
@@ -4425,7 +4506,7 @@ SIZE_CHECK(CInvSlot, CInvSlot_size);
 
 constexpr int MAX_INV_SLOTS = 4000;  // CInvSlotMgr::CreateInvSlot
 
-constexpr size_t CInvSlotMgr_size = 0x7D88; // @sizeof(CInvSlotMgr) :: 2025-12-09 (test) @ 0x140195BB7
+constexpr size_t CInvSlotMgr_size = 0x7D88; // @sizeof(CInvSlotMgr) :: 2026-01-13 (test) @ 0x140197C87
 
 class [[offsetcomments]] CInvSlotMgr
 {
@@ -4469,7 +4550,7 @@ SIZE_CHECK(CInvSlotMgr, CInvSlotMgr_size);
 
 //----------------------------------------------------------------------------
 
-constexpr size_t CInvSlotWnd_size = 0x458; // @sizeof(CInvSlotWnd) :: 2025-12-09 (test) @ 0x1404F6A1C
+constexpr size_t CInvSlotWnd_size = 0x458; // @sizeof(CInvSlotWnd) :: 2026-01-13 (test) @ 0x1404FD409
 
 class [[offsetcomments]] CInvSlotWnd : public CButtonWnd
 {
@@ -4568,7 +4649,7 @@ enum ItemDisplayFlags
 	FROM_BARTER_SEARCH = 0x00000010
 };
 
-constexpr size_t CItemDisplayWnd_size = 0xAA0; // @sizeof(CItemDisplayWnd) :: 2025-12-09 (test) @ 0x1404316E4
+constexpr size_t CItemDisplayWnd_size = 0xAA0; // @sizeof(CItemDisplayWnd) :: 2026-01-13 (test) @ 0x1404378A4
 
 class [[offsetcomments]] CItemDisplayWnd : public CSidlScreenWnd
 {
@@ -4748,7 +4829,7 @@ public:
 // CKeyRingWnd
 //============================================================================
 
-constexpr size_t CKeyRingWnd_size = 0x4A0; // @sizeof(CKeyRingWnd) :: 2025-12-09 (test) @ 0x140197109
+constexpr size_t CKeyRingWnd_size = 0x4A0; // @sizeof(CKeyRingWnd) :: 2026-01-13 (test) @ 0x1401991D9
 
 class [[offsetcomments]] CKeyRingWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -4874,7 +4955,7 @@ public:
 
 struct loot_msg;
 
-constexpr size_t CLootWnd_size = 0xCB8; // @sizeof(CLootWnd) :: 2025-12-09 (test) @ 0x1401972AA
+constexpr size_t CLootWnd_size = 0xCB8; // @sizeof(CLootWnd) :: 2026-01-13 (test) @ 0x14019937A
 
 class [[offsetcomments]] CLootWnd : public CSidlScreenWnd, public PopDialogHandler, public WndEventHandler
 {
@@ -5091,7 +5172,7 @@ public:
 	static VirtualFunctionTable* sm_vftable;
 };
 
-constexpr size_t CMapViewWnd_size = 0x848; // @sizeof(CMapViewWnd) :: 2025-12-09 (test) @ 0x140196AFA
+constexpr size_t CMapViewWnd_size = 0x848; // @sizeof(CMapViewWnd) :: 2026-01-13 (test) @ 0x140198BCA
 
 class [[offsetcomments]] CMapViewWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -5513,7 +5594,7 @@ public:
 
 constexpr const int MAX_PET_BUTTONS = 14;
 
-constexpr size_t CPetInfoWnd_size = 0x3C8; // @sizeof(CPetInfoWnd) :: 2025-12-09 (test) @ 0x1401965C0
+constexpr size_t CPetInfoWnd_size = 0x3C8; // @sizeof(CPetInfoWnd) :: 2026-01-13 (test) @ 0x140198690
 
 class [[offsetcomments]] CPetInfoWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -5652,7 +5733,7 @@ enum ECombatState
 };
 
 
-constexpr size_t CPlayerWnd_size = 0x400; // @sizeof(CPlayerWnd) :: 2025-12-09 (test) @ 0x140196F31
+constexpr size_t CPlayerWnd_size = 0x400; // @sizeof(CPlayerWnd) :: 2026-01-13 (test) @ 0x140199001
 
 class [[offsetcomments]] CPlayerWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -6047,7 +6128,7 @@ enum ESpellDisplayType
 	SpellDisplayType_TargetBuff,
 };
 
-constexpr size_t CSpellDisplayWnd_size = 0x3B0; // @sizeof(CSpellDisplayWnd) :: 2025-12-09 (test) @ 0x14050333E
+constexpr size_t CSpellDisplayWnd_size = 0x3B0; // @sizeof(CSpellDisplayWnd) :: 2026-01-13 (test) @ 0x140509D4E
 
 class [[offsetcomments]] CSpellDisplayWnd : public CSidlScreenWnd
 {
@@ -6149,7 +6230,7 @@ public:
 // CTargetWnd
 //============================================================================
 
-constexpr size_t CTargetWnd_size = 0x3C0; // @sizeof(CTargetWnd) :: 2025-12-09 (test) @ 0x140196DCF
+constexpr size_t CTargetWnd_size = 0x3C0; // @sizeof(CTargetWnd) :: 2026-01-13 (test) @ 0x140198E9F
 
 class [[offsetcomments]] CTargetWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -6457,7 +6538,7 @@ public:
 // CTradeWnd
 //============================================================================
 
-constexpr size_t CTradeWnd_size = 0x1740; // @sizeof(CTradeWnd) :: 2025-12-09 (test) @ 0x140197492
+constexpr size_t CTradeWnd_size = 0x1740; // @sizeof(CTradeWnd) :: 2026-01-13 (test) @ 0x140199562
 
 class [[offsetcomments]] CTradeWnd : public CGFScreenWnd, public WndEventHandler
 {
@@ -6724,7 +6805,7 @@ public:
 
 using ZonePathArray = ArrayClass<ZonePathData>;
 
-constexpr size_t ZoneGuideManagerClient_size = 0xFA50; // @sizeof(ZoneGuideManagerClient) :: 2025-12-09 (test) @ 0x14034FF0F
+constexpr size_t ZoneGuideManagerClient_size = 0xFA50; // @sizeof(ZoneGuideManagerClient) :: 2026-01-13 (test) @ 0x1403540DF
 
 class [[offsetcomments]] ZoneGuideManagerClient : public ZoneGuideManagerBase
 {

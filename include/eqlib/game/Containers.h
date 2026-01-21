@@ -1691,16 +1691,16 @@ template <typename KeyT, typename T, int TableSize>
 class HashListMap<KeyT, T, TableSize, -1>
 {
 public:
-	using KeyType = KeyT;
-	using ValueType = T;
+	using key_type = KeyT;
+	using value_type = T;
 
 	struct Node
 	{
 		T& value() { return Value; }
 		const T& value() const { return Value; }
 
-		KeyType& key() { return Key; }
-		const KeyType& key() const { return Key; }
+		key_type& key() { return Key; }
+		const key_type& key() const { return Key; }
 
 		Node* next() const { return pNext; }
 		Node* prev() const { return pPrev; }
@@ -1710,7 +1710,7 @@ public:
 		friend class Iterator;
 
 		// Node size: 0x20 + sizeof(Key) + sizeof(T)
-		KeyType   Key;
+		key_type   Key;
 		T         Value;
 		Node*     pNext;
 		Node*     pPrev;
@@ -1797,7 +1797,7 @@ public:
 		return nullptr;
 	}
 
-	T* FindFirst(const KeyType& key) const
+	T* FindFirst(const key_type& key) const
 	{
 		uint32_t hashValue = (uint32_t)HashType(key);
 		int slot = hashValue % TableSize;
@@ -1818,7 +1818,7 @@ public:
 	T* FindNext(const T* previousResult) const
 	{
 		Node* entry = NodeGet(previousResult);
-		KeyType& prevKey = entry->key();
+		key_type& prevKey = entry->key();
 
 		entry = entry->hashNext();
 		while (entry != nullptr)
@@ -1832,7 +1832,7 @@ public:
 		return nullptr;
 	}
 
-	const KeyType& GetKey(const T* object) const
+	const key_type& GetKey(const T* object) const
 	{
 		return NodeGet(object)->key();
 	}
