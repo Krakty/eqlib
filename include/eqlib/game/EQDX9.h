@@ -122,9 +122,9 @@ SIZE_CHECK(SwapChain, SwapChain_size);
 class [[offsetcomments]] SwapChainImpl : public ObjectBase<SwapChainImpl>
 {
 public:
-/*0x78*/ Device*             Device;
-/*0x80*/ void*               Something; // wrong (not swap chain)
-/*0x88*/
+/*0x28*/ Device*             Device;
+/*0x30*/ void*               Something; // wrong (not swap chain)
+/*0x38*/
 };
 //constexpr size_t SwapChainImpl_size = 0x88;
 //SIZE_CHECK(SwapChainImpl, SwapChainImpl_size);
@@ -191,9 +191,9 @@ public:
 /*0x150*/ virtual HRESULT WINAPI Unknown0x150() = 0;
 #pragma endregion
 
-/*0x78*/ Device*             Device;
-/*0x80*/ uint32_t            ThreadID;
-/*0x84*/
+/*0x28*/ Device*             Device;
+/*0x30*/ uint32_t            ThreadID;
+/*0x34*/
 };
 //constexpr size_t DeviceImpl_size = 0x38; // 180128435
 //SIZE_CHECK(DeviceImpl, DeviceImpl_size);
