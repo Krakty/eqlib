@@ -658,18 +658,31 @@ public:
 	~HashTable();
 
 	template <typename T, typename Key>
-	struct HashTableEntry : std::pair<T, const Key>
+	struct HashNode : std::pair<const Key, T>
 	{
-		using std::pair<T, const Key>::pair;
+		using std::pair<const Key, T>::pair;
 
-		const Key& key() const { return this->second; }
-		T& value() { return this->first; }
-		const T& value() const { return this->first; }
+		const Key& key() const { return this->first; }
+		T& value() { return this->second; }
+		const T& value() const { return this->second; }
+	};
 
-		static const HashTableEntry* GetEntry(const T* value) { return reinterpret_cast<const HashTableEntry*>(value); }
-		static HashTableEntry* GetEntry(T* value) { return reinterpret_cast<HashTableEntry*>(value); }
-
+	template <typename T, typename Key>
+	struct HashTableEntry : HashNode<T, Key>
+	{
+		using HashNode<T, Key>::HashNode;
+	
 		HashTableEntry* next = nullptr;
+
+		static const HashTableEntry* GetEntry(const T* value)
+		{
+			return value ? (const HashTableEntry*)((const uint8_t*)value - offsetof(HashTableEntry, second)) : nullptr;
+		}
+
+		static HashTableEntry* GetEntry(T* value)
+		{
+			return value ? (HashTableEntry*)((uint8_t*)value - offsetof(HashTableEntry, second)) : nullptr;
+		}
 	};
 	static_assert(sizeof(HashTableEntry<int, int>) == 8 + sizeof(uintptr_t));
 	using HashEntry = HashTableEntry<T, Key>;
@@ -740,7 +753,7 @@ public:
 #pragma region STL Interface
 	using key_type = Key;
 	using mapped_type = T;
-	using value_type = std::pair<T, const Key>;
+	using value_type = HashNode<T, Key>;
 	using size_type = size_t;
 	using difference_type = std::ptrdiff_t;
 
