@@ -1284,7 +1284,7 @@ public:
 	Value* GetPrev(const Value* pValue) const;
 
 	const Key& GetKeyOf(const Value* pValue) const;
-	int GetCount() const { return m_count; }
+	int GetCount() const { return static_cast<int>(m_count); }
 	bool IsEmpty() const { return m_count == 0; }
 
 	mapped_type* operator[](const Key& key) { return Find(key); }

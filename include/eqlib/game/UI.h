@@ -6453,24 +6453,24 @@ class [[offsetcomments]] CTradeskillDepotWnd : public CSidlScreenWnd, public Wnd
 public:
 	FORCE_SYMBOLS;
 
-/*0x2d8*/ CListWnd*     pItemList;          // TD_Item_List
-/*0x2e0*/ CButtonWnd*   pInspectButton;     // TD_Inspect_Button
-/*0x2e8*/ CLabel*       pSelectedItemLabel; // TD_Selected_Item_Label
-/*0x2f0*/ CLabel*       pNoDataLabel;       // TD_NoDataLabel
-/*0x2f8*/ CXWnd*        pScreenHideList;    // TD_ScreenHideList
-/*0x300*/ CButtonWnd*   pSelectedItemSlot;  // TD_Selected_Item_Slot
-/*0x308*/ CButtonWnd*   pWithdrawButton;    // TD_Withdraw_Button
-/*0x310*/ CButtonWnd*   pExitButton;        // TD_Exit_Button
-/*0x318*/ CLabel*       pItemCountNumber;   // TD_Item_Count_Number
-/*0x320*/ CEditWnd*     pSearchItemInput;   // TD_SearchItem_Input
-/*0x328*/ CButtonWnd*   pSearchItemButton;  // TD_SearchItem_Button
-/*0x330*/ ItemContainer Items;
-/*0x358*/ bool          bNeedsUpdate;
-/*0x360*/ ItemPtr       pSelectedItem;
-/*0x370*/ uint32_t      SelectedItemID;
-/*0x378*/ uint64_t      lastUpdateTime;
-/*0x380*/ bool          bUnknown5;
-/*0x384*/
+/*0x2d8*/ CListWnd*                      pItemList;          // TD_Item_List
+/*0x2e0*/ CButtonWnd*                    pInspectButton;     // TD_Inspect_Button
+/*0x2e8*/ CLabel*                        pSelectedItemLabel; // TD_Selected_Item_Label
+/*0x2f0*/ CLabel*                        pNoDataLabel;       // TD_NoDataLabel
+/*0x2f8*/ CXWnd*                         pScreenHideList;    // TD_ScreenHideList
+/*0x300*/ CButtonWnd*                    pSelectedItemSlot;  // TD_Selected_Item_Slot
+/*0x308*/ CButtonWnd*                    pWithdrawButton;    // TD_Withdraw_Button
+/*0x310*/ CButtonWnd*                    pExitButton;        // TD_Exit_Button
+/*0x318*/ CLabel*                        pItemCountNumber;   // TD_Item_Count_Number
+/*0x320*/ CEditWnd*                      pSearchItemInput;   // TD_SearchItem_Input
+/*0x328*/ CButtonWnd*                    pSearchItemButton;  // TD_SearchItem_Button
+/*0x330*/ SoeUtil::HashMap<int, ItemPtr> Items;
+/*0x368*/ bool                           bNeedsUpdate;
+/*0x370*/ ItemPtr                        pSelectedItem;
+/*0x380*/ uint32_t                       SelectedItemID;
+/*0x388*/ uint64_t                       lastUpdateTime;
+/*0x390*/ bool                           bUnknown5;
+/*0x394*/
 };
 
 //============================================================================
