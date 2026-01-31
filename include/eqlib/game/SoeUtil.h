@@ -1462,6 +1462,9 @@ typename HashMap<Key, Value>::Node* HashMap<Key, Value>::GetPrevNode(const Node*
 template <typename Key, typename Value>
 Value* HashMap<Key, Value>::Find(const Key& key) const
 {
+	if (m_buckets == nullptr)
+		return nullptr;
+
 	uint32_t hashValue = Hash(key);
 	uint32_t bucket = hashValue & (m_dynamicSize - 1);
 
