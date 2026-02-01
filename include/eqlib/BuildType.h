@@ -150,6 +150,9 @@
 // Tradeskill Depot was added with Night of Shadows expansion
 #define HAS_TRADESKILL_DEPOT IS_EXPANSION_LEVEL(EXPANSION_LEVEL_NOS)
 
+// Tradeskill Depot was modified to use a hashmap on Jan 22, 2026
+#define HAS_HASHMAP_TRADESKILL_DEPOT HAS_TRADESKILL_DEPOT && IS_CLIENT_DATE(20260122)
+
 //----------------------------------------------------------------------------
 // Compiler architecture error detection
 

@@ -98,6 +98,11 @@ public:
 	virtual EStatus GetBlitSpriteDefinition(const char* szTag, void** ppDefinition) = 0;
 	virtual void LoadGrassObjects(const char* filename, float distance, void** objects) = 0;
 	virtual void FreeGrassObjects() = 0;
+	virtual void Unknown0x118() = 0;       // References %s_EnvironmentFabricShader.txt
+	virtual void Unknown0x120() = 0;
+	virtual void Unknown0x128() = 0;       // References %s_EnvironmentEmissiveShader.txt
+	virtual void Unknown0x130() = 0;       // References %s_EnvironmentGodRaysShader.txt
+	virtual void Unknown0x138() = 0;       // References %s_EnvironmentOITShader.txt
 	virtual void InitFontManager() = 0;
 	virtual void DestroyFontManager() = 0;
 	virtual EStatus GetCachedFont(int fontStyle, CCachedFontInterface** ppCachedFont) = 0;
