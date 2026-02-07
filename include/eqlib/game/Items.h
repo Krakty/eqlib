@@ -1237,6 +1237,8 @@ public:
 	int get_LastEquipped() { return pEvolutionData ? pEvolutionData->LastEquipped : 0; }
 	__declspec(property(get = get_LastEquipped)) int LastEquipped;
 
+	bool IsEvolvingExpOn() const { return true; }
+
 	// Create ItemEvolutionData. Intended for use with MQ2LinkDB, to create an item that can be used
 	// to create an item link from.
 	EQLIB_OBJECT void PopulateItemEvolutionData(int maxLevel, int currentLevel, int groupId, int lastEquipped, double expPct);
