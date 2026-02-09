@@ -182,7 +182,7 @@ private:
 	void ClearRoles();
 };
 
-constexpr size_t CGroupMember_size = 0x68; // @sizeof(CGroupMember) :: 2026-01-27 (test) @ 0x1402E2441
+constexpr size_t CGroupMember_size = 0x68; // @sizeof(CGroupMember) :: 2026-02-02 (test) @ 0x1402E5F67
 
 class [[offsetcomments]] CGroupMember : public CGroupMemberBase
 {
@@ -1393,7 +1393,7 @@ public:
 /*0x1550*/ ItemContainer                         HeroForgeKeyRingItems;
 /*0x1578*/ ItemContainer                         TeleportationKeyRingItems;
 /*0x15a0*/ ItemContainer                         DragonHoardItems;
-/*0x15c8*/ ItemContainer                         PersonalTradeskillDepotItems;
+/*0x15c8*/ SoeUtil::HashMap<int, ItemPtr>        PersonalTradeskillDepotItems;
 /*0x15f0*/ ItemContainer                         ActivatedKeyRingItems;
 /*0x1618*/ ItemContainer                         EquipmentKeyRingItems;
 /*0x1640*/ ItemContainer                         AltStorageItems;
@@ -1679,7 +1679,7 @@ public:
 	int GetDeityBitmask() const { return 1 << (GetDeityReal() - 1); }
 };
 
-constexpr size_t PcClient_size = 0x3288; // @sizeof(PcClient) :: 2026-01-27 (test) @ 0x140288E7B
+constexpr size_t PcClient_size = 0x3298; // @sizeof(PcClient) :: 2026-02-02 (test) @ 0x14028C39B
 
 class [[offsetcomments]] PcClient : public PcZoneClient
 {

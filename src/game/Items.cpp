@@ -326,17 +326,17 @@ ItemBase::ItemBase()
 	NewArmorID = 0;
 	RealEstateID = -1;
 	Charges = 0;
-	Item1 = nullptr;
+	ItemDef = nullptr;
 }
 
 ItemDefinition* ItemBase::GetItemDefinition() const
 {
-	return const_cast<ItemDefinition*>(Item1);
+	return const_cast<ItemDefinition*>(ItemDef);
 }
 
 void ItemBase::SetItemDefinition(ItemDefinition* item)
 {
-	Item1 = item;
+	ItemDef = item;
 	UpdateItemDefinition();
 }
 
@@ -377,7 +377,7 @@ DESTRUCTOR_AT_ADDRESS(ItemClient::~ItemClient, ItemClient__dItemClient);
 
 ItemDefinition* ItemClient::GetItemDefinition() const
 {
-	return const_cast<ItemDefinition*>(Item1 ? Item1 : SharedItemDef.get());
+	return ItemDef ? ItemDef : SharedItemDef.get();
 }
 
 //----------------------------------------------------------------------------

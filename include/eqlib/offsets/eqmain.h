@@ -18,20 +18,20 @@
 // eqmain.dll offsets
 //
 
-#define EQMain__CEQSuiteTextureLoader__GetTexture_x                0x18008DE20
-#define EQMain__CLoginViewManager__HandleLButtonUp_x               0x18001AC60
+#define EQMain__CEQSuiteTextureLoader__GetTexture_x                0x18008E8E0
+#define EQMain__CLoginViewManager__HandleLButtonUp_x               0x18001B0E0
 //#define EQMain__CXWndManager__GetCursorToDisplay_x                 0x0          // inlined into CXWndManager::DrawCursor
-#define EQMain__LoginController__GiveTime_x                        0x180016150
-#define EQMain__LoginController__Shutdown_x                        0x180016950
-#define EQMain__LoginServerAPI__JoinServer_x                       0x180017B80
-#define EQMain__WndProc_x                                          0x18000BE30
+#define EQMain__LoginController__GiveTime_x                        0x180016640
+#define EQMain__LoginController__Shutdown_x                        0x180016E40
+#define EQMain__LoginServerAPI__JoinServer_x                       0x180018050
+#define EQMain__WndProc_x                                          0x18000C220
 
-#define EQMain__pinstCEQSuiteTextureLoader_x                       0x180175DE0
-#define EQMain__pinstCLoginViewManager_x                           0x18017D4E8
-#define EQMain__pinstCXWndManager_x                                0x1803804B8
-#define EQMain__pinstCSidlManager_x                                0x1803804C0
-#define EQMain__pinstLoginController_x                             0x18017D4F0
-#define EQMain__pinstLoginServerAPI_x                              0x18017D4D0
+#define EQMain__pinstCEQSuiteTextureLoader_x                       0x180177DE0
+#define EQMain__pinstCLoginViewManager_x                           0x18017F4E8
+#define EQMain__pinstCXWndManager_x                                0x1803824B8
+#define EQMain__pinstCSidlManager_x                                0x1803824C0
+#define EQMain__pinstLoginController_x                             0x18017F4F0
+#define EQMain__pinstLoginServerAPI_x                              0x18017F4D0
 
 #if __has_include("../../../../private/eqmain-private.h")
 #include "../../../../private/eqmain-private.h"
