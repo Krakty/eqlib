@@ -5402,7 +5402,7 @@ FUNCTION_AT_ADDRESS(void, CItemDisplayWnd::UpdateStrings(), CItemDisplayWnd__Upd
 FUNCTION_AT_ADDRESS(void, CItemDisplayWnd::InsertAugmentRequest(int AugSlot), CItemDisplayWnd__InsertAugmentRequest);
 #endif
 #ifdef CItemDisplayWnd__RemoveAugmentRequest_x
-FUNCTION_AT_ADDRESS(void, CItemDisplayWnd::RemoveAugmentRequest(int AugSlot), CItemDisplayWnd__RemoveAugmentRequest);
+FUNCTION_AT_ADDRESS(void, CItemDisplayWnd::RemoveAugmentRequest(ItemPtr item, int AugSlot), CItemDisplayWnd__RemoveAugmentRequest);
 #endif
 #ifdef CItemDisplayWnd__RequestConvertItem_x
 FUNCTION_AT_ADDRESS(void, CItemDisplayWnd::RequestConvertItem(), CItemDisplayWnd__RequestConvertItem);
