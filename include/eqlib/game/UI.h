@@ -4673,7 +4673,7 @@ public:
 	EQLIB_OBJECT CXStr CreateRaceString(EQ_Equipment*);
 	EQLIB_OBJECT void GetSizeString(int, char*);
 	EQLIB_OBJECT void InsertAugmentRequest(int AugSlot);
-	EQLIB_OBJECT void RemoveAugmentRequest(int AugSlot);
+	EQLIB_OBJECT static void RemoveAugmentRequest(ItemPtr item, int AugSlot);
 	EQLIB_OBJECT void RequestConvertItem();
 
 	//----------------------------------------------------------------------------
