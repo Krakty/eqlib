@@ -312,7 +312,7 @@ public:
 // CButtonWnd
 //============================================================================
 
-constexpr size_t CButtonWnd_size = 0x330; // @sizeof(CButtonWnd) :: 2026-02-05 (live) @ 0x1405EF440
+constexpr size_t CButtonWnd_size = 0x330; // @sizeof(CButtonWnd) :: 2026-03-03 (test) @ 0x1405F3000
 
 class [[offsetcomments]] CButtonWnd : public CXWnd
 {
@@ -1908,7 +1908,7 @@ public:
 // CBankWnd
 //============================================================================
 
-constexpr size_t CBankWnd_size = 0x2348; // @sizeof(CBankWnd) :: 2026-02-05 (live) @ 0x14019B666
+constexpr size_t CBankWnd_size = 0x2348; // @sizeof(CBankWnd) :: 2026-03-03 (test) @ 0x14019C376
 
 class [[offsetcomments]] CBankWnd : public CGFScreenWnd, public WndEventHandler
 {
@@ -2387,7 +2387,7 @@ enum BuffWindowType
 	BuffWindowShortDuration,
 };
 
-constexpr size_t CBuffWindow_size = 0x338; // @sizeof(CBuffWindow) :: 2026-02-05 (live) @ 0x14019B18A
+constexpr size_t CBuffWindow_size = 0x338; // @sizeof(CBuffWindow) :: 2026-03-03 (test) @ 0x14019BE9A
 
 class [[offsetcomments]] CBuffWindow : public CSidlScreenWnd, public WndEventHandler
 {
@@ -3112,7 +3112,7 @@ inline namespace deprecated {
 
 constexpr int MAX_CONTAINERS = 45;
 
-constexpr size_t CContainerMgr_size = 0x1B0; // @sizeof(CContainerMgr) :: 2026-02-05 (live) @ 0x14019A179
+constexpr size_t CContainerMgr_size = 0x1B0; // @sizeof(CContainerMgr) :: 2026-03-03 (test) @ 0x14019AE89
 
 class [[offsetcomments]] CContainerMgr
 {
@@ -3290,7 +3290,7 @@ enum ECursorAttachmentType
 	eCursorAttachment_EquipmentKeyRingLink,
 };
 
-constexpr size_t CCursorAttachment_size = 0x630; // @sizeof(CCursorAttachment) :: 2026-02-05 (live) @ 0x14019A523
+constexpr size_t CCursorAttachment_size = 0x630; // @sizeof(CCursorAttachment) :: 2026-03-03 (test) @ 0x14019B233
 
 class [[offsetcomments]] CCursorAttachment : public CGFScreenWnd, public WndEventHandler
 {
@@ -3456,7 +3456,7 @@ public:
 // CFindItemWnd
 //============================================================================
 
-constexpr size_t CFindItemWnd_size = 0x3E8; // @sizeof(CFindItemWnd) :: 2026-02-05 (live) @ 0x14019BA8B
+constexpr size_t CFindItemWnd_size = 0x3E8; // @sizeof(CFindItemWnd) :: 2026-03-03 (test) @ 0x14019C79B
 
 class [[offsetcomments]] CFindItemWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -3542,7 +3542,7 @@ enum FindLocationType {
 };
 EQLIB_API const char* FindLocationTypeToString(FindLocationType type);
 
-constexpr size_t CFindLocationWnd_size = 0x7A8; // @sizeof(CFindLocationWnd) :: 2026-02-05 (live) @ 0x14019C249
+constexpr size_t CFindLocationWnd_size = 0x7A8; // @sizeof(CFindLocationWnd) :: 2026-03-03 (test) @ 0x14019CF59
 
 class [[offsetcomments]] CFindLocationWnd : public CGFScreenWnd
 {
@@ -3756,7 +3756,7 @@ public:
 // CGiveWnd
 //============================================================================
 
-constexpr size_t CGiveWnd_size = 0xB38; // @sizeof(CGiveWnd) :: 2026-02-05 (live) @ 0x14019BCFB
+constexpr size_t CGiveWnd_size = 0xB38; // @sizeof(CGiveWnd) :: 2026-03-03 (test) @ 0x14019CA0B
 
 class [[offsetcomments]] CGiveWnd : public CGFScreenWnd, public PopDialogHandler, public WndEventHandler
 {
@@ -3945,7 +3945,7 @@ public:
 // CGroupWnd
 //============================================================================
 
-constexpr size_t CGroupWnd_size = 0x6E8; // @sizeof(CGroupWnd) :: 2026-02-05 (live) @ 0x14019ACA2
+constexpr size_t CGroupWnd_size = 0x46F0; // @sizeof(CGroupWnd) :: 2026-03-03 (test) @ 0x14019B9B2
 
 class [[offsetcomments]] CGroupWnd : public CGFScreenWnd
 {
@@ -3971,42 +3971,131 @@ public:
 
 	//----------------------------------------------------------------------------
 	// data members
-/*0x3a0*/ CButtonWnd*        InviteButton;
-/*0x3a8*/ CButtonWnd*        DisbandButton;
-/*0x3b0*/ CButtonWnd*        FollowButton;
-/*0x3b8*/ CButtonWnd*        DeclineButton;
-/*0x3c0*/ CButtonWnd*        LFGButton;
-/*0x3c8*/ CGaugeWnd*         HPGauge[6];
-/*0x3f8*/ CGaugeWnd*         PetGauge[6];
-/*0x428*/ CGaugeWnd*         ManaGauge[6];
-/*0x458*/ CGaugeWnd*         EnduranceGauge[6];
-/*0x488*/ CLabel*            HPLabel[6];
-/*0x4b8*/ CLabel*            HPPercLabel[6];
-/*0x4e8*/ CLabel*            ManaLabel[6];
-/*0x518*/ CLabel*            ManaPercLabel[6];
-/*0x548*/ CLabel*            EnduranceLabel[6];
-/*0x578*/ CLabel*            EndurancePercLabel[6];
-/*0x5a8*/ COLORREF           HPTextColor[6];
-/*0x5c0*/ CButtonWnd*        GroupTankButton[6];
-/*0x5f0*/ CButtonWnd*        GroupAssistButton[6];
-/*0x620*/ CButtonWnd*        GroupPullerButton[6];
-/*0x650*/ CButtonWnd*        GroupMarkNPCButton[6];
-/*0x680*/ CLabel*            AggroPercLabel[6];
-/*0x6b0*/ long               Timer;
-/*0x6b8*/ CContextMenu*      GroupContextMenu;
-/*0x6c0*/ bool               bPetbars;
-/*0x6c1*/ bool               bManabars;
-/*0x6c2*/ bool               bEndurancebars;
-/*0x6c3*/ bool               bAggroPct;
-/*0x6c4*/ int                PetBarIndex;
-/*0x6c8*/ int                ManaBarIndex;
-/*0x6cc*/ int                EnduranceBarIndex;
-/*0x6d0*/ int                AggroPctIndex;
-/*0x6d4*/ int                RoleSeparatorID;
-/*0x6d8*/ int                RoleSelectMenu;
-/*0x6dc*/ int                RoleSelectMenuID;
-/*0x6e0*/ bool               bPlayerInvited;
-/*0x6e4*/
+
+private:
+	// If New UI is enabled, these members will not be initialized, and the components will be used instead. Use the
+	// Accessors below instead.
+/*0x03a0*/ CButtonWnd*       m_inviteButton;                 // InviteButton
+/*0x03a8*/ CButtonWnd*       m_disbandButton;                // DisbandButton
+/*0x03b0*/ CButtonWnd*       m_followButton;                 // FollowButton
+/*0x03b8*/ CButtonWnd*       m_declineButton;                // DeclineButton
+/*0x03c0*/ CButtonWnd*       m_lfgButton;                    // LFGButton
+/*0x03c8*/ CGaugeWnd*        m_hpGauge[6];                   // Gauge%d
+/*0x03f8*/ CGaugeWnd*        m_petGauge[6];                  // PetGauge%d
+/*0x0428*/ CGaugeWnd*        m_manaGauge[6];                 // ManaGauge%d
+/*0x0458*/ CGaugeWnd*        m_enduranceGauge[6];            // STAGauge%d
+/*0x0488*/ CLabel*           m_hpLabel[6];                   // HPLabel%d
+/*0x04b8*/ CLabel*           m_hpPercLabel[6];               // HPPercLabel%d
+/*0x04e8*/ CLabel*           m_manaLabel[6];                 // ManaLabel%d
+/*0x0518*/ CLabel*           m_manaPercLabel[6];             // ManaPercLabel%d
+/*0x0548*/ CLabel*           m_enduranceLabel[6];            // STALabel%d
+/*0x0578*/ CLabel*           m_endurancePercLabel[6];        // STAPercLabel%d
+/*0x05a8*/ COLORREF          m_hpTextColor[6];
+/*0x05c0*/ CButtonWnd*       m_groupTankButton[6];           // GroupRoleTank%d
+/*0x05f0*/ CButtonWnd*       m_groupAssistButton[6];         // GroupRoleAssist%d
+/*0x0620*/ CButtonWnd*       m_groupPullerButton[6];         // GroupRolePuller%d
+/*0x0650*/ CButtonWnd*       m_groupMarkNPCButton[6];        // GroupRoleMarkNPC%d
+/*0x0680*/ CLabel*           m_aggroPercLabel[6];            // GW_AggroPctPlayer%d
+
+public:
+	// CButtonWnd* InviteButton;
+	CButtonWnd* _get_inviteButton() { return GetNewUIEngineWindow(m_inviteButton, inviteButtonComponent); }
+	__declspec(property(get = _get_inviteButton)) CButtonWnd* InviteButton;
+	// CButtonWnd* DisbandButton;
+	CButtonWnd* _get_disbandButton() { return GetNewUIEngineWindow(m_disbandButton, disbandButtonComponent); }
+	__declspec(property(get = _get_disbandButton)) CButtonWnd* DisbandButton;
+	// CButtonWnd* FollowButton;
+	CButtonWnd* _get_followButton() { return GetNewUIEngineWindow(m_followButton, followButtonComponent); }
+	__declspec(property(get = _get_followButton)) CButtonWnd* FollowButton;
+	// CButtonWnd* DeclineButton;
+	CButtonWnd* _get_declineButton() { return GetNewUIEngineWindow(m_declineButton, declineButtonComponent); }
+	__declspec(property(get = _get_declineButton)) CButtonWnd* DeclineButton;
+	// CButtonWnd* LFGButton;
+	CButtonWnd* _get_lfgButton() { return GetNewUIEngineWindow(m_lfgButton, lfgButtonComponent); }
+	__declspec(property(get = _get_lfgButton)) CButtonWnd* LFGButton;
+	// CGaugeWnd* HPGauge[6];
+	CGaugeWnd* _get_hpGauge(int idx) { return idx < 6 ? GetNewUIEngineWindow(m_hpGauge[idx], hpGaugeComponent[idx]) : nullptr; }
+	__declspec(property(get = _get_hpGauge)) CGaugeWnd* HPGauge[];
+	// CGaugeWnd* PetGauge[6];
+	CGaugeWnd* _get_petGauge(int idx) { return idx < 6 ? GetNewUIEngineWindow(m_petGauge[idx], petGaugeComponent[idx]) : nullptr; }
+	__declspec(property(get = _get_petGauge)) CGaugeWnd* PetGauge[];
+	// CGaugeWnd* ManaGauge[6];
+	CGaugeWnd* _get_manaGauge(int idx) { return idx < 6 ? GetNewUIEngineWindow(m_manaGauge[idx], manaGaugeComponent[idx]) : nullptr; }
+	__declspec(property(get = _get_manaGauge)) CGaugeWnd* ManaGauge[];
+	// CGaugeWnd* EnduranceGauge[6];
+	CGaugeWnd* _get_enduranceGauge(int idx) { return idx < 6 ? GetNewUIEngineWindow(m_enduranceGauge[idx], enduranceGaugeComponent[idx]) : nullptr; }
+	__declspec(property(get = _get_enduranceGauge)) CGaugeWnd* EnduranceGauge[];
+	// CLabel* HPLabel[6];
+	CLabel* _get_hpLabel(int idx) { return idx < 6 ? GetNewUIEngineWindow(m_hpLabel[idx], hpLabelComponent[idx]) : nullptr; }
+	__declspec(property(get = _get_hpLabel)) CLabel* HPLabel[];
+	// CLabel* HPPercLabel[6];
+	CLabel* _get_hpPercLabel(int idx) { return idx < 6 ? GetNewUIEngineWindow(m_hpPercLabel[idx], hpPercLabelComponent[idx]) : nullptr; }
+	__declspec(property(get = _get_hpPercLabel)) CLabel* HPPercLabel[];
+	// CLabel* ManaLabel[6];
+	CLabel* _get_manaLabel(int idx) { return idx < 6 ? GetNewUIEngineWindow(m_manaLabel[idx], manaLabelComponent[idx]) : nullptr; }
+	__declspec(property(get = _get_manaLabel)) CLabel* ManaLabel[];
+	// CLabel* ManaPercLabel[6];
+	CLabel* _get_manaPercLabel(int idx) { return idx < 6 ? GetNewUIEngineWindow(m_manaPercLabel[idx], manaPercLabelComponent[idx]) : nullptr; }
+	__declspec(property(get = _get_manaPercLabel)) CLabel* ManaPercLabel[];
+	// CLabel* EnduranceLabel[6];
+	CLabel* _get_enduranceLabel(int idx) { return idx < 6 ? GetNewUIEngineWindow(m_enduranceLabel[idx], enduranceLabelComponent[idx]) : nullptr; }
+	__declspec(property(get = _get_enduranceLabel)) CLabel* EnduranceLabel[];
+	// CLabel* EndurancePercLabel[6];
+	CLabel* _get_endurancePercLabel(int idx) { return idx < 6 ? GetNewUIEngineWindow(m_endurancePercLabel[idx], endurancePercLabelComponent[idx]) : nullptr; }
+	__declspec(property(get = _get_endurancePercLabel)) CLabel* EndurancePercLabel[];
+	// CButtonWnd* GroupTankButton[6];
+	CButtonWnd* _get_groupTankButton(int idx) { return idx < 6 ? GetNewUIEngineWindow(m_groupTankButton[idx], groupTankButtonComponent[idx]) : nullptr; }
+	__declspec(property(get = _get_groupTankButton)) CButtonWnd* GroupTankButton[];
+	// CButtonWnd* GroupAssistButton[6];
+	CButtonWnd* _get_groupAssistButton(int idx) { return idx < 6 ? GetNewUIEngineWindow(m_groupAssistButton[idx], groupAssistButtonComponent[idx]) : nullptr; }
+	__declspec(property(get = _get_groupAssistButton)) CButtonWnd* GroupAssistButton[];
+	// CButtonWnd* GroupPullerButton[6];
+	CButtonWnd* _get_groupPullerButton(int idx) { return idx < 6 ? GetNewUIEngineWindow(m_groupPullerButton[idx], groupPullerButtonComponent[idx]) : nullptr; }
+	__declspec(property(get = _get_groupPullerButton)) CButtonWnd* GroupPullerButton[];
+	// CButtonWnd* GroupMarkNPCButton[6];
+	CButtonWnd* _get_groupMarkNPCButton(int idx) { return idx < 6 ? GetNewUIEngineWindow(m_groupMarkNPCButton[idx], groupMarkNPCButtonComponent[idx]) : nullptr; }
+	__declspec(property(get = _get_groupMarkNPCButton)) CButtonWnd* GroupMarkNPCButton[];
+	// CLabel* AggroPercLabel[6];
+	CLabel* _get_aggroPercLabel(int idx) { return idx < 6 ? GetNewUIEngineWindow(m_aggroPercLabel[idx], aggroPercLabelComponent[idx]) : nullptr; }
+	__declspec(property(get = _get_aggroPercLabel)) CLabel* AggroPercLabel[];
+
+/*0x06b0*/ UIButtonComponent inviteButtonComponent;
+/*0x0758*/ UIButtonComponent disbandButtonComponent;
+/*0x0800*/ UIButtonComponent followButtonComponent;
+/*0x08a8*/ UIButtonComponent declineButtonComponent;
+/*0x0950*/ UIButtonComponent lfgButtonComponent;
+/*0x09f8*/ UIGaugeComponent  hpGaugeComponent[6];
+/*0x0db8*/ UIGaugeComponent  petGaugeComponent[6];
+/*0x1178*/ UIGaugeComponent  manaGaugeComponent[6];
+/*0x1538*/ UIGaugeComponent  enduranceGaugeComponent[6];
+/*0x18f8*/ UILabelComponent  hpLabelComponent[6];            // HPLabel%d
+/*0x1cb8*/ UILabelComponent  hpPercLabelComponent[6];
+/*0x2078*/ UILabelComponent  manaLabelComponent[6];
+/*0x2438*/ UILabelComponent  manaPercLabelComponent[6];
+/*0x27f8*/ UILabelComponent  enduranceLabelComponent[6];
+/*0x2bb8*/ UILabelComponent  endurancePercLabelComponent[6]; // STAPercLabel%d
+/*0x2f78*/ UILabelComponent  gaugeLabelComponent[6];         // GaugeLabel%d
+/*0x3338*/ UIButtonComponent groupTankButtonComponent[6];
+/*0x3728*/ UIButtonComponent groupAssistButtonComponent[6];
+/*0x3b18*/ UIButtonComponent groupPullerButtonComponent[6];
+/*0x3f08*/ UIButtonComponent groupMarkNPCButtonComponent[6];
+/*0x42f8*/ UILabelComponent  aggroPercLabelComponent[6];
+
+/*0x46b8*/ long              Timer;
+/*0x46c0*/ CContextMenu*     GroupContextMenu;
+/*0x46c8*/ bool              bPetbars;
+/*0x46c9*/ bool              bManabars;
+/*0x46ca*/ bool              bEndurancebars;
+/*0x46cb*/ bool              bAggroPct;
+/*0x46cc*/ int               PetBarIndex;
+/*0x46d0*/ int               ManaBarIndex;
+/*0x46d4*/ int               EnduranceBarIndex;
+/*0x46d8*/ int               AggroPctIndex;
+/*0x46dc*/ int               RoleSeparatorID;
+/*0x46e0*/ int               RoleSelectMenu;
+/*0x46e4*/ int               RoleSelectMenuID;
+/*0x46e8*/ bool              bPlayerInvited;
+/*0x46ec*/
 };
 
 SIZE_CHECK(CGroupWnd, CGroupWnd_size);
@@ -4460,7 +4549,7 @@ inline namespace deprecated {
 
 class CInvSlotWnd;
 
-constexpr size_t CInvSlot_size = 0x28; // @sizeof(CInvSlot) :: 2026-02-05 (live) @ 0x14041CF22
+constexpr size_t CInvSlot_size = 0x28; // @sizeof(CInvSlot) :: 2026-03-03 (test) @ 0x1404203F2
 
 class [[offsetcomments]] CInvSlot
 {
@@ -4507,7 +4596,7 @@ SIZE_CHECK(CInvSlot, CInvSlot_size);
 
 constexpr int MAX_INV_SLOTS = 4000;  // CInvSlotMgr::CreateInvSlot
 
-constexpr size_t CInvSlotMgr_size = 0x7D88; // @sizeof(CInvSlotMgr) :: 2026-02-05 (live) @ 0x14019A0B7
+constexpr size_t CInvSlotMgr_size = 0x7D88; // @sizeof(CInvSlotMgr) :: 2026-03-03 (test) @ 0x14019ADC7
 
 class [[offsetcomments]] CInvSlotMgr
 {
@@ -4551,7 +4640,7 @@ SIZE_CHECK(CInvSlotMgr, CInvSlotMgr_size);
 
 //----------------------------------------------------------------------------
 
-constexpr size_t CInvSlotWnd_size = 0x448; // @sizeof(CInvSlotWnd) :: 2026-02-05 (live) @ 0x140504FCC
+constexpr size_t CInvSlotWnd_size = 0x448; // @sizeof(CInvSlotWnd) :: 2026-03-03 (test) @ 0x14050867C
 
 class [[offsetcomments]] CInvSlotWnd : public CButtonWnd
 {
@@ -4650,7 +4739,7 @@ enum ItemDisplayFlags
 	FROM_BARTER_SEARCH = 0x00000010
 };
 
-constexpr size_t CItemDisplayWnd_size = 0xA90; // @sizeof(CItemDisplayWnd) :: 2026-02-05 (live) @ 0x14043D494
+constexpr size_t CItemDisplayWnd_size = 0xA90; // @sizeof(CItemDisplayWnd) :: 2026-03-03 (test) @ 0x1404409D4
 
 class [[offsetcomments]] CItemDisplayWnd : public CSidlScreenWnd
 {
@@ -4830,7 +4919,7 @@ public:
 // CKeyRingWnd
 //============================================================================
 
-constexpr size_t CKeyRingWnd_size = 0x490; // @sizeof(CKeyRingWnd) :: 2026-02-05 (live) @ 0x14019B618
+constexpr size_t CKeyRingWnd_size = 0x490; // @sizeof(CKeyRingWnd) :: 2026-03-03 (test) @ 0x14019C328
 
 class [[offsetcomments]] CKeyRingWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -4956,7 +5045,7 @@ public:
 
 struct loot_msg;
 
-constexpr size_t CLootWnd_size = 0xCA8; // @sizeof(CLootWnd) :: 2026-02-05 (live) @ 0x14019B7B9
+constexpr size_t CLootWnd_size = 0xCA8; // @sizeof(CLootWnd) :: 2026-03-03 (test) @ 0x14019C4C9
 
 class [[offsetcomments]] CLootWnd : public CSidlScreenWnd, public PopDialogHandler, public WndEventHandler
 {
@@ -5173,7 +5262,7 @@ public:
 	static VirtualFunctionTable* sm_vftable;
 };
 
-constexpr size_t CMapViewWnd_size = 0x828; // @sizeof(CMapViewWnd) :: 2026-02-05 (live) @ 0x14019B004
+constexpr size_t CMapViewWnd_size = 0x828; // @sizeof(CMapViewWnd) :: 2026-03-03 (test) @ 0x14019BD14
 
 class [[offsetcomments]] CMapViewWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -5595,7 +5684,7 @@ public:
 
 constexpr const int MAX_PET_BUTTONS = 14;
 
-constexpr size_t CPetInfoWnd_size = 0x3B8; // @sizeof(CPetInfoWnd) :: 2026-02-05 (live) @ 0x14019AACA
+constexpr size_t CPetInfoWnd_size = 0x3B8; // @sizeof(CPetInfoWnd) :: 2026-03-03 (test) @ 0x14019B7DA
 
 class [[offsetcomments]] CPetInfoWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -5734,7 +5823,7 @@ enum ECombatState
 };
 
 
-constexpr size_t CPlayerWnd_size = 0x3F0; // @sizeof(CPlayerWnd) :: 2026-02-05 (live) @ 0x14019B440
+constexpr size_t CPlayerWnd_size = 0x3F0; // @sizeof(CPlayerWnd) :: 2026-03-03 (test) @ 0x14019C150
 
 class [[offsetcomments]] CPlayerWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -6129,7 +6218,7 @@ enum ESpellDisplayType
 	SpellDisplayType_TargetBuff,
 };
 
-constexpr size_t CSpellDisplayWnd_size = 0x3A0; // @sizeof(CSpellDisplayWnd) :: 2026-02-05 (live) @ 0x1405119FE
+constexpr size_t CSpellDisplayWnd_size = 0x3A0; // @sizeof(CSpellDisplayWnd) :: 2026-03-03 (test) @ 0x1405150AE
 
 class [[offsetcomments]] CSpellDisplayWnd : public CSidlScreenWnd
 {
@@ -6231,7 +6320,7 @@ public:
 // CTargetWnd
 //============================================================================
 
-constexpr size_t CTargetWnd_size = 0x3B0; // @sizeof(CTargetWnd) :: 2026-02-05 (live) @ 0x14019B2D9
+constexpr size_t CTargetWnd_size = 0x3B0; // @sizeof(CTargetWnd) :: 2026-03-03 (test) @ 0x14019BFE9
 
 class [[offsetcomments]] CTargetWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -6539,7 +6628,7 @@ public:
 // CTradeWnd
 //============================================================================
 
-constexpr size_t CTradeWnd_size = 0x1730; // @sizeof(CTradeWnd) :: 2026-02-05 (live) @ 0x14019B9A1
+constexpr size_t CTradeWnd_size = 0x1730; // @sizeof(CTradeWnd) :: 2026-03-03 (test) @ 0x14019C6B1
 
 class [[offsetcomments]] CTradeWnd : public CGFScreenWnd, public WndEventHandler
 {
@@ -6806,7 +6895,7 @@ public:
 
 using ZonePathArray = ArrayClass<ZonePathData>;
 
-constexpr size_t ZoneGuideManagerClient_size = 0xFA50; // @sizeof(ZoneGuideManagerClient) :: 2026-02-05 (live) @ 0x14035785F
+constexpr size_t ZoneGuideManagerClient_size = 0xFA50; // @sizeof(ZoneGuideManagerClient) :: 2026-03-03 (test) @ 0x140357DDF
 
 class [[offsetcomments]] ZoneGuideManagerClient : public ZoneGuideManagerBase
 {
