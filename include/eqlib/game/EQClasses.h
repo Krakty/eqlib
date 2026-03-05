@@ -725,7 +725,7 @@ public:
 /*0x1d8*/
 };
 
-constexpr size_t EQWorldData_size = 0x1F88; // @sizeof(EQWorldData) :: 2026-02-02 (test) @ 0x14026CB16
+constexpr size_t EQWorldData_size = 0x1F88; // @sizeof(EQWorldData) :: 2026-02-05 (live) @ 0x14026CB26
 
 class [[offsetcomments]] EQWorldData
 {
@@ -1134,25 +1134,41 @@ enum eDatabaseStringType
 	eSpellCategory = 5,
 	eSpellDescription = 6,
 	eItemLoreGroup = 7,
-
+	eRaceDescription = 8,
+	eClassDescription = 9,
+	eStatDescription = 10,
+	eRaceName = 11,
+	eRaceNamePlural = 12,
+	eClassnamePlural = 13,
+	eDeityDescription = 14,
+	eStartingCityDescription = 15,
+	eAugmentSlot = 16,
 	eAltCurrencyName = 17,
 	eAltCurrencyNamePlural = 18,
-
 	eAltAbilityCategory = 19,
 	eExpansionName = 20,
 	eMercenaryCategory = 21,
 	eMercenarySubCategory = 22,
 	eMercenarySubCategoryDescription = 23,
 	eMercenaryStanceName = 24,
-
+	eMercenaryStanceDescriptionLong = 25,
+	eMercenaryStanceDescriptionShort = 26,
 	eSpellLineName = 27,
+	eContextMenu = 28,
+	// 29 does not exist
+	eAlertName = 30,
+	eAlertDescription = 31,
 
+	eZoneBonusDescription = 34,
+	// 35 does not exist
 	eMercenaryAbilityType = 36,
 	eMercenaryAbilityName = 37,
 	eMercenaryAbilityDescription = 38,
-
+	eSpellRestrictions = 39,
 	eSpellStackingGroup = 40,
 	eClaimFeatureDescription = 41,
+	eDecal = 42,
+	eClickDescription = 43,
 
 	eFactionName = 45,
 };
@@ -1213,7 +1229,7 @@ using SKILL = EQ_Skill;
 using PSKILL = EQ_Skill*;
 
 
-constexpr size_t SkillManager_size = 0x399C80; // @sizeof(SkillManager) :: 2026-02-02 (test) @ 0x14026CC56
+constexpr size_t SkillManager_size = 0x399C80; // @sizeof(SkillManager) :: 2026-02-05 (live) @ 0x14026CC66
 
 class [[offsetcomments]] SkillManager
 {
