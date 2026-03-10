@@ -7298,6 +7298,8 @@ class CSpellDisplayManager : public CWndDisplayManager
 {
 public:
 	CSpellDisplayWnd* GetWindow(int index) const { return static_cast<CSpellDisplayWnd*>(CWndDisplayManager::GetWindow(index)); }
+
+	EQLIB_OBJECT void ShowSpell(int SpellID, bool NewWindow, bool FullDisplay, ESpellDisplayType SpellDisplayType);
 };
 
 //----------------------------------------------------------------------------
