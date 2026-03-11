@@ -75,6 +75,12 @@ public:
 	virtual eqstd::string GetTypeName() const override { return "UILabel"; }
 };
 
+class [[offsetcomments]] UIGaugeComponent : public BaseComponent<CGaugeWnd>
+{
+public:
+	virtual eqstd::string GetTypeName() const override { return "UIGauge"; }
+};
+
 class [[offsetcomments]] UIButtonComponent : public BaseComponent<CButtonWnd>
 {
 public:
