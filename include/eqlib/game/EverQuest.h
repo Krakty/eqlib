@@ -460,7 +460,7 @@ struct [[offsetcomments]] EverQuestinfo
 /*0x00528*/ int               Heroic50Slots;
 /*0x0052c*/ int               Heroic85Slots;
 /*0x00530*/ int               Heroic100Slots;
-/*0x00534*/ int               Heroic110Slots;
+/*0x00534*/ int               Heroic115Slots;
 /*0x00538*/ bool              bAutoIdentify;
 /*0x00539*/ bool              bNameGen;
 /*0x0053a*/ bool              bGibberish;
