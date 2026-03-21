@@ -1255,7 +1255,7 @@ public:
 	__declspec(property(get = get_Item2)) ItemDefinition* Item2;
 };
 
-constexpr size_t ItemClient_size = 0x140; // @sizeof(ItemClient) :: 2026-03-03 (test) @ 0x1401EB009
+constexpr size_t ItemClient_size = 0x130; // @sizeof(ItemClient) :: 2026-03-16 (test) @ 0x1401EB1B9
 
 class [[offsetcomments]] ItemClient : public ItemBase
 {
@@ -1269,9 +1269,8 @@ public:
 
 	EQLIB_OBJECT static ItemPtr Create() { return eqstd::make_shared<ItemClient>(); }
 
-/*0x128*/ ItemDefinitionPtr SharedItemDef;
-/*0x138*/ CXStr             ClientString;
-/*0x140*/
+/*0x120*/ ItemDefinitionPtr SharedItemDef;
+/*0x130*/
 };
 
 SIZE_CHECK(ItemClient, ItemClient_size);
