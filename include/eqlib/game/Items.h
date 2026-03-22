@@ -1269,9 +1269,9 @@ public:
 
 	EQLIB_OBJECT static ItemPtr Create() { return eqstd::make_shared<ItemClient>(); }
 
-/*0x120*/ ItemDefinitionPtr SharedItemDef;
-/*0x130*/ CXStr             ClientString;
-/*0x138*/
+/*0x118*/ ItemDefinitionPtr SharedItemDef;
+/*0x128*/ CXStr             ClientString;
+/*0x130*/
 };
 
 SIZE_CHECK(ItemClient, ItemClient_size);

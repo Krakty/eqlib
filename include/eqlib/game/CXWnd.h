@@ -836,9 +836,9 @@ public:
 /*0x260*/ bool               bClickThrough;
 // @end: CXWnd Members
 
-/*0x264*/ bool               bUsesClassicUI;
-/*0x265*/ bool               bMouseOverEvent;
-/*0x268*/
+/*0x261*/ bool               bUsesClassicUI;
+/*0x262*/ bool               bMouseOverEvent;
+/*0x264*/
 
 	ALT_MEMBER_ALIAS(bool, bEscapable, CloseOnESC);
 	ALT_MEMBER_ALIAS_DEPRECATED(bool, bEnableShowBorder, bBorder, "Use bEnableShowBorder instead of bBorder");
