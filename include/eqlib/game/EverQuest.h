@@ -962,7 +962,8 @@ public:
 /*0x18eb8*/ int                   Blue;
 /*0x18ec0*/ ArrayClass<CharSelectInfo> charSelectPlayerArray;
 /*0x18ed8*/ char                  Filler[0x830]; // more data
-/*0x19708*/
+/*0x19708*/ uint8_t               unknown0x19708[0x8]; // +8B appended 2026-04-07
+/*0x19710*/
 
 	ALT_MEMBER_GETTER(UniversalChatProxy*, chatService, ChatService);
 };

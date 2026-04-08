@@ -964,7 +964,18 @@ public:
 /*0x614*/ bool                bInteractiveObject;
 /*0x615*/ uint8_t             SocketSubClassCount;
 /*0x618*/ int                 SocketSubClass[10];
-/*0x640*/
+/*0x640*/ int                 unknown0x640;       // +72B appended 2026-04-07
+/*0x644*/ uint8_t             unknown0x644[0xc];  // padding/unknown
+/*0x650*/ uint8_t             unknown0x650;
+/*0x654*/ int                 unknown0x654;
+/*0x658*/ int                 unknown0x658;
+/*0x65c*/ uint8_t             unknown0x65c[0xc];  // padding/unknown
+/*0x668*/ void*               unknown0x668;       // ptr
+/*0x670*/ int                 unknown0x670;
+/*0x678*/ void*               unknown0x678;       // ptr
+/*0x680*/ int                 unknown0x680;
+/*0x684*/ uint8_t             unknown0x684[0x4];  // padding to 0x688
+/*0x688*/
 
 	EQLIB_OBJECT ItemDefinition();
 

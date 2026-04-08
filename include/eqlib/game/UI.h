@@ -4840,7 +4840,8 @@ public:
 /*0xa90*/ CTAFrameDraw*     ptaPageBorderHighlight;        // FT_DefPageBorderHighlight // a60
 /*0xa98*/ CTAFrameDraw*     ptaPageBorder;                 // FT_DefPageBorder // a68
 /*0xaa0*/ uint32_t          ItemWndIndex;
-/*0xaa4*/
+/*0xaa4*/ uint8_t           unknown0xaa4[0xc]; // +8B appended 2026-04-07 (includes existing padding)
+/*0xab0*/
 };
 
 SIZE_CHECK(CItemDisplayWnd, CItemDisplayWnd_size);
