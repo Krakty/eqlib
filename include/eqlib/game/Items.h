@@ -1255,7 +1255,7 @@ public:
 	__declspec(property(get = get_Item2)) ItemDefinition* Item2;
 };
 
-constexpr size_t ItemClient_size = 0x120; // @sizeof(ItemClient) :: 2026-04-07 (test)
+constexpr size_t ItemClient_size = 0x130; // @sizeof(ItemClient) :: 2026-04-07 (test) -- verified from CreateItemClient alloc
 
 class [[offsetcomments]] ItemClient : public ItemBase
 {
