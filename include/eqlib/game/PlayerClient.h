@@ -735,7 +735,7 @@ struct BardQueueUnknown
 // PlayerClient
 //============================================================================
 
-constexpr size_t PlayerClient_size = 0x20C8; // @sizeof(PlayerClient) :: 2026-03-16 (test) @ 0x14030604E
+constexpr size_t PlayerClient_size = 0x20D8; // @sizeof(PlayerClient) :: 2026-04-07 (test)
 
 class [[offsetcomments]] PlayerClient : public PlayerZoneClient
 {
@@ -857,14 +857,15 @@ public:
 /*0x2018*/ HashList<uint64_t, 5> BardMelodyQueue; // /queuemelody related - definitely not a HashList // 2010
 /*0x2060*/ PlayerPhysicsClient mPlayerPhysicsClient;
 /*0x2098*/ int               SpawnStatus[6];
-/*0x20b0*/ int               BannerIndex0;                 // guild banners
-/*0x20b4*/ int               BannerIndex1;
-/*0x20b8*/ ARGBCOLOR         BannerTint0;
-/*0x20bc*/ ARGBCOLOR         BannerTint1;
-/*0x20c0*/ int               MountAnimationRelated;
-/*0x20c4*/ bool              bGuildShowAnim;               // or sprite? need to check
-/*0x20c5*/ bool              bWaitingForPort;
-/*0x20c8*/
+/*0x20b0*/ uint8_t           unknown0x20b0[0x10];          // new in 2026-04-07 patch (+16 bytes)
+/*0x20c0*/ int               BannerIndex0;                 // guild banners
+/*0x20c4*/ int               BannerIndex1;
+/*0x20c8*/ ARGBCOLOR         BannerTint0;
+/*0x20cc*/ ARGBCOLOR         BannerTint1;
+/*0x20d0*/ int               MountAnimationRelated;
+/*0x20d4*/ bool              bGuildShowAnim;               // or sprite? need to check
+/*0x20d5*/ bool              bWaitingForPort;
+/*0x20d8*/
 
 	void Initialize(PlayerClient*, unsigned char, unsigned int, unsigned char, char*);
 	~PlayerClient();
