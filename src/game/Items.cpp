@@ -290,10 +290,6 @@ ItemDefinition::ItemDefinition()
 	bInteractiveObject = false;
 	SocketSubClassCount = 0;
 	memset(SocketSubClass, 0, sizeof(SocketSubClass));
-	memset(Unknown0x640, 0, sizeof(Unknown0x640));
-	Unknown0x65C = 0;
-	memset(Unknown0x65D, 0, sizeof(Unknown0x65D));
-	memset(Unknown0x660, 0, sizeof(Unknown0x660));
 }
 
 //============================================================================
@@ -323,7 +319,6 @@ ItemBase::ItemBase()
 	Open = 0;
 	NoteStatus = 0;
 	bConvertable = false;
-	ConvertItemID = 0;
 	Tint = 0;
 	ArmorType = 0;
 	AugFlag = 0;
