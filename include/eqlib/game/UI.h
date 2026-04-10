@@ -4740,7 +4740,7 @@ enum ItemDisplayFlags
 	FROM_BARTER_SEARCH = 0x00000010
 };
 
-constexpr size_t CItemDisplayWnd_size = 0xAA8; // @sizeof(CItemDisplayWnd) :: 2026-03-16 (test) @ 0x140441114
+constexpr size_t CItemDisplayWnd_size = 0xAB0; // @sizeof(CItemDisplayWnd) :: 2026-04-07 (test)
 
 class [[offsetcomments]] CItemDisplayWnd : public CSidlScreenWnd
 {
@@ -4807,40 +4807,41 @@ public:
 /*0x418*/ CLabel*           ModButtonLabel;                // IDW_ModButtonLabel // 3e8
 /*0x420*/ CStmlWnd*         RewardButtonLabel;             // IDW_RewardButtonLabel
 /*0x428*/ CStmlWnd*         ConvertStml;                   // IDW_ConvertButtonLabel
-/*0x430*/ CLabel*           FuseButtonLabel;               // IDW_FuseButtonLabel
-/*0x438*/ CLabel*           MadeByLabel;                   // IDW_MadeBy
-/*0x440*/ CLabel*           CollectedLabel;                // IDW_CollectedLabel
-/*0x448*/ CLabel*           ScribedLabel;                  // IDW_ScribedLabel
-/*0x450*/ int               Row;
-/*0x454*/ bool              bAntiTwink;
-/*0x458*/ CButtonWnd*       ModButton;                     // IDW_ModButton
-/*0x460*/ CButtonWnd*       RewardButton;                  // IDW_RewardButton
-/*0x468*/ CButtonWnd*       PrintRealEstateItems;          // IDW_PrintRealEstateItems
-/*0x470*/ CButtonWnd*       ConvertButton;                 // IDW_ConvertButton
-/*0x478*/ CButtonWnd*       FuseButton;                    // IDW_FuseButton // 448
-/*0x480*/ bool              bCollected;
-/*0x481*/ bool              bCollectedReceived;
-/*0x484*/ int               Unknown0x0314;
-/*0x488*/ CXStr             ItemName;
-/*0x490*/ bool              bScribed;
-/*0x491*/ bool              bScribedReceived;
-/*0x494*/ int               group[6];
-/*0x4ac*/ int               showModified;
-/*0x4b0*/ int               heroicCount;
-/*0x4b4*/ int               itemInfoCount;
-/*0x4b8*/ CStmlWnd*         lblItemInfo[NumItemInfo];      // IDW_ItemInfo%d
-/*0x520*/ CLabel*           lblStat[NumStatRows][NumStatCols];      // IDW_Row%dCol%dStat
-/*0x790*/ CLabel*           lblValue[NumStatRows][NumStatCols];     // IDW_Row%dCol%dValue
-/*0xa00*/ CLabel*           lblHeroic[NumHeroic];          // IDW_Heroic%d 9d0
-/*0xa68*/ int               rightClickMenuId;
-/*0xa6c*/ int               rightClickMenuSocketId;
-/*0xa70*/ CComboWnd*        ItemCompareList;               // IDW_ItemCompareList // a40
-/*0xa78*/ bool              isComparing;                   // this and the next are a guess. Need to verify.
-/*0xa80*/ ItemPtr           pCompareItem;
-/*0xa90*/ CTAFrameDraw*     ptaPageBorderHighlight;        // FT_DefPageBorderHighlight // a60
-/*0xa98*/ CTAFrameDraw*     ptaPageBorder;                 // FT_DefPageBorder // a68
-/*0xaa0*/ uint32_t          ItemWndIndex;
-/*0xaa4*/
+/*0x430*/ bool              Unknown0x430;                  // added 2026-04-07 (test). Zeroed in SetItem. Purpose TBD.
+/*0x438*/ CLabel*           FuseButtonLabel;               // IDW_FuseButtonLabel
+/*0x440*/ CLabel*           MadeByLabel;                   // IDW_MadeBy
+/*0x448*/ CLabel*           CollectedLabel;                // IDW_CollectedLabel
+/*0x450*/ CLabel*           ScribedLabel;                  // IDW_ScribedLabel
+/*0x458*/ int               Row;
+/*0x45c*/ bool              bAntiTwink;
+/*0x460*/ CButtonWnd*       ModButton;                     // IDW_ModButton
+/*0x468*/ CButtonWnd*       RewardButton;                  // IDW_RewardButton
+/*0x470*/ CButtonWnd*       PrintRealEstateItems;          // IDW_PrintRealEstateItems
+/*0x478*/ CButtonWnd*       ConvertButton;                 // IDW_ConvertButton
+/*0x480*/ CButtonWnd*       FuseButton;                    // IDW_FuseButton // 448
+/*0x488*/ bool              bCollected;
+/*0x489*/ bool              bCollectedReceived;
+/*0x48c*/ int               Unknown0x0314;
+/*0x490*/ CXStr             ItemName;
+/*0x498*/ bool              bScribed;
+/*0x499*/ bool              bScribedReceived;
+/*0x49c*/ int               group[6];
+/*0x4b4*/ int               showModified;
+/*0x4b8*/ int               heroicCount;
+/*0x4bc*/ int               itemInfoCount;
+/*0x4c0*/ CStmlWnd*         lblItemInfo[NumItemInfo];      // IDW_ItemInfo%d
+/*0x528*/ CLabel*           lblStat[NumStatRows][NumStatCols];      // IDW_Row%dCol%dStat
+/*0x798*/ CLabel*           lblValue[NumStatRows][NumStatCols];     // IDW_Row%dCol%dValue
+/*0xa08*/ CLabel*           lblHeroic[NumHeroic];          // IDW_Heroic%d 9d0
+/*0xa70*/ int               rightClickMenuId;
+/*0xa74*/ int               rightClickMenuSocketId;
+/*0xa78*/ CComboWnd*        ItemCompareList;               // IDW_ItemCompareList // a40
+/*0xa80*/ bool              isComparing;                   // this and the next are a guess. Need to verify.
+/*0xa88*/ ItemPtr           pCompareItem;
+/*0xa98*/ CTAFrameDraw*     ptaPageBorderHighlight;        // FT_DefPageBorderHighlight // a60
+/*0xaa0*/ CTAFrameDraw*     ptaPageBorder;                 // FT_DefPageBorder // a68
+/*0xaa8*/ uint32_t          ItemWndIndex;
+/*0xaac*/
 };
 
 SIZE_CHECK(CItemDisplayWnd, CItemDisplayWnd_size);

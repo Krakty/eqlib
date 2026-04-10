@@ -306,7 +306,6 @@ ItemBase::ItemBase()
 	Luck = 0;
 	ID = 0;
 	MerchantSlot = 0;
-	ConvertItemID = 0;
 	DontKnow = 0;
 	NoDropFlag = 0;
 	LastCastTime = 0;
