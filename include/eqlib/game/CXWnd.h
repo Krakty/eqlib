@@ -729,116 +729,117 @@ public:
 	EQLIB_OBJECT static void operator delete[](void* ptr);
 
 // @start: CXWnd Members
-// Bumamgar hand-validated from in-memory object inspection, Apr 7 2026 test
-/*0x030*/ uint8_t            StartAlpha;
-/*0x034*/ uint32_t           Unknown0x034;
-/*0x038*/ bool               bKeepOnScreen;
-/*0x039*/ bool               bIsParentOrContextMenuWindow;
-/*0x03c*/ int                BlinkStartTimer;
-/*0x040*/ CTextureAnimation* IconTextureAnim;
-/*0x048*/ int                VScrollMax;
-/*0x04c*/ bool               bEscapable;
-/*0x050*/ CXStr              WindowText;
-/*0x058*/ bool               bClientRectChanged;
-/*0x05c*/ CXSize             MinClientSize;
-/*0x064*/ int                Transition;
-/*0x068*/ int                managerArrayIndex;
-/*0x06c*/ int                BlinkDuration;
-/*0x070*/ bool               Unlockable;
-/*0x071*/ bool               bMarkedForDelete;
-/*0x074*/ int                TopOffset;
-/*0x078*/ CXWnd*             FocusProxy;
-/*0x080*/ uint8_t            FadeAlpha;
-/*0x081*/ bool               dShow;
-/*0x084*/ CXRect             IconRect;
-/*0x094*/ bool               bNeedsSaving;
-/*0x098*/ int                HScrollPos;
-/*0x0a0*/ CXStr              Tooltip;
-/*0x0a8*/ bool               bShowBorder;
-/*0x0b0*/ CStaticTintedBlendAnimationTemplate* TitlePiece2;
-/*0x0b8*/ int                LeftOffset;
-/*0x0bc*/ bool               bClickThroughToBackground;
-/*0x0c0*/ uint32_t           TransitionStartTick;
-/*0x0c4*/ int                BottomOffset;
-/*0x0c8*/ uint32_t           LastBlinkFadeRefreshTime;
-/*0x0cc*/ bool               bClickThrough;
-/*0x0cd*/ bool               bClickThroughMenuItemStatus;
-/*0x0d0*/ CTextureFont*      pFont;
-/*0x0d8*/ bool               Locked;
-/*0x0dc*/ int                RightOffset;
-/*0x0e0*/ CXRect             TransitionRect;
-/*0x0f0*/ uint32_t           BlinkFadeStartTime;
-/*0x0f4*/ uint32_t           LastTimeMouseOver;
-/*0x0f8*/ CXSize             MaxClientSize;
-/*0x100*/ bool               bScreenClipRectChanged;
-/*0x104*/ COLORREF           BGColor;
-/*0x108*/ uint32_t           BlinkFadeFreq;
-/*0x10c*/ bool               bShowClickThroughMenuItem;
-/*0x10d*/ uint8_t            bResizableMask;
-/*0x10e*/ bool               Faded;
-/*0x10f*/ uint8_t            TargetAlpha;
-/*0x110*/ COLORREF           DisabledBackground;
-/*0x114*/ bool               ValidCXWnd;
-/*0x115*/ bool               bBottomAnchoredToTop;
-/*0x118*/ CTextObjectInterface* pTipTextObject;
-/*0x120*/ bool               Enabled;
-/*0x124*/ CXRect             Location;
-/*0x134*/ bool               MouseOver;
-/*0x138*/ COLORREF           CRNormal;
-/*0x13c*/ int                HScrollMax;
-/*0x140*/ bool               bRightAnchoredToLeft;
-/*0x144*/ CXRect             OldLocation;
-/*0x154*/ int                ZLayer;
-/*0x158*/ ControllerBase*    pController;
-/*0x160*/ uint32_t           BlinkFadeDuration;
-/*0x164*/ bool               bUseInLayoutHorizontal;
-/*0x168*/ uint32_t           XMLIndex;
-/*0x16c*/ CXRect             ClipRectClient;
-/*0x17c*/ uint32_t           TransitionDuration;
-/*0x180*/ CLayoutStrategy*   pLayoutStrategy;
-/*0x188*/ int                BackgroundDrawType;
-/*0x190*/ CXWnd*             ParentWindow;
-/*0x198*/ bool               bMaximizable;
-/*0x199*/ bool               bActive;
-/*0x1a0*/ ArrayClass2<uint32_t> RuntimeTypes;
-/*0x1c0*/ bool               bAction;
-/*0x1c1*/ bool               bFullyScreenClipped;
-/*0x1c4*/ CXRect             ClipRectScreen;
-/*0x1d4*/ bool               bIsTransitioning;
-/*0x1d8*/ CXStr              DataStr;
-/*0x1e0*/ bool               bClipToParent;
-/*0x1e1*/ bool               bBringToTopWhenClicked;
-/*0x1e8*/ CTextObjectInterface* pTextObject;
-/*0x1f0*/ bool               bEnableShowBorder;
-/*0x1f8*/ CXWndDrawTemplate* DrawTemplate;
-/*0x200*/ bool               bCaptureTitle;
-/*0x204*/ uint32_t           WindowStyle;
-/*0x208*/ int64_t            Data;
-/*0x210*/ CStaticTintedBlendAnimationTemplate* TitlePiece;
-/*0x218*/ bool               bUseInLayoutVertical;
-/*0x21c*/ int                VScrollPos;
-/*0x220*/ uint32_t           FadeDuration;
-/*0x224*/ bool               Minimized;
-/*0x225*/ bool               bEscapableLocked;
-/*0x226*/ bool               Fades;
-/*0x227*/ bool               bHCenterTooltip;
-/*0x228*/ bool               bMaximized;
-/*0x22c*/ uint32_t           FadeDelay;
-/*0x230*/ int                DeleteCount;
-/*0x234*/ int                ParentAndContextMenuArrayIndex;
-/*0x238*/ bool               bTiled;
-/*0x239*/ bool               bLeftAnchoredToLeft;
-/*0x23a*/ bool               bClientClipRectChanged;
-/*0x23c*/ uint32_t           BGType;
-/*0x240*/ CXStr              XMLToolTip;
-/*0x248*/ bool               bTopAnchoredToTop;
-/*0x24c*/ int                BlinkState;
-/*0x250*/ uint8_t            FadeToAlpha;
-/*0x251*/ uint8_t            Alpha;
-/*0x254*/ CXRect             ClientRect;
-/*0x264*/ bool               bUsesClassicUI;
-/*0x265*/ bool               bMouseOverEvent;
+// Sorted by offset. CONFIRMED = verified by raw asm. UNVERIFIED = type known, name unconfirmed.
+/*0x030*/ uint8_t            StartAlpha;                    // UNVERIFIED type_only: StartFade copies FadeAlpha here
+/*0x034*/ uint32_t           Unknown0x034;                  // NEW: suspected added field, ctor doesn't init, no refs found yet
+/*0x038*/ bool               bKeepOnScreen;                 // UNVERIFIED type_only
+/*0x039*/ bool               bIsParentOrContextMenuWindow;  // UNVERIFIED type_only
+/*0x03C*/ uint32_t           BlinkStartTimer;              // CONFIRMED: OnProcessFrame [RBX+0x3c] blink start tick
+/*0x040*/ CTextureAnimation* IconTextureAnim;               // CONFIRMED: title bar draw function passes to CTextureAnimation::Draw
+/*0x048*/ int                VScrollMax;                    // CONFIRMED: CalculateVSBRange writes/clamps against 0x21C
+/*0x04C*/ bool               bEscapable;                   // CONFIRMED: StoreIniInfo "Escapable"
+/*0x050*/ CXStr              WindowText;                   // CONFIRMED: destructor CXStr cleanup
+/*0x058*/ bool               bClientRectChanged;           // CONFIRMED: GetClientRect checks/clears [RBX+0x58]
+/*0x05C*/ CXSize             MinClientSize;                // CONFIRMED: GetMinClientSize vtable stub returns [RCX+0x5c]
+/*0x064*/ int                Transition;                   // CONFIRMED: ProcessTransition [param_1+0x64]
+/*0x068*/ int                managerArrayIndex;            // CONFIRMED: unregister reads [RDI+0x68] as index into manager+0x08 array
+/*0x06C*/ uint32_t           BlinkDuration;                // CONFIRMED: OnProcessFrame compares elapsed vs [RBX+0x6c]
+/*0x070*/ bool               Unlockable;                   // CONFIRMED: SetLocked checks [RCX+0x70]
+/*0x071*/ bool               bMarkedForDelete;             // CONFIRMED: Destroy sets [RCX+0x71]=1 before hide/remove
+/*0x074*/ int                TopOffset;                    // CONFIRMED: anchor layout function [RDI+0x74]
+/*0x078*/ CXWnd*             FocusProxy;                   // CONFIRMED: SetFocus chain walks [window+0x78] proxy chain
+/*0x080*/ uint8_t            FadeAlpha;                    // UNVERIFIED type_only: init 0xFF, StartFade reads as source alpha
+/*0x081*/ bool               dShow;                        // CONFIRMED: IsReallyVisible [param_1+0x81]
+/*0x084*/ CXRect             IconRect;                     // CONFIRMED: title bar draw reads 4 dwords at 0x084-0x090 for icon layout
+/*0x094*/ bool               bNeedsSaving;                 // CONFIRMED: StoreIniInfo sets [RSI+0x94]=0
+/*0x098*/ int                HScrollPos;                   // CONFIRMED: scroll setter clamps 0..HScrollMax, stores here
+/*0x0A0*/ CXStr              Tooltip;                      // CONFIRMED: SetKeyTooltip [param_1+0xa0], destructor CXStr
+/*0x0A8*/ bool               bShowBorder;                  // CONFIRMED: StoreIniInfo "Border" [RSI+0xa8]
+/*0x0B0*/ CStaticTintedBlendAnimationTemplate* TitlePiece2; // CONFIRMED: title bar draw passes to TintedBlend draw
+/*0x0B8*/ int                LeftOffset;                   // CONFIRMED: anchor layout function [RDI+0xb8]
+/*0x0BC*/ bool               bClickThroughToBackground;    // CONFIRMED: FUN_1405c8560 returns this when 0x200 is true
+/*0x0C0*/ uint32_t           TransitionStartTick;          // CONFIRMED: StartFade writes GetTickCount
+/*0x0C4*/ int                BottomOffset;                 // CONFIRMED: anchor layout function [RDI+0xc4]
+/*0x0C8*/ uint32_t           LastBlinkFadeRefreshTime;     // CONFIRMED: OnProcessFrame [RBX+0xc8] last fade tick
+/*0x0CC*/ bool               bClickThrough;                // CONFIRMED: StoreIniInfo "ClickThrough"
+/*0x0CD*/ bool               bClickThroughMenuItemStatus;  // CONFIRMED: bulk property copy at 0x1402ffb54, byte after bClickThrough
+/*0x0D0*/ CTextureFont*      pFont;                        // CONFIRMED: DrawTooltipAtPoint, SetFont, destructor
+/*0x0D8*/ bool               Locked;                       // CONFIRMED: StoreIniInfo "Locked", Bumamgar
+/*0x0DC*/ int                RightOffset;                  // CONFIRMED: anchor layout function [RDI+0xdc]
+/*0x0E0*/ CXRect             TransitionRect;               // CONFIRMED: Minimize writes current rect here before transition
+/*0x0F0*/ uint32_t           BlinkFadeStartTime;           // CONFIRMED: OnProcessFrame [RBX+0xf0] fade start tick
+/*0x0F4*/ uint32_t           LastTimeMouseOver;            // CONFIRMED: OnProcessFrame [RBX+0xf4] mouse-over timestamp
+/*0x0F8*/ CXSize             MaxClientSize;                // CONFIRMED: GetMaxClientSize vtable stub returns [RCX+0xf8]
+/*0x100*/ bool               bScreenClipRectChanged;       // CONFIRMED: DoAllDrawing checks, scroll setter sets
+/*0x104*/ COLORREF           BGColor;                      // CONFIRMED: StoreIniInfo "BGTint.rgb"
+/*0x108*/ uint32_t           BlinkFadeFreq;                // CONFIRMED: OnProcessFrame min ms between fade updates, init 0x32
+/*0x10C*/ bool               bShowClickThroughMenuItem;     // CONFIRMED: read alongside bClickThrough in property copy at 1405db124
+/*0x10D*/ uint8_t            bResizableMask;               // CONFIRMED: bit tests 0x1-0x40 for resize edges, init 0xFF=all
+/*0x10E*/ bool               Faded;                        // CONFIRMED by elimination: bool init 1 in alpha/blink region
+/*0x10F*/ uint8_t            TargetAlpha;                  // CONFIRMED: StartFade writes fade direction param here
+/*0x110*/ COLORREF           DisabledBackground;           // CONFIRMED: StoreIniInfo "DBGTint.rgb"
+/*0x114*/ bool               ValidCXWnd;                   // CONFIRMED: constructor word 0x101, IsValid vtable
+/*0x115*/ bool               bBottomAnchoredToTop;         // CONFIRMED: anchor layout [RDI+0x115] gates BottomOffset
+/*0x118*/ CTextObjectInterface* pTipTextObject;            // CONFIRMED: DrawWrappedText2 in DrawTooltipAtPoint, SetFont, Bumamgar
+/*0x120*/ bool               Enabled;                      // CONFIRMED: title bar draw + DoAllDrawing selects BGColor vs DisabledBackground
+/*0x124*/ CXRect             Location;                     // CONFIRMED: StoreIniInfo/LoadIniInfo, constructor from param_4
+/*0x134*/ bool               MouseOver;                    // CONFIRMED: FUN_1405c9e70 propagates up parent chain via 0x190
+/*0x138*/ COLORREF           CRNormal;                     // CONFIRMED: title bar draw reads as COLORREF, init 0xFFC0C0C0
+/*0x13C*/ int                HScrollMax;                   // CONFIRMED: scroll setter clamps against this, init 0x64
+/*0x140*/ bool               bRightAnchoredToLeft;         // CONFIRMED: anchor layout [RDI+0x140] gates RightOffset
+/*0x144*/ CXRect             OldLocation;                  // CONFIRMED: StoreIniInfo "Restore"
+/*0x154*/ int                ZLayer;                       // CONFIRMED: manager registration sorts by [RSI+0x154], >=1000 gets ParentAndContext
+/*0x158*/ ControllerBase*    pController;                  // CONFIRMED: destructor vtable cleanup
+/*0x160*/ uint32_t           BlinkFadeDuration;            // CONFIRMED: OnProcessFrame fade duration, reset to 0 when done
+/*0x168*/ uint32_t           XMLIndex;                     // CONFIRMED: constructor param_3 = XML template index
+/*0x16C*/ CXRect             ClipRectClient;               // CONFIRMED: GetClientClipRect writes [RBX+0x16C]-[RBX+0x178]
+/*0x17C*/ uint32_t           TransitionDuration;            // CONFIRMED: StartFade stores duration param here
+/*0x180*/ CLayoutStrategy*   pLayoutStrategy;              // CONFIRMED: destructor vtable cleanup, SetLayoutStrategy
+/*0x188*/ bool               bUseInLayoutHorizontal;       // CONFIRMED: gates layout property copy at 1405f5d4a, adjacent to 0x189
+/*0x189*/ bool               bUseInLayoutVertical;         // CONFIRMED: second adjacent bool at 1405f5d64, gates vertical layout copy
+/*0x190*/ CXWnd*             ParentWindow;                 // CONFIRMED: GetClientClipRect, IsReallyVisible, destructor, 20+ refs
+/*0x198*/ bool               bMaximizable;                 // CONFIRMED: Minimize gates restore path
+/*0x199*/ bool               bActive;                      // CONFIRMED: IsActive returns [param_1+0x199]
+/*0x1A0*/ ArrayClass2<uint32_t> RuntimeTypes;              // CONFIRMED: destructor cleanup. Actual size 32B (0x1A0-0x1BF), includes bucket array at 0x1B0, count at 0x1B8
+/*0x1C0*/ bool               bAction;                      // CONFIRMED: alternative to Enabled, allows processing at 1405edf8e
+/*0x1C1*/ bool               bFullyScreenClipped;          // CONFIRMED: DoAllDrawing skips if true
+/*0x1C4*/ CXRect             ClipRectScreen;               // CONFIRMED: GetScreenClipRect writes 4 dwords at 0x1C4-0x1D0
+/*0x1D4*/ bool               bIsTransitioning;             // CONFIRMED: checked in BringToTop inner, transition state flag
+/*0x1D8*/ CXStr              DataStr;                      // CONFIRMED: destructor CXStr cleanup
+/*0x1E0*/ bool               bClipToParent;                // CONFIRMED: GetClientClipRect, Bumamgar
+/*0x1E1*/ bool               bBringToTopWhenClicked;       // CONFIRMED: BringToTop inner
+/*0x1E8*/ CTextObjectInterface* pTextObject;               // CONFIRMED: SetFont, destructor (second text object from pFont)
+/*0x1F0*/ bool               bEnableShowBorder;            // CONFIRMED: LoadIniInfo, Bumamgar
+/*0x1F8*/ CXWndDrawTemplate* DrawTemplate;                 // CONFIRMED: skin/template object, SetDrawTemplate takes void*, getter returns CXWndDrawTemplate*
+/*0x200*/ bool               bCaptureTitle;                // CONFIRMED: gates bClickThroughToBackground in FUN_1405c8560
+/*0x204*/ uint32_t           WindowStyle;                  // CONFIRMED: tested & 0x4000, 0x800, 0x20, etc.
+/*0x208*/ int64_t            Data;                         // CONFIRMED: MOV RAX, qword ptr [RBX + 0x208] in FUN_1405c63ea
+/*0x210*/ CStaticTintedBlendAnimationTemplate* TitlePiece; // CONFIRMED: title bar draw passes to TintedBlend draw
+/*0x218*/ uint32_t           BackgroundDrawType;           // CONFIRMED by elimination: only remaining 4B field for this slot
+/*0x21C*/ int                VScrollPos;                   // Bumamgar
+/*0x220*/ uint32_t           FadeDuration;                 // CONFIRMED: StoreIniInfo "Duration"
+/*0x224*/ bool               Minimized;                    // CONFIRMED: StoreIniInfo "Minimized", IsReallyVisible
+/*0x225*/ bool               bEscapableLocked;             // CONFIRMED: SetEscapable checks [RCX+0x225] before allowing write to bEscapable
+/*0x226*/ bool               Fades;                        // CONFIRMED: StoreIniInfo "Fades"
+/*0x227*/ bool               bHCenterTooltip;              // CONFIRMED: DrawTooltipAtPoint checks for tooltip positioning
+/*0x228*/ bool               bMaximized;                   // CONFIRMED: OnMaximizeBox (vtable 0x170) checks [RCX+0x228], SETZ=toggle
+/*0x22C*/ uint32_t           FadeDelay;                    // CONFIRMED: StoreIniInfo "Delay"
+/*0x230*/ int                DeleteCount;                  // CONFIRMED: Destroy (FUN_1405c3500) resets [RCX+0x230]=0
+/*0x234*/ int                ParentAndContextMenuArrayIndex; // CONFIRMED: unregister reads [RDI+0x234] as index into manager+0x20 array
+/*0x238*/ bool               bTiled;                       // CONFIRMED: BringToTop inner
+/*0x239*/ bool               bLeftAnchoredToLeft;          // CONFIRMED: anchor layout [RDI+0x239] gates LeftOffset
+/*0x23A*/ bool               bClientClipRectChanged;       // CONFIRMED: GetClientClipRect checks/clears
+/*0x23C*/ uint32_t           BGType;                       // CONFIRMED: StoreIniInfo "BGType"
+/*0x240*/ CXStr              XMLToolTip;                   // CONFIRMED: destructor CXStr cleanup
+/*0x248*/ bool               bTopAnchoredToTop;            // CONFIRMED: anchor layout [RDI+0x248] gates TopOffset
+/*0x24C*/ int                BlinkState;                   // CONFIRMED: OnProcessFrame XOR toggle 0/1, -1=not blinking
+/*0x250*/ uint8_t            FadeToAlpha;                  // CONFIRMED: StoreIniInfo "FadeToAlpha"
+/*0x251*/ uint8_t            Alpha;                        // CONFIRMED: StoreIniInfo "Alpha"
+/*0x254*/ CXRect             ClientRect;                   // CONFIRMED: GetClientRect writes 4 dwords at 0x254-0x260
 // @end: CXWnd Members
+
+/*0x264*/ bool               bUsesClassicUI;               // Bumamgar
+/*0x265*/ bool               bMouseOverEvent;              // Bumamgar
 /*0x268*/
 
 	ALT_MEMBER_ALIAS(bool, bEscapable, CloseOnESC);
