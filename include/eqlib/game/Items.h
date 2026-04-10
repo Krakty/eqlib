@@ -1073,6 +1073,7 @@ public:
 // @start: ItemBase Members
 /*0x008*/ int                   ID;
 /*0x00c*/ int                   NoDropFlag;
+/*0x0ac*/ int                   ConvertItemID;
 /*0x010*/ int                   OrnamentationIcon;
 /*0x014*/ int                   ScriptIndex;
 /*0x018*/ ItemGlobalIndex       GlobalIndex;
@@ -1204,7 +1205,7 @@ public:
 	// Convertible Item and Collection fields
 	bool IsCollected() const { return bCollected; }
 	bool IsConvertible() const { return bConvertable; }
-	int GetConvertItemID() const { return 0; }
+	int GetConvertItemID() const { return ConvertItemID; }
 	CXStr GetConvertItemName() const { return CXStr(); }
 
 	// Luck Accessors
