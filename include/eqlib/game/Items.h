@@ -1071,8 +1071,8 @@ class [[offsetcomments]] ItemBase : public IChildItemContainer
 {
 public:
 // @start: ItemBase Members
-/*0x008*/ int                   ID;
-/*0x00c*/ int                   NoDropFlag;
+/*0x008*/ int                   RealEstateID;
+/*0x00c*/ int                   MerchantQuantity;
 /*0x010*/ int                   OrnamentationIcon;
 /*0x014*/ int                   ScriptIndex;
 /*0x018*/ ItemGlobalIndex       GlobalIndex;
@@ -1084,13 +1084,13 @@ public:
 /*0x03c*/ int                   ArmorType;
 /*0x040*/ bool                  bDisableAugTexture;
 /*0x044*/ int                   AugFlag;
-/*0x048*/ int                   StackCount;
+/*0x048*/ int                   Unknown0x048;
 /*0x04c*/ int                   Charges;
 /*0x050*/ unsigned int          Tint;
 /*0x054*/ unsigned int          RespawnTime;
-/*0x058*/ int                   Open;
+/*0x058*/ int                   Unknown0x058;
 /*0x05c*/ bool                  bCollected;
-/*0x060*/ int                   Power;
+/*0x060*/ int                   StackCount;
 /*0x068*/ ItemEvolutionDataPtr  pEvolutionData;
 /*0x078*/ SoeUtil::String       SaveString;
 /*0x090*/ int64_t               Price;
@@ -1103,12 +1103,17 @@ public:
 /*0x0d8*/ bool                  bRankDisabled;
 /*0x0d9*/ EqItemGuid            ItemGUID;
 /*0x0f0*/ int64_t               MerchantSlot;
-/*0x0f8*/ unsigned int          LastCastTime;
-/*0x0fc*/ int                   RealEstateID;
-/*0x100*/ unsigned int          NewArmorID;
-/*0x104*/ int                   MerchantQuantity;
+/*0x0f8*/ unsigned int          NoDropFlag;
+/*0x0fc*/ int                   Unknown0x0fc;
+/*0x100*/ unsigned int          Unknown0x100;
+/*0x104*/ int                   Unknown0x104;
 /*0x108*/
 // @end: ItemBase Members
+
+	// Backward compatibility aliases for renamed fields (Apr 7 2026 shuffle)
+	ALT_MEMBER_ALIAS_DEPRECATED(int, StackCount, Power, "Use StackCount instead of Power");
+	ALT_MEMBER_ALIAS_DEPRECATED(unsigned int, NoDropFlag, LastCastTime, "Use NoDropFlag instead of LastCastTime");
+	ALT_MEMBER_ALIAS_DEPRECATED(int, RealEstateID, ID, "RealEstateID was mislabeled as ID");
 
 	EQLIB_OBJECT ItemBase();
 
