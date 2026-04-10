@@ -716,7 +716,7 @@ public:
 };
 
 
-constexpr size_t CEverQuest_size = 0x19708; // @sizeof(CEverQuest) :: 2026-03-16 (test) @ 0x14034FFA3
+constexpr size_t CEverQuest_size = 0x19710; // @sizeof(CEverQuest) :: 2026-04-07 (test) @ 0x14034FFA3
 
 class [[offsetcomments]] CEverQuest : public CEverQuestBase, public UniversalChatProxyHandler, public PopDialogHandler
 {
