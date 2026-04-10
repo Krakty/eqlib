@@ -304,14 +304,14 @@ ItemBase::ItemBase()
 	bRankDisabled = false;
 	bDisableAugTexture = false;
 	Luck = 0;
-	RealEstateID = -1;
+	ID = 0;
 	MerchantSlot = 0;
 	DontKnow = 0;
-	Unknown0x00c = 1;
 	NoDropFlag = 0;
-	StackCount = 0;
+	LastCastTime = 0;
+	Power = 0;
 	ItemHash = 0;
-	Unknown0x048 = 0;
+	StackCount = 1;
 	OrnamentationIcon = 0;
 	MerchantQuantity = 1;
 	bItemNeedsUpdate = false;
@@ -323,7 +323,7 @@ ItemBase::ItemBase()
 	ArmorType = 0;
 	AugFlag = 0;
 	NewArmorID = 0;
-	Unknown0x104 = 0;
+	RealEstateID = -1;
 	Charges = 0;
 	ItemDef = nullptr;
 }
