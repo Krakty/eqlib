@@ -1115,6 +1115,12 @@ public:
 	ALT_MEMBER_ALIAS_DEPRECATED(unsigned int, NoDropFlag, LastCastTime, "Use NoDropFlag instead of LastCastTime");
 	ALT_MEMBER_ALIAS_DEPRECATED(int, RealEstateID, ID, "RealEstateID was mislabeled as ID");
 
+	// Aliases for unknown fields pending identification
+	ALT_MEMBER_ALIAS(int, Unknown0x058, Open);
+	ALT_MEMBER_ALIAS(int, Unknown0x0fc, OldRealEstateID);
+	ALT_MEMBER_ALIAS(unsigned int, Unknown0x100, NewArmorID);
+	ALT_MEMBER_ALIAS(int, Unknown0x104, OldMerchantQuantity);
+
 	EQLIB_OBJECT ItemBase();
 
 	virtual ~ItemBase() {}
