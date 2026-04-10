@@ -182,15 +182,15 @@ private:
 	void ClearRoles();
 };
 
-constexpr size_t CGroupMember_size = 0x68; // @sizeof(CGroupMember) :: 2026-03-16 (test) @ 0x1402E689E
+constexpr size_t CGroupMember_size = 0x68; // @sizeof(CGroupMember) :: 2026-04-09 (test) @ 0x1402e7540
 
 class [[offsetcomments]] CGroupMember : public CGroupMemberBase
 {
 public:
-/*0x50*/ CharacterZoneClient*  pCharacter;
-/*0x58*/ PlayerClient*         pPlayer;
-/*0x60*/ int                   GroupIndex;
-/*0x64*/
+/*0x38*/ CharacterZoneClient*  pCharacter;
+/*0x3E*/ PlayerClient*         pPlayer;
+/*0x3F*/ int                   GroupIndex;
+/*0x40*/
 
 	CGroupMember();
 	virtual ~CGroupMember();
