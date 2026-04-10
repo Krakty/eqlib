@@ -738,7 +738,7 @@ public:
 /*0x040*/ CTextureAnimation* IconTextureAnim;
 /*0x048*/ int                VScrollMax;
 /*0x04c*/ bool               bEscapable;
-/*0x050*/ CXStr              WindowText;
+/*0x050*/ CXStr              Tooltip;
 /*0x058*/ bool               bClientRectChanged;
 /*0x05c*/ CXSize             MinClientSize;
 /*0x064*/ int                Transition;
@@ -753,7 +753,7 @@ public:
 /*0x084*/ CXRect             IconRect;
 /*0x094*/ bool               bNeedsSaving;
 /*0x098*/ int                HScrollPos;
-/*0x0a0*/ CXStr              Tooltip;
+/*0x0a0*/ CXStr              XMLToolTip;
 /*0x0a8*/ bool               bShowBorder;
 /*0x0b0*/ CStaticTintedBlendAnimationTemplate* TitlePiece2;
 /*0x0b8*/ int                LeftOffset;
@@ -805,7 +805,7 @@ public:
 /*0x1c1*/ bool               bFullyScreenClipped;
 /*0x1c4*/ CXRect             ClipRectScreen;
 /*0x1d4*/ bool               bIsTransitioning;
-/*0x1d8*/ CXStr              DataStr;
+/*0x1d8*/ CXStr              WindowText;
 /*0x1e0*/ bool               bClipToParent;
 /*0x1e1*/ bool               bBringToTopWhenClicked;
 /*0x1e8*/ CTextObjectInterface* pTextObject;
@@ -830,7 +830,7 @@ public:
 /*0x239*/ bool               bLeftAnchoredToLeft;
 /*0x23a*/ bool               bClientClipRectChanged;
 /*0x23c*/ uint32_t           BGType;
-/*0x240*/ CXStr              XMLToolTip;
+/*0x240*/ CXStr              DataStr;
 /*0x248*/ bool               bTopAnchoredToTop;
 /*0x24c*/ int                BlinkState;
 /*0x250*/ uint8_t            FadeToAlpha;
