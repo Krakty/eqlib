@@ -753,7 +753,7 @@ public:
 /*0x084*/ CXRect             IconRect;
 /*0x094*/ bool               bNeedsSaving;
 /*0x098*/ int                HScrollPos;
-/*0x0a0*/ CXStr              XMLToolTip;
+/*0x0a0*/ CXStr              Tooltip;
 /*0x0a8*/ bool               bShowBorder;
 /*0x0b0*/ CStaticTintedBlendAnimationTemplate* TitlePiece2;
 /*0x0b8*/ int                LeftOffset;
@@ -830,7 +830,7 @@ public:
 /*0x239*/ bool               bLeftAnchoredToLeft;
 /*0x23a*/ bool               bClientClipRectChanged;
 /*0x23c*/ uint32_t           BGType;
-/*0x240*/ CXStr              Tooltip;
+/*0x240*/ CXStr              XMLToolTip;
 /*0x248*/ bool               bTopAnchoredToTop;
 /*0x24c*/ int                BlinkState;
 /*0x250*/ uint8_t            FadeToAlpha;
@@ -838,7 +838,7 @@ public:
 /*0x254*/ CXRect             ClientRect;
 /*0x264*/ bool               bUsesClassicUI;
 /*0x265*/ bool               bMouseOverEvent;
-/*0x268*/ // @end: CXWnd Members
+// @end: CXWnd Members
 /*0x268*/
 
 	ALT_MEMBER_ALIAS(bool, bEscapable, CloseOnESC);
