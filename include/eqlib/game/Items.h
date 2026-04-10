@@ -803,7 +803,7 @@ public:
 	}
 };
 
-constexpr size_t ItemDefinition_size = 0x688; // @sizeof(ItemDefinition) :: 2026-04-07 (test) @ 0x140222F54
+constexpr size_t ItemDefinition_size = 0x688; // @sizeof(ItemDefinition) :: 2026-04-07 (test) @ 0x140223744 (__eq_new)
 
 class [[offsetcomments]] ItemDefinition
 {
@@ -964,7 +964,8 @@ public:
 /*0x614*/ bool                bInteractiveObject;
 /*0x615*/ uint8_t             SocketSubClassCount;
 /*0x618*/ int                 SocketSubClass[10];
-/*0x640*/
+/*0x640*/ uint8_t             Unknown0x640[0x48];           // Apr 7 grew by 0x48 bytes (0x640->0x688), content TBD
+/*0x688*/
 
 	EQLIB_OBJECT ItemDefinition();
 
