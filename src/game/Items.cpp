@@ -319,6 +319,7 @@ ItemBase::ItemBase()
 	Open = 0;
 	NoteStatus = 0;
 	bConvertable = false;
+	ConvertItemID = 0;
 	Tint = 0;
 	ArmorType = 0;
 	AugFlag = 0;
