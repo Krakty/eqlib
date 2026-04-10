@@ -16,6 +16,12 @@
 
 //
 // EQGraphics.dll offsets
+// Apr 7 2026 test binary
+//
+// C2DPrimitiveManager::Render identified via Ghidra xref trace ("Render 2D stuff" string in RenderScene)
+// CRender::ResetDevice/UpdateDisplay swap identified via Ghidra string xrefs
+// ObjectPreviewView::Render identified via Ghidra string xref
+// Remaining offsets corrected by Bumamgar (EnhancedFunctionFinder) and Axel
 //
 
 #define __eqgraphics_fopen_x                                       0x1802812b8
