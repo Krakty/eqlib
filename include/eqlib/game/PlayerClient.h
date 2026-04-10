@@ -490,225 +490,153 @@ class [[offsetcomments]] PlayerZoneClient : public PlayerBase
 {
 public:
 // @start: PlayerZoneClient Members
-/*0x01c8*/ unsigned int             LastIntimidateUse;                  // 0x1C8: int
-/*0x01cc*/ int                      Unknown4;                           // 0x1CC: int (was at 0x1D0)
-/*0x01d0*/ int                      SecondaryTintIndex;                 // 0x1D0: int
-/*0x01d4*/ int                      DoSpecialMelee;                     // 0x1D4: int
-/*0x01d8*/ float                    MerchantGreed;                      // 0x1D8: float (init 1.0)
-/*0x01dc*/ int                      Unknown0x1DC;                       // 0x1DC: pad to 8-align
-/*0x01e0*/ int64_t                  HPCurrent;                          // 0x1E0: int64 (confirmed)
-/*0x01e8*/ unsigned int             SitStartTime;                       // 0x1E8: int
-/*0x01ec*/ unsigned int             LastResendAddPlayerPacket;           // 0x1EC: int
-/*0x01f0*/ uint8_t                  IntimidateCount;                    // 0x1F0: byte
-/*0x01f1*/ bool                     bBetaBuffed;                        // 0x1F1: byte
-/*0x01f2*/ uint8_t                  Unknown0x1F2;                       // 0x1F2: byte
-/*0x01f3*/ uint8_t                  Unknown0x1F3;                       // 0x1F3: byte
-/*0x01f4*/ uint8_t                  Unknown0x1F4;                       // 0x1F4: byte
-/*0x01f5*/ uint8_t                  Unknown0x1F5;                       // 0x1F5: byte
-/*0x01f6*/ uint8_t                  Unknown0x1F6;                       // 0x1F6: byte
-/*0x01f7*/ uint8_t                  Unknown0x1F7;                       // 0x1F7: byte
-/*0x01f8*/ uint8_t                  Unknown0x1F8;                       // 0x1F8: byte
-/*0x01f9*/ uint8_t                  Unknown0x1F9;                       // 0x1F9: byte
-/*0x01fa*/ uint8_t                  Unknown0x1FA;                       // 0x1FA: byte
-/*0x01fb*/ uint8_t                  Unknown0x1FB;                       // 0x1FB: byte
-/*0x01fc*/ char                     LoginRelated[0x20];                 // 0x1FC: char[32] (confirmed)
-/*0x021c*/ float                    AnimationSpeedRelated;              // 0x21C: float (confirmed)
-/*0x0220*/ bool                     bStationary;                        // 0x220: byte
-/*0x0221*/ uint8_t                  Unknown0x221;                       // 0x221: pad
-/*0x0222*/ uint8_t                  Unknown0x222;                       // 0x222: pad
-/*0x0223*/ uint8_t                  Unknown0x223;                       // 0x223: pad
-/*0x0224*/ float                    ViewHeight;                         // 0x224: float (confirmed)
-/*0x0228*/ EQSwitch*                pTouchingSwitch;                    // 0x228: ptr
-/*0x0230*/ uint8_t                  FindBits;                           // 0x230: byte
-/*0x0231*/ uint8_t                  Blind;                              // 0x231: byte
-/*0x0232*/ uint8_t                  Unknown0x232;                       // 0x232: pad
-/*0x0233*/ uint8_t                  Unknown0x233;                       // 0x233: pad
-/*0x0234*/ int                      Unknown0x234;                       // 0x234: pad to 8-align
-/*0x0238*/ int64_t                  HPMax;                              // 0x238: int64 (confirmed)
-/*0x0240*/ bool                     LFG;                                // 0x240: byte
-/*0x0241*/ uint8_t                  Unknown0x241;                       // 0x241: pad
-/*0x0242*/ uint8_t                  Unknown0x242;                       // 0x242: pad
-/*0x0243*/ uint8_t                  Unknown0x243;                       // 0x243: pad
-/*0x0244*/ int                      Buyer;                              // 0x244: int
-/*0x0248*/ uint8_t                  StandState;                         // 0x248: byte (confirmed)
-/*0x0249*/ bool                     bTempPet;                           // 0x249: bool (confirmed)
-/*0x024a*/ uint8_t                  IsPassenger;                        // 0x24A: byte
-/*0x024b*/ uint8_t                  Unknown0x24B;                       // 0x24B: pad
-/*0x024c*/ LaunchSpellData          CastingData;                        // 0x24C: 68B (confirmed)
-/*0x0290*/ unsigned int             TimeStamp;                          // 0x290: int
-/*0x0294*/ bool                     Sneak;                              // 0x294: byte
-/*0x0295*/ uint8_t                  Unknown0x295;                       // 0x295: pad
-/*0x0296*/ uint8_t                  Unknown0x296;                       // 0x296: pad
-/*0x0297*/ uint8_t                  Unknown0x297;                       // 0x297: pad
-/*0x0298*/ unsigned int             MasterID;                           // 0x298: int
-/*0x029c*/ int                      Unknown0x29C;                       // 0x29C: pad to 8-align
-/*0x02a0*/ int64_t                  GuildID;                            // 0x2A0: qword (confirmed near 0x278->0x2A0)
-/*0x02a8*/ bool                     bSummoned;                          // 0x2A8: byte
-/*0x02a9*/ uint8_t                  Unknown0x2A9;                       // 0x2A9: pad
-/*0x02aa*/ uint8_t                  Unknown0x2AA;                       // 0x2AA: pad
-/*0x02ab*/ uint8_t                  Unknown0x2AB;                       // 0x2AB: pad
-/*0x02ac*/ int                      Unknown1;                           // 0x2AC: int (confirmed)
-/*0x02b0*/ int                      Unknown0x2B0;                       // 0x2B0: int
-/*0x02b4*/ float                    MissileRangeToTarget;               // 0x2B4: float
-/*0x02b8*/ int                      Anon;                               // 0x2B8: int (confirmed)
-/*0x02bc*/ int                      Unknown0x2BC;                       // 0x2BC: int
-/*0x02c0*/ int                      WarCry;                             // 0x2C0: int
-/*0x02c4*/ bool                     berserker;                          // 0x2C4: byte
-/*0x02c5*/ uint8_t                  Unknown0x2C5;                       // 0x2C5: pad
-/*0x02c6*/ uint8_t                  Unknown0x2C6;                       // 0x2C6: pad
-/*0x02c7*/ uint8_t                  Unknown0x2C7;                       // 0x2C7: pad
-/*0x02c8*/ int                      EnduranceCurrent;                   // 0x2C8: int
-/*0x02cc*/ unsigned int             EnduranceMax;                       // 0x2CC: int
-/*0x02d0*/ unsigned int             LastPrimaryUseTime;                 // 0x2D0: int
-/*0x02d4*/ float                    MyWalkSpeed;                        // 0x2D4: float
-/*0x02d8*/ char                     Title[0x80];                        // 0x2D8: char[128] (confirmed)
-/*0x0358*/ int                      Deity;                              // 0x358: int
-/*0x035c*/ EqItemGuid               realEstateItemGuid;                 // 0x35C: 18B (confirmed)
-/*0x036e*/ char                     Suffix[0x80];                       // 0x36E: char[128] (confirmed)
-/*0x03ee*/ bool                     bBuffTimersOnHold;                  // 0x3EE: byte
-/*0x03ef*/ bool                     PvPFlag;                            // 0x3EF: byte
-/*0x03f0*/ int                      IsAttacking;                        // 0x3F0: int
-/*0x03f4*/ uint8_t                  GMRank;                             // 0x3F4: byte
-/*0x03f5*/ uint8_t                  Unknown0x3F5;                       // 0x3F5: pad
-/*0x03f6*/ uint8_t                  Unknown0x3F6;                       // 0x3F6: pad
-/*0x03f7*/ uint8_t                  Unknown0x3F7;                       // 0x3F7: pad
-/*0x03f8*/ float                    BearingToTarget;                    // 0x3F8: float
-/*0x03fc*/ char                     GM;                                 // 0x3FC: byte
-/*0x03fd*/ uint8_t                  Level;                              // 0x3FD: byte (confirmed)
-/*0x03fe*/ uint8_t                  Unknown0x3FE;                       // 0x3FE: pad
-/*0x03ff*/ uint8_t                  Unknown0x3FF;                       // 0x3FF: pad
-/*0x0400*/ int                      PetID;                              // 0x400: int (confirmed)
-/*0x0404*/ unsigned int             LoginSerial;                        // 0x404: int
-/*0x0408*/ int                      RealEstateID;                       // 0x408: int
-/*0x040c*/ char                     DraggingPlayer[0x41];               // 0x40C: char[65] (confirmed)
-/*0x044d*/ uint8_t                  Unknown0x44D;                       // 0x44D: pad
-/*0x044e*/ uint8_t                  Unknown0x44E;                       // 0x44E: pad
-/*0x044f*/ uint8_t                  Unknown0x44F;                       // 0x44F: pad
-/*0x0450*/ int                      AFK;                                // 0x450: int (confirmed)
-/*0x0454*/ int                      CurrIOState;                        // 0x454: int
-/*0x0458*/ int                      Unknown0x458;                       // 0x458: int
-/*0x045c*/ uint8_t                  InPvPArea;                          // 0x45C: byte
-/*0x045d*/ uint8_t                  Unknown0x45D;                       // 0x45D: pad
-/*0x045e*/ uint8_t                  Unknown0x45E;                       // 0x45E: pad
-/*0x045f*/ uint8_t                  Unknown0x45F;                       // 0x45F: pad
-/*0x0460*/ int                      Unknown0x460;                       // 0x460: int
-/*0x0464*/ uint8_t                  Original;                           // 0x464: byte
-/*0x0465*/ uint8_t                  HoldingAnimation;                   // 0x465: byte
-/*0x0466*/ uint8_t                  Unknown0x466;                       // 0x466: pad
-/*0x0467*/ uint8_t                  Unknown0x467;                       // 0x467: pad
-/*0x0468*/ unsigned int             LastRefresh;                        // 0x468: int
-/*0x046c*/ unsigned int             MinuteTimer;                        // 0x46C: int
-/*0x0470*/ char                     DragNames[129];                     // 0x470: char[129] (confirmed)
-/*0x04f1*/ uint8_t                  Unknown0x4F1;                       // 0x4F1: pad
-/*0x04f2*/ uint8_t                  Unknown0x4F2;                       // 0x4F2: pad
-/*0x04f3*/ uint8_t                  Unknown0x4F3;                       // 0x4F3: pad
-/*0x04f4*/ int                      Unknown0x4F4;                       // 0x4F4: pad to 8-align
-/*0x04f8*/ CharacterZoneClient*     pCharacter;                         // 0x4F8: ptr (confirmed)
-/*0x0500*/ bool                     bOfflineMode;                       // 0x500: byte
-/*0x0501*/ uint8_t                  CharClass;                          // 0x501: byte
-/*0x0502*/ uint8_t                  Unknown0x502;                       // 0x502: pad
-/*0x0503*/ uint8_t                  Unknown0x503;                       // 0x503: pad
-/*0x0504*/ unsigned int             SpellGemETA[15];                    // 0x504: int[15] (60B)
-/*0x0540*/ unsigned int             Unknown0x540;                       // 0x540: int
-/*0x0544*/ unsigned int             Unknown0x544;                       // 0x544: int
-/*0x0548*/ unsigned int             LastRangedUsedTime;                 // 0x548: int
-/*0x054c*/ bool                     Linkdead;                           // 0x54C: byte
-/*0x054d*/ uint8_t                  Unknown0x54D;                       // 0x54D: pad
-/*0x054e*/ uint8_t                  Unknown0x54E;                       // 0x54E: pad
-/*0x054f*/ uint8_t                  Unknown0x54F;                       // 0x54F: pad
-/*0x0550*/ int                      Trader;                             // 0x550: int
-/*0x0554*/ bool                     bAnimationOnPop;                    // 0x554: byte
-/*0x0555*/ uint8_t                  Unknown0x555;                       // 0x555: pad
-/*0x0556*/ uint8_t                  Unknown0x556;                       // 0x556: pad
-/*0x0557*/ uint8_t                  Unknown0x557;                       // 0x557: pad
-/*0x0558*/ int                      CorpseDragCount;                    // 0x558: int
-/*0x055c*/ uint8_t                  Light;                              // 0x55C: byte (confirmed)
-/*0x055d*/ uint8_t                  Unknown0x55D;                       // 0x55D: pad
-/*0x055e*/ uint8_t                  Unknown0x55E;                       // 0x55E: pad
-/*0x055f*/ uint8_t                  Unknown0x55F;                       // 0x55F: pad
-/*0x0560*/ int                      SomeData[2];                        // 0x560: qword
-/*0x0568*/ float                    GetMeleeRangeVar1;                  // 0x568: float (confirmed)
-/*0x056c*/ unsigned int             CombatSkillTicks[CONCURRENT_SKILLS]; // 0x56C: int[2] (confirmed)
-/*0x0574*/ int                      HideMode;                           // 0x574: int
-/*0x0578*/ bool                     Mercenary;                          // 0x578: byte (confirmed)
-/*0x0579*/ uint8_t                  Unknown0x579;                       // 0x579: pad
-/*0x057a*/ uint8_t                  Unknown0x57A;                       // 0x57A: pad
-/*0x057b*/ uint8_t                  Unknown0x57B;                       // 0x57B: pad
-/*0x057c*/ unsigned int             RespawnTimer;                       // 0x57C: int
-/*0x0580*/ bool                     bShowHelm;                          // 0x580: byte
-/*0x0581*/ uint8_t                  Unknown0x581;                       // 0x581: pad
-/*0x0582*/ uint8_t                  Unknown0x582;                       // 0x582: pad
-/*0x0583*/ uint8_t                  Unknown0x583;                       // 0x583: pad
-/*0x0584*/ CPhysicsInfo             LastCollision;                      // 0x584: 48B (confirmed)
-/*0x05b4*/ uint8_t                  LastAttack;                         // 0x5B4: byte
-/*0x05b5*/ uint8_t                  Unknown0x5B5;                       // 0x5B5: pad
-/*0x05b6*/ uint8_t                  Unknown0x5B6;                       // 0x5B6: pad
-/*0x05b7*/ uint8_t                  Unknown0x5B7;                       // 0x5B7: pad
-/*0x05b8*/ int                      AltAttack;                          // 0x5B8: int
-/*0x05bc*/ bool                     bSwitchMoved;                       // 0x5BC: byte
-/*0x05bd*/ uint8_t                  Unknown0x5BD;                       // 0x5BD: pad
-/*0x05be*/ uint8_t                  Unknown0x5BE;                       // 0x5BE: pad
-/*0x05bf*/ uint8_t                  Unknown0x5BF;                       // 0x5BF: pad
-/*0x05c0*/ int                      Birthdate;                          // 0x5C0: int
-/*0x05c4*/ int                      Unknown0x5C4;                       // 0x5C4: int
-/*0x05c8*/ int                      Unknown0x5C8;                       // 0x5C8: int
-/*0x05cc*/ char                     Handle[0x20];                       // 0x5CC: char[32] (confirmed)
-/*0x05ec*/ int                      Unknown0x5EC;                       // 0x5EC: pad to 8-align
-/*0x05f0*/ void*                    pRaceGenderInfo;                    // 0x5F0: qword
-/*0x05f8*/ unsigned int             SpellCooldownETA;                   // 0x5F8: int
-/*0x05fc*/ int                      ManaMax;                            // 0x5FC: int
-/*0x0600*/ int                      ManaCurrent;                        // 0x600: int
-/*0x0604*/ uint8_t                  FishingEvent;                       // 0x604: byte
-/*0x0605*/ uint8_t                  Unknown0x605;                       // 0x605: pad
-/*0x0606*/ uint8_t                  Unknown0x606;                       // 0x606: pad
-/*0x0607*/ uint8_t                  Unknown0x607;                       // 0x607: pad
-/*0x0608*/ float                    RunSpeed;                           // 0x608: float (init 1.4)
-/*0x060c*/ bool                     bAttackRelated;                     // 0x60C: byte
-/*0x060d*/ uint8_t                  Unknown0x60D;                       // 0x60D: pad
-/*0x060e*/ uint8_t                  Unknown0x60E;                       // 0x60E: pad
-/*0x060f*/ uint8_t                  Unknown0x60F;                       // 0x60F: pad
-/*0x0610*/ unsigned int             NextIntimidateTime;                 // 0x610: int
-/*0x0614*/ unsigned int             FishingETA;                         // 0x614: int
-/*0x0618*/ int                      Unknown0x618;                       // 0x618: int
-/*0x061c*/ uint8_t                  FD;                                 // 0x61C: byte (confirmed)
-/*0x061d*/ uint8_t                  Unknown0x61D;                       // 0x61D: pad
-/*0x061e*/ uint8_t                  Unknown0x61E;                       // 0x61E: pad
-/*0x061f*/ uint8_t                  Unknown0x61F;                       // 0x61F: pad
-/*0x0620*/ int                      Unknown0x620a;                      // 0x620: qword (split as 2 ints)
-/*0x0624*/ int                      Unknown0x624;                       // 0x624: int
-/*0x0628*/ bool                     Unknown0x628;                       // 0x628: byte
-/*0x0629*/ uint8_t                  Unknown0x629;                       // 0x629: pad
-/*0x062a*/ uint8_t                  Unknown0x62A;                       // 0x62A: pad
-/*0x062b*/ uint8_t                  Unknown0x62B;                       // 0x62B: pad
-/*0x062c*/ int                      Unknown0x62C;                       // 0x62C: int
-/*0x0630*/ unsigned int             Unknown0x630;                       // 0x630: int
-/*0x0634*/ int                      Unknown0x634;                       // 0x634: int (init=6)
-/*0x0638*/ int                      NpcTintIndex;                       // 0x638: int
-/*0x063c*/ int                      PrimaryTintIndex;                   // 0x63C: int
-/*0x0640*/ unsigned int             LastTick;                           // 0x640: int
-/*0x0644*/ unsigned int             CombatSkillUsed[CONCURRENT_SKILLS]; // 0x644: int[2] (confirmed)
-/*0x064c*/ int                      RealEstateItemId;                   // 0x64C: int (dtor CMP -1)
-/*0x0650*/ uint8_t                  Meditating;                         // 0x650: byte
-/*0x0651*/ uint8_t                  Unknown0x651;                       // 0x651: pad
-/*0x0652*/ uint8_t                  Unknown0x652;                       // 0x652: pad
-/*0x0653*/ uint8_t                  Unknown0x653;                       // 0x653: pad
-/*0x0654*/ unsigned int             Zone;                               // 0x654: int
-/*0x0658*/ unsigned int             HibernatingCount;                   // 0x658: int
-/*0x065c*/ unsigned int             Unknown0x65C;                       // 0x65C: int
-/*0x0660*/ unsigned int             Unknown0x660;                       // 0x660: int
+/*0x01c8*/ unsigned int              LastIntimidateUse;
+/*0x01cc*/ uint8_t                   Unknown4;
+/*0x01d0*/ int                       SecondaryTintIndex;
+/*0x01d4*/ int                       DoSpecialMelee;
+/*0x01d8*/ float                     MerchantGreed;
+/*0x01dc*/ int                       Unknown0x1DC;
+/*0x01e0*/ int64_t                   HPCurrent;
+/*0x01e8*/ unsigned int              SitStartTime;
+/*0x01ec*/ unsigned int              LastResendAddPlayerPacket;
+/*0x01f0*/ uint8_t                   IntimidateCount;
+/*0x01f1*/ bool                      bBetaBuffed;
+/*0x01f2*/ uint8_t                   Unknown0x1F2;
+/*0x01f3*/ uint8_t                   Unknown0x1F3;
+/*0x01f4*/ uint8_t                   Unknown0x1F4;
+/*0x01f5*/ uint8_t                   Unknown0x1F5;
+/*0x01f6*/ uint8_t                   Unknown0x1F6;
+/*0x01f7*/ uint8_t                   Unknown0x1F7;
+/*0x01f8*/ uint8_t                   Unknown0x1F8;
+/*0x01f9*/ uint8_t                   Unknown0x1F9;
+/*0x01fa*/ uint8_t                   Unknown0x1FA;
+/*0x01fb*/ uint8_t                   Unknown0x1FB;
+/*0x01fc*/ char                      LoginRelated[21];
+/*0x0214*/ int                       Unknown0x214;
+/*0x0218*/ bool                      Unknown0x218;
+/*0x021c*/ float                     AnimationSpeedRelated;
+/*0x0220*/ bool                      bStationary;
+/*0x0224*/ float                     ViewHeight;
+/*0x0228*/ EQSwitch*                 pTouchingSwitch;
+/*0x0230*/ uint8_t                   FindBits;
+/*0x0231*/ uint8_t                   Blind;
+/*0x0234*/ int                       Unknown0x234;
+/*0x0238*/ int64_t                   HPMax;
+/*0x0240*/ bool                      LFG;
+/*0x0244*/ int                       Buyer;
+/*0x0248*/ uint8_t                   StandState;
+/*0x0249*/ bool                      bTempPet;
+/*0x024a*/ uint8_t                   IsPassenger;
+/*0x024c*/ LaunchSpellData           CastingData;
+/*0x0290*/ unsigned int              TimeStamp;
+/*0x0294*/ bool                      Sneak;
+/*0x0298*/ unsigned int              MasterID;
+/*0x029c*/ int                       Unknown0x29C;
+/*0x02a0*/ int64_t                   GuildID;
+/*0x02a8*/ bool                      bSummoned;
+/*0x02ac*/ int                       Unknown1;
+/*0x02b0*/ int                       Unknown0x2B0;
+/*0x02b4*/ float                     MissileRangeToTarget;
+/*0x02b8*/ int                       Anon;
+/*0x02bc*/ int                       Unknown0x2BC;
+/*0x02c0*/ int                       WarCry;
+/*0x02c4*/ bool                      berserker;
+/*0x02c8*/ int                       EnduranceCurrent;
+/*0x02cc*/ unsigned int              EnduranceMax;
+/*0x02d0*/ unsigned int              LastPrimaryUseTime;
+/*0x02d4*/ float                     MyWalkSpeed;
+/*0x02d8*/ char                      Title[0x80];
+/*0x0358*/ int                       Deity;
+/*0x035c*/ EqItemGuid                realEstateItemGuid;
+/*0x036e*/ char                      Suffix[0x80];
+/*0x03ee*/ bool                      bBuffTimersOnHold;
+/*0x03ef*/ bool                      PvPFlag;
+/*0x03f0*/ int                       IsAttacking;
+/*0x03f4*/ uint8_t                   GMRank;
+/*0x03f8*/ float                     BearingToTarget;
+/*0x03fc*/ char                      GM;
+/*0x03fd*/ uint8_t                   Level;
+/*0x0400*/ int                       PetID;
+/*0x0404*/ unsigned int              LoginSerial;
+/*0x0408*/ int                       RealEstateID;
+/*0x040c*/ char                      DraggingPlayer[0x41];
+/*0x0450*/ int                       AFK;
+/*0x0454*/ int                       CurrIOState;
+/*0x0458*/ int                       Unknown0x458;
+/*0x045c*/ uint8_t                   InPvPArea;
+/*0x0460*/ int                       Unknown0x460;
+/*0x0464*/ uint8_t                   Original;
+/*0x0465*/ uint8_t                   HoldingAnimation;
+/*0x0468*/ unsigned int              LastRefresh;
+/*0x046c*/ unsigned int              MinuteTimer;
+/*0x0470*/ char                      DragNames[129];
+/*0x04f8*/ CharacterZoneClient*      pCharacter;
+/*0x0500*/ bool                      bOfflineMode;
+/*0x0501*/ uint8_t                   CharClass;
+/*0x0504*/ unsigned int              SpellGemETA[15];
+/*0x0540*/ unsigned int              Unknown0x540;
+/*0x0544*/ unsigned int              Unknown0x544;
+/*0x0548*/ unsigned int              LastRangedUsedTime;
+/*0x054c*/ bool                      Linkdead;
+/*0x0550*/ int                       Trader;
+/*0x0554*/ bool                      bAnimationOnPop;
+/*0x0558*/ int                       CorpseDragCount;
+/*0x055c*/ uint8_t                   Light;
+/*0x0560*/ int64_t                   SomeData;
+/*0x0568*/ float                     GetMeleeRangeVar1;
+/*0x056c*/ unsigned int              CombatSkillTicks[CONCURRENT_SKILLS];
+/*0x0574*/ int                       HideMode;
+/*0x0578*/ bool                      Mercenary;
+/*0x057c*/ unsigned int              RespawnTimer;
+/*0x0580*/ bool                      bShowHelm;
+/*0x0584*/ CPhysicsInfo              LastCollision;
+/*0x05b4*/ uint8_t                   LastAttack;
+/*0x05b8*/ int                       AltAttack;
+/*0x05bc*/ bool                      bSwitchMoved;
+/*0x05c0*/ int                       Birthdate;
+/*0x05c4*/ int                       Unknown0x5C4;
+/*0x05c8*/ int                       Unknown0x5C8;
+/*0x05cc*/ char                      Handle[0x20];
+/*0x05ec*/ int                       Unknown0x5EC;
+/*0x05f0*/ void*                     pRaceGenderInfo;
+/*0x05f8*/ unsigned int              SpellCooldownETA;
+/*0x05fc*/ int                       ManaMax;
+/*0x0600*/ int                       ManaCurrent;
+/*0x0604*/ uint8_t                   FishingEvent;
+/*0x0608*/ float                     RunSpeed;
+/*0x060c*/ bool                      bAttackRelated;
+/*0x0610*/ unsigned int              NextIntimidateTime;
+/*0x0614*/ unsigned int              FishingETA;
+/*0x0618*/ int                       Unknown0x618;
+/*0x061c*/ uint8_t                   FD;
+/*0x0620*/ int64_t                   Unknown0x620;
+/*0x0628*/ bool                      Unknown0x628;
+/*0x062c*/ int                       Unknown0x62C;
+/*0x0630*/ unsigned int              Unknown0x630;
+/*0x0634*/ int                       Unknown0x634;
+/*0x0638*/ int                       NpcTintIndex;
+/*0x063c*/ int                       PrimaryTintIndex;
+/*0x0640*/ unsigned int              LastTick;
+/*0x0644*/ unsigned int              CombatSkillUsed[CONCURRENT_SKILLS];
+/*0x064c*/ int                       RealEstateItemId;
+/*0x0650*/ uint8_t                   Meditating;
+/*0x0654*/ unsigned int              Zone;
+/*0x0658*/ unsigned int              HibernatingCount;
+/*0x65c*/
 // @end: PlayerZoneClient Members
 
-/*0x0664*/ TCircularBuffer<SDoCollisionMovementStats, MAX_MOVEMENT_STATS> MovementStats;
-/*0x0f80*/ PlayerClient*      WhoFollowing;                       // NULL if autofollow off
-/*0x0f88*/ unsigned int       GroupAssistNPC[MAX_GROUP_ASSISTS];
-/*0x0f8c*/ unsigned int       RaidAssistNPC[MAX_RAID_ASSISTS];
-/*0x0f98*/ unsigned int       GroupMarkNPC[MAX_GROUP_MARK_TARGETS];
-/*0x0fa4*/ unsigned int       RaidMarkNPC[MAX_RAID_MARK_TARGETS];
-/*0x0fb0*/ unsigned int       TargetOfTarget;
-/*0x0fb4*/ PZCPhysicsInfo     PZCLastPhysics;
-/*0x0fd4*/ unsigned int       ParticleCastStartTime;
-/*0x0fd8*/ unsigned int       ParticleCastDuration;
-/*0x0fdc*/ int                ParticleVisualSpellNum;
+/*0x065c*/ TCircularBuffer<SDoCollisionMovementStats, MAX_MOVEMENT_STATS> MovementStats;  // copy ctor: FUN_1402fed10(this+0x65C)
+/*0x0f78*/ PlayerClient*      WhoFollowing;                       // NULL if autofollow off
+/*0x0f80*/ unsigned int       GroupAssistNPC[MAX_GROUP_ASSISTS];
+/*0x0f84*/ unsigned int       RaidAssistNPC[MAX_RAID_ASSISTS];
+/*0x0f90*/ unsigned int       GroupMarkNPC[MAX_GROUP_MARK_TARGETS];
+/*0x0f9c*/ unsigned int       RaidMarkNPC[MAX_RAID_MARK_TARGETS];
+/*0x0fa8*/ unsigned int       TargetOfTarget;
+/*0x0fac*/ PZCPhysicsInfo     PZCLastPhysics;
+/*0x0fcc*/ unsigned int       ParticleCastStartTime;
+/*0x0fd0*/ unsigned int       ParticleCastDuration;
+/*0x0fd4*/ int                ParticleVisualSpellNum;
+/*0x0fd8*/ unsigned int       Unknown0xFD8;                       // new field (copy ctor confirmed at 0xFD8)
 /*0x0fe0*/ ActorClient        mActorClient;
 /*0x11f0*/ PlayerAnimationBase* pAnimation;
 /*0x11f8*/ float              MeleeRadius;                        // used by GetMeleeRange

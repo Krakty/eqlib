@@ -182,15 +182,15 @@ private:
 	void ClearRoles();
 };
 
-constexpr size_t CGroupMember_size = 0x68; // @sizeof(CGroupMember) :: 2026-04-09 (test) @ 0x1402e7540
+constexpr size_t CGroupMember_size = 0x68; // @sizeof(CGroupMember) :: 2026-03-16 (test) @ 0x1402E689E
 
 class [[offsetcomments]] CGroupMember : public CGroupMemberBase
 {
 public:
-/*0x38*/ CharacterZoneClient*  pCharacter;
-/*0x3E*/ PlayerClient*         pPlayer;
-/*0x3F*/ int                   GroupIndex;
-/*0x40*/
+/*0x50*/ CharacterZoneClient*  pCharacter;
+/*0x58*/ PlayerClient*         pPlayer;
+/*0x60*/ int                   GroupIndex;
+/*0x64*/
 
 	CGroupMember();
 	virtual ~CGroupMember();
@@ -1679,7 +1679,7 @@ public:
 	int GetDeityBitmask() const { return 1 << (GetDeityReal() - 1); }
 };
 
-constexpr size_t PcClient_size = 0x3298; // @sizeof(PcClient) :: 2026-04-08 (test) @ 0x14028D59B
+constexpr size_t PcClient_size = 0x3298; // @sizeof(PcClient) :: 2026-03-16 (test) @ 0x14028CBCB
 
 class [[offsetcomments]] PcClient : public PcZoneClient
 {
