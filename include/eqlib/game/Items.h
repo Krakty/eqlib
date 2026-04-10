@@ -1071,8 +1071,8 @@ class [[offsetcomments]] ItemBase : public IChildItemContainer
 {
 public:
 // @start: ItemBase Members
-/*0x008*/ int                   ID;
-/*0x00c*/ int                   NoDropFlag;
+/*0x008*/ int                   RealEstateID;
+/*0x00c*/ int                   Unknown0x00c;                 // init=1, identity pending (possibly keyring-related)
 /*0x010*/ int                   OrnamentationIcon;
 /*0x014*/ int                   ScriptIndex;
 /*0x018*/ ItemGlobalIndex       GlobalIndex;
@@ -1084,13 +1084,13 @@ public:
 /*0x03c*/ int                   ArmorType;
 /*0x040*/ bool                  bDisableAugTexture;
 /*0x044*/ int                   AugFlag;
-/*0x048*/ int                   StackCount;
+/*0x048*/ int                   Unknown0x048;                 // was StackCount, agent says Charges but conflicts with 0x04c
 /*0x04c*/ int                   Charges;
 /*0x050*/ unsigned int          Tint;
 /*0x054*/ unsigned int          RespawnTime;
 /*0x058*/ int                   Open;
 /*0x05c*/ bool                  bCollected;
-/*0x060*/ int                   Power;
+/*0x060*/ int                   StackCount;
 /*0x068*/ ItemEvolutionDataPtr  pEvolutionData;
 /*0x078*/ SoeUtil::String       SaveString;
 /*0x090*/ int64_t               Price;
@@ -1103,10 +1103,10 @@ public:
 /*0x0d8*/ bool                  bRankDisabled;
 /*0x0d9*/ EqItemGuid            ItemGUID;
 /*0x0f0*/ int64_t               MerchantSlot;
-/*0x0f8*/ unsigned int          LastCastTime;
-/*0x0fc*/ int                   RealEstateID;
+/*0x0f8*/ int                   NoDropFlag;
+/*0x0fc*/ int                   MerchantQuantity;
 /*0x100*/ unsigned int          NewArmorID;
-/*0x104*/ int                   MerchantQuantity;
+/*0x104*/ int                   Unknown0x104;                 // init=0, was MerchantQuantity but that's now at 0x0fc
 /*0x108*/
 // @end: ItemBase Members
 
