@@ -306,6 +306,7 @@ ItemBase::ItemBase()
 	Luck = 0;
 	ID = 0;
 	MerchantSlot = 0;
+	ConvertItemID = 0;
 	DontKnow = 0;
 	NoDropFlag = 0;
 	LastCastTime = 0;
@@ -319,7 +320,6 @@ ItemBase::ItemBase()
 	Open = 0;
 	NoteStatus = 0;
 	bConvertable = false;
-	ConvertItemID = 0;
 	Tint = 0;
 	ArmorType = 0;
 	AugFlag = 0;

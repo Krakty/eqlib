@@ -215,7 +215,7 @@
 #define CharacterZoneClient__GetFocusDurationMod_x                 0x1400CFD40
 #define CharacterZoneClient__GetHPRegen_x                          0x1400F6E90
 #define CharacterZoneClient__GetItemCountInInventory_x             0x1400EF350
-#define CharacterZoneClient__GetItemCountWorn_x                    0x1400F5FE0
+#define CharacterZoneClient__GetItemCountWorn_x                    0x1400F6080
 #define CharacterZoneClient__GetLastEffectSlot_x                   0x1400DE980
 #define CharacterZoneClient__GetManaRegen_x                        0x1400F8700
 #define CharacterZoneClient__GetModCap_x                           0x1400FFCE0
@@ -284,7 +284,7 @@
 #define CContextMenuManager__CreateDefaultMenu_x                   0x1403CEB40
 
 // CChatService
-#define CChatService__GetNumberOfFriends_x                         0x1406B86B0
+#define CChatService__GetNumberOfFriends_x                         0x14013C1A0
 #define CChatService__GetFriendName_x                              0x1406B86C0
 
 // CComboWnd
@@ -356,7 +356,7 @@
 #define CEverQuest__GetLangDesc_x                                  0x140282A20
 #define CEverQuest__GetRaceDesc_x                                  0x140282DC0
 #define CEverQuest__InterpretCmd_x                                 0x140284A00
-#define CEverQuest__LeftClickedOnPlayer_x                          0x14029A3E0
+#define CEverQuest__LeftClickedOnPlayer_x                          0x140287FD0
 #define CEverQuest__LMouseUp_x                                     0x140286510
 #define CEverQuest__RightClickedOnPlayer_x                         0x140297780
 #define CEverQuest__RMouseUp_x                                     0x140290E20
@@ -520,7 +520,7 @@
 #define CSidlScreenWnd__HandleLButtonUp_x                          0x1405C8090 // CXWnd::HandleLButtonUp
 #define CSidlScreenWnd__Init1_x                                    0x1405BE370
 #define CSidlScreenWnd__LoadIniInfo_x                              0x1405BE6E0
-#define CSidlScreenWnd__LoadIniListWnd_x                           0x1405BEFB0
+#define CSidlScreenWnd__LoadIniListWnd_x                           0x140073FA0
 #define CSidlScreenWnd__LoadSidlScreen_x                           0x1405BF9B0
 #define CSidlScreenWnd__m_layoutCopy_x                             0x140F529B8
 #define CSidlScreenWnd__StoreIniInfo_x                             0x1405C0030
@@ -538,7 +538,7 @@
 #define CSkillMgr__GetSkillLastUsed_x                              0x14033AB50
 
 // CSliderWnd
-#define CSliderWnd__GetValue_x                                     0x1405D86E0
+#define CSliderWnd__GetValue_x                                     0x1401ED900
 #define CSliderWnd__SetValue_x                                     0x1405D8EF0
 #define CSliderWnd__SetNumTicks_x                                  0x1405D8D70
 
@@ -602,7 +602,7 @@
 #define CXWnd__DrawColoredRect_x                                   0x1405C3DD0
 #define CXWnd__DrawTooltip_x                                       0x1405C5440
 #define CXWnd__DrawTooltipAtPoint_x                                0x1405C5500
-#define CXWnd__GetChildItem_x                                      0x1405C5E10
+#define CXWnd__GetChildItem_x                                      0x1405BDE90
 #define CXWnd__GetChildWndAt_x                                     0x1405C5ED0
 #define CXWnd__GetClientRect_x                                     0x1405C6190
 #define CXWnd__GetClientClipRect_x                                 0x1405C6040
@@ -671,7 +671,7 @@
 // PcClient
 #define PcBase__GetAlternateAbilityId_x                            0x140682160
 #define PcBase__GetCombatAbility_x                                 0x140682860
-#define PcBase__GetCombatAbilityTimer_x                            0x140682900
+#define PcBase__GetCombatAbilityTimer_x                            0x1402F5B80
 #define PcBase__GetItemContainedRealEstateIds_x                    0x1406830D0
 #define PcBase__GetNonArchivedOwnedRealEstates_x                   0x140683B50
 #define PcClient__AlertInventoryChanged_x                          0x1402E4310
@@ -890,7 +890,7 @@
 #define FactionManagerClient__GetMinFaction_x                      0x14012ACD0
 
 // AggroMeterManagerClient
-#define AggroMeterManagerClient__Instance_x                        0x1400B2ED0
+#define AggroMeterManagerClient__Instance_x                        0x140797030
 
 // ClientSOIManager
 #define ClientSOIManager__GetSingleton_x                           0x140137000
@@ -904,9 +904,6 @@
 // CTargetManager
 #define CTargetManager__Get_x                                      0x140346D00
 
-// RealEstateManagerClient
-#define RealEstateManagerClient__Instance_x                        0x140334670
-
 // KeyCombo
 #define KeyCombo__GetTextDescription_x                             0x1405C0E60
 
@@ -917,7 +914,7 @@
 #define ZoneGuideManagerClient__Instance_x                         0x140358880
 
 // AchievementManager
-#define AchievementManager__Instance_x                             0x140091FD0
+#define AchievementManager__Instance_x                             0x14034D550
 
 // FreeToPlayClient
 #define FreeToPlayClient__Instance_x                               0x14069E580
