@@ -1148,11 +1148,12 @@ public:
 /*0x28ac*/ int                                   NoBuffItemEnduranceRegen;
 /*0x28b0*/ int                                   NoBuffItemDamageShield;
 /*0x28b4*/ int                                   NoBuffItemDamageShieldMitigation;
-/*0x28b8*/ int                                   NoBuffItemHaste;
-/*0x28bc*/ int                                   NoBuffItemSkillMinDamageMod[NUM_ITEM_SKILL_DMG_MOD];
-/*0x28e0*/ bool                                  bOutputHpRegen;
-/*0x28e1*/ bool                                  bInvulnerable;
-/*0x28e2*/ bool                                  bOnAVehicle;
+/*0x28b8*/ uint8_t                               unk_0130_byte_flag; // MQ-RE W22/W26: NEW per-patch byte flag (CZC +0x130). Shifts NoBuffItemHaste from +0x130 to +0x134.
+/*0x28bc*/ int                                   NoBuffItemHaste;
+/*0x28c0*/ int                                   NoBuffItemSkillMinDamageMod[NUM_ITEM_SKILL_DMG_MOD];
+/*0x28e4*/ bool                                  bOutputHpRegen;
+/*0x28e5*/ bool                                  bInvulnerable;
+/*0x28e6*/ bool                                  bOnAVehicle;
 /*0x28e8*/ SpellCache                            spellCache;
 /*0x2978*/ HashListSet<int, 128>                 DoomEffectsBySlot;
 /*0x2d98*/ uint32_t                              LastHitEval;
