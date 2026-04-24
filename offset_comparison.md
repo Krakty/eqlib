@@ -12,7 +12,7 @@ and missing names are flagged.
 - Our sizeof: `0x20c0`
 - Upstream header: `include/eqlib/game/PlayerClient.h`
 - Field count (ours): 529
-- Upstream name-indexed field count: 431
+- Upstream name-indexed field count: 421
 
 | Offset (ours) | Type | Name | Upstream offset | Status |
 |---:|---|---|---:|---|
@@ -91,28 +91,28 @@ and missing names are flagged.
 | `0x01c0` | `u32` | `EncounterLockState` | 0x01c0 | MATCH |
 | `0x01c4` | `raw:4` | `PAD_align_1C8` | - | MISSING_IN_UPSTREAM |
 | `0x01c8` | `u32` | `LastIntimidateUse` | 0x01c8 | MATCH |
-| `0x01cc` | `u8` | `Linkdead` | 0x0335 | MISMATCH (delta 0x169) |
+| `0x01cc` | `u8` | `Linkdead` | 0x01cc | MATCH |
 | `0x01cd` | `raw:3` | `PAD_align_1D0_fallz` | - | MISSING_IN_UPSTREAM |
-| `0x01d0` | `f32` | `FallingStartZ` | 0x04f0 | MISMATCH (delta 0x320) |
-| `0x01d4` | `f32` | `MerchantGreed` | 0x0370 | MISMATCH (delta 0x19c) |
-| `0x01d8` | `str:128` | `Title` | 0x05a5 | MISMATCH (delta 0x3cd) |
-| `0x0258` | `u32` | `AFK` | 0x04b8 | MISMATCH (delta 0x260) |
-| `0x025c` | `f32` | `GetMeleeRangeVar1` | 0x0578 | MISMATCH (delta 0x31c) |
+| `0x01d0` | `f32` | `FallingStartZ` | 0x01d0 | MATCH |
+| `0x01d4` | `f32` | `MerchantGreed` | 0x01d4 | MATCH |
+| `0x01d8` | `str:128` | `Title` | 0x01d8 | MATCH |
+| `0x0258` | `u32` | `AFK` | 0x0258 | MATCH |
+| `0x025c` | `f32` | `GetMeleeRangeVar1` | 0x025c | MATCH |
 | `0x0260` | `u8` | `Level` | 0x004c | MISMATCH (delta 0x214) |
 | `0x0261` | `raw:7` | `PAD_align_268_hpmax` | - | MISSING_IN_UPSTREAM |
-| `0x0268` | `i64` | `HPMax` | 0x0338 | MISMATCH (delta 0xd0) |
+| `0x0268` | `i64` | `HPMax` | 0x0268 | MATCH |
 | `0x0270` | `raw:128` | `banker_interaction_slots_8x16` | - | MISSING_IN_UPSTREAM |
-| `0x02f0` | `u8` | `HoldingAnimation` | 0x044c | MISMATCH (delta 0x15c) |
-| `0x02f1` | `u8` | `GM` | 0x03ec | MISMATCH (delta 0xfb) |
-| `0x02f2` | `str:128` | `Suffix` | 0x02b0 | MISMATCH (delta 0x42) |
+| `0x02f0` | `u8` | `HoldingAnimation` | 0x02f0 | MATCH |
+| `0x02f1` | `u8` | `GM` | 0x02f1 | MATCH |
+| `0x02f2` | `str:128` | `Suffix` | 0x02f2 | MATCH |
 | `0x0370` | `f32` | `U_MerchantGreed` | - | MISSING_IN_UPSTREAM |
 | `0x0372` | `raw:2` | `PAD_post_suffix` | - | MISSING_IN_UPSTREAM |
 | `0x0374` | `u32` | `Unknown0x0374` | - | MISSING_IN_UPSTREAM |
-| `0x0378` | `u32` | `HideMode` | 0x0430 | MISMATCH (delta 0xb8) |
-| `0x037c` | `u8` | `Light` | 0x037d | MISMATCH (delta 0x1) |
+| `0x0378` | `u32` | `HideMode` | 0x0378 | MATCH |
+| `0x037c` | `u8` | `Light` | 0x037c | MATCH |
 | `0x037d` | `raw:3` | `PAD_align_380_prevpos` | - | MISSING_IN_UPSTREAM |
 | `0x0380` | `f32` | `PrevFramePosY` | - | MISSING_IN_UPSTREAM |
-| `0x0380` | `raw:48` | `LastCollision` | 0x0540 | MISMATCH (delta 0x1c0) |
+| `0x0380` | `raw:48` | `LastCollision` | 0x0380 | MATCH |
 | `0x0384` | `f32` | `PrevFramePosX` | - | MISSING_IN_UPSTREAM |
 | `0x0388` | `f32` | `PrevFramePosZ` | - | MISSING_IN_UPSTREAM |
 | `0x038c` | `u32` | `unk_38C_dword_dynamic` | - | MISSING_IN_UPSTREAM |
@@ -124,96 +124,96 @@ and missing names are flagged.
 | `0x03a4` | `u32` | `unk_3A4_dword` | - | MISSING_IN_UPSTREAM |
 | `0x03a8` | `u32` | `unk_3A8_dword` | - | MISSING_IN_UPSTREAM |
 | `0x03ac` | `f32` | `PrevFrameFallVelocityZ` | - | MISSING_IN_UPSTREAM |
-| `0x03b0` | `f32` | `AnimationSpeedRelated` | 0x04e0 | MISMATCH (delta 0x130) |
-| `0x03b4` | `u32` | `LastTimeStoodStill` | 0x0354 | MISMATCH (delta 0x60) |
+| `0x03b0` | `f32` | `AnimationSpeedRelated` | 0x03b0 | MATCH |
+| `0x03b4` | `u32` | `LastTimeStoodStill` | 0x03b4 | MATCH |
 | `0x03b4` | `u8` | `Hide` | - | MISSING_IN_UPSTREAM |
 | `0x03b5` | `raw:3` | `PAD_align_3B8_walkspeed` | - | MISSING_IN_UPSTREAM |
-| `0x03b8` | `f32` | `MyWalkSpeed` | 0x0378 | MISMATCH (delta 0x40) |
-| `0x03bc` | `u32` | `FishingETA` | 0x03f4 | MISMATCH (delta 0x38) |
-| `0x03c0` | `u32` | `CurrIOState` | 0x0374 | MISMATCH (delta 0x4c) |
+| `0x03b8` | `f32` | `MyWalkSpeed` | 0x03b8 | MATCH |
+| `0x03bc` | `u32` | `FishingETA` | 0x03bc | MATCH |
+| `0x03c0` | `u32` | `CurrIOState` | 0x03c0 | MATCH |
 | `0x03c4` | `u8` | `u8_3C4` | - | MISSING_IN_UPSTREAM |
-| `0x03c4` | `u8` | `bStationary` | 0x0428 | MISMATCH (delta 0x64) |
+| `0x03c4` | `u8` | `bStationary` | 0x03c4 | MATCH |
 | `0x03c5` | `raw:3` | `PAD_align_3C8_runspeed` | - | MISSING_IN_UPSTREAM |
-| `0x03c8` | `f32` | `RunSpeed` | 0x0404 | MISMATCH (delta 0x3c) |
-| `0x03cc` | `u32` | `LastSecondaryUseTime` | 0x057c | MISMATCH (delta 0x1b0) |
-| `0x03d0` | `u8` | `bAnimationOnPop` | 0x05a4 | MISMATCH (delta 0x1d4) |
-| `0x03d1` | `u8` | `GMRank` | 0x0368 | MISMATCH (delta 0x69) |
+| `0x03c8` | `f32` | `RunSpeed` | 0x03c8 | MATCH |
+| `0x03cc` | `u32` | `LastSecondaryUseTime` | 0x03cc | MATCH |
+| `0x03d0` | `u8` | `bAnimationOnPop` | 0x03d0 | MATCH |
+| `0x03d1` | `u8` | `GMRank` | 0x03d1 | MATCH |
 | `0x03d2` | `raw:6` | `PAD_align_3D8_ppUDP` | - | MISSING_IN_UPSTREAM |
-| `0x03d8` | `u64` | `ppUDP` | 0x0358 | MISMATCH (delta 0x80) |
+| `0x03d8` | `u64` | `ppUDP` | 0x03d8 | MATCH |
 | `0x03e0` | `u32` | `HungerThirstTick` | - | MISSING_IN_UPSTREAM |
-| `0x03e0` | `u32` | `MinuteTimer` | 0x01d0 | MISMATCH (delta 0x210) |
-| `0x03e4` | `u32` | `ManaCurrent` | 0x03fc | MISMATCH (delta 0x18) |
-| `0x03e8` | `u8` | `FishingEvent` | 0x02a1 | MISMATCH (delta 0x147) |
+| `0x03e0` | `u32` | `MinuteTimer` | 0x03e0 | MATCH |
+| `0x03e4` | `u32` | `ManaCurrent` | 0x03e4 | MATCH |
+| `0x03e8` | `u8` | `FishingEvent` | 0x03e8 | MATCH |
 | `0x03e9` | `raw:3` | `PAD_align_3EC_tint` | - | MISSING_IN_UPSTREAM |
-| `0x03ec` | `u32` | `Birthdate` | 0x0448 | MISMATCH (delta 0x5c) |
+| `0x03ec` | `u32` | `Birthdate` | 0x03ec | MATCH |
 | `0x03f0` | `u32` | `unk_3F0_dword` | - | MISSING_IN_UPSTREAM |
-| `0x03f0` | `u32` | `LastRangedUsedTime` | 0x0438 | MISMATCH (delta 0x48) |
+| `0x03f0` | `u32` | `LastRangedUsedTime` | 0x03f0 | MATCH |
 | `0x03f4` | `u32` | `attack_cooldown_3F4` | - | MISSING_IN_UPSTREAM |
 | `0x03f4` | `u32` | `Unknown0x03f4` | - | MISSING_IN_UPSTREAM |
 | `0x03f8` | `u32` | `LastObstructionTick` | - | MISSING_IN_UPSTREAM |
 | `0x03f8` | `u32` | `Unknown0x03f8` | - | MISSING_IN_UPSTREAM |
-| `0x03fc` | `f32` | `BearingToTarget` | 0x0594 | MISMATCH (delta 0x198) |
+| `0x03fc` | `f32` | `BearingToTarget` | 0x03fc | MATCH |
 | `0x0400` | `u32` | `unk_400_zero_init` | - | MISSING_IN_UPSTREAM |
-| `0x0400` | `u32` | `LastTick` | 0x04b4 | MISMATCH (delta 0xb4) |
-| `0x0404` | `u32` | `LastRefresh` | 0x0344 | MISMATCH (delta 0xc0) |
-| `0x0404` | `u32` | `WarCry` | 0x0570 | MISMATCH (delta 0x16c) |
-| `0x0408` | `i32` | `Deity` | 0x042c | MISMATCH (delta 0x24) |
+| `0x0400` | `u32` | `LastTick` | 0x05c8 | MISMATCH (delta 0x1c8) |
+| `0x0404` | `u32` | `LastRefresh` | 0x0404 | MATCH |
+| `0x0404` | `u32` | `WarCry` | - | MISSING_IN_UPSTREAM |
+| `0x0408` | `i32` | `Deity` | 0x0408 | MATCH |
 | `0x040c` | `u32` | `unk_40C_id_init_neg1` | - | MISSING_IN_UPSTREAM |
-| `0x0410` | `u64` | `GuildID` | 0x0500 | MISMATCH (delta 0xf0) |
+| `0x0410` | `u64` | `GuildID` | 0x0410 | MATCH |
 | `0x0418` | `u32` | `Unknown0x0418` | - | MISSING_IN_UPSTREAM |
 | `0x041c` | `u32` | `Unknown0x041c` | - | MISSING_IN_UPSTREAM |
-| `0x0420` | `str:32` | `Handle` | 0x0508 | MISMATCH (delta 0xe8) |
+| `0x0420` | `str:32` | `Handle` | 0x0420 | MATCH |
 | `0x0424` | `u32` | `U_TimeStamp` | - | MISSING_IN_UPSTREAM |
 | `0x043c` | `u32` | `U_StunTimer` | - | MISSING_IN_UPSTREAM |
-| `0x0440` | `u8` | `bShowHelm` | 0x0440 | MATCH |
+| `0x0440` | `u8` | `bShowHelm` | - | MISSING_IN_UPSTREAM |
 | `0x0441` | `raw:1` | `PAD_align_442` | - | MISSING_IN_UPSTREAM |
 | `0x0442` | `raw:2` | `PAD_align_444` | - | MISSING_IN_UPSTREAM |
-| `0x0444` | `u32` | `PrimaryTintIndex` | 0x0588 | MISMATCH (delta 0x144) |
+| `0x0444` | `u32` | `PrimaryTintIndex` | 0x0444 | MATCH |
 | `0x0444` | `u32` | `u32_deserialized_0x444_unnamed` | - | MISSING_IN_UPSTREAM |
 | `0x0444` | `raw:4` | `PAD_align_448` | - | MISSING_IN_UPSTREAM |
-| `0x0448` | `array:u32:2` | `CombatSkillUsed` | 0x0580 | MISMATCH (delta 0x138) |
-| `0x0450` | `u8` | `Blind` | 0x0408 | MISMATCH (delta 0x48) |
+| `0x0448` | `array:u32:2` | `CombatSkillUsed` | 0x0448 | MATCH |
+| `0x0450` | `u8` | `Blind` | 0x0450 | MATCH |
 | `0x0451` | `raw:3` | `PAD_align_454_sit` | - | MISSING_IN_UPSTREAM |
-| `0x0454` | `u32` | `SitStartTime` | 0x034c | MISMATCH (delta 0x108) |
-| `0x0458` | `u32` | `CameraOffset` | 0x039c | MISMATCH (delta 0xbc) |
-| `0x045c` | `u32` | `LastMealTime` | 0x041c | MISMATCH (delta 0x40) |
-| `0x0460` | `u8` | `berserker` | 0x02a8 | MISMATCH (delta 0x1b8) |
+| `0x0454` | `u32` | `SitStartTime` | 0x0454 | MATCH |
+| `0x0458` | `u32` | `CameraOffset` | 0x0458 | MATCH |
+| `0x045c` | `u32` | `LastMealTime` | 0x045c | MATCH |
+| `0x0460` | `u8` | `berserker` | 0x0460 | MATCH |
 | `0x0461` | `u8` | `u8_461` | - | MISSING_IN_UPSTREAM |
 | `0x0462` | `raw:2` | `PAD_align_464` | - | MISSING_IN_UPSTREAM |
-| `0x0464` | `u32` | `EnduranceCurrent` | 0x04f8 | MISMATCH (delta 0x94) |
-| `0x0468` | `u32` | `EnduranceMax` | 0x0538 | MISMATCH (delta 0xd0) |
-| `0x046c` | `u32` | `RealEstateItemId` | 0x03f0 | MISMATCH (delta 0x7c) |
-| `0x0470` | `u32` | `Anon` | 0x021c | MISMATCH (delta 0x254) |
-| `0x0474` | `u32` | `NextIntimidateTime` | 0x0388 | MISMATCH (delta 0xec) |
-| `0x0478` | `u8` | `InPvPArea` | 0x038c | MISMATCH (delta 0xec) |
+| `0x0464` | `u32` | `EnduranceCurrent` | 0x0464 | MATCH |
+| `0x0468` | `u32` | `EnduranceMax` | 0x0468 | MATCH |
+| `0x046c` | `u32` | `RealEstateItemId` | 0x046c | MATCH |
+| `0x0470` | `u32` | `Anon` | 0x0470 | MATCH |
+| `0x0474` | `u32` | `NextIntimidateTime` | 0x0474 | MATCH |
+| `0x0478` | `u8` | `InPvPArea` | 0x0478 | MATCH |
 | `0x0479` | `raw:1` | `PAD_align_47C_byte1` | - | MISSING_IN_UPSTREAM |
 | `0x047a` | `raw:1` | `PAD_align_47C_byte2` | - | MISSING_IN_UPSTREAM |
 | `0x047b` | `raw:1` | `PAD_align_47C_byte3` | - | MISSING_IN_UPSTREAM |
-| `0x047c` | `u32` | `StunTimer` | 0x043c | MISMATCH (delta 0x40) |
-| `0x0480` | `u32` | `LastResendAddPlayerPacket` | 0x058c | MISMATCH (delta 0x10c) |
+| `0x047c` | `u32` | `StunTimer` | 0x047c | MATCH |
+| `0x0480` | `u32` | `LastResendAddPlayerPacket` | 0x0480 | MATCH |
 | `0x0480` | `u32` | `unk_480_const_8` | - | MISSING_IN_UPSTREAM |
-| `0x0484` | `u32` | `NpcTintIndex` | 0x0630 | MISMATCH (delta 0x1ac) |
+| `0x0484` | `u32` | `NpcTintIndex` | 0x0484 | MATCH |
 | `0x0488` | `u32` | `AnimationStateFlags` | - | MISSING_IN_UPSTREAM |
-| `0x0488` | `u8` | `TitleVisible` | 0x0434 | MISMATCH (delta 0x54) |
+| `0x0488` | `u8` | `TitleVisible` | 0x0488 | MATCH |
 | `0x0489` | `u8` | `unknown0x0489` | - | MISSING_IN_UPSTREAM |
 | `0x048a` | `u8` | `unknown0x048a` | - | MISSING_IN_UPSTREAM |
 | `0x048b` | `u8` | `unknown0x048b` | - | MISSING_IN_UPSTREAM |
 | `0x048c` | `u8` | `bTrader` | - | MISSING_IN_UPSTREAM |
-| `0x048c` | `u8` | `bOfflineMode` | 0x0350 | MISMATCH (delta 0x13c) |
+| `0x048c` | `u8` | `bOfflineMode` | 0x048c | MATCH |
 | `0x048d` | `raw:3` | `PAD_align_490` | - | MISSING_IN_UPSTREAM |
 | `0x0490` | `f32` | `DistanceToFollowTarget` | - | MISSING_IN_UPSTREAM |
-| `0x0490` | `f32` | `MissileRangeToTarget` | 0x04e8 | MISMATCH (delta 0x58) |
+| `0x0490` | `f32` | `MissileRangeToTarget` | 0x0490 | MATCH |
 | `0x0494` | `i32` | `Unknown0x0494` | - | MISSING_IN_UPSTREAM |
 | `0x0498` | `u8` | `Unknown0x0498` | - | MISSING_IN_UPSTREAM |
 | `0x0498` | `u8` | `packet_bit_498` | - | MISSING_IN_UPSTREAM |
 | `0x0499` | `raw:3` | `PAD_align_49C` | - | MISSING_IN_UPSTREAM |
 | `0x049c` | `u32` | `FamiliarID` | - | MISSING_IN_UPSTREAM |
-| `0x04a0` | `u32` | `CorpseDragCount` | 0x0360 | MISMATCH (delta 0x140) |
-| `0x04a4` | `raw:18` | `realEstateItemGuid` | 0x045c | MISMATCH (delta 0x48) |
-| `0x04b6` | `str:64` | `DraggingPlayer` | 0x046e | MISMATCH (delta 0x48) |
+| `0x04a0` | `u32` | `CorpseDragCount` | 0x04a0 | MATCH |
+| `0x04a4` | `raw:18` | `realEstateItemGuid` | 0x04a4 | MATCH |
+| `0x04b6` | `str:64` | `DraggingPlayer` | 0x04b6 | MATCH |
 | `0x04f6` | `raw:2` | `PAD_align_4F8` | - | MISSING_IN_UPSTREAM |
-| `0x04f8` | `u32` | `SecondaryTintIndex` | 0x036c | MISMATCH (delta 0x18c) |
-| `0x04fc` | `raw:68` | `CastingData` | 0x01d8 | MISMATCH (delta 0x324) |
+| `0x04f8` | `u32` | `SecondaryTintIndex` | 0x04f8 | MATCH |
+| `0x04fc` | `raw:68` | `CastingData` | 0x04fc | MATCH |
 | `0x04fc` | `i32` | `CastingData_SpellID` | - | MISSING_IN_UPSTREAM |
 | `0x0500` | `u32` | `CastingData_TargetID` | - | MISSING_IN_UPSTREAM |
 | `0x0504` | `u32` | `CastingData_unknown08` | - | MISSING_IN_UPSTREAM |
@@ -239,88 +239,88 @@ and missing names are flagged.
 | `0x053e` | `u8` | `CastingData_bUnknownFlag42` | - | MISSING_IN_UPSTREAM |
 | `0x053f` | `u8` | `CastingData_bUnknownFlag43` | - | MISSING_IN_UPSTREAM |
 | `0x0540` | `raw:8` | `unk_540_post_casting_pad` | - | MISSING_IN_UPSTREAM |
-| `0x0548` | `i64` | `HPCurrent` | 0x03a0 | MISMATCH (delta 0x1a8) |
-| `0x0550` | `u8` | `bBuffTimersOnHold` | 0x02a0 | MISMATCH (delta 0x2b0) |
-| `0x0551` | `str:32` | `LoginRelated` | 0x04c0 | MISMATCH (delta 0x91) |
+| `0x0548` | `i64` | `HPCurrent` | 0x0548 | MATCH |
+| `0x0550` | `u8` | `bBuffTimersOnHold` | 0x0550 | MATCH |
+| `0x0551` | `str:32` | `LoginRelated` | 0x0551 | MATCH |
 | `0x0571` | `raw:3` | `PAD_align_574_lfg` | - | MISSING_IN_UPSTREAM |
 | `0x0574` | `u32` | `bLFG` | - | MISSING_IN_UPSTREAM |
-| `0x0574` | `u32` | `Trader` | 0x0364 | MISMATCH (delta 0x210) |
-| `0x0578` | `u32` | `ManaMax` | 0x03ac | MISMATCH (delta 0x1cc) |
-| `0x057c` | `u32` | `LoginSerial` | 0x0394 | MISMATCH (delta 0x1e8) |
-| `0x0580` | `u8` | `StandState` | 0x0574 | MISMATCH (delta 0xc) |
-| `0x0581` | `u8` | `CharClass` | 0x0420 | MISMATCH (delta 0x161) |
+| `0x0574` | `u32` | `Trader` | 0x0574 | MATCH |
+| `0x0578` | `u32` | `ManaMax` | 0x0578 | MATCH |
+| `0x057c` | `u32` | `LoginSerial` | 0x057c | MATCH |
+| `0x0580` | `u8` | `StandState` | 0x0580 | MATCH |
+| `0x0581` | `u8` | `CharClass` | 0x0581 | MATCH |
 | `0x0582` | `raw:2` | `PAD_align_584_zone_tail` | - | MISSING_IN_UPSTREAM |
-| `0x0584` | `u32` | `Zone` | 0x04b0 | MISMATCH (delta 0xd4) |
-| `0x0588` | `u32` | `PetID` | 0x0450 | MISMATCH (delta 0x138) |
-| `0x058c` | `u8` | `FD` | 0x03ee | MISMATCH (delta 0x19e) |
-| `0x058d` | `u8` | `bSummoned` | 0x03ed | MISMATCH (delta 0x1a0) |
+| `0x0584` | `u32` | `Zone` | 0x0584 | MATCH |
+| `0x0588` | `u32` | `PetID` | 0x0588 | MATCH |
+| `0x058c` | `u8` | `FD` | 0x058c | MATCH |
+| `0x058d` | `u8` | `bSummoned` | 0x058d | MATCH |
 | `0x058e` | `raw:2` | `PAD_align_590` | - | MISSING_IN_UPSTREAM |
-| `0x0590` | `i32` | `IsAttacking` | 0x04e4 | MISMATCH (delta 0xac) |
+| `0x0590` | `i32` | `IsAttacking` | 0x0590 | MATCH |
 | `0x0590` | `u32` | `CombatSubState_enum` | - | MISSING_IN_UPSTREAM |
-| `0x0594` | `u8` | `FindBits` | 0x03a8 | MISMATCH (delta 0x1ec) |
+| `0x0594` | `u8` | `FindBits` | 0x0594 | MATCH |
 | `0x0595` | `raw:3` | `PAD_align_598` | - | MISSING_IN_UPSTREAM |
-| `0x0598` | `u32` | `RespawnTimer` | 0x0390 | MISMATCH (delta 0x208) |
+| `0x0598` | `u32` | `RespawnTimer` | 0x0598 | MATCH |
 | `0x059c` | `raw:4` | `PAD_align_5A0` | - | MISSING_IN_UPSTREAM |
 | `0x059c` | `raw:8` | `ALIAS_CombatSkillTicks_is_at_0x5C0` | - | MISSING_IN_UPSTREAM |
-| `0x05a0` | `u64` | `pCharacter` | 0x0410 | MISMATCH (delta 0x190) |
-| `0x05a8` | `u32` | `DoSpecialMelee` | 0x0400 | MISMATCH (delta 0x1a8) |
-| `0x05ac` | `u32` | `HibernatingCount` | 0x02ac | MISMATCH (delta 0x300) |
-| `0x05b0` | `u8` | `Buyer` | 0x0418 | MISMATCH (delta 0x198) |
-| `0x05b0` | `u8` | `LFG` | 0x01d4 | MISMATCH (delta 0x3dc) |
-| `0x05b1` | `u8` | `bSwitchMoved` | 0x0340 | MISMATCH (delta 0x271) |
+| `0x05a0` | `u64` | `pCharacter` | 0x05a0 | MATCH |
+| `0x05a8` | `u32` | `DoSpecialMelee` | 0x05a8 | MATCH |
+| `0x05ac` | `u32` | `HibernatingCount` | 0x05ac | MATCH |
+| `0x05b0` | `u8` | `Buyer` | 0x062c | MISMATCH (delta 0x7c) |
+| `0x05b0` | `u8` | `LFG` | 0x05b0 | MATCH |
+| `0x05b1` | `u8` | `bSwitchMoved` | 0x05b1 | MATCH |
 | `0x05b2` | `raw:2` | `PAD_align_5B4_cooldown_tail` | - | MISSING_IN_UPSTREAM |
-| `0x05b4` | `u32` | `SpellCooldownETA` | 0x0444 | MISMATCH (delta 0x170) |
+| `0x05b4` | `u32` | `SpellCooldownETA` | 0x05b4 | MATCH |
 | `0x05b8` | `u8` | `bInvisible` | - | MISSING_IN_UPSTREAM |
 | `0x05b8` | `u8` | `Unknown0x05B8` | - | MISSING_IN_UPSTREAM |
 | `0x05b9` | `raw:3` | `PAD_align_5BC_masterid` | - | MISSING_IN_UPSTREAM |
-| `0x05bc` | `u32` | `MasterID` | 0x0330 | MISMATCH (delta 0x28c) |
-| `0x05c0` | `array:u32:2` | `CombatSkillTicks` | 0x059c | MISMATCH (delta 0x24) |
-| `0x05c8` | `u32` | `LastTick` | 0x04b4 | MISMATCH (delta 0x114) |
-| `0x05c8` | `u32` | `LastRefresh` | 0x0344 | MISMATCH (delta 0x284) |
-| `0x05cc` | `u32` | `LastTrapDamageTime` | 0x04ec | MISMATCH (delta 0xe0) |
-| `0x05d0` | `u8` | `bTempPet` | 0x01cc | MISMATCH (delta 0x404) |
-| `0x05d1` | `u8` | `PvPFlag` | 0x0598 | MISMATCH (delta 0x39) |
-| `0x05d2` | `u8` | `AltAttack` | 0x02a4 | MISMATCH (delta 0x32e) |
+| `0x05bc` | `u32` | `MasterID` | 0x05bc | MATCH |
+| `0x05c0` | `array:u32:2` | `CombatSkillTicks` | 0x05c0 | MATCH |
+| `0x05c8` | `u32` | `LastTick` | 0x05c8 | MATCH |
+| `0x05c8` | `u32` | `LastRefresh` | 0x0404 | MISMATCH (delta 0x1c4) |
+| `0x05cc` | `u32` | `LastTrapDamageTime` | 0x05cc | MATCH |
+| `0x05d0` | `u8` | `bTempPet` | 0x05d0 | MATCH |
+| `0x05d1` | `u8` | `PvPFlag` | 0x05d1 | MATCH |
+| `0x05d2` | `u8` | `AltAttack` | 0x05d2 | MATCH |
 | `0x05d3` | `raw:1` | `PAD_align_5D4_LastPrimaryUseTime` | - | MISSING_IN_UPSTREAM |
-| `0x05d4` | `u32` | `LastPrimaryUseTime` | 0x04bc | MISMATCH (delta 0x118) |
-| `0x05d8` | `u8` | `Mercenary` | 0x037c | MISMATCH (delta 0x25c) |
+| `0x05d4` | `u32` | `LastPrimaryUseTime` | 0x05d4 | MATCH |
+| `0x05d8` | `u8` | `Mercenary` | 0x05d8 | MATCH |
 | `0x05d9` | `raw:3` | `PAD_align_5DC_nextswim` | - | MISSING_IN_UPSTREAM |
-| `0x05dc` | `u32` | `NextSwim` | 0x04f4 | MISMATCH (delta 0xe8) |
-| `0x05e0` | `array:u32:15` | `SpellGemETA` | 0x03b0 | MISMATCH (delta 0x230) |
-| `0x061c` | `f32` | `ViewHeight` | 0x0590 | MISMATCH (delta 0x8c) |
-| `0x0620` | `u64` | `pTouchingSwitch` | 0x0530 | MISMATCH (delta 0xf0) |
+| `0x05dc` | `u32` | `NextSwim` | 0x05dc | MATCH |
+| `0x05e0` | `array:u32:15` | `SpellGemETA` | 0x05e0 | MATCH |
+| `0x061c` | `f32` | `ViewHeight` | 0x061c | MATCH |
+| `0x0620` | `u64` | `pTouchingSwitch` | 0x0620 | MATCH |
 | `0x0628` | `u32` | `CombatEnduranceDrainTick` | - | MISSING_IN_UPSTREAM |
-| `0x0628` | `u32` | `TimeStamp` | 0x0424 | MISMATCH (delta 0x204) |
+| `0x0628` | `u32` | `TimeStamp` | 0x0628 | MATCH |
 | `0x062c` | `u32` | `unk_62C_roleplay_flag` | - | MISSING_IN_UPSTREAM |
-| `0x062c` | `u32` | `Buyer` | 0x0418 | MISMATCH (delta 0x214) |
-| `0x0630` | `u8` | `IsAttacking` | 0x04e4 | MISMATCH (delta 0x14c) |
-| `0x0630` | `u8` | `LastAttack` | 0x0398 | MISMATCH (delta 0x298) |
+| `0x062c` | `u32` | `Buyer` | 0x062c | MATCH |
+| `0x0630` | `u8` | `IsAttacking` | 0x0590 | MISMATCH (delta 0xa0) |
+| `0x0630` | `u8` | `LastAttack` | 0x0630 | MATCH |
 | `0x0631` | `u8` | `IsDead` | - | MISSING_IN_UPSTREAM |
-| `0x0631` | `u8` | `IntimidateCount` | 0x0435 | MISMATCH (delta 0x1fc) |
-| `0x0632` | `u8` | `IsPassenger` | 0x0575 | MISMATCH (delta 0xbd) |
-| `0x0633` | `u8` | `Sneak` | 0x02a2 | MISMATCH (delta 0x391) |
-| `0x0634` | `u8` | `bBetaBuffed` | 0x0528 | MISMATCH (delta 0x10c) |
-| `0x0635` | `u8` | `Original` | 0x0436 | MISMATCH (delta 0x1ff) |
+| `0x0631` | `u8` | `IntimidateCount` | 0x0631 | MATCH |
+| `0x0632` | `u8` | `IsPassenger` | 0x0632 | MATCH |
+| `0x0633` | `u8` | `Sneak` | 0x0633 | MATCH |
+| `0x0634` | `u8` | `bBetaBuffed` | 0x0634 | MATCH |
+| `0x0635` | `u8` | `Original` | 0x0635 | MATCH |
 | `0x0636` | `raw:2` | `PAD_align_638_racegender_tail` | - | MISSING_IN_UPSTREAM |
 | `0x0638` | `u64` | `pRaceGenderInfo` | 0x0638 | MATCH |
-| `0x0640` | `u32` | `Meditating` | 0x0628 | MISMATCH (delta 0x18) |
-| `0x0644` | `raw:2320` | `MovementStats` | 0x0640 | MISMATCH (delta 0x4) |
+| `0x0640` | `u32` | `Meditating` | 0x0640 | MATCH |
+| `0x0644` | `raw:2320` | `MovementStats` | 0x0644 | MATCH |
 | `0x0f54` | `u32` | `MovementStats_Count` | - | MISSING_IN_UPSTREAM |
 | `0x0f58` | `u32` | `MovementStats_WriteIndex` | - | MISSING_IN_UPSTREAM |
 | `0x0f5c` | `raw:4` | `PAD_align_F60` | - | MISSING_IN_UPSTREAM |
-| `0x0f60` | `ptr` | `WhoFollowing` | 0x0f58 | MISMATCH (delta 0x8) |
-| `0x0f68` | `array:u32:1` | `GroupAssistNPC` | 0x0f60 | MISMATCH (delta 0x8) |
-| `0x0f6c` | `array:u32:3` | `RaidAssistNPC` | 0x0f64 | MISMATCH (delta 0x8) |
-| `0x0f78` | `array:u32:3` | `GroupMarkNPC` | 0x0f70 | MISMATCH (delta 0x8) |
-| `0x0f84` | `array:u32:3` | `RaidMarkNPC` | 0x0f7c | MISMATCH (delta 0x8) |
-| `0x0f90` | `u32` | `TargetOfTarget` | 0x0f88 | MISMATCH (delta 0x8) |
-| `0x0f94` | `raw:36` | `PZCLastPhysics` | 0x0f8c | MISMATCH (delta 0x8) |
-| `0x0fb8` | `u32` | `ParticleCastStartTime` | 0x0fb0 | MISMATCH (delta 0x8) |
-| `0x0fbc` | `u32` | `ParticleCastDuration` | 0x0fb4 | MISMATCH (delta 0x8) |
-| `0x0fc0` | `i32` | `ParticleVisualSpellNum` | 0x0fb8 | MISMATCH (delta 0x8) |
+| `0x0f60` | `ptr` | `WhoFollowing` | 0x0f60 | MATCH |
+| `0x0f68` | `array:u32:1` | `GroupAssistNPC` | 0x0f68 | MATCH |
+| `0x0f6c` | `array:u32:3` | `RaidAssistNPC` | 0x0f6c | MATCH |
+| `0x0f78` | `array:u32:3` | `GroupMarkNPC` | 0x0f78 | MATCH |
+| `0x0f84` | `array:u32:3` | `RaidMarkNPC` | 0x0f84 | MATCH |
+| `0x0f90` | `u32` | `TargetOfTarget` | 0x0f90 | MATCH |
+| `0x0f94` | `raw:36` | `PZCLastPhysics` | 0x0f94 | MATCH |
+| `0x0fb8` | `u32` | `ParticleCastStartTime` | 0x0fb8 | MATCH |
+| `0x0fbc` | `u32` | `ParticleCastDuration` | 0x0fbc | MATCH |
+| `0x0fc0` | `i32` | `ParticleVisualSpellNum` | 0x0fc0 | MATCH |
 | `0x0fc4` | `raw:4` | `PAD_align_FC8` | - | MISSING_IN_UPSTREAM |
 | `0x0fc8` | `u64` | `vftable_ActorClient` | - | MISSING_IN_UPSTREAM |
-| `0x0fc8` | `raw:528` | `mActorClient` | 0x0fc0 | MISMATCH (delta 0x8) |
+| `0x0fc8` | `raw:528` | `mActorClient` | 0x0fc8 | MATCH |
 | `0x0fd0` | `u8` | `TextureType` | - | MISSING_IN_UPSTREAM |
 | `0x0fd1` | `u8` | `Material` | - | MISSING_IN_UPSTREAM |
 | `0x0fd2` | `u8` | `Variation` | - | MISSING_IN_UPSTREAM |
@@ -338,7 +338,7 @@ and missing names are flagged.
 | `0x0fe8` | `u8` | `Gender` | - | MISSING_IN_UPSTREAM |
 | `0x0fe9` | `raw:67` | `ActorDef` | - | MISSING_IN_UPSTREAM |
 | `0x102c` | `raw:36` | `ArmorColor` | - | MISSING_IN_UPSTREAM |
-| `0x1050` | `u8` | `bShowHelm` | 0x0440 | MISMATCH (delta 0xc10) |
+| `0x1050` | `u8` | `bShowHelm` | - | MISSING_IN_UPSTREAM |
 | `0x1051` | `raw:3` | `PAD_align_1054` | - | MISSING_IN_UPSTREAM |
 | `0x1054` | `u32` | `Heritage` | - | MISSING_IN_UPSTREAM |
 | `0x1058` | `u32` | `Tattoo` | - | MISSING_IN_UPSTREAM |
@@ -365,18 +365,18 @@ and missing names are flagged.
 | `0x11c8` | `u8` | `bNewArmorDisabled` | - | MISSING_IN_UPSTREAM |
 | `0x11c9` | `raw:7` | `PAD_align_actorclient_208` | - | MISSING_IN_UPSTREAM |
 | `0x11d0` | `ptr` | `pApplicationData` | - | MISSING_IN_UPSTREAM |
-| `0x11d8` | `ptr` | `pAnimation` | 0x11d0 | MISMATCH (delta 0x8) |
-| `0x11e0` | `f32` | `MeleeRadius` | 0x11d8 | MISMATCH (delta 0x8) |
-| `0x11e4` | `u32` | `CollisionCounter` | 0x11dc | MISMATCH (delta 0x8) |
-| `0x11e8` | `u32` | `CachedFloorLocationY` | 0x11e0 | MISMATCH (delta 0x8) |
-| `0x11ec` | `u32` | `CachedFloorLocationX` | 0x11e4 | MISMATCH (delta 0x8) |
-| `0x11f0` | `u32` | `CachedFloorLocationZ` | 0x11e8 | MISMATCH (delta 0x8) |
-| `0x11f4` | `u32` | `CachedFloorHeight` | 0x11ec | MISMATCH (delta 0x8) |
-| `0x11f8` | `u32` | `CachedCeilingLocationY` | 0x11f0 | MISMATCH (delta 0x8) |
-| `0x11fc` | `u32` | `CachedCeilingLocationX` | 0x11f4 | MISMATCH (delta 0x8) |
-| `0x1200` | `u32` | `CachedCeilingLocationZ` | 0x11f8 | MISMATCH (delta 0x8) |
-| `0x1204` | `u32` | `CachedCeilingHeight` | 0x11fc | MISMATCH (delta 0x8) |
-| `0x1208` | `raw:32` | `StaticCollision` | 0x1200 | MISMATCH (delta 0x8) |
+| `0x11d8` | `ptr` | `pAnimation` | 0x11d8 | MATCH |
+| `0x11e0` | `f32` | `MeleeRadius` | 0x11e0 | MATCH |
+| `0x11e4` | `u32` | `CollisionCounter` | 0x11e4 | MATCH |
+| `0x11e8` | `u32` | `CachedFloorLocationY` | 0x11e8 | MATCH |
+| `0x11ec` | `u32` | `CachedFloorLocationX` | 0x11ec | MATCH |
+| `0x11f0` | `u32` | `CachedFloorLocationZ` | 0x11f0 | MATCH |
+| `0x11f4` | `u32` | `CachedFloorHeight` | 0x11f4 | MATCH |
+| `0x11f8` | `u32` | `CachedCeilingLocationY` | 0x11f8 | MATCH |
+| `0x11fc` | `u32` | `CachedCeilingLocationX` | 0x11fc | MATCH |
+| `0x1200` | `u32` | `CachedCeilingLocationZ` | 0x1200 | MATCH |
+| `0x1204` | `u32` | `CachedCeilingHeight` | 0x1204 | MATCH |
+| `0x1208` | `raw:32` | `StaticCollision` | 0x1208 | MATCH |
 | `0x1208` | `u32` | `PC_u32_1208_slot08` | - | MISSING_IN_UPSTREAM |
 | `0x120c` | `u32` | `PC_u32_120C_slot09` | - | MISSING_IN_UPSTREAM |
 | `0x1210` | `u32` | `PC_u32_1210_slot10` | - | MISSING_IN_UPSTREAM |
@@ -385,12 +385,12 @@ and missing names are flagged.
 | `0x121c` | `u32` | `PC_u32_121C_slot13` | - | MISSING_IN_UPSTREAM |
 | `0x1220` | `u32` | `PC_u32_1220_slot14` | - | MISSING_IN_UPSTREAM |
 | `0x1224` | `f32` | `PC_f32_1224_neg1` | - | MISSING_IN_UPSTREAM |
-| `0x1228` | `raw:24` | `mPhysicsEffects` | 0x1220 | MISMATCH (delta 0x8) |
+| `0x1228` | `raw:24` | `mPhysicsEffects` | 0x1228 | MATCH |
 | `0x1228` | `u64` | `ArmorTintList_begin` | - | MISSING_IN_UPSTREAM |
 | `0x1230` | `u64` | `ArmorTintList_end` | - | MISSING_IN_UPSTREAM |
 | `0x1238` | `u64` | `ArmorTintList_capacity` | - | MISSING_IN_UPSTREAM |
 | `0x123c` | `u32` | `ArmorTintList_count` | - | MISSING_IN_UPSTREAM |
-| `0x1240` | `raw:24` | `PhysicsEffectsUpdated` | 0x1238 | MISMATCH (delta 0x8) |
+| `0x1240` | `raw:24` | `PhysicsEffectsUpdated` | 0x1240 | MATCH |
 | `0x1240` | `u64` | `ArmorTintList_bitmask` | - | MISSING_IN_UPSTREAM |
 | `0x1248` | `raw:16` | `PAD_align_1258_tail` | - | MISSING_IN_UPSTREAM |
 | `0x1258` | `u64` | `DEAD_ABSORBED_container_tail` | - | MISSING_IN_UPSTREAM |
@@ -546,7 +546,7 @@ and missing names are flagged.
 | `0x20bd` | `u8` | `bWaitingForPort` | 0x20bd | MATCH |
 | `0x20be` | `raw:2` | `PC_pad_20BE` | 0x20be | MATCH |
 
-**Summary**: MATCH=177 MISMATCH=148 MISSING_IN_UPSTREAM=204
+**Summary**: MATCH=303 MISMATCH=19 MISSING_IN_UPSTREAM=207
 
 ## PcClient
 

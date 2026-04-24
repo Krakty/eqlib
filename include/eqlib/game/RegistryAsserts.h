@@ -47,7 +47,7 @@ namespace eqlib {
 
 // --- registry-driven offsetof() asserts ---
 
-// ==== PlayerClient (529 registry fields, target C++ class: PlayerClient, upstream declared in chain: 327, sizeof 0x20c0) ====
+// ==== PlayerClient (529 registry fields, target C++ class: PlayerClient, upstream declared in chain: 317, sizeof 0x20c0) ====
 static_assert(offsetof(PlayerClient, JumpStrength) == 0x20, "PlayerClient::JumpStrength offset mismatch (expected 0x20)");
 static_assert(offsetof(PlayerClient, SwimStrength) == 0x24, "PlayerClient::SwimStrength offset mismatch (expected 0x24)");
 static_assert(offsetof(PlayerClient, SpeedMultiplier) == 0x28, "PlayerClient::SpeedMultiplier offset mismatch (expected 0x28)");
@@ -113,275 +113,134 @@ static_assert(offsetof(PlayerClient, SplineRiderID) == 0x1b0, "PlayerClient::Spl
 static_assert(offsetof(PlayerClient, LockID) == 0x1b8, "PlayerClient::LockID offset mismatch (expected 0x1b8)");
 static_assert(offsetof(PlayerClient, EncounterLockState) == 0x1c0, "PlayerClient::EncounterLockState offset mismatch (expected 0x1c0)");
 static_assert(offsetof(PlayerClient, LastIntimidateUse) == 0x1c8, "PlayerClient::LastIntimidateUse offset mismatch (expected 0x1c8)");
-// MISMATCH: upstream PlayerClient::Linkdead @ 0x335 vs registry @ 0x1cc
 static_assert(offsetof(PlayerClient, Linkdead) == 0x1cc, "PlayerClient::Linkdead offset mismatch (expected 0x1cc)");
-// MISMATCH: upstream PlayerClient::FallingStartZ @ 0x4f0 vs registry @ 0x1d0
 static_assert(offsetof(PlayerClient, FallingStartZ) == 0x1d0, "PlayerClient::FallingStartZ offset mismatch (expected 0x1d0)");
-// MISMATCH: upstream PlayerClient::MerchantGreed @ 0x370 vs registry @ 0x1d4
 static_assert(offsetof(PlayerClient, MerchantGreed) == 0x1d4, "PlayerClient::MerchantGreed offset mismatch (expected 0x1d4)");
-// MISMATCH: upstream PlayerClient::Title @ 0x5a5 vs registry @ 0x1d8
 static_assert(offsetof(PlayerClient, Title) == 0x1d8, "PlayerClient::Title offset mismatch (expected 0x1d8)");
-// MISMATCH: upstream PlayerClient::AFK @ 0x4b8 vs registry @ 0x258
 static_assert(offsetof(PlayerClient, AFK) == 0x258, "PlayerClient::AFK offset mismatch (expected 0x258)");
-// MISMATCH: upstream PlayerClient::GetMeleeRangeVar1 @ 0x578 vs registry @ 0x25c
 static_assert(offsetof(PlayerClient, GetMeleeRangeVar1) == 0x25c, "PlayerClient::GetMeleeRangeVar1 offset mismatch (expected 0x25c)");
-// MISMATCH: upstream PlayerClient::Level @ 0x3ef vs registry @ 0x260
 static_assert(offsetof(PlayerClient, Level) == 0x260, "PlayerClient::Level offset mismatch (expected 0x260)");
-// MISMATCH: upstream PlayerClient::HPMax @ 0x338 vs registry @ 0x268
 static_assert(offsetof(PlayerClient, HPMax) == 0x268, "PlayerClient::HPMax offset mismatch (expected 0x268)");
-// MISMATCH: upstream PlayerClient::HoldingAnimation @ 0x44c vs registry @ 0x2f0
 static_assert(offsetof(PlayerClient, HoldingAnimation) == 0x2f0, "PlayerClient::HoldingAnimation offset mismatch (expected 0x2f0)");
-// MISMATCH: upstream PlayerClient::GM @ 0x3ec vs registry @ 0x2f1
 static_assert(offsetof(PlayerClient, GM) == 0x2f1, "PlayerClient::GM offset mismatch (expected 0x2f1)");
-// MISMATCH: upstream PlayerClient::Suffix @ 0x2b0 vs registry @ 0x2f2
 static_assert(offsetof(PlayerClient, Suffix) == 0x2f2, "PlayerClient::Suffix offset mismatch (expected 0x2f2)");
-// MISMATCH: upstream PlayerClient::HideMode @ 0x430 vs registry @ 0x378
 static_assert(offsetof(PlayerClient, HideMode) == 0x378, "PlayerClient::HideMode offset mismatch (expected 0x378)");
-// MISMATCH: upstream PlayerClient::Light @ 0x37d vs registry @ 0x37c
 static_assert(offsetof(PlayerClient, Light) == 0x37c, "PlayerClient::Light offset mismatch (expected 0x37c)");
-// MISMATCH: upstream PlayerClient::LastCollision @ 0x540 vs registry @ 0x380
 static_assert(offsetof(PlayerClient, LastCollision) == 0x380, "PlayerClient::LastCollision offset mismatch (expected 0x380)");
-// MISMATCH: upstream PlayerClient::AnimationSpeedRelated @ 0x4e0 vs registry @ 0x3b0
 static_assert(offsetof(PlayerClient, AnimationSpeedRelated) == 0x3b0, "PlayerClient::AnimationSpeedRelated offset mismatch (expected 0x3b0)");
-// MISMATCH: upstream PlayerClient::LastTimeStoodStill @ 0x354 vs registry @ 0x3b4
 static_assert(offsetof(PlayerClient, LastTimeStoodStill) == 0x3b4, "PlayerClient::LastTimeStoodStill offset mismatch (expected 0x3b4)");
-// MISMATCH: upstream PlayerClient::MyWalkSpeed @ 0x378 vs registry @ 0x3b8
 static_assert(offsetof(PlayerClient, MyWalkSpeed) == 0x3b8, "PlayerClient::MyWalkSpeed offset mismatch (expected 0x3b8)");
-// MISMATCH: upstream PlayerClient::FishingETA @ 0x3f4 vs registry @ 0x3bc
 static_assert(offsetof(PlayerClient, FishingETA) == 0x3bc, "PlayerClient::FishingETA offset mismatch (expected 0x3bc)");
-// MISMATCH: upstream PlayerClient::CurrIOState @ 0x374 vs registry @ 0x3c0
 static_assert(offsetof(PlayerClient, CurrIOState) == 0x3c0, "PlayerClient::CurrIOState offset mismatch (expected 0x3c0)");
-// MISMATCH: upstream PlayerClient::bStationary @ 0x428 vs registry @ 0x3c4
 static_assert(offsetof(PlayerClient, bStationary) == 0x3c4, "PlayerClient::bStationary offset mismatch (expected 0x3c4)");
-// MISMATCH: upstream PlayerClient::RunSpeed @ 0x404 vs registry @ 0x3c8
 static_assert(offsetof(PlayerClient, RunSpeed) == 0x3c8, "PlayerClient::RunSpeed offset mismatch (expected 0x3c8)");
-// MISMATCH: upstream PlayerClient::LastSecondaryUseTime @ 0x57c vs registry @ 0x3cc
 static_assert(offsetof(PlayerClient, LastSecondaryUseTime) == 0x3cc, "PlayerClient::LastSecondaryUseTime offset mismatch (expected 0x3cc)");
-// MISMATCH: upstream PlayerClient::bAnimationOnPop @ 0x5a4 vs registry @ 0x3d0
 static_assert(offsetof(PlayerClient, bAnimationOnPop) == 0x3d0, "PlayerClient::bAnimationOnPop offset mismatch (expected 0x3d0)");
-// MISMATCH: upstream PlayerClient::GMRank @ 0x368 vs registry @ 0x3d1
 static_assert(offsetof(PlayerClient, GMRank) == 0x3d1, "PlayerClient::GMRank offset mismatch (expected 0x3d1)");
-// MISMATCH: upstream PlayerClient::ppUDP @ 0x358 vs registry @ 0x3d8
 static_assert(offsetof(PlayerClient, ppUDP) == 0x3d8, "PlayerClient::ppUDP offset mismatch (expected 0x3d8)");
-// MISMATCH: upstream PlayerClient::MinuteTimer @ 0x1d0 vs registry @ 0x3e0
 static_assert(offsetof(PlayerClient, MinuteTimer) == 0x3e0, "PlayerClient::MinuteTimer offset mismatch (expected 0x3e0)");
-// MISMATCH: upstream PlayerClient::ManaCurrent @ 0x3fc vs registry @ 0x3e4
 static_assert(offsetof(PlayerClient, ManaCurrent) == 0x3e4, "PlayerClient::ManaCurrent offset mismatch (expected 0x3e4)");
-// MISMATCH: upstream PlayerClient::FishingEvent @ 0x2a1 vs registry @ 0x3e8
 static_assert(offsetof(PlayerClient, FishingEvent) == 0x3e8, "PlayerClient::FishingEvent offset mismatch (expected 0x3e8)");
-// MISMATCH: upstream PlayerClient::Birthdate @ 0x448 vs registry @ 0x3ec
 static_assert(offsetof(PlayerClient, Birthdate) == 0x3ec, "PlayerClient::Birthdate offset mismatch (expected 0x3ec)");
-// MISMATCH: upstream PlayerClient::LastRangedUsedTime @ 0x438 vs registry @ 0x3f0
 static_assert(offsetof(PlayerClient, LastRangedUsedTime) == 0x3f0, "PlayerClient::LastRangedUsedTime offset mismatch (expected 0x3f0)");
-// MISMATCH: upstream PlayerClient::BearingToTarget @ 0x594 vs registry @ 0x3fc
 static_assert(offsetof(PlayerClient, BearingToTarget) == 0x3fc, "PlayerClient::BearingToTarget offset mismatch (expected 0x3fc)");
-// MISMATCH: upstream PlayerClient::LastTick @ 0x4b4 vs registry @ 0x400
-static_assert(offsetof(PlayerClient, LastTick) == 0x400, "PlayerClient::LastTick offset mismatch (expected 0x400)");
-// MISMATCH: upstream PlayerClient::LastRefresh @ 0x344 vs registry @ 0x404
 static_assert(offsetof(PlayerClient, LastRefresh) == 0x404, "PlayerClient::LastRefresh offset mismatch (expected 0x404)");
-// MISMATCH: upstream PlayerClient::WarCry @ 0x570 vs registry @ 0x404
-static_assert(offsetof(PlayerClient, WarCry) == 0x404, "PlayerClient::WarCry offset mismatch (expected 0x404)");
-// MISMATCH: upstream PlayerClient::Deity @ 0x42c vs registry @ 0x408
 static_assert(offsetof(PlayerClient, Deity) == 0x408, "PlayerClient::Deity offset mismatch (expected 0x408)");
-// MISMATCH: upstream PlayerClient::GuildID @ 0x500 vs registry @ 0x410
 static_assert(offsetof(PlayerClient, GuildID) == 0x410, "PlayerClient::GuildID offset mismatch (expected 0x410)");
-// MISMATCH: upstream PlayerClient::Handle @ 0x508 vs registry @ 0x420
 static_assert(offsetof(PlayerClient, Handle) == 0x420, "PlayerClient::Handle offset mismatch (expected 0x420)");
-static_assert(offsetof(PlayerClient, bShowHelm) == 0x440, "PlayerClient::bShowHelm offset mismatch (expected 0x440)");
-// MISMATCH: upstream PlayerClient::PrimaryTintIndex @ 0x588 vs registry @ 0x444
 static_assert(offsetof(PlayerClient, PrimaryTintIndex) == 0x444, "PlayerClient::PrimaryTintIndex offset mismatch (expected 0x444)");
-// MISMATCH: upstream PlayerClient::CombatSkillUsed @ 0x580 vs registry @ 0x448
 static_assert(offsetof(PlayerClient, CombatSkillUsed) == 0x448, "PlayerClient::CombatSkillUsed offset mismatch (expected 0x448)");
-// MISMATCH: upstream PlayerClient::Blind @ 0x408 vs registry @ 0x450
 static_assert(offsetof(PlayerClient, Blind) == 0x450, "PlayerClient::Blind offset mismatch (expected 0x450)");
-// MISMATCH: upstream PlayerClient::SitStartTime @ 0x34c vs registry @ 0x454
 static_assert(offsetof(PlayerClient, SitStartTime) == 0x454, "PlayerClient::SitStartTime offset mismatch (expected 0x454)");
-// MISMATCH: upstream PlayerClient::CameraOffset @ 0x39c vs registry @ 0x458
 static_assert(offsetof(PlayerClient, CameraOffset) == 0x458, "PlayerClient::CameraOffset offset mismatch (expected 0x458)");
-// MISMATCH: upstream PlayerClient::LastMealTime @ 0x41c vs registry @ 0x45c
 static_assert(offsetof(PlayerClient, LastMealTime) == 0x45c, "PlayerClient::LastMealTime offset mismatch (expected 0x45c)");
-// MISMATCH: upstream PlayerClient::berserker @ 0x2a8 vs registry @ 0x460
 static_assert(offsetof(PlayerClient, berserker) == 0x460, "PlayerClient::berserker offset mismatch (expected 0x460)");
-// MISMATCH: upstream PlayerClient::EnduranceCurrent @ 0x4f8 vs registry @ 0x464
 static_assert(offsetof(PlayerClient, EnduranceCurrent) == 0x464, "PlayerClient::EnduranceCurrent offset mismatch (expected 0x464)");
-// MISMATCH: upstream PlayerClient::EnduranceMax @ 0x538 vs registry @ 0x468
 static_assert(offsetof(PlayerClient, EnduranceMax) == 0x468, "PlayerClient::EnduranceMax offset mismatch (expected 0x468)");
-// MISMATCH: upstream PlayerClient::RealEstateItemId @ 0x3f0 vs registry @ 0x46c
 static_assert(offsetof(PlayerClient, RealEstateItemId) == 0x46c, "PlayerClient::RealEstateItemId offset mismatch (expected 0x46c)");
-// MISMATCH: upstream PlayerClient::Anon @ 0x21c vs registry @ 0x470
 static_assert(offsetof(PlayerClient, Anon) == 0x470, "PlayerClient::Anon offset mismatch (expected 0x470)");
-// MISMATCH: upstream PlayerClient::NextIntimidateTime @ 0x388 vs registry @ 0x474
 static_assert(offsetof(PlayerClient, NextIntimidateTime) == 0x474, "PlayerClient::NextIntimidateTime offset mismatch (expected 0x474)");
-// MISMATCH: upstream PlayerClient::InPvPArea @ 0x38c vs registry @ 0x478
 static_assert(offsetof(PlayerClient, InPvPArea) == 0x478, "PlayerClient::InPvPArea offset mismatch (expected 0x478)");
-// MISMATCH: upstream PlayerClient::StunTimer @ 0x43c vs registry @ 0x47c
 static_assert(offsetof(PlayerClient, StunTimer) == 0x47c, "PlayerClient::StunTimer offset mismatch (expected 0x47c)");
-// MISMATCH: upstream PlayerClient::LastResendAddPlayerPacket @ 0x58c vs registry @ 0x480
 static_assert(offsetof(PlayerClient, LastResendAddPlayerPacket) == 0x480, "PlayerClient::LastResendAddPlayerPacket offset mismatch (expected 0x480)");
-// MISMATCH: upstream PlayerClient::NpcTintIndex @ 0x630 vs registry @ 0x484
 static_assert(offsetof(PlayerClient, NpcTintIndex) == 0x484, "PlayerClient::NpcTintIndex offset mismatch (expected 0x484)");
-// MISMATCH: upstream PlayerClient::TitleVisible @ 0x434 vs registry @ 0x488
 static_assert(offsetof(PlayerClient, TitleVisible) == 0x488, "PlayerClient::TitleVisible offset mismatch (expected 0x488)");
-// MISMATCH: upstream PlayerClient::bOfflineMode @ 0x350 vs registry @ 0x48c
 static_assert(offsetof(PlayerClient, bOfflineMode) == 0x48c, "PlayerClient::bOfflineMode offset mismatch (expected 0x48c)");
-// MISMATCH: upstream PlayerClient::MissileRangeToTarget @ 0x4e8 vs registry @ 0x490
 static_assert(offsetof(PlayerClient, MissileRangeToTarget) == 0x490, "PlayerClient::MissileRangeToTarget offset mismatch (expected 0x490)");
-// MISMATCH: upstream PlayerClient::CorpseDragCount @ 0x360 vs registry @ 0x4a0
 static_assert(offsetof(PlayerClient, CorpseDragCount) == 0x4a0, "PlayerClient::CorpseDragCount offset mismatch (expected 0x4a0)");
-// MISMATCH: upstream PlayerClient::realEstateItemGuid @ 0x45c vs registry @ 0x4a4
 static_assert(offsetof(PlayerClient, realEstateItemGuid) == 0x4a4, "PlayerClient::realEstateItemGuid offset mismatch (expected 0x4a4)");
-// MISMATCH: upstream PlayerClient::DraggingPlayer @ 0x46e vs registry @ 0x4b6
 static_assert(offsetof(PlayerClient, DraggingPlayer) == 0x4b6, "PlayerClient::DraggingPlayer offset mismatch (expected 0x4b6)");
-// MISMATCH: upstream PlayerClient::SecondaryTintIndex @ 0x36c vs registry @ 0x4f8
 static_assert(offsetof(PlayerClient, SecondaryTintIndex) == 0x4f8, "PlayerClient::SecondaryTintIndex offset mismatch (expected 0x4f8)");
-// MISMATCH: upstream PlayerClient::CastingData @ 0x1d8 vs registry @ 0x4fc
 static_assert(offsetof(PlayerClient, CastingData) == 0x4fc, "PlayerClient::CastingData offset mismatch (expected 0x4fc)");
-// MISMATCH: upstream PlayerClient::HPCurrent @ 0x3a0 vs registry @ 0x548
 static_assert(offsetof(PlayerClient, HPCurrent) == 0x548, "PlayerClient::HPCurrent offset mismatch (expected 0x548)");
-// MISMATCH: upstream PlayerClient::bBuffTimersOnHold @ 0x2a0 vs registry @ 0x550
 static_assert(offsetof(PlayerClient, bBuffTimersOnHold) == 0x550, "PlayerClient::bBuffTimersOnHold offset mismatch (expected 0x550)");
-// MISMATCH: upstream PlayerClient::LoginRelated @ 0x4c0 vs registry @ 0x551
 static_assert(offsetof(PlayerClient, LoginRelated) == 0x551, "PlayerClient::LoginRelated offset mismatch (expected 0x551)");
-// MISMATCH: upstream PlayerClient::Trader @ 0x364 vs registry @ 0x574
 static_assert(offsetof(PlayerClient, Trader) == 0x574, "PlayerClient::Trader offset mismatch (expected 0x574)");
-// MISMATCH: upstream PlayerClient::ManaMax @ 0x3ac vs registry @ 0x578
 static_assert(offsetof(PlayerClient, ManaMax) == 0x578, "PlayerClient::ManaMax offset mismatch (expected 0x578)");
-// MISMATCH: upstream PlayerClient::LoginSerial @ 0x394 vs registry @ 0x57c
 static_assert(offsetof(PlayerClient, LoginSerial) == 0x57c, "PlayerClient::LoginSerial offset mismatch (expected 0x57c)");
-// MISMATCH: upstream PlayerClient::StandState @ 0x574 vs registry @ 0x580
 static_assert(offsetof(PlayerClient, StandState) == 0x580, "PlayerClient::StandState offset mismatch (expected 0x580)");
-// MISMATCH: upstream PlayerClient::CharClass @ 0x420 vs registry @ 0x581
 static_assert(offsetof(PlayerClient, CharClass) == 0x581, "PlayerClient::CharClass offset mismatch (expected 0x581)");
-// MISMATCH: upstream PlayerClient::Zone @ 0x4b0 vs registry @ 0x584
 static_assert(offsetof(PlayerClient, Zone) == 0x584, "PlayerClient::Zone offset mismatch (expected 0x584)");
-// MISMATCH: upstream PlayerClient::PetID @ 0x450 vs registry @ 0x588
 static_assert(offsetof(PlayerClient, PetID) == 0x588, "PlayerClient::PetID offset mismatch (expected 0x588)");
-// MISMATCH: upstream PlayerClient::FD @ 0x3ee vs registry @ 0x58c
 static_assert(offsetof(PlayerClient, FD) == 0x58c, "PlayerClient::FD offset mismatch (expected 0x58c)");
-// MISMATCH: upstream PlayerClient::bSummoned @ 0x3ed vs registry @ 0x58d
 static_assert(offsetof(PlayerClient, bSummoned) == 0x58d, "PlayerClient::bSummoned offset mismatch (expected 0x58d)");
-// MISMATCH: upstream PlayerClient::IsAttacking @ 0x4e4 vs registry @ 0x590
 static_assert(offsetof(PlayerClient, IsAttacking) == 0x590, "PlayerClient::IsAttacking offset mismatch (expected 0x590)");
-// MISMATCH: upstream PlayerClient::FindBits @ 0x3a8 vs registry @ 0x594
 static_assert(offsetof(PlayerClient, FindBits) == 0x594, "PlayerClient::FindBits offset mismatch (expected 0x594)");
-// MISMATCH: upstream PlayerClient::RespawnTimer @ 0x390 vs registry @ 0x598
 static_assert(offsetof(PlayerClient, RespawnTimer) == 0x598, "PlayerClient::RespawnTimer offset mismatch (expected 0x598)");
-// MISMATCH: upstream PlayerClient::pCharacter @ 0x410 vs registry @ 0x5a0
 static_assert(offsetof(PlayerClient, pCharacter) == 0x5a0, "PlayerClient::pCharacter offset mismatch (expected 0x5a0)");
-// MISMATCH: upstream PlayerClient::DoSpecialMelee @ 0x400 vs registry @ 0x5a8
 static_assert(offsetof(PlayerClient, DoSpecialMelee) == 0x5a8, "PlayerClient::DoSpecialMelee offset mismatch (expected 0x5a8)");
-// MISMATCH: upstream PlayerClient::HibernatingCount @ 0x2ac vs registry @ 0x5ac
 static_assert(offsetof(PlayerClient, HibernatingCount) == 0x5ac, "PlayerClient::HibernatingCount offset mismatch (expected 0x5ac)");
-// MISMATCH: upstream PlayerClient::Buyer @ 0x418 vs registry @ 0x5b0
-static_assert(offsetof(PlayerClient, Buyer) == 0x5b0, "PlayerClient::Buyer offset mismatch (expected 0x5b0)");
-// MISMATCH: upstream PlayerClient::LFG @ 0x1d4 vs registry @ 0x5b0
 static_assert(offsetof(PlayerClient, LFG) == 0x5b0, "PlayerClient::LFG offset mismatch (expected 0x5b0)");
-// MISMATCH: upstream PlayerClient::bSwitchMoved @ 0x340 vs registry @ 0x5b1
 static_assert(offsetof(PlayerClient, bSwitchMoved) == 0x5b1, "PlayerClient::bSwitchMoved offset mismatch (expected 0x5b1)");
-// MISMATCH: upstream PlayerClient::SpellCooldownETA @ 0x444 vs registry @ 0x5b4
 static_assert(offsetof(PlayerClient, SpellCooldownETA) == 0x5b4, "PlayerClient::SpellCooldownETA offset mismatch (expected 0x5b4)");
-// MISMATCH: upstream PlayerClient::MasterID @ 0x330 vs registry @ 0x5bc
 static_assert(offsetof(PlayerClient, MasterID) == 0x5bc, "PlayerClient::MasterID offset mismatch (expected 0x5bc)");
-// MISMATCH: upstream PlayerClient::CombatSkillTicks @ 0x59c vs registry @ 0x5c0
 static_assert(offsetof(PlayerClient, CombatSkillTicks) == 0x5c0, "PlayerClient::CombatSkillTicks offset mismatch (expected 0x5c0)");
-// MISMATCH: upstream PlayerClient::LastTick @ 0x4b4 vs registry @ 0x5c8
 static_assert(offsetof(PlayerClient, LastTick) == 0x5c8, "PlayerClient::LastTick offset mismatch (expected 0x5c8)");
-// MISMATCH: upstream PlayerClient::LastRefresh @ 0x344 vs registry @ 0x5c8
-static_assert(offsetof(PlayerClient, LastRefresh) == 0x5c8, "PlayerClient::LastRefresh offset mismatch (expected 0x5c8)");
-// MISMATCH: upstream PlayerClient::LastTrapDamageTime @ 0x4ec vs registry @ 0x5cc
 static_assert(offsetof(PlayerClient, LastTrapDamageTime) == 0x5cc, "PlayerClient::LastTrapDamageTime offset mismatch (expected 0x5cc)");
-// MISMATCH: upstream PlayerClient::bTempPet @ 0x1cc vs registry @ 0x5d0
 static_assert(offsetof(PlayerClient, bTempPet) == 0x5d0, "PlayerClient::bTempPet offset mismatch (expected 0x5d0)");
-// MISMATCH: upstream PlayerClient::PvPFlag @ 0x598 vs registry @ 0x5d1
 static_assert(offsetof(PlayerClient, PvPFlag) == 0x5d1, "PlayerClient::PvPFlag offset mismatch (expected 0x5d1)");
-// MISMATCH: upstream PlayerClient::AltAttack @ 0x2a4 vs registry @ 0x5d2
 static_assert(offsetof(PlayerClient, AltAttack) == 0x5d2, "PlayerClient::AltAttack offset mismatch (expected 0x5d2)");
-// MISMATCH: upstream PlayerClient::LastPrimaryUseTime @ 0x4bc vs registry @ 0x5d4
 static_assert(offsetof(PlayerClient, LastPrimaryUseTime) == 0x5d4, "PlayerClient::LastPrimaryUseTime offset mismatch (expected 0x5d4)");
-// MISMATCH: upstream PlayerClient::Mercenary @ 0x37c vs registry @ 0x5d8
 static_assert(offsetof(PlayerClient, Mercenary) == 0x5d8, "PlayerClient::Mercenary offset mismatch (expected 0x5d8)");
-// MISMATCH: upstream PlayerClient::NextSwim @ 0x4f4 vs registry @ 0x5dc
 static_assert(offsetof(PlayerClient, NextSwim) == 0x5dc, "PlayerClient::NextSwim offset mismatch (expected 0x5dc)");
-// MISMATCH: upstream PlayerClient::SpellGemETA @ 0x3b0 vs registry @ 0x5e0
 static_assert(offsetof(PlayerClient, SpellGemETA) == 0x5e0, "PlayerClient::SpellGemETA offset mismatch (expected 0x5e0)");
-// MISMATCH: upstream PlayerClient::ViewHeight @ 0x590 vs registry @ 0x61c
 static_assert(offsetof(PlayerClient, ViewHeight) == 0x61c, "PlayerClient::ViewHeight offset mismatch (expected 0x61c)");
-// MISMATCH: upstream PlayerClient::pTouchingSwitch @ 0x530 vs registry @ 0x620
 static_assert(offsetof(PlayerClient, pTouchingSwitch) == 0x620, "PlayerClient::pTouchingSwitch offset mismatch (expected 0x620)");
-// MISMATCH: upstream PlayerClient::TimeStamp @ 0x424 vs registry @ 0x628
 static_assert(offsetof(PlayerClient, TimeStamp) == 0x628, "PlayerClient::TimeStamp offset mismatch (expected 0x628)");
-// MISMATCH: upstream PlayerClient::Buyer @ 0x418 vs registry @ 0x62c
 static_assert(offsetof(PlayerClient, Buyer) == 0x62c, "PlayerClient::Buyer offset mismatch (expected 0x62c)");
-// MISMATCH: upstream PlayerClient::IsAttacking @ 0x4e4 vs registry @ 0x630
-static_assert(offsetof(PlayerClient, IsAttacking) == 0x630, "PlayerClient::IsAttacking offset mismatch (expected 0x630)");
-// MISMATCH: upstream PlayerClient::LastAttack @ 0x398 vs registry @ 0x630
 static_assert(offsetof(PlayerClient, LastAttack) == 0x630, "PlayerClient::LastAttack offset mismatch (expected 0x630)");
-// MISMATCH: upstream PlayerClient::IntimidateCount @ 0x435 vs registry @ 0x631
 static_assert(offsetof(PlayerClient, IntimidateCount) == 0x631, "PlayerClient::IntimidateCount offset mismatch (expected 0x631)");
-// MISMATCH: upstream PlayerClient::IsPassenger @ 0x575 vs registry @ 0x632
 static_assert(offsetof(PlayerClient, IsPassenger) == 0x632, "PlayerClient::IsPassenger offset mismatch (expected 0x632)");
-// MISMATCH: upstream PlayerClient::Sneak @ 0x2a2 vs registry @ 0x633
 static_assert(offsetof(PlayerClient, Sneak) == 0x633, "PlayerClient::Sneak offset mismatch (expected 0x633)");
-// MISMATCH: upstream PlayerClient::bBetaBuffed @ 0x528 vs registry @ 0x634
 static_assert(offsetof(PlayerClient, bBetaBuffed) == 0x634, "PlayerClient::bBetaBuffed offset mismatch (expected 0x634)");
-// MISMATCH: upstream PlayerClient::Original @ 0x436 vs registry @ 0x635
 static_assert(offsetof(PlayerClient, Original) == 0x635, "PlayerClient::Original offset mismatch (expected 0x635)");
 static_assert(offsetof(PlayerClient, pRaceGenderInfo) == 0x638, "PlayerClient::pRaceGenderInfo offset mismatch (expected 0x638)");
-// MISMATCH: upstream PlayerClient::Meditating @ 0x628 vs registry @ 0x640
 static_assert(offsetof(PlayerClient, Meditating) == 0x640, "PlayerClient::Meditating offset mismatch (expected 0x640)");
-// MISMATCH: upstream PlayerClient::MovementStats @ 0x640 vs registry @ 0x644
 static_assert(offsetof(PlayerClient, MovementStats) == 0x644, "PlayerClient::MovementStats offset mismatch (expected 0x644)");
-// MISMATCH: upstream PlayerClient::WhoFollowing @ 0xf58 vs registry @ 0xf60
 static_assert(offsetof(PlayerClient, WhoFollowing) == 0xf60, "PlayerClient::WhoFollowing offset mismatch (expected 0xf60)");
-// MISMATCH: upstream PlayerClient::GroupAssistNPC @ 0xf60 vs registry @ 0xf68
 static_assert(offsetof(PlayerClient, GroupAssistNPC) == 0xf68, "PlayerClient::GroupAssistNPC offset mismatch (expected 0xf68)");
-// MISMATCH: upstream PlayerClient::RaidAssistNPC @ 0xf64 vs registry @ 0xf6c
 static_assert(offsetof(PlayerClient, RaidAssistNPC) == 0xf6c, "PlayerClient::RaidAssistNPC offset mismatch (expected 0xf6c)");
-// MISMATCH: upstream PlayerClient::GroupMarkNPC @ 0xf70 vs registry @ 0xf78
 static_assert(offsetof(PlayerClient, GroupMarkNPC) == 0xf78, "PlayerClient::GroupMarkNPC offset mismatch (expected 0xf78)");
-// MISMATCH: upstream PlayerClient::RaidMarkNPC @ 0xf7c vs registry @ 0xf84
 static_assert(offsetof(PlayerClient, RaidMarkNPC) == 0xf84, "PlayerClient::RaidMarkNPC offset mismatch (expected 0xf84)");
-// MISMATCH: upstream PlayerClient::TargetOfTarget @ 0xf88 vs registry @ 0xf90
 static_assert(offsetof(PlayerClient, TargetOfTarget) == 0xf90, "PlayerClient::TargetOfTarget offset mismatch (expected 0xf90)");
-// MISMATCH: upstream PlayerClient::PZCLastPhysics @ 0xf8c vs registry @ 0xf94
 static_assert(offsetof(PlayerClient, PZCLastPhysics) == 0xf94, "PlayerClient::PZCLastPhysics offset mismatch (expected 0xf94)");
-// MISMATCH: upstream PlayerClient::ParticleCastStartTime @ 0xfb0 vs registry @ 0xfb8
 static_assert(offsetof(PlayerClient, ParticleCastStartTime) == 0xfb8, "PlayerClient::ParticleCastStartTime offset mismatch (expected 0xfb8)");
-// MISMATCH: upstream PlayerClient::ParticleCastDuration @ 0xfb4 vs registry @ 0xfbc
 static_assert(offsetof(PlayerClient, ParticleCastDuration) == 0xfbc, "PlayerClient::ParticleCastDuration offset mismatch (expected 0xfbc)");
-// MISMATCH: upstream PlayerClient::ParticleVisualSpellNum @ 0xfb8 vs registry @ 0xfc0
 static_assert(offsetof(PlayerClient, ParticleVisualSpellNum) == 0xfc0, "PlayerClient::ParticleVisualSpellNum offset mismatch (expected 0xfc0)");
-// MISMATCH: upstream PlayerClient::mActorClient @ 0xfc0 vs registry @ 0xfc8
 static_assert(offsetof(PlayerClient, mActorClient) == 0xfc8, "PlayerClient::mActorClient offset mismatch (expected 0xfc8)");
-// MISMATCH: upstream PlayerClient::bShowHelm @ 0x440 vs registry @ 0x1050
-static_assert(offsetof(PlayerClient, bShowHelm) == 0x1050, "PlayerClient::bShowHelm offset mismatch (expected 0x1050)");
-// MISMATCH: upstream PlayerClient::pAnimation @ 0x11d0 vs registry @ 0x11d8
 static_assert(offsetof(PlayerClient, pAnimation) == 0x11d8, "PlayerClient::pAnimation offset mismatch (expected 0x11d8)");
-// MISMATCH: upstream PlayerClient::MeleeRadius @ 0x11d8 vs registry @ 0x11e0
 static_assert(offsetof(PlayerClient, MeleeRadius) == 0x11e0, "PlayerClient::MeleeRadius offset mismatch (expected 0x11e0)");
-// MISMATCH: upstream PlayerClient::CollisionCounter @ 0x11dc vs registry @ 0x11e4
 static_assert(offsetof(PlayerClient, CollisionCounter) == 0x11e4, "PlayerClient::CollisionCounter offset mismatch (expected 0x11e4)");
-// MISMATCH: upstream PlayerClient::CachedFloorLocationY @ 0x11e0 vs registry @ 0x11e8
 static_assert(offsetof(PlayerClient, CachedFloorLocationY) == 0x11e8, "PlayerClient::CachedFloorLocationY offset mismatch (expected 0x11e8)");
-// MISMATCH: upstream PlayerClient::CachedFloorLocationX @ 0x11e4 vs registry @ 0x11ec
 static_assert(offsetof(PlayerClient, CachedFloorLocationX) == 0x11ec, "PlayerClient::CachedFloorLocationX offset mismatch (expected 0x11ec)");
-// MISMATCH: upstream PlayerClient::CachedFloorLocationZ @ 0x11e8 vs registry @ 0x11f0
 static_assert(offsetof(PlayerClient, CachedFloorLocationZ) == 0x11f0, "PlayerClient::CachedFloorLocationZ offset mismatch (expected 0x11f0)");
-// MISMATCH: upstream PlayerClient::CachedFloorHeight @ 0x11ec vs registry @ 0x11f4
 static_assert(offsetof(PlayerClient, CachedFloorHeight) == 0x11f4, "PlayerClient::CachedFloorHeight offset mismatch (expected 0x11f4)");
-// MISMATCH: upstream PlayerClient::CachedCeilingLocationY @ 0x11f0 vs registry @ 0x11f8
 static_assert(offsetof(PlayerClient, CachedCeilingLocationY) == 0x11f8, "PlayerClient::CachedCeilingLocationY offset mismatch (expected 0x11f8)");
-// MISMATCH: upstream PlayerClient::CachedCeilingLocationX @ 0x11f4 vs registry @ 0x11fc
 static_assert(offsetof(PlayerClient, CachedCeilingLocationX) == 0x11fc, "PlayerClient::CachedCeilingLocationX offset mismatch (expected 0x11fc)");
-// MISMATCH: upstream PlayerClient::CachedCeilingLocationZ @ 0x11f8 vs registry @ 0x1200
 static_assert(offsetof(PlayerClient, CachedCeilingLocationZ) == 0x1200, "PlayerClient::CachedCeilingLocationZ offset mismatch (expected 0x1200)");
-// MISMATCH: upstream PlayerClient::CachedCeilingHeight @ 0x11fc vs registry @ 0x1204
 static_assert(offsetof(PlayerClient, CachedCeilingHeight) == 0x1204, "PlayerClient::CachedCeilingHeight offset mismatch (expected 0x1204)");
-// MISMATCH: upstream PlayerClient::StaticCollision @ 0x1200 vs registry @ 0x1208
 static_assert(offsetof(PlayerClient, StaticCollision) == 0x1208, "PlayerClient::StaticCollision offset mismatch (expected 0x1208)");
-// MISMATCH: upstream PlayerClient::mPhysicsEffects @ 0x1220 vs registry @ 0x1228
 static_assert(offsetof(PlayerClient, mPhysicsEffects) == 0x1228, "PlayerClient::mPhysicsEffects offset mismatch (expected 0x1228)");
-// MISMATCH: upstream PlayerClient::PhysicsEffectsUpdated @ 0x1238 vs registry @ 0x1240
 static_assert(offsetof(PlayerClient, PhysicsEffectsUpdated) == 0x1240, "PlayerClient::PhysicsEffectsUpdated offset mismatch (expected 0x1240)");
 static_assert(offsetof(PlayerClient, Animation) == 0x1260, "PlayerClient::Animation offset mismatch (expected 0x1260)");
 static_assert(offsetof(PlayerClient, NextAnim) == 0x1264, "PlayerClient::NextAnim offset mismatch (expected 0x1264)");
@@ -621,11 +480,7 @@ static_assert(offsetof(PcClient, StationID) == 0x21c4, "PcClient::StationID offs
 static_assert(offsetof(PcClient, Guid) == 0x21e8, "PcClient::Guid offset mismatch (expected 0x21e8)");
 static_assert(offsetof(PcClient, bBetaBuffed) == 0x21f0, "PcClient::bBetaBuffed offset mismatch (expected 0x21f0)");
 static_assert(offsetof(PcClient, Unknown0x1ee4) == 0x21f4, "PcClient::Unknown0x1ee4 offset mismatch (expected 0x21f4)");
-// MISMATCH: upstream PcClient::bShowHelm @ 0x21fc vs registry @ 0x21f8
-static_assert(offsetof(PcClient, bShowHelm) == 0x21f8, "PcClient::bShowHelm offset mismatch (expected 0x21f8)");
 static_assert(offsetof(PcClient, MainLevel) == 0x21f8, "PcClient::MainLevel offset mismatch (expected 0x21f8)");
-// MISMATCH: upstream PcClient::MainLevel @ 0x21f8 vs registry @ 0x21fc
-static_assert(offsetof(PcClient, MainLevel) == 0x21fc, "PcClient::MainLevel offset mismatch (expected 0x21fc)");
 static_assert(offsetof(PcClient, bShowHelm) == 0x21fc, "PcClient::bShowHelm offset mismatch (expected 0x21fc)");
 static_assert(offsetof(PcClient, LastTestCopyTime) == 0x2200, "PcClient::LastTestCopyTime offset mismatch (expected 0x2200)");
 static_assert(offsetof(PcClient, PointManager) == 0x2208, "PcClient::PointManager offset mismatch (expected 0x2208)");
