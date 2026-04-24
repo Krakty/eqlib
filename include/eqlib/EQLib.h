@@ -69,6 +69,9 @@
 #include "eqlib/game/RealEstate.h"
 #include "eqlib/game/Requirements.h"
 #include "eqlib/game/Spells.h"
+
+// Registry-driven compile-time asserts (patchday 2026-04-15)
+#include "eqlib/game/RegistryAsserts.h"
 #include "eqlib/game/TaskSystem.h"
 
 // misc components
