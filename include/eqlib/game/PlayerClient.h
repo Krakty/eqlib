@@ -735,7 +735,7 @@ struct BardQueueUnknown
 // PlayerClient
 //============================================================================
 
-constexpr size_t PlayerClient_size = 0x20B8; // @sizeof(PlayerClient) :: 2026-03-10 (live) @ 0x140305F8E
+constexpr size_t PlayerClient_size = 0x20C0; // @sizeof(PlayerClient) :: 2026-03-10 (live) @ 0x140305F8E
 
 class [[offsetcomments]] PlayerClient : public PlayerZoneClient
 {
@@ -856,15 +856,17 @@ public:
 /*0x1ef0*/ BardQueueUnknown  BardQueueData[14];
 /*0x2008*/ HashList<uint64_t, 5> BardMelodyQueue; // /queuemelody related - definitely not a HashList // 2010
 /*0x2050*/ PlayerPhysicsClient mPlayerPhysicsClient;
-/*0x2088*/ int               SpawnStatus[6];
-/*0x20a0*/ int               BannerIndex0;                 // guild banners
-/*0x20a4*/ int               BannerIndex1;
-/*0x20a8*/ ARGBCOLOR         BannerTint0;
-/*0x20ac*/ ARGBCOLOR         BannerTint1;
-/*0x20b0*/ int               MountAnimationRelated;
-/*0x20b4*/ bool              bGuildShowAnim;               // or sprite? need to check
-/*0x20b5*/ bool              bWaitingForPort;
-/*0x20b8*/
+/*0x2088*/ int               SpawnStatus[6];               // MQ-RE W24 shift: was @0x2088, evidence @0x2090
+/*0x2090*/ uint8_t           PC_pad_20A0[8];               // MQ-RE W22: 8-byte shift vs upstream 2026-03-10 layout
+/*0x20a8*/ int               BannerIndex0;                 // guild banners (MQ-RE W25: was @0x20A0)
+/*0x20ac*/ int               BannerIndex1;                 // (MQ-RE W25: was @0x20A4)
+/*0x20b0*/ ARGBCOLOR         BannerTint0;                  // (MQ-RE W25: was @0x20A8)
+/*0x20b4*/ ARGBCOLOR         BannerTint1;                  // (MQ-RE W25: was @0x20AC)
+/*0x20b8*/ int               MountAnimationRelated;        // (MQ-RE W25: was @0x20B0)
+/*0x20bc*/ bool              bGuildShowAnim;               // or sprite? need to check (MQ-RE W25: was @0x20B4)
+/*0x20bd*/ bool              bWaitingForPort;              // (MQ-RE W25: was @0x20B5)
+/*0x20be*/ uint8_t           PC_pad_20BE[2];               // MQ-RE W19 tail pad to 0x20C0
+/*0x20c0*/
 
 	void Initialize(PlayerClient*, unsigned char, unsigned int, unsigned char, char*);
 	~PlayerClient();
