@@ -666,7 +666,7 @@
 
 // EQ_LoadingS
 #define EQ_LoadingS__SetProgressBar_x                              0x1401B3000
-#define EQ_LoadingS__Array_x                                       0x1401B30F9
+#define EQ_LoadingS__Array_x                                       0x140D57D40
 
 // PcClient
 #define PcBase__GetAlternateAbilityId_x                            0x1406823F0
