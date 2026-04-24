@@ -12,7 +12,7 @@ and missing names are flagged.
 - Our sizeof: `0x20c0`
 - Upstream header: `include/eqlib/game/PlayerClient.h`
 - Field count (ours): 529
-- Upstream name-indexed field count: 432
+- Upstream name-indexed field count: 431
 
 | Offset (ours) | Type | Name | Upstream offset | Status |
 |---:|---|---|---:|---|
@@ -395,101 +395,101 @@ and missing names are flagged.
 | `0x1248` | `raw:16` | `PAD_align_1258_tail` | - | MISSING_IN_UPSTREAM |
 | `0x1258` | `u64` | `DEAD_ABSORBED_container_tail` | - | MISSING_IN_UPSTREAM |
 | `0x125c` | `u32` | `DEAD_ABSORBED_container_tail_hi` | - | MISSING_IN_UPSTREAM |
-| `0x1260` | `i32` | `Animation` | 0x1258 | MISMATCH (delta 0x8) |
-| `0x1264` | `i32` | `NextAnim` | 0x125c | MISMATCH (delta 0x8) |
-| `0x1268` | `i32` | `CurrLowerBodyAnim` | 0x1260 | MISMATCH (delta 0x8) |
-| `0x126c` | `i32` | `NextLowerBodyAnim` | 0x1264 | MISMATCH (delta 0x8) |
-| `0x1270` | `i32` | `CurrLowerAnimVariation` | 0x1268 | MISMATCH (delta 0x8) |
-| `0x1274` | `i32` | `CurrAnimVariation` | 0x126c | MISMATCH (delta 0x8) |
-| `0x1278` | `i32` | `CurrAnimRndVariation` | 0x1270 | MISMATCH (delta 0x8) |
-| `0x127c` | `i32` | `Loop3d_SoundID` | 0x1274 | MISMATCH (delta 0x8) |
-| `0x1280` | `u32` | `Step_SoundID` | 0x1278 | MISMATCH (delta 0x8) |
+| `0x1260` | `i32` | `Animation` | 0x1260 | MATCH |
+| `0x1264` | `i32` | `NextAnim` | 0x1264 | MATCH |
+| `0x1268` | `i32` | `CurrLowerBodyAnim` | 0x1268 | MATCH |
+| `0x126c` | `i32` | `NextLowerBodyAnim` | 0x126c | MATCH |
+| `0x1270` | `i32` | `CurrLowerAnimVariation` | 0x1270 | MATCH |
+| `0x1274` | `i32` | `CurrAnimVariation` | 0x1274 | MATCH |
+| `0x1278` | `i32` | `CurrAnimRndVariation` | 0x1278 | MATCH |
+| `0x127c` | `i32` | `Loop3d_SoundID` | 0x127c | MATCH |
+| `0x1280` | `u32` | `Step_SoundID` | 0x1280 | MATCH |
 | `0x1280` | `u8` | `PC_IdleAnimGateFlag` | - | MISSING_IN_UPSTREAM |
 | `0x1281` | `raw:3` | `PC_PAD_align_1284` | - | MISSING_IN_UPSTREAM |
-| `0x1284` | `i32` | `CurLoop_SoundID` | 0x127c | MISMATCH (delta 0x8) |
-| `0x1288` | `i32` | `Idle3d1_SoundID` | 0x1280 | MISMATCH (delta 0x8) |
-| `0x128c` | `i32` | `Idle3d2_SoundID` | 0x1284 | MISMATCH (delta 0x8) |
-| `0x1290` | `i32` | `Jump_SoundID` | 0x1288 | MISMATCH (delta 0x8) |
-| `0x1294` | `i32` | `Hit1_SoundID` | 0x128c | MISMATCH (delta 0x8) |
-| `0x1298` | `i32` | `Hit2_SoundID` | 0x1290 | MISMATCH (delta 0x8) |
-| `0x129c` | `i32` | `Hit3_SoundID` | 0x1294 | MISMATCH (delta 0x8) |
-| `0x12a0` | `i32` | `Hit4_SoundID` | 0x1298 | MISMATCH (delta 0x8) |
-| `0x12a4` | `i32` | `Gasp1_SoundID` | 0x129c | MISMATCH (delta 0x8) |
-| `0x12a8` | `i32` | `Gasp2_SoundID` | 0x12a0 | MISMATCH (delta 0x8) |
-| `0x12ac` | `i32` | `Drown_SoundID` | 0x12a4 | MISMATCH (delta 0x8) |
-| `0x12b0` | `i32` | `Death_SoundID` | 0x12a8 | MISMATCH (delta 0x8) |
-| `0x12b4` | `i32` | `Attk1_SoundID` | 0x12ac | MISMATCH (delta 0x8) |
-| `0x12b8` | `i32` | `Attk2_SoundID` | 0x12b0 | MISMATCH (delta 0x8) |
-| `0x12bc` | `i32` | `Attk3_SoundID` | 0x12b4 | MISMATCH (delta 0x8) |
-| `0x12c0` | `i32` | `Walk_SoundID` | 0x12b8 | MISMATCH (delta 0x8) |
-| `0x12c4` | `i32` | `Run_SoundID` | 0x12bc | MISMATCH (delta 0x8) |
-| `0x12c8` | `i32` | `Crouch_SoundID` | 0x12c0 | MISMATCH (delta 0x8) |
-| `0x12cc` | `i32` | `Swim_SoundID` | 0x12c4 | MISMATCH (delta 0x8) |
-| `0x12d0` | `i32` | `TreadWater_SoundID` | 0x12c8 | MISMATCH (delta 0x8) |
-| `0x12d4` | `i32` | `Climb_SoundID` | 0x12cc | MISMATCH (delta 0x8) |
-| `0x12d8` | `i32` | `Sit_SoundID` | 0x12d0 | MISMATCH (delta 0x8) |
-| `0x12dc` | `i32` | `Kick_SoundID` | 0x12d4 | MISMATCH (delta 0x8) |
-| `0x12e0` | `i32` | `Bash_SoundID` | 0x12d8 | MISMATCH (delta 0x8) |
-| `0x12e4` | `i32` | `FireBow_SoundID` | 0x12dc | MISMATCH (delta 0x8) |
-| `0x12e8` | `i32` | `MonkAttack1_SoundID` | 0x12e0 | MISMATCH (delta 0x8) |
-| `0x12ec` | `i32` | `MonkAttack2_SoundID` | 0x12e4 | MISMATCH (delta 0x8) |
-| `0x12f0` | `i32` | `MonkSpecial_SoundID` | 0x12e8 | MISMATCH (delta 0x8) |
-| `0x12f4` | `i32` | `PrimaryBlunt_SoundID` | 0x12ec | MISMATCH (delta 0x8) |
-| `0x12f8` | `i32` | `PrimarySlash_SoundID` | 0x12f0 | MISMATCH (delta 0x8) |
-| `0x12fc` | `i32` | `PrimaryStab_SoundID` | 0x12f4 | MISMATCH (delta 0x8) |
-| `0x1300` | `i32` | `Punch_SoundID` | 0x12f8 | MISMATCH (delta 0x8) |
-| `0x1304` | `i32` | `Roundhouse_SoundID` | 0x12fc | MISMATCH (delta 0x8) |
-| `0x1308` | `i32` | `SecondaryBlunt_SoundID` | 0x1300 | MISMATCH (delta 0x8) |
-| `0x130c` | `i32` | `SecondarySlash_SoundID` | 0x1304 | MISMATCH (delta 0x8) |
-| `0x1310` | `i32` | `SecondaryStab_SoundID` | 0x1308 | MISMATCH (delta 0x8) |
-| `0x1314` | `i32` | `SwimAttack_SoundID` | 0x130c | MISMATCH (delta 0x8) |
-| `0x1318` | `i32` | `TwoHandedBlunt_SoundID` | 0x1310 | MISMATCH (delta 0x8) |
-| `0x131c` | `i32` | `TwoHandedSlash_SoundID` | 0x1314 | MISMATCH (delta 0x8) |
-| `0x1320` | `i32` | `TwoHandedStab_SoundID` | 0x1318 | MISMATCH (delta 0x8) |
-| `0x1324` | `i32` | `SecondaryPunch_SoundID` | 0x131c | MISMATCH (delta 0x8) |
-| `0x1328` | `i32` | `JumpAcross_SoundID` | 0x1320 | MISMATCH (delta 0x8) |
-| `0x132c` | `i32` | `WalkBackwards_SoundID` | 0x1324 | MISMATCH (delta 0x8) |
-| `0x1330` | `i32` | `CrouchWalk_SoundID` | 0x1328 | MISMATCH (delta 0x8) |
-| `0x1334` | `u32` | `LastHurtSound` | 0x132c | MISMATCH (delta 0x8) |
-| `0x1338` | `u32` | `LastWalkTime` | 0x1330 | MISMATCH (delta 0x8) |
-| `0x133c` | `i32` | `ShipRelated` | 0x1334 | MISMATCH (delta 0x8) |
-| `0x1340` | `i32` | `RightHolding` | 0x1338 | MISMATCH (delta 0x8) |
-| `0x1344` | `i32` | `LeftHolding` | 0x133c | MISMATCH (delta 0x8) |
-| `0x1348` | `u32` | `DeathAnimationFinishTime` | 0x1340 | MISMATCH (delta 0x8) |
-| `0x134c` | `u8` | `bRemoveCorpseAfterDeathAnim` | 0x1344 | MISMATCH (delta 0x8) |
+| `0x1284` | `i32` | `CurLoop_SoundID` | 0x1284 | MATCH |
+| `0x1288` | `i32` | `Idle3d1_SoundID` | 0x1288 | MATCH |
+| `0x128c` | `i32` | `Idle3d2_SoundID` | 0x128c | MATCH |
+| `0x1290` | `i32` | `Jump_SoundID` | 0x1290 | MATCH |
+| `0x1294` | `i32` | `Hit1_SoundID` | 0x1294 | MATCH |
+| `0x1298` | `i32` | `Hit2_SoundID` | 0x1298 | MATCH |
+| `0x129c` | `i32` | `Hit3_SoundID` | 0x129c | MATCH |
+| `0x12a0` | `i32` | `Hit4_SoundID` | 0x12a0 | MATCH |
+| `0x12a4` | `i32` | `Gasp1_SoundID` | 0x12a4 | MATCH |
+| `0x12a8` | `i32` | `Gasp2_SoundID` | 0x12a8 | MATCH |
+| `0x12ac` | `i32` | `Drown_SoundID` | 0x12ac | MATCH |
+| `0x12b0` | `i32` | `Death_SoundID` | 0x12b0 | MATCH |
+| `0x12b4` | `i32` | `Attk1_SoundID` | 0x12b4 | MATCH |
+| `0x12b8` | `i32` | `Attk2_SoundID` | 0x12b8 | MATCH |
+| `0x12bc` | `i32` | `Attk3_SoundID` | 0x12bc | MATCH |
+| `0x12c0` | `i32` | `Walk_SoundID` | 0x12c0 | MATCH |
+| `0x12c4` | `i32` | `Run_SoundID` | 0x12c4 | MATCH |
+| `0x12c8` | `i32` | `Crouch_SoundID` | 0x12c8 | MATCH |
+| `0x12cc` | `i32` | `Swim_SoundID` | 0x12cc | MATCH |
+| `0x12d0` | `i32` | `TreadWater_SoundID` | 0x12d0 | MATCH |
+| `0x12d4` | `i32` | `Climb_SoundID` | 0x12d4 | MATCH |
+| `0x12d8` | `i32` | `Sit_SoundID` | 0x12d8 | MATCH |
+| `0x12dc` | `i32` | `Kick_SoundID` | 0x12dc | MATCH |
+| `0x12e0` | `i32` | `Bash_SoundID` | 0x12e0 | MATCH |
+| `0x12e4` | `i32` | `FireBow_SoundID` | 0x12e4 | MATCH |
+| `0x12e8` | `i32` | `MonkAttack1_SoundID` | 0x12e8 | MATCH |
+| `0x12ec` | `i32` | `MonkAttack2_SoundID` | 0x12ec | MATCH |
+| `0x12f0` | `i32` | `MonkSpecial_SoundID` | 0x12f0 | MATCH |
+| `0x12f4` | `i32` | `PrimaryBlunt_SoundID` | 0x12f4 | MATCH |
+| `0x12f8` | `i32` | `PrimarySlash_SoundID` | 0x12f8 | MATCH |
+| `0x12fc` | `i32` | `PrimaryStab_SoundID` | 0x12fc | MATCH |
+| `0x1300` | `i32` | `Punch_SoundID` | 0x1300 | MATCH |
+| `0x1304` | `i32` | `Roundhouse_SoundID` | 0x1304 | MATCH |
+| `0x1308` | `i32` | `SecondaryBlunt_SoundID` | 0x1308 | MATCH |
+| `0x130c` | `i32` | `SecondarySlash_SoundID` | 0x130c | MATCH |
+| `0x1310` | `i32` | `SecondaryStab_SoundID` | 0x1310 | MATCH |
+| `0x1314` | `i32` | `SwimAttack_SoundID` | 0x1314 | MATCH |
+| `0x1318` | `i32` | `TwoHandedBlunt_SoundID` | 0x1318 | MATCH |
+| `0x131c` | `i32` | `TwoHandedSlash_SoundID` | 0x131c | MATCH |
+| `0x1320` | `i32` | `TwoHandedStab_SoundID` | 0x1320 | MATCH |
+| `0x1324` | `i32` | `SecondaryPunch_SoundID` | 0x1324 | MATCH |
+| `0x1328` | `i32` | `JumpAcross_SoundID` | 0x1328 | MATCH |
+| `0x132c` | `i32` | `WalkBackwards_SoundID` | 0x132c | MATCH |
+| `0x1330` | `i32` | `CrouchWalk_SoundID` | 0x1330 | MATCH |
+| `0x1334` | `u32` | `LastHurtSound` | 0x1334 | MATCH |
+| `0x1338` | `u32` | `LastWalkTime` | 0x1338 | MATCH |
+| `0x133c` | `i32` | `ShipRelated` | 0x133c | MATCH |
+| `0x1340` | `i32` | `RightHolding` | 0x1340 | MATCH |
+| `0x1344` | `i32` | `LeftHolding` | 0x1344 | MATCH |
+| `0x1348` | `u32` | `DeathAnimationFinishTime` | 0x1348 | MATCH |
+| `0x134c` | `u8` | `bRemoveCorpseAfterDeathAnim` | 0x134c | MATCH |
 | `0x134d` | `raw:3` | `PC_PAD_align_1350` | - | MISSING_IN_UPSTREAM |
-| `0x1350` | `u32` | `LastBubblesTime` | 0x1348 | MISMATCH (delta 0x8) |
-| `0x1354` | `u32` | `LastBubblesTime1` | 0x134c | MISMATCH (delta 0x8) |
-| `0x1358` | `u32` | `LastColdBreathTime` | 0x1350 | MISMATCH (delta 0x8) |
-| `0x135c` | `u32` | `LastParticleUpdateTime` | 0x1354 | MISMATCH (delta 0x8) |
-| `0x1360` | `u32` | `MercID` | 0x1358 | MISMATCH (delta 0x8) |
-| `0x1364` | `u32` | `ContractorID` | 0x135c | MISMATCH (delta 0x8) |
-| `0x1368` | `f32` | `CeilingHeightAtCurrLocation` | 0x1360 | MISMATCH (delta 0x8) |
+| `0x1350` | `u32` | `LastBubblesTime` | 0x1350 | MATCH |
+| `0x1354` | `u32` | `LastBubblesTime1` | 0x1354 | MATCH |
+| `0x1358` | `u32` | `LastColdBreathTime` | 0x1358 | MATCH |
+| `0x135c` | `u32` | `LastParticleUpdateTime` | 0x135c | MATCH |
+| `0x1360` | `u32` | `MercID` | 0x1360 | MATCH |
+| `0x1364` | `u32` | `ContractorID` | 0x1364 | MATCH |
+| `0x1368` | `f32` | `CeilingHeightAtCurrLocation` | 0x1368 | MATCH |
 | `0x136c` | `raw:4` | `PC_pad_136C` | - | MISSING_IN_UPSTREAM |
-| `0x1370` | `ptr` | `MobileEmitter` | 0x1368 | MISMATCH (delta 0x8) |
-| `0x1378` | `u8` | `bInstantHPGaugeChange` | 0x1370 | MISMATCH (delta 0x8) |
+| `0x1370` | `ptr` | `MobileEmitter` | 0x1370 | MATCH |
+| `0x1378` | `u8` | `bInstantHPGaugeChange` | 0x1378 | MATCH |
 | `0x1379` | `raw:3` | `PC_PAD_align_137C` | - | MISSING_IN_UPSTREAM |
-| `0x137c` | `u32` | `LastUpdateReceivedTime` | 0x1374 | MISMATCH (delta 0x8) |
-| `0x1380` | `f32` | `MaxSpeakDistance` | 0x1378 | MISMATCH (delta 0x8) |
-| `0x1384` | `f32` | `WalkSpeed` | 0x137c | MISMATCH (delta 0x8) |
-| `0x1388` | `u8` | `bHideCorpse` | 0x1380 | MISMATCH (delta 0x8) |
-| `0x1389` | `str:64` | `AssistName` | 0x1381 | MISMATCH (delta 0x8) |
-| `0x13c9` | `u8` | `InvitedToGroup` | 0x13c1 | MISMATCH (delta 0x8) |
+| `0x137c` | `u32` | `LastUpdateReceivedTime` | 0x137c | MATCH |
+| `0x1380` | `f32` | `MaxSpeakDistance` | 0x1380 | MATCH |
+| `0x1384` | `f32` | `WalkSpeed` | 0x1384 | MATCH |
+| `0x1388` | `u8` | `bHideCorpse` | 0x1388 | MATCH |
+| `0x1389` | `str:64` | `AssistName` | 0x1389 | MATCH |
+| `0x13c9` | `u8` | `InvitedToGroup` | 0x13c9 | MATCH |
 | `0x13ca` | `raw:2` | `PC_PAD_align_13CC` | - | MISSING_IN_UPSTREAM |
-| `0x13cc` | `i32` | `GroupMemberTargeted` | 0x13c4 | MISMATCH (delta 0x8) |
-| `0x13d0` | `u8` | `bRemovalPending` | 0x13c8 | MISMATCH (delta 0x8) |
+| `0x13cc` | `i32` | `GroupMemberTargeted` | 0x13cc | MATCH |
+| `0x13d0` | `u8` | `bRemovalPending` | 0x13d0 | MATCH |
 | `0x13d1` | `raw:7` | `PC_PAD_align_13D8` | - | MISSING_IN_UPSTREAM |
-| `0x13d8` | `ptr` | `pCorpse` | 0x13d0 | MISMATCH (delta 0x8) |
-| `0x13e0` | `f32` | `EmitterScalingRadius` | 0x13d8 | MISMATCH (delta 0x8) |
-| `0x13e4` | `i32` | `DefaultEmitterID` | 0x13dc | MISMATCH (delta 0x8) |
-| `0x13e8` | `u8` | `bDisplayNameSprite` | 0x13e0 | MISMATCH (delta 0x8) |
-| `0x13e9` | `u8` | `bIdleAnimationOff` | 0x13e1 | MISMATCH (delta 0x8) |
-| `0x13ea` | `u8` | `bIsInteractiveObject` | 0x13e2 | MISMATCH (delta 0x8) |
-| `0x13eb` | `str:128` | `InteractiveObjectModelName` | 0x13e3 | MISMATCH (delta 0x8) |
-| `0x146b` | `str:128` | `InteractiveObjectOtherName` | 0x1463 | MISMATCH (delta 0x8) |
-| `0x14eb` | `str:64` | `InteractiveObjectName` | 0x14e3 | MISMATCH (delta 0x8) |
+| `0x13d8` | `ptr` | `pCorpse` | 0x13d8 | MATCH |
+| `0x13e0` | `f32` | `EmitterScalingRadius` | 0x13e0 | MATCH |
+| `0x13e4` | `i32` | `DefaultEmitterID` | 0x13e4 | MATCH |
+| `0x13e8` | `u8` | `bDisplayNameSprite` | 0x13e8 | MATCH |
+| `0x13e9` | `u8` | `bIdleAnimationOff` | 0x13e9 | MATCH |
+| `0x13ea` | `u8` | `bIsInteractiveObject` | 0x13ea | MATCH |
+| `0x13eb` | `str:128` | `InteractiveObjectModelName` | 0x13eb | MATCH |
+| `0x146b` | `str:128` | `InteractiveObjectOtherName` | 0x146b | MATCH |
+| `0x14eb` | `str:64` | `InteractiveObjectName` | 0x14eb | MATCH |
 | `0x152b` | `raw:1` | `PC_pad_152B` | - | MISSING_IN_UPSTREAM |
-| `0x152c` | `raw:48` | `PhysicsBeforeLastPort` | 0x1524 | MISMATCH (delta 0x8) |
+| `0x152c` | `raw:48` | `PhysicsBeforeLastPort` | 0x152c | MATCH |
 | `0x152c` | `f32` | `PC_PhysicsBeforeLastPort_Y` | - | MISSING_IN_UPSTREAM |
 | `0x1530` | `f32` | `PC_PhysicsBeforeLastPort_X` | - | MISSING_IN_UPSTREAM |
 | `0x1534` | `f32` | `PC_PhysicsBeforeLastPort_Z` | - | MISSING_IN_UPSTREAM |
@@ -502,41 +502,41 @@ and missing names are flagged.
 | `0x1550` | `f32` | `PC_PhysicsBeforeLastPort_AccelAngle` | - | MISSING_IN_UPSTREAM |
 | `0x1554` | `f32` | `PC_PhysicsBeforeLastPort_SpeedHeading` | - | MISSING_IN_UPSTREAM |
 | `0x1558` | `f32` | `PC_PhysicsBeforeLastPort_CameraAngle` | - | MISSING_IN_UPSTREAM |
-| `0x155c` | `u32` | `notsure` | 0x1554 | MISMATCH (delta 0x8) |
-| `0x1560` | `raw:2144` | `Fellowship` | 0x1558 | MISMATCH (delta 0x8) |
-| `0x1dc0` | `f32` | `CampfireY` | 0x1db8 | MISMATCH (delta 0x8) |
-| `0x1dc4` | `f32` | `CampfireX` | 0x1dbc | MISMATCH (delta 0x8) |
-| `0x1dc8` | `f32` | `CampfireZ` | 0x1dc0 | MISMATCH (delta 0x8) |
-| `0x1dcc` | `i32` | `CampfireZoneID` | 0x1dc4 | MISMATCH (delta 0x8) |
-| `0x1dd0` | `u32` | `CampfireTimestamp` | 0x1dc8 | MISMATCH (delta 0x8) |
-| `0x1dd4` | `u32` | `CampfireTimestamp2` | 0x1dcc | MISMATCH (delta 0x8) |
-| `0x1dd8` | `i32` | `FellowShipID` | 0x1dd0 | MISMATCH (delta 0x8) |
-| `0x1ddc` | `i32` | `FellowShipID2` | 0x1dd4 | MISMATCH (delta 0x8) |
-| `0x1de0` | `i32` | `CampType` | 0x1dd8 | MISMATCH (delta 0x8) |
-| `0x1de4` | `u8` | `Campfire` | 0x1ddc | MISMATCH (delta 0x8) |
+| `0x155c` | `u32` | `notsure` | 0x155c | MATCH |
+| `0x1560` | `raw:2144` | `Fellowship` | 0x1560 | MATCH |
+| `0x1dc0` | `f32` | `CampfireY` | 0x1dc0 | MATCH |
+| `0x1dc4` | `f32` | `CampfireX` | 0x1dc4 | MATCH |
+| `0x1dc8` | `f32` | `CampfireZ` | 0x1dc8 | MATCH |
+| `0x1dcc` | `i32` | `CampfireZoneID` | 0x1dcc | MATCH |
+| `0x1dd0` | `u32` | `CampfireTimestamp` | 0x1dd0 | MATCH |
+| `0x1dd4` | `u32` | `CampfireTimestamp2` | 0x1dd4 | MATCH |
+| `0x1dd8` | `i32` | `FellowShipID` | 0x1dd8 | MATCH |
+| `0x1ddc` | `i32` | `FellowShipID2` | 0x1ddc | MATCH |
+| `0x1de0` | `i32` | `CampType` | 0x1de0 | MATCH |
+| `0x1de4` | `u8` | `Campfire` | 0x1de4 | MATCH |
 | `0x1de5` | `raw:3` | `PC_pad_1DE5` | - | MISSING_IN_UPSTREAM |
-| `0x1de8` | `array:i32:3` | `SeeInvis` | 0x1de0 | MISMATCH (delta 0x8) |
+| `0x1de8` | `array:i32:3` | `SeeInvis` | 0x1de8 | MATCH |
 | `0x1dec` | `u32` | `PC_SeeInvis_slot1` | - | MISSING_IN_UPSTREAM |
-| `0x1df4` | `raw:180` | `Equipment` | 0x1dec | MISMATCH (delta 0x8) |
+| `0x1df4` | `raw:180` | `Equipment` | 0x1df4 | MATCH |
 | `0x1e08` | `raw:140` | `PC_struct_array_1E08` | - | MISSING_IN_UPSTREAM |
-| `0x1ea8` | `u8` | `bIsPlacingItem` | 0x1ea0 | MISMATCH (delta 0x8) |
-| `0x1ea9` | `u8` | `bGMCreatedNPC` | 0x1ea1 | MISMATCH (delta 0x8) |
+| `0x1ea8` | `u8` | `bIsPlacingItem` | 0x1ea8 | MATCH |
+| `0x1ea9` | `u8` | `bGMCreatedNPC` | 0x1ea9 | MATCH |
 | `0x1eaa` | `raw:2` | `PC_pad_1EAA` | - | MISSING_IN_UPSTREAM |
-| `0x1eac` | `i32` | `ObjectAnimationID` | 0x1ea4 | MISMATCH (delta 0x8) |
-| `0x1eb0` | `u8` | `bInteractiveObjectCollidable` | 0x1ea8 | MISMATCH (delta 0x8) |
-| `0x1eb1` | `u8` | `InteractiveObjectType` | 0x1ea9 | MISMATCH (delta 0x8) |
+| `0x1eac` | `i32` | `ObjectAnimationID` | 0x1eac | MATCH |
+| `0x1eb0` | `u8` | `bInteractiveObjectCollidable` | 0x1eb0 | MATCH |
+| `0x1eb1` | `u8` | `InteractiveObjectType` | 0x1eb1 | MATCH |
 | `0x1eb2` | `raw:2` | `PC_pad_1EB2` | - | MISSING_IN_UPSTREAM |
-| `0x1eb4` | `array:i32:10` | `SoundIDs` | 0x1eac | MISMATCH (delta 0x8) |
+| `0x1eb4` | `array:i32:10` | `SoundIDs` | 0x1eb4 | MATCH |
 | `0x1ed4` | `i32` | `PC_SoundIDs_secondary_slot8` | - | MISSING_IN_UPSTREAM |
 | `0x1ed8` | `i32` | `PC_SoundIDs_secondary_slot9` | - | MISSING_IN_UPSTREAM |
-| `0x1edc` | `i32` | `unk1edc` | 0x1ed4 | MISMATCH (delta 0x8) |
-| `0x1ee0` | `ptr` | `unk1ee0` | 0x1ed8 | MISMATCH (delta 0x8) |
-| `0x1ee8` | `ptr` | `unk1ee8` | 0x1ee0 | MISMATCH (delta 0x8) |
-| `0x1ef0` | `u64` | `unk1ef0` | 0x1ee8 | MISMATCH (delta 0x8) |
-| `0x1ef8` | `raw:280` | `BardQueueData` | 0x1ef0 | MISMATCH (delta 0x8) |
-| `0x2010` | `raw:72` | `BardMelodyQueue` | 0x2008 | MISMATCH (delta 0x8) |
-| `0x2058` | `raw:56` | `mPlayerPhysicsClient` | 0x2050 | MISMATCH (delta 0x8) |
-| `0x2090` | `array:i32:6` | `SpawnStatus` | 0x2088 | MISMATCH (delta 0x8) |
+| `0x1edc` | `i32` | `unk1edc` | 0x1edc | MATCH |
+| `0x1ee0` | `ptr` | `unk1ee0` | 0x1ee0 | MATCH |
+| `0x1ee8` | `ptr` | `unk1ee8` | 0x1ee8 | MATCH |
+| `0x1ef0` | `u64` | `unk1ef0` | 0x1ef0 | MATCH |
+| `0x1ef8` | `raw:280` | `BardQueueData` | 0x1ef8 | MATCH |
+| `0x2010` | `raw:72` | `BardMelodyQueue` | 0x2010 | MATCH |
+| `0x2058` | `raw:56` | `mPlayerPhysicsClient` | 0x2058 | MATCH |
+| `0x2090` | `array:i32:6` | `SpawnStatus` | 0x2090 | MATCH |
 | `0x20a8` | `i32` | `BannerIndex0` | 0x20a8 | MATCH |
 | `0x20ac` | `i32` | `BannerIndex1` | 0x20ac | MATCH |
 | `0x20b0` | `u32` | `BannerTint0` | 0x20b0 | MATCH |
@@ -546,7 +546,7 @@ and missing names are flagged.
 | `0x20bd` | `u8` | `bWaitingForPort` | 0x20bd | MATCH |
 | `0x20be` | `raw:2` | `PC_pad_20BE` | 0x20be | MATCH |
 
-**Summary**: MATCH=62 MISMATCH=263 MISSING_IN_UPSTREAM=204
+**Summary**: MATCH=177 MISMATCH=148 MISSING_IN_UPSTREAM=204
 
 ## PcClient
 
@@ -554,7 +554,7 @@ and missing names are flagged.
 - Our sizeof: `0x3298`
 - Upstream header: `include/eqlib/game/PcClient.h`
 - Field count (ours): 231
-- Upstream name-indexed field count: 501
+- Upstream name-indexed field count: 502
 
 | Offset (ours) | Type | Name | Upstream offset | Status |
 |---:|---|---|---:|---|
@@ -798,7 +798,7 @@ and missing names are flagged.
 - Our sizeof: `0x9b8`
 - Upstream header: `include/eqlib/game/PcClient.h`
 - Field count (ours): 102
-- Upstream name-indexed field count: 501
+- Upstream name-indexed field count: 502
 
 | Offset (ours) | Type | Name | Upstream offset | Status |
 |---:|---|---|---:|---|
@@ -878,9 +878,9 @@ and missing names are flagged.
 | `0x0124` | `i32` | `NoBuffItemEnduranceRegen` | 0x28ac | MISMATCH (delta 0x2788) |
 | `0x0128` | `i32` | `NoBuffItemDamageShield` | 0x28b0 | MISMATCH (delta 0x2788) |
 | `0x012c` | `i32` | `NoBuffItemDamageShieldMitigation` | 0x28b4 | MISMATCH (delta 0x2788) |
-| `0x0130` | `u8` | `unk_0130_byte_flag` | - | MISSING_IN_UPSTREAM |
+| `0x0130` | `u8` | `unk_0130_byte_flag` | 0x28b8 | MISMATCH (delta 0x2788) |
 | `0x0130` | `i32` | `Unknown0x28b8` | - | MISSING_IN_UPSTREAM |
-| `0x0134` | `i32` | `NoBuffItemHaste` | 0x28b8 | MISMATCH (delta 0x2784) |
+| `0x0134` | `i32` | `NoBuffItemHaste` | 0x28bc | MISMATCH (delta 0x2788) |
 | `0x0138` | `i32` | `NoBuffItemSkillMinDamageMod[0]` | - | MISSING_IN_UPSTREAM |
 | `0x013c` | `i32` | `NoBuffItemSkillMinDamageMod[1]` | - | MISSING_IN_UPSTREAM |
 | `0x0140` | `i32` | `NoBuffItemSkillMinDamageMod[2]` | - | MISSING_IN_UPSTREAM |
@@ -890,9 +890,9 @@ and missing names are flagged.
 | `0x0150` | `i32` | `NoBuffItemSkillMinDamageMod[6]` | - | MISSING_IN_UPSTREAM |
 | `0x0154` | `i32` | `NoBuffItemSkillMinDamageMod[7]` | - | MISSING_IN_UPSTREAM |
 | `0x0158` | `i32` | `NoBuffItemSkillMinDamageMod[8]` | - | MISSING_IN_UPSTREAM |
-| `0x015c` | `u8` | `bOutputHpRegen` | 0x28e0 | MISMATCH (delta 0x2784) |
-| `0x015d` | `u8` | `bInvulnerable` | 0x28e1 | MISMATCH (delta 0x2784) |
-| `0x015e` | `u8` | `bOnAVehicle` | 0x28e2 | MISMATCH (delta 0x2784) |
+| `0x015c` | `u8` | `bOutputHpRegen` | 0x28e4 | MISMATCH (delta 0x2788) |
+| `0x015d` | `u8` | `bInvulnerable` | 0x28e5 | MISMATCH (delta 0x2788) |
+| `0x015e` | `u8` | `bOnAVehicle` | 0x28e6 | MISMATCH (delta 0x2788) |
 | `0x015f` | `raw:1` | `PAD_align_0160` | - | MISSING_IN_UPSTREAM |
 | `0x0160` | `raw:144` | `spellCache` | 0x28e8 | MISMATCH (delta 0x2788) |
 | `0x0168` | `u8` | `spellCache_isDirty` | - | MISSING_IN_UPSTREAM |
@@ -905,7 +905,7 @@ and missing names are flagged.
 | `0x0210` | `raw:1024` | `DoomEffectsBySlot_Table` | - | MISSING_IN_UPSTREAM |
 | `0x0610` | `u32` | `LastHitEval` | 0x2d98 | MISMATCH (delta 0x2788) |
 
-**Summary**: MATCH=0 MISMATCH=60 MISSING_IN_UPSTREAM=42
+**Summary**: MATCH=0 MISMATCH=61 MISSING_IN_UPSTREAM=41
 
 ## CharacterBase
 
@@ -913,7 +913,7 @@ and missing names are flagged.
 - Our sizeof: `0x398`
 - Upstream header: `include/eqlib/game/PcClient.h`
 - Field count (ours): 90
-- Upstream name-indexed field count: 501
+- Upstream name-indexed field count: 502
 
 | Offset (ours) | Type | Name | Upstream offset | Status |
 |---:|---|---|---:|---|
