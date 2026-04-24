@@ -6,7 +6,7 @@ For each struct, we emit `static_assert(offsetof(Class, name) == 0x...)` ONLY fo
 
 | Struct | Registry | Upstream declared | Matched | Mismatch | Skipped (registry-only) | Skipped (non-ident) | Emitted | SIZE_CHECK |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
-| PlayerClient | 529 | 317 | 316 | 0 | 156 | 52 | 316 | yes |
+| PlayerClient | 529 | 363 | 325 | 0 | 147 | 52 | 325 | yes |
 | PcClient | 231 | 365 | 210 | 0 | 1 | 18 | 210 | yes |
 | CharacterZoneClient | 102 | 146 | 61 | 0 | 8 | 33 | 61 | no |
 | CharacterBase | 90 | 81 | 78 | 0 | 6 | 6 | 78 | no |

@@ -493,18 +493,24 @@ public:
 
 // @start: PlayerZoneClient Members
 /*0x01cc*/ bool                     Linkdead;
+/*0x01cd*/ uint8_t                  Unknown0x01CD[0x3];          // MQ-RE registry
 /*0x01d0*/ float                    FallingStartZ;
 /*0x01d4*/ float                    MerchantGreed;
 /*0x01d8*/ char                     Title[0x80];
 /*0x0258*/ int                      AFK;
 /*0x025c*/ float                    GetMeleeRangeVar1;
 /*0x0260*/ uint8_t                  Level;
+/*0x0261*/ uint8_t                  Unknown0x0261[0x7];          // MQ-RE registry
 /*0x0268*/ int64_t                  HPMax;
+/*0x0270*/ uint8_t                  banker_interaction_slots_8x16[0x80];          // MQ-RE registry
 /*0x02f0*/ uint8_t                  HoldingAnimation;
 /*0x02f1*/ char                     GM;
 /*0x02f2*/ char                     Suffix[0x80];
+/*0x0372*/ uint8_t                  Unknown0x0372[0x2];          // MQ-RE registry
+/*0x0374*/ uint32_t                 Unknown0x0374;          // MQ-RE registry
 /*0x0378*/ int                      HideMode;
 /*0x037c*/ uint8_t                  Light;
+/*0x037d*/ uint8_t                  Unknown0x037D[0x3];          // MQ-RE registry
 /*0x0380*/ CPhysicsInfo             LastCollision;
 /*0x03b0*/ float                    AnimationSpeedRelated;
 /*0x03b4*/ unsigned int             LastTimeStoodStill;
@@ -512,75 +518,113 @@ public:
 /*0x03bc*/ unsigned int             FishingETA;
 /*0x03c0*/ int                      CurrIOState;
 /*0x03c4*/ bool                     bStationary;
+/*0x03c5*/ uint8_t                  Unknown0x03C5[0x3];          // MQ-RE registry
 /*0x03c8*/ float                    RunSpeed;
 /*0x03cc*/ unsigned int             LastSecondaryUseTime;
 /*0x03d0*/ bool                     bAnimationOnPop;
 /*0x03d1*/ uint8_t                  GMRank;
+/*0x03d2*/ uint8_t                  Unknown0x03D2[0x6];          // MQ-RE registry
 /*0x03d8*/ unsigned int**           ppUDP;
 /*0x03e0*/ unsigned int             MinuteTimer;
 /*0x03e4*/ int                      ManaCurrent;
 /*0x03e8*/ uint8_t                  FishingEvent;
+/*0x03e9*/ uint8_t                  Unknown0x03E9[0x3];          // MQ-RE registry
 /*0x03ec*/ int                      Birthdate;
 /*0x03f0*/ unsigned int             LastRangedUsedTime;
+/*0x03f4*/ uint32_t                 Unknown0x03F4;          // MQ-RE registry
+/*0x03f8*/ uint32_t                 LastObstructionTick;          // MQ-RE registry
 /*0x03fc*/ float                    BearingToTarget;
+/*0x0400*/ uint32_t                 Unknown0x0400;          // MQ-RE registry
 /*0x0404*/ unsigned int             LastRefresh;
 /*0x0408*/ int                      Deity;
+/*0x040c*/ uint32_t                 Unknown0x040C;          // MQ-RE registry
 /*0x0410*/ int64_t                  GuildID;
+/*0x0418*/ uint32_t                 Unknown0x0418;          // MQ-RE registry
+/*0x041c*/ uint32_t                 Unknown0x041C;          // MQ-RE registry
 /*0x0420*/ char                     Handle[0x20];
+/*0x0440*/ uint8_t                  bShowHelm;          // MQ-RE registry
+/*0x0441*/ uint8_t                  Unknown0x0441[0x1];          // MQ-RE registry
+/*0x0442*/ uint8_t                  Unknown0x0442[0x2];          // MQ-RE registry
 /*0x0444*/ int                      PrimaryTintIndex;
 /*0x0448*/ unsigned int             CombatSkillUsed[CONCURRENT_SKILLS];
 /*0x0450*/ uint8_t                  Blind;
+/*0x0451*/ uint8_t                  Unknown0x0451[0x3];          // MQ-RE registry
 /*0x0454*/ unsigned int             SitStartTime;
 /*0x0458*/ float                    CameraOffset;
 /*0x045c*/ unsigned int             LastMealTime;
 /*0x0460*/ bool                     berserker;
+/*0x0461*/ uint8_t                  Unknown0x0461;          // MQ-RE registry
+/*0x0462*/ uint8_t                  Unknown0x0462[0x2];          // MQ-RE registry
 /*0x0464*/ int                      EnduranceCurrent;
 /*0x0468*/ unsigned int             EnduranceMax;
 /*0x046c*/ int                      RealEstateItemId;
 /*0x0470*/ int                      Anon;
 /*0x0474*/ unsigned int             NextIntimidateTime;
 /*0x0478*/ uint8_t                  InPvPArea;
+/*0x0479*/ uint8_t                  Unknown0x0479[0x1];          // MQ-RE registry
+/*0x047a*/ uint8_t                  Unknown0x047A[0x1];          // MQ-RE registry
+/*0x047b*/ uint8_t                  Unknown0x047B[0x1];          // MQ-RE registry
 /*0x047c*/ unsigned int             StunTimer;
 /*0x0480*/ unsigned int             LastResendAddPlayerPacket;
 /*0x0484*/ int                      NpcTintIndex;
 /*0x0488*/ uint8_t                  TitleVisible;
+/*0x0489*/ uint8_t                  Unknown0x0489;          // MQ-RE registry
+/*0x048a*/ uint8_t                  Unknown0x048A;          // MQ-RE registry
+/*0x048b*/ uint8_t                  Unknown0x048B;          // MQ-RE registry
 /*0x048c*/ bool                     bOfflineMode;
+/*0x048d*/ uint8_t                  Unknown0x048D[0x3];          // MQ-RE registry
 /*0x0490*/ float                    MissileRangeToTarget;
+/*0x0494*/ int32_t                  Unknown0x0494;          // MQ-RE registry
+/*0x0498*/ uint8_t                  Unknown0x0498;          // MQ-RE registry
+/*0x0499*/ uint8_t                  Unknown0x0499[0x3];          // MQ-RE registry
+/*0x049c*/ uint32_t                 FamiliarID;          // MQ-RE registry
 /*0x04a0*/ unsigned int             CorpseDragCount;
 /*0x04a4*/ EqItemGuid               realEstateItemGuid;
 /*0x04b6*/ char                     DraggingPlayer[0x40];
+/*0x04f6*/ uint8_t                  Unknown0x04F6[0x2];          // MQ-RE registry
 /*0x04f8*/ int                      SecondaryTintIndex;
 /*0x04fc*/ LaunchSpellData          CastingData;
+/*0x0540*/ uint8_t                  Unknown0x0540[0x8];          // MQ-RE registry
 /*0x0548*/ int64_t                  HPCurrent;
 /*0x0550*/ bool                     bBuffTimersOnHold;
 /*0x0551*/ char                     LoginRelated[0x20];
+/*0x0571*/ uint8_t                  Unknown0x0571[0x3];          // MQ-RE registry
 /*0x0574*/ int                      Trader;
 /*0x0578*/ int                      ManaMax;
 /*0x057c*/ unsigned int             LoginSerial;
 /*0x0580*/ uint8_t                  StandState;
 /*0x0581*/ uint8_t                  CharClass;
+/*0x0582*/ uint8_t                  Unknown0x0582[0x2];          // MQ-RE registry
 /*0x0584*/ unsigned int             Zone;
 /*0x0588*/ int                      PetID;
 /*0x058c*/ uint8_t                  FD;
 /*0x058d*/ bool                     bSummoned;
+/*0x058e*/ uint8_t                  Unknown0x058E[0x2];          // MQ-RE registry
 /*0x0590*/ int                      IsAttacking;
 /*0x0594*/ uint8_t                  FindBits;
+/*0x0595*/ uint8_t                  Unknown0x0595[0x3];          // MQ-RE registry
 /*0x0598*/ unsigned int             RespawnTimer;
+/*0x059c*/ uint8_t                  Unknown0x059C[0x4];          // MQ-RE registry
 /*0x05a0*/ CharacterZoneClient*     pCharacter;
 /*0x05a8*/ int                      DoSpecialMelee;
 /*0x05ac*/ unsigned int             HibernatingCount;
 /*0x05b0*/ bool                     LFG;
 /*0x05b1*/ bool                     bSwitchMoved;
+/*0x05b2*/ uint8_t                  Unknown0x05B2[0x2];          // MQ-RE registry
 /*0x05b4*/ unsigned int             SpellCooldownETA;
+/*0x05b8*/ uint8_t                  bInvisible;          // MQ-RE registry
+/*0x05b9*/ uint8_t                  Unknown0x05B9[0x3];          // MQ-RE registry
 /*0x05bc*/ unsigned int             MasterID;
 /*0x05c0*/ unsigned int             CombatSkillTicks[CONCURRENT_SKILLS];
 /*0x05c8*/ unsigned int             LastTick;
 /*0x05cc*/ unsigned int             LastTrapDamageTime;
 /*0x05d0*/ bool                     bTempPet;
 /*0x05d1*/ bool                     PvPFlag;
-/*0x05d2*/ int                      AltAttack;
+/*0x05d2*/ uint8_t                  AltAttack;
+/*0x05d3*/ uint8_t                  Unknown0x05D3[0x1];          // MQ-RE registry
 /*0x05d4*/ unsigned int             LastPrimaryUseTime;
 /*0x05d8*/ bool                     Mercenary;
+/*0x05d9*/ uint8_t                  Unknown0x05D9[0x3];          // MQ-RE registry
 /*0x05dc*/ unsigned int             NextSwim;
 /*0x05e0*/ unsigned int             SpellGemETA[15];
 /*0x061c*/ float                    ViewHeight;
@@ -593,6 +637,7 @@ public:
 /*0x0633*/ bool                     Sneak;
 /*0x0634*/ bool                     bBetaBuffed;
 /*0x0635*/ uint8_t                  Original;
+/*0x0636*/ uint8_t                  Unknown0x0636[0x2];          // MQ-RE registry
 /*0x0638*/ void*                    pRaceGenderInfo;
 /*0x0640*/ unsigned int             Meditating;
 // @end: PlayerZoneClient Members
@@ -608,6 +653,7 @@ public:
 /*0x0fb8*/ unsigned int       ParticleCastStartTime;
 /*0x0fbc*/ unsigned int       ParticleCastDuration;
 /*0x0fc0*/ int                ParticleVisualSpellNum;
+/*0x0fc4*/ uint8_t            Unknown0x0FC4[0x4];                 // MQ-RE registry
 /*0x0fc8*/ ActorClient        mActorClient;
 /*0x11d8*/ PlayerAnimationBase* pAnimation;
 /*0x11e0*/ float              MeleeRadius;                        // used by GetMeleeRange

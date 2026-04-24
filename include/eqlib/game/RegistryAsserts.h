@@ -47,7 +47,7 @@ namespace eqlib {
 
 // --- registry-driven offsetof() asserts ---
 
-// ==== PlayerClient (529 registry fields, target C++ class: PlayerClient, upstream declared in chain: 317, sizeof 0x20c0) ====
+// ==== PlayerClient (529 registry fields, target C++ class: PlayerClient, upstream declared in chain: 363, sizeof 0x20c0) ====
 static_assert(offsetof(PlayerClient, JumpStrength) == 0x20, "PlayerClient::JumpStrength offset mismatch (expected 0x20)");
 static_assert(offsetof(PlayerClient, SwimStrength) == 0x24, "PlayerClient::SwimStrength offset mismatch (expected 0x24)");
 static_assert(offsetof(PlayerClient, SpeedMultiplier) == 0x28, "PlayerClient::SpeedMultiplier offset mismatch (expected 0x28)");
@@ -121,9 +121,11 @@ static_assert(offsetof(PlayerClient, AFK) == 0x258, "PlayerClient::AFK offset mi
 static_assert(offsetof(PlayerClient, GetMeleeRangeVar1) == 0x25c, "PlayerClient::GetMeleeRangeVar1 offset mismatch (expected 0x25c)");
 static_assert(offsetof(PlayerClient, Level) == 0x260, "PlayerClient::Level offset mismatch (expected 0x260)");
 static_assert(offsetof(PlayerClient, HPMax) == 0x268, "PlayerClient::HPMax offset mismatch (expected 0x268)");
+static_assert(offsetof(PlayerClient, banker_interaction_slots_8x16) == 0x270, "PlayerClient::banker_interaction_slots_8x16 offset mismatch (expected 0x270)");
 static_assert(offsetof(PlayerClient, HoldingAnimation) == 0x2f0, "PlayerClient::HoldingAnimation offset mismatch (expected 0x2f0)");
 static_assert(offsetof(PlayerClient, GM) == 0x2f1, "PlayerClient::GM offset mismatch (expected 0x2f1)");
 static_assert(offsetof(PlayerClient, Suffix) == 0x2f2, "PlayerClient::Suffix offset mismatch (expected 0x2f2)");
+static_assert(offsetof(PlayerClient, Unknown0x0374) == 0x374, "PlayerClient::Unknown0x0374 offset mismatch (expected 0x374)");
 static_assert(offsetof(PlayerClient, HideMode) == 0x378, "PlayerClient::HideMode offset mismatch (expected 0x378)");
 static_assert(offsetof(PlayerClient, Light) == 0x37c, "PlayerClient::Light offset mismatch (expected 0x37c)");
 static_assert(offsetof(PlayerClient, LastCollision) == 0x380, "PlayerClient::LastCollision offset mismatch (expected 0x380)");
@@ -143,11 +145,14 @@ static_assert(offsetof(PlayerClient, ManaCurrent) == 0x3e4, "PlayerClient::ManaC
 static_assert(offsetof(PlayerClient, FishingEvent) == 0x3e8, "PlayerClient::FishingEvent offset mismatch (expected 0x3e8)");
 static_assert(offsetof(PlayerClient, Birthdate) == 0x3ec, "PlayerClient::Birthdate offset mismatch (expected 0x3ec)");
 static_assert(offsetof(PlayerClient, LastRangedUsedTime) == 0x3f0, "PlayerClient::LastRangedUsedTime offset mismatch (expected 0x3f0)");
+static_assert(offsetof(PlayerClient, LastObstructionTick) == 0x3f8, "PlayerClient::LastObstructionTick offset mismatch (expected 0x3f8)");
 static_assert(offsetof(PlayerClient, BearingToTarget) == 0x3fc, "PlayerClient::BearingToTarget offset mismatch (expected 0x3fc)");
 static_assert(offsetof(PlayerClient, LastRefresh) == 0x404, "PlayerClient::LastRefresh offset mismatch (expected 0x404)");
 static_assert(offsetof(PlayerClient, Deity) == 0x408, "PlayerClient::Deity offset mismatch (expected 0x408)");
 static_assert(offsetof(PlayerClient, GuildID) == 0x410, "PlayerClient::GuildID offset mismatch (expected 0x410)");
+static_assert(offsetof(PlayerClient, Unknown0x0418) == 0x418, "PlayerClient::Unknown0x0418 offset mismatch (expected 0x418)");
 static_assert(offsetof(PlayerClient, Handle) == 0x420, "PlayerClient::Handle offset mismatch (expected 0x420)");
+static_assert(offsetof(PlayerClient, bShowHelm) == 0x440, "PlayerClient::bShowHelm offset mismatch (expected 0x440)");
 static_assert(offsetof(PlayerClient, PrimaryTintIndex) == 0x444, "PlayerClient::PrimaryTintIndex offset mismatch (expected 0x444)");
 static_assert(offsetof(PlayerClient, CombatSkillUsed) == 0x448, "PlayerClient::CombatSkillUsed offset mismatch (expected 0x448)");
 static_assert(offsetof(PlayerClient, Blind) == 0x450, "PlayerClient::Blind offset mismatch (expected 0x450)");
@@ -167,6 +172,9 @@ static_assert(offsetof(PlayerClient, NpcTintIndex) == 0x484, "PlayerClient::NpcT
 static_assert(offsetof(PlayerClient, TitleVisible) == 0x488, "PlayerClient::TitleVisible offset mismatch (expected 0x488)");
 static_assert(offsetof(PlayerClient, bOfflineMode) == 0x48c, "PlayerClient::bOfflineMode offset mismatch (expected 0x48c)");
 static_assert(offsetof(PlayerClient, MissileRangeToTarget) == 0x490, "PlayerClient::MissileRangeToTarget offset mismatch (expected 0x490)");
+static_assert(offsetof(PlayerClient, Unknown0x0494) == 0x494, "PlayerClient::Unknown0x0494 offset mismatch (expected 0x494)");
+static_assert(offsetof(PlayerClient, Unknown0x0498) == 0x498, "PlayerClient::Unknown0x0498 offset mismatch (expected 0x498)");
+static_assert(offsetof(PlayerClient, FamiliarID) == 0x49c, "PlayerClient::FamiliarID offset mismatch (expected 0x49c)");
 static_assert(offsetof(PlayerClient, CorpseDragCount) == 0x4a0, "PlayerClient::CorpseDragCount offset mismatch (expected 0x4a0)");
 static_assert(offsetof(PlayerClient, realEstateItemGuid) == 0x4a4, "PlayerClient::realEstateItemGuid offset mismatch (expected 0x4a4)");
 static_assert(offsetof(PlayerClient, DraggingPlayer) == 0x4b6, "PlayerClient::DraggingPlayer offset mismatch (expected 0x4b6)");
@@ -193,6 +201,7 @@ static_assert(offsetof(PlayerClient, HibernatingCount) == 0x5ac, "PlayerClient::
 static_assert(offsetof(PlayerClient, LFG) == 0x5b0, "PlayerClient::LFG offset mismatch (expected 0x5b0)");
 static_assert(offsetof(PlayerClient, bSwitchMoved) == 0x5b1, "PlayerClient::bSwitchMoved offset mismatch (expected 0x5b1)");
 static_assert(offsetof(PlayerClient, SpellCooldownETA) == 0x5b4, "PlayerClient::SpellCooldownETA offset mismatch (expected 0x5b4)");
+static_assert(offsetof(PlayerClient, bInvisible) == 0x5b8, "PlayerClient::bInvisible offset mismatch (expected 0x5b8)");
 static_assert(offsetof(PlayerClient, MasterID) == 0x5bc, "PlayerClient::MasterID offset mismatch (expected 0x5bc)");
 static_assert(offsetof(PlayerClient, CombatSkillTicks) == 0x5c0, "PlayerClient::CombatSkillTicks offset mismatch (expected 0x5c0)");
 static_assert(offsetof(PlayerClient, LastTick) == 0x5c8, "PlayerClient::LastTick offset mismatch (expected 0x5c8)");
