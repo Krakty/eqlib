@@ -15,7 +15,7 @@
 #pragma once
 
 //
-// eqmain.dll offsets
+// eqmain.dll offsets (apr15 2026 live, ASM-traced)
 //
 
 #define EQMain__CEQSuiteTextureLoader__GetTexture_x                0x18008EF50
