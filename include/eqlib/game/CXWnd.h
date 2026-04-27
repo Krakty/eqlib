@@ -508,8 +508,15 @@ public:
 	void SetFaded(bool bValue) { Faded = bValue; }
 	bool GetFaded() const { return Faded; }
 
-	void SetFadeDelay(int Value) { FadeDelay = Value; }
-	int GetFadeDelay() const { return FadeDelay; }
+	// apr15-2026-live: FadeDelay removed from CXWnd. The audit
+	// (forensics/cxwnd_apr15_layout_audit.md round-2) found no apr15 evidence
+	// for a uint32_t at +0x148 — the ctor only writes a 2-byte WORD there and
+	// CXWnd::SetMouseOver reads/writes a 1-byte bool at +0x148. Apr15 places
+	// MouseOver at +0x148, displacing upstream FadeDelay. The accessors are
+	// stubbed so MQ2ChatWnd/MQ2MoveUtils continue to compile; runtime fade
+	// delay control is non-functional until the apr15 location is identified.
+	void SetFadeDelay(int /*Value*/) { /* apr15: FadeDelay UNRESOLVED */ }
+	int GetFadeDelay() const { return 0; /* apr15: FadeDelay UNRESOLVED */ }
 
 	void SetFadeDuration(uint32_t Value) { FadeDuration = Value; }
 	uint32_t GetFadeDuration() const { return FadeDuration; }
@@ -531,8 +538,13 @@ public:
 	bool GetClickThrough() const { return bClickThrough; }
 	void SetClickThrough(bool bValue) { bClickThrough = bValue; }
 
-	void SetShowClickThroughMenuItem(bool bValue) { bShowClickThroughMenuItem = bValue; }
-	bool GetShowClickThroughMenuItem() const { return bShowClickThroughMenuItem; }
+	// apr15-2026-live: bShowClickThroughMenuItem removed from CXWnd. The audit
+	// (forensics/cxwnd_apr15_layout_audit.md round-2) shows the apr15 ctor zeroes
+	// 16 bytes contiguously at +0x22c..+0x23c, indicating TransitionRect (CXRect,
+	// 16B) shifted from upstream +0x230 to +0x22c, displacing this 1-byte bool.
+	// Accessors stubbed so MQ2AutoInventory continues to compile.
+	void SetShowClickThroughMenuItem(bool /*bValue*/) { /* apr15: removed */ }
+	bool GetShowClickThroughMenuItem() const { return false; /* apr15: removed */ }
 
 	void SetBottomAnchoredToTop(bool bValue) { bBottomAnchoredToTop = bValue; }
 	void SetLeftAnchoredToLeft(bool bValue) { bLeftAnchoredToLeft = bValue; }
@@ -544,7 +556,10 @@ public:
 		TopOffset = rect.top;
 		BottomOffset = rect.bottom;
 		LeftOffset = rect.left;
-		RightOffset = rect.right;
+		// apr15-2026-live: RightOffset removed from CXWnd, no apr15 evidence
+		// at +0x25c (forensics/cxwnd_apr15_layout_audit.md round-2). Caller
+		// intent preserved via SetRightOffset stub.
+		SetRightOffset(rect.right);
 	}
 
 	void SetTopOffset(int Value) { TopOffset = Value; }
@@ -556,8 +571,12 @@ public:
 	void SetLeftOffset(int Value) { LeftOffset = Value; }
 	int GetLeftOffset() const { return LeftOffset; }
 
-	void SetRightOffset(int Value) { RightOffset = Value; }
-	int GetRightOffset() const { return RightOffset; }
+	// apr15-2026-live: RightOffset removed from CXWnd. No apr15 ctor write at
+	// +0x25c; +0x25c lies in CXWnd's tail-pad before CSidlScreenWnd starts at
+	// +0x260. Accessors stubbed so MQ2AutoInventory / MQ2TargetInfo /
+	// MQ2XTarInfo continue to compile.
+	void SetRightOffset(int /*Value*/) { /* apr15: removed */ }
+	int GetRightOffset() const { return 0; /* apr15: removed */ }
 
 	int GetXMLIndex() const { return XMLIndex; }
 
@@ -596,7 +615,11 @@ public:
 	void Refade()
 	{
 		Faded = true;
-		LastTimeMouseOver = 0;
+		// apr15-2026-live: LastTimeMouseOver removed from CXWnd. The audit
+		// (forensics/cxwnd_apr15_layout_audit.md round-2) classified the JSON's
+		// writer/reader VAs at +0x1cc as stack-frame false positives; no apr15
+		// ctor or method-fn evidence supports a uint32_t at +0x1cc. Field
+		// removed pending re-identification of the apr15 location.
 	}
 
 	struct [[offsetcomments]] VirtualFunctionTable
@@ -729,6 +752,29 @@ public:
 	EQLIB_OBJECT static void operator delete[](void* ptr);
 
 // @start: CXWnd Members
+//
+// apr15-2026-live layout (forensics/cxwnd_apr15_layout_audit.md round-2).
+// Changes vs upstream:
+//   - MouseOver shifted from +0x0c9 to +0x148 (1-byte bool, displaces
+//     upstream FadeDelay; FadeDelay apr15 location UNRESOLVED).
+//   - LastTimeMouseOver removed from +0x1cc (no apr15 evidence; JSON
+//     writer/reader VAs were stack-frame false positives).
+//   - TransitionRect shifted from +0x230 to +0x22c (16-byte CXRect,
+//     displaces upstream bShowClickThroughMenuItem; ctor zero-pair at
+//     +0x22c+0x234 covers a contiguous 16-byte region).
+//   - BlinkState (0x254 int), bFullyScreenClipped (0x258 bool), and
+//     RightOffset (0x25c int) removed (no apr15 evidence at those byte
+//     offsets; +0x254 holds bUsesClassicUI per ctor 0x1405c1d8d).
+//   - bUsesClassicUI shifted from +0x260 to +0x254; bMouseOverEvent
+//     shifted from +0x261 to +0x255.
+// Layout anomaly at +0x218: CXWnd::SetMouseOver chains via a qword pointer
+// at [this+0x218]. That offset lies inside upstream Location (CXRect@0x20c,
+// 16 bytes ending at 0x21c). Two interpretations are possible: (a) apr15
+// reuses Location's last int as a parent/sibling pointer (TYPE_OVERLAP), or
+// (b) Location was relocated and a new pointer field lives at +0x218. The
+// audit did not reconcile this. Location is left at +0x20c since changing
+// it would cascade into unverified territory; do NOT add a new field at
+// +0x218 until additional Ghidra decompiles confirm Location's apr15 size.
 /*0x030*/ int                BottomOffset;
 /*0x034*/ uint32_t           BGType;
 /*0x038*/ CStaticTintedBlendAnimationTemplate* TitlePiece2;
@@ -759,7 +805,7 @@ public:
 /*0x0c0*/ int                managerArrayIndex;
 /*0x0c4*/ int                HScrollPos;
 /*0x0c8*/ bool               bClientRectChanged;
-/*0x0c9*/ bool               MouseOver;
+/*0x0c9*/ uint8_t            _pad_apr15_0x0c9[3];   // apr15: MouseOver moved to +0x148; pad to align WindowStyle@0x0cc
 /*0x0cc*/ uint32_t           WindowStyle;
 /*0x0d0*/ bool               bEnableShowBorder;
 /*0x0d1*/ bool               bClickThroughMenuItemStatus;
@@ -783,7 +829,8 @@ public:
 /*0x138*/ bool               bRightAnchoredToLeft;
 /*0x13c*/ int                LeftOffset;
 /*0x140*/ CXWnd*             ParentWindow;
-/*0x148*/ uint32_t           FadeDelay;
+/*0x148*/ bool               MouseOver;             // apr15: moved from +0x0c9 (CXWnd::SetMouseOver 0x1405c9d10 byte read/write with RBX=this)
+/*0x149*/ uint8_t            _pad_apr15_0x149[7];   // apr15: pad to align DrawTemplate@0x150
 /*0x150*/ CXWndDrawTemplate* DrawTemplate;
 /*0x158*/ bool               bClientClipRectChanged;
 /*0x15c*/ CXRect             IconRect;
@@ -802,7 +849,7 @@ public:
 /*0x1c9*/ bool               bShowBorder;
 /*0x1ca*/ bool               bMarkedForDelete;
 /*0x1cb*/ bool               bIsTransitioning;
-/*0x1cc*/ uint32_t           LastTimeMouseOver;
+/*0x1cc*/ uint8_t            _pad_apr15_0x1cc[4];   // apr15: LastTimeMouseOver removed; pad to align bMaximizable@0x1d0
 /*0x1d0*/ bool               bMaximizable;
 /*0x1d4*/ int                BlinkStartTimer;
 /*0x1d8*/ ControllerBase*    pController;
@@ -817,13 +864,13 @@ public:
 /*0x200*/ int                DeleteCount;
 /*0x204*/ bool               bScreenClipRectChanged;
 /*0x208*/ int                TopOffset;
-/*0x20c*/ CXRect             Location;
+/*0x20c*/ CXRect             Location;              // apr15: see "Layout anomaly at +0x218" note above
 /*0x21c*/ bool               Locked;
 /*0x220*/ int                Transition;
 /*0x224*/ bool               bHCenterTooltip;
 /*0x228*/ COLORREF           DisabledBackground;
-/*0x22c*/ bool               bShowClickThroughMenuItem;
-/*0x230*/ CXRect             TransitionRect;
+/*0x22c*/ CXRect             TransitionRect;        // apr15: shifted from +0x230 (ctor zero-pair at +0x22c+0x234 spans 16B)
+/*0x23c*/ uint8_t            _pad_apr15_0x23c[4];   // apr15: bShowClickThroughMenuItem absorbed; pad to align Faded@0x240
 /*0x240*/ bool               Faded;
 /*0x244*/ uint32_t           TransitionDuration;
 /*0x248*/ bool               Minimized;
@@ -831,19 +878,11 @@ public:
 /*0x24a*/ bool               bBottomAnchoredToTop;
 /*0x24c*/ COLORREF           BGColor;
 /*0x250*/ uint32_t           BlinkFadeDuration;
-/*0x254*/ int                BlinkState;
-/*0x258*/ bool               bFullyScreenClipped;
-/*0x25c*/ int                RightOffset;
+/*0x254*/ bool               bUsesClassicUI;        // apr15: ctor 0x1405c1d8d MOV byte [RBX+0x254], AL (was upstream +0x260)
+/*0x255*/ bool               bMouseOverEvent;       // apr15: ctor 0x1405c2262 MOV byte [RBX+0x255], 0x0 (was upstream +0x261)
+/*0x256*/ uint8_t            _pad_apr15_0x256[10];  // apr15: pad CXWnd to sizeof 0x260 (CSidlScreenWnd::SidlText starts at +0x260)
 // @end: CXWnd Members
 
-// apr15-2026-live: bUsesClassicUI and bMouseOverEvent removed from upstream
-// 0x260/0x261 (no usages in MQ source). Per cxwnd_apr15_layout_audit.md they
-// live at +0x254/+0x255 in apr15, but BlinkState/bFullyScreenClipped/RightOffset
-// at +0x254..+0x25F have no apr15 ctor evidence — they may be stale upstream
-// fields too. Kept here pragmatically: MQ2WindowInspector.cpp reads them, so
-// removing would break compilation; their apr15 in-memory values are garbage
-// but reads don't crash. CXWnd ends at +0x260 (proven by CSidlScreenWnd::Init1
-// placing SidlText at +0x260). See forensics/cxwnd_apr15_layout_audit.md.
 /*0x260*/
 
 	ALT_MEMBER_ALIAS(bool, bEscapable, CloseOnESC);
