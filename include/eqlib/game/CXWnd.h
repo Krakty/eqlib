@@ -486,7 +486,9 @@ public:
 	CXRect GetLocation() const { return Location; }
 	void SetLocation(const CXRect& r) { Location = r; }
 
-	CXRect GetOldLocation() { return OldLocation; }
+	// apr15-2026-live: OldLocation REMOVED — upstream +0x184 conflicts with
+	// verified bTopAnchoredToBottom@+0x185 and Location@+0x18c..+0x19c.
+	// Accessor removed; call-sites must be updated.
 
 	void SetNeedsSaving(bool bValue) { bNeedsSaving = bValue; }
 
