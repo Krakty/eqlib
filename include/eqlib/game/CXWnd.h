@@ -251,7 +251,7 @@ public:
 // CXWnd
 //============================================================================
 
-constexpr size_t CXWnd_size = 0x268; // @sizeof(CXWnd) :: 2026-03-10 (live) @ 0x1405D55A6
+constexpr size_t CXWnd_size = 0x260; // @sizeof(CXWnd) :: 2026-04-15 (live) — audit forensics/cxwnd_apr15_layout_audit.md (CSidlScreenWnd2 0x1405BC880 + Init1 0x1405BE360)
 constexpr size_t CXWnd_vftable_size = 0x348;
 
 class [[offsetcomments]] CXWnd
@@ -836,9 +836,15 @@ public:
 /*0x25c*/ int                RightOffset;
 // @end: CXWnd Members
 
-/*0x260*/ bool               bUsesClassicUI;
-/*0x261*/ bool               bMouseOverEvent;
-/*0x264*/
+// apr15-2026-live: bUsesClassicUI and bMouseOverEvent removed from upstream
+// 0x260/0x261 (no usages in MQ source). Per cxwnd_apr15_layout_audit.md they
+// live at +0x254/+0x255 in apr15, but BlinkState/bFullyScreenClipped/RightOffset
+// at +0x254..+0x25F have no apr15 ctor evidence — they may be stale upstream
+// fields too. Kept here pragmatically: MQ2WindowInspector.cpp reads them, so
+// removing would break compilation; their apr15 in-memory values are garbage
+// but reads don't crash. CXWnd ends at +0x260 (proven by CSidlScreenWnd::Init1
+// placing SidlText at +0x260). See forensics/cxwnd_apr15_layout_audit.md.
+/*0x260*/
 
 	ALT_MEMBER_ALIAS(bool, bEscapable, CloseOnESC);
 	ALT_MEMBER_ALIAS_DEPRECATED(bool, bEnableShowBorder, bBorder, "Use bEnableShowBorder instead of bBorder");
