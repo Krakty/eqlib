@@ -802,7 +802,9 @@ public:
 // Master row count = 85 (84 named + 1 med). Net (TBD) count = 0.
 //
 /*0x030*/ uint8_t            _apr15_internal_0x030;     // gated cursor/internal byte, no upstream match (R, FUN_1405c92e0)
-/*0x031*/ uint8_t            _pad_0x031[3];
+/*0x031*/ uint8_t            _apr15_internal_0x031;     // RW byte, list-2 membership cand: bManagerList2Linked (master, 0x1405ee5d0)
+/*0x032*/ bool               bTiled;                    // apr15: VERIFIED MEDIUM (member-fn sweep batch 11, SIDL writers LoadSidlScreen 0x1405bfbd8 and CreateXWndFromTemplate 0x1405f7d68 copy template+0x95 → this+0x32)
+/*0x033*/ bool               bNeedsSaving;              // apr15: VERIFIED (member-fn sweep batch 10, 4 writers all on UI state-change paths: ApplyLockedStyle 0x1405ede28; HandleLButtonUp state-3/4/6)
 /*0x034*/ uint8_t            Fades;                     // apr15: VERIFIED (master +pass3, OnProcessFrame 0x1405c9050)
 /*0x035*/ uint8_t            _pad_0x035[3];
 /*0x038*/ uint32_t           BlinkFadeDuration;         // apr15: VERIFIED (master +pass3, OnProcessFrame fade-trigger reader)
@@ -841,7 +843,8 @@ public:
 /*0x0c4*/ int                BlinkStartTimer;           // apr15: VERIFIED (master +pass3, OnProcessFrame 0x1405c9050)
 /*0x0c8*/ COLORREF           CRNormal;                  // apr15: VERIFIED (master +pass4, 0x1405c4e30)
 /*0x0cc*/ uint32_t           LastBlinkFadeRefreshTime;  // apr15: VERIFIED (master, OnProcessFrame 0x1405c9050)
-/*0x0d0*/ uint8_t            _pad_0x0d0[4];
+/*0x0d0*/ bool               bDragMoveEnabled;          // apr15: VERIFIED (member-fn sweep batch 10, CXWndManager::HandleLButtonDown 0x1405eb5fc — direct DRAG_MOVE_ACTIVE state gate when non-zero AND drag-state==8; CWS_CLIENTMOVABLE bypasses)
+/*0x0d1*/ uint8_t            _pad_0x0d1[3];
 /*0x0d4*/ CXRect             ClipRectClient;            // apr15: VERIFIED (member-fn sweep, GetClientClipRect 0x1405c5fb0 — parent-intersected client-clip rect, NOT the screen-clip rect at +0x68)
 /*0x0e4*/ uint8_t            _apr15_internal_0x0e4;     // R byte, no upstream match (master +pass4, 0x1405c5490)
 /*0x0e5*/ bool               bFullyScreenClipped;       // apr15: VERIFIED (GetScreenClipRect 0x1405c7bb0, ctor 0x1405c1f8c)
@@ -861,7 +864,7 @@ public:
 /*0x124*/ uint8_t            _pad_0x124[4];
 /*0x128*/ CXRect             TransitionRect;            // apr15: VERIFIED (master, 0x1405c8630 Minimize-anchor)
 /*0x138*/ uint8_t            _pad_0x138[1];
-/*0x139*/ uint8_t            _apr15_internal_0x139;     // demoted from Minimized — actual minimized state is +0x0b8 bMinimized; +0x139 semantic is unclear (read by CXWnd::Minimize 0x1405c8630)
+/*0x139*/ bool               bMaximizable;              // apr15: VERIFIED (member-fn sweep batch 11, CXWnd::Minimize restore-branch gate 0x1405c8696 + CXWnd::MinimizeImpl restore gate 0x1405c881d — read only on un-minimize path = "is allowed to be restored")
 /*0x13a*/ uint8_t            _pad_0x13a[6];
 /*0x140*/ CXWndDrawTemplate* DrawTemplate;              // apr15: VERIFIED (master, 0x140074730)
 /*0x148*/ bool               MouseOver;                 // apr15: VERIFIED (SetMouseOver 0x1405c9d10)
@@ -877,15 +880,15 @@ public:
 /*0x178*/ uint32_t           FadeDelay;                 // apr15: VERIFIED (OnProcessFrame 0x1405c9050, ctor 0x1405c1f08 = 2000ms)
 /*0x17c*/ bool               Enabled;                   // apr15: VERIFIED (master +pass3, 0x1405c37b0)
 /*0x17d*/ uint8_t            _pad_0x17d[3];
-/*0x180*/ int                ParentAndContextMenuArrayIndex; // apr15: VERIFIED (member-fn sweep, Destroy 0x1405c34a0 parent-array slot index)
+/*0x180*/ int                DeleteCount;               // apr15: VERIFIED (member-fn sweep batch 11, per-frame loop 0x1405ee355 reads/increments/dispatches vtable+0x8 delete when >5; gated by +0x184 bMarkedForDelete)
 /*0x184*/ bool               bMarkedForDelete;          // apr15: VERIFIED (member-fn sweep, Destroy 0x1405c34a0 writes =1 before manager teardown)
 /*0x185*/ bool               bTopAnchoredToBottom;      // apr15: VERIFIED (GetRelativeRect, anchor save FUN_1405c5c50)
 /*0x186*/ uint8_t            bBottomAnchoredToTop;      // apr15: VERIFIED (master +pass4, 0x140074350)
 /*0x187*/ uint8_t            FadeToAlpha;               // apr15: VERIFIED (master, OnProcessFrame 0x1405c9050)
 /*0x188*/ uint8_t            _apr15_internal_0x188;     // R byte, no upstream match (master +pass4, 0x140074750)
 /*0x189*/ uint8_t            _apr15_internal_0x189;     // R byte, no upstream match (master +pass4, 0x1405c6190)
-/*0x18a*/ uint8_t            _pad_0x18a[1];
-/*0x18b*/ uint8_t            _apr15_internal_0x18b;     // R byte, no upstream match (master +pass4, 0x1405c8920)
+/*0x18a*/ bool               bEscapableLocked;          // apr15: VERIFIED (member-fn sweep batch 11, SetEscapable 0x1405c9a40 gates +0x138 write on +0x18a==0 OR force-flag; ApplyLockedStyle sets =1 after force-bypass-SetEscapable — canonical lock-on-customize)
+/*0x18b*/ bool               bKeepOnScreen;             // apr15: VERIFIED MEDIUM (member-fn sweep batch 10, SetPos 0x1405c8920 gates viewport-clamp branch when non-zero)
 /*0x18c*/ CXRect             Location;                  // apr15: VERIFIED (4-int rect, ctor 0x1405c1e21..0x1405c1e42)
 /*0x19c*/ bool               cached_ClientRect_dirty_flag; // apr15: VERIFIED (master, 0x1405c9320 cache invalidate)
 /*0x19d*/ uint8_t            _apr15_internal_0x19d;     // R byte, no upstream match (master +pass4, 0x1400735f0)
@@ -902,7 +905,7 @@ public:
 /*0x1d0*/ ArrayClass2<uint32_t> RuntimeTypes;           // apr15: VERIFIED (member-fn sweep, IsType 0x1405c8530 paged-hash: length@+0x1d0, mask@+0x1d8, shift@+0x1dc, buckets@+0x1e0; 32B span)
 /*0x1f0*/ int                BlinkDuration;             // apr15: VERIFIED (master +pass3, OnProcessFrame 0x1405c9050)
 /*0x1f4*/ uint32_t           LastTimeMouseOver;         // apr15: VERIFIED (OnProcessFrame 0x1405c9050, ctor 0x1405c1f1c init=0)
-/*0x1f8*/ int                managerArrayIndex_2;       // apr15: VERIFIED (member-fn sweep, CXWndManager unregister 0x1405ee5d0 secondary-list slot index; -1 sentinel)
+/*0x1f8*/ int                ParentAndContextMenuArrayIndex; // apr15: VERIFIED (member-fn sweep batch 11, RemoveWnd 0x1405ee79f reads as secondary-array index; rebuild-array 0x1405eee5d writes; ctor inits to -1 sentinel)
 /*0x1fc*/ int                WindowStyle;               // apr15: VERIFIED (master, 0x1405c4800)
 /*0x200*/ uint8_t            _pad_0x200[16];
 /*0x210*/ ControllerBase*    pController;               // apr15: VERIFIED (master +disambig, 0x1405ca7f0)
