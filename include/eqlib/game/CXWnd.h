@@ -808,7 +808,7 @@ public:
 /*0x084*/ int                DisabledBackground;        // apr15: VERIFIED (master +pass3, 0x1405c37b0)
 /*0x088*/ CXRect             IconRect;                  // apr15: VERIFIED (master, 0x1405c4e30 DrawNC)
 /*0x098*/ uint8_t            _pad_0x098[1];
-/*0x099*/ uint8_t            _apr15_internal_0x099;     // RW byte adjacent to bActive shadow, no upstream match (master, 0x140074ad0)
+/*0x099*/ bool               dShow;                     // apr15: VERIFIED (member-fn sweep, IsReallyVisible 0x1405c84e0 self+parent-chain visibility gate)
 /*0x09a*/ uint8_t            _apr15_internal_0x09a;     // RW byte, no upstream match (master +pass4, 0x140074750)
 /*0x09b*/ uint8_t            _pad_0x09b[5];
 /*0x0a0*/ CStaticTintedBlendAnimationTemplate* TitlePiece; // apr15: VERIFIED (master +pass4, 0x1405c4e30)
@@ -818,13 +818,13 @@ public:
 /*0x0b8*/ bool               Locked;                    // apr15: VERIFIED (master, 0x140074ad0)
 /*0x0b9*/ uint8_t            _pad_0x0b9[3];
 /*0x0bc*/ int                ZLayer;                    // apr15: VERIFIED (master, 0x1405c9f70)
-/*0x0c0*/ bool               cached_ScreenRect_dirty_flag; // apr15: VERIFIED (master, 0x1405c9320 cache invalidate)
+/*0x0c0*/ bool               ClipRectClient_dirty_flag; // apr15: VERIFIED (member-fn sweep, GetClientClipRect 0x1405c5fb0 dirty gate for +0x0d4 rect)
 /*0x0c1*/ uint8_t            _pad_0x0c1[3];
 /*0x0c4*/ int                BlinkStartTimer;           // apr15: VERIFIED (master +pass3, OnProcessFrame 0x1405c9050)
 /*0x0c8*/ COLORREF           CRNormal;                  // apr15: VERIFIED (master +pass4, 0x1405c4e30)
 /*0x0cc*/ uint32_t           LastBlinkFadeRefreshTime;  // apr15: VERIFIED (master, OnProcessFrame 0x1405c9050)
 /*0x0d0*/ uint8_t            _pad_0x0d0[4];
-/*0x0d4*/ CXRect             cached_ScreenRect;         // apr15: VERIFIED (master, GetScreenRect 0x1405c5fb0 RW cache)
+/*0x0d4*/ CXRect             ClipRectClient;            // apr15: VERIFIED (member-fn sweep, GetClientClipRect 0x1405c5fb0 — parent-intersected client-clip rect, NOT the screen-clip rect at +0x68)
 /*0x0e4*/ uint8_t            _apr15_internal_0x0e4;     // R byte, no upstream match (master +pass4, 0x1405c5490)
 /*0x0e5*/ bool               bFullyScreenClipped;       // apr15: VERIFIED (GetScreenClipRect 0x1405c7bb0, ctor 0x1405c1f8c)
 /*0x0e6*/ uint8_t            _pad_0x0e6[2];
@@ -846,7 +846,8 @@ public:
 /*0x13a*/ uint8_t            _pad_0x13a[6];
 /*0x140*/ CXWndDrawTemplate* DrawTemplate;              // apr15: VERIFIED (master, 0x140074730)
 /*0x148*/ bool               MouseOver;                 // apr15: VERIFIED (SetMouseOver 0x1405c9d10)
-/*0x149*/ uint8_t            _pad_0x149[15];
+/*0x149*/ uint8_t            _pad_0x149[7];
+/*0x150*/ CXWnd*             FocusProxy;                // apr15: VERIFIED (member-fn sweep, CXWndManager::SetFocus 0x1405ee9a0 self-deref chain-walker mov rcx,[this+0x150])
 /*0x158*/ uint8_t            TargetAlpha;               // apr15: VERIFIED (master +disambig, 0x1405c9f90)
 /*0x159*/ uint8_t            _pad_0x159[3];
 /*0x15c*/ int                BlinkFadeStartTime;        // apr15: VERIFIED (master +disambig, OnProcessFrame 0x1405c9050)
@@ -856,7 +857,9 @@ public:
 /*0x174*/ uint8_t            _pad_0x174[4];
 /*0x178*/ uint32_t           FadeDelay;                 // apr15: VERIFIED (OnProcessFrame 0x1405c9050, ctor 0x1405c1f08 = 2000ms)
 /*0x17c*/ bool               Enabled;                   // apr15: VERIFIED (master +pass3, 0x1405c37b0)
-/*0x17d*/ uint8_t            _pad_0x17d[8];
+/*0x17d*/ uint8_t            _pad_0x17d[3];
+/*0x180*/ int                ParentAndContextMenuArrayIndex; // apr15: VERIFIED (member-fn sweep, Destroy 0x1405c34a0 parent-array slot index)
+/*0x184*/ bool               bMarkedForDelete;          // apr15: VERIFIED (member-fn sweep, Destroy 0x1405c34a0 writes =1 before manager teardown)
 /*0x185*/ bool               bTopAnchoredToBottom;      // apr15: VERIFIED (GetRelativeRect, anchor save FUN_1405c5c50)
 /*0x186*/ uint8_t            bBottomAnchoredToTop;      // apr15: VERIFIED (master +pass4, 0x140074350)
 /*0x187*/ uint8_t            FadeToAlpha;               // apr15: VERIFIED (master, OnProcessFrame 0x1405c9050)
@@ -876,7 +879,8 @@ public:
 /*0x1b6*/ uint8_t            _pad_0x1b6[2];
 /*0x1b8*/ CXRect             OldLocation;               // apr15: VERIFIED (master, 0x1405c8630 Minimize)
 /*0x1c8*/ int                TopOffset;                 // apr15: VERIFIED (master +pass3, GetRelativeRect 0x1405c8a50)
-/*0x1cc*/ uint8_t            _pad_0x1cc[36];
+/*0x1cc*/ uint8_t            _pad_0x1cc[4];
+/*0x1d0*/ ArrayClass2<uint32_t> RuntimeTypes;           // apr15: VERIFIED (member-fn sweep, IsType 0x1405c8530 paged-hash: length@+0x1d0, mask@+0x1d8, shift@+0x1dc, buckets@+0x1e0; 32B span)
 /*0x1f0*/ int                BlinkDuration;             // apr15: VERIFIED (master +pass3, OnProcessFrame 0x1405c9050)
 /*0x1f4*/ uint32_t           LastTimeMouseOver;         // apr15: VERIFIED (OnProcessFrame 0x1405c9050, ctor 0x1405c1f1c init=0)
 /*0x1f8*/ uint8_t            _pad_0x1f8[4];
