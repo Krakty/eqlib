@@ -310,8 +310,8 @@ public:
 	EQLIB_OBJECT virtual int OnBeginMoveOrResize();
 	EQLIB_OBJECT virtual int OnCompleteMoveOrResize();
 	EQLIB_OBJECT virtual int OnMinimizeBox();
-	EQLIB_OBJECT bool IsMinimized() const { return Minimized; }
-	EQLIB_OBJECT void SetMinimized(bool bValue) { Minimized = bValue; }
+	EQLIB_OBJECT bool IsMinimized() const { return bMinimized; }
+	EQLIB_OBJECT void SetMinimized(bool bValue) { bMinimized = bValue; }
 	EQLIB_OBJECT virtual int OnMaximizeBox();
 	EQLIB_OBJECT bool IsMaximized() const { return bMaximized; }
 	EQLIB_OBJECT virtual int OnTileBox();
@@ -344,8 +344,8 @@ public:
 	EQLIB_OBJECT virtual bool ShouldProcessChildrenFrames() const { return IsVisible() && !IsMinimized(); }
 	EQLIB_OBJECT virtual bool ShouldProcessControllerFrame() const { return IsVisible() && !IsMinimized(); }
 	EQLIB_OBJECT virtual void SetDrawTemplate(CXWndDrawTemplate* drawTemplate) { DrawTemplate = drawTemplate; }
-	EQLIB_OBJECT virtual void SetBGType(uint32_t Value) { BGType = Value; }
-	uint32_t GetBGType() const { return BGType; }
+	EQLIB_OBJECT virtual void SetBGType(uint32_t Value) { BackgroundDrawType = Value; }
+	uint32_t GetBGType() const { return BackgroundDrawType; }
 	// apr15-2026-live: BGColor RESTORED at +0x060 per pass-3 master layout
 	// (cxwnd_apr15_vtable_thunks.md). The +0x24c slot holds FadeDuration in
 	// apr15 (re-attribution; +0x038 is BlinkFadeDuration).
@@ -815,7 +815,7 @@ public:
 /*0x0a8*/ uint8_t            bResizableMask;            // apr15: VERIFIED (master +pass3, 0x1405c6190)
 /*0x0a9*/ uint8_t            _pad_0x0a9[7];
 /*0x0b0*/ CTextObjectInterface* pTextObject;            // apr15: VERIFIED (master +disambig, 0x1405c4e30)
-/*0x0b8*/ bool               Locked;                    // apr15: VERIFIED (master, 0x140074ad0)
+/*0x0b8*/ bool               bMinimized;                // apr15: VERIFIED (member-fn sweep, thunk 0x140074ad0 = "shown AND not minimized" predicate; sibling helper 0x1405c8720 writes =1 + save-rect to OldLocation)
 /*0x0b9*/ uint8_t            _pad_0x0b9[3];
 /*0x0bc*/ int                ZLayer;                    // apr15: VERIFIED (master, 0x1405c9f70)
 /*0x0c0*/ bool               ClipRectClient_dirty_flag; // apr15: VERIFIED (member-fn sweep, GetClientClipRect 0x1405c5fb0 dirty gate for +0x0d4 rect)
@@ -842,7 +842,7 @@ public:
 /*0x124*/ uint8_t            _pad_0x124[4];
 /*0x128*/ CXRect             TransitionRect;            // apr15: VERIFIED (master, 0x1405c8630 Minimize-anchor)
 /*0x138*/ uint8_t            _pad_0x138[1];
-/*0x139*/ bool               Minimized;                 // apr15: VERIFIED (master, 0x1405c8630 Minimize)
+/*0x139*/ uint8_t            _apr15_internal_0x139;     // demoted from Minimized — actual minimized state is +0x0b8 bMinimized; +0x139 semantic is unclear (read by CXWnd::Minimize 0x1405c8630)
 /*0x13a*/ uint8_t            _pad_0x13a[6];
 /*0x140*/ CXWndDrawTemplate* DrawTemplate;              // apr15: VERIFIED (master, 0x140074730)
 /*0x148*/ bool               MouseOver;                 // apr15: VERIFIED (SetMouseOver 0x1405c9d10)
@@ -872,7 +872,7 @@ public:
 /*0x19d*/ uint8_t            _apr15_internal_0x19d;     // R byte, no upstream match (master +pass4, 0x1400735f0)
 /*0x19e*/ uint8_t            _pad_0x19e[2];
 /*0x1a0*/ CXStr              WindowText;                // apr15: VERIFIED (vtable+0x280 SetWindowText FUN_140074850)
-/*0x1a8*/ uint32_t           BGType;                    // apr15: VERIFIED (master, 0x140074630 SetBGType)
+/*0x1a8*/ uint32_t           BackgroundDrawType;        // apr15: VERIFIED (member-fn sweep, DoAllDrawing 0x1405c35b0 reads as switch-on-value: case 1=custom-image vtable+0x48, case 2=solid-fill BGColor/DisabledBackground)
 /*0x1ac*/ CXSize             MinClientSize;             // apr15: VERIFIED (master, vtable+0x328 GetMinClientSize thunk 0x140073560)
 /*0x1b4*/ uint8_t            _pad_0x1b4[1];
 /*0x1b5*/ bool               bClipToParent;             // apr15: VERIFIED (master +disambig, GetScreenRect 0x1405c5fb0)
