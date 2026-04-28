@@ -537,6 +537,8 @@ enum EditWndStyle
 	ewsReadOnly     = 0x00200000,
 };
 
+constexpr size_t CEditBaseWnd_size = 0x3c0; // @sizeof(CEditBaseWnd) :: 2026-04-15 (live) — forensics/ceditwnd_apr15_vtable.md (vftable 0x140aec470, 110 slots; data shifted -0x10 from upstream)
+
 class [[offsetcomments]] CEditBaseWnd : public CXWnd
 {
 public:
@@ -563,23 +565,25 @@ public:
 	EQLIB_OBJECT void SetSel(int, int);
 
 	//----------------------------------------------------------------------------
-	// data members
-/*0x268*/ eTextAlign   eAlign = eta_Left;
-/*0x26c*/ int          StartPos = 0;
-/*0x270*/ int          EndPos = 0;
-/*0x274*/ int          MaxChars = -1;
-/*0x278*/ int          MaxBytesUTF8 = -1;
-/*0x280*/ CXStr        InputText;
-/*0x288*/ int          TagPrintableStarts[EDITWND_MAX_TAGS];
-/*0x2b0*/ int          TagPrintableEnds[EDITWND_MAX_TAGS];
-/*0x2d8*/ int          TagOriginalStarts[EDITWND_MAX_TAGS];
-/*0x300*/ int          TagOriginalEnds[EDITWND_MAX_TAGS];
-/*0x328*/ int          TagDynamicSize[EDITWND_MAX_TAGS];
-/*0x350*/ int          TagCodes[EDITWND_MAX_TAGS];
-/*0x378*/ CXStr        TagStrings[EDITWND_MAX_TAGS];
-/*0x3c8*/ int          TagCount;
-/*0x3cc*/ uint32_t     EditStyle;
-/*0x3d0*/
+	// data members — apr15: shifted -0x10 from upstream (CEditBaseWnd's first
+	// field eAlign packs into CXWnd's tail-pad starting at +0x258)
+/*0x258*/ eTextAlign   eAlign = eta_Left;
+/*0x25c*/ int          StartPos = 0;
+/*0x260*/ int          EndPos = 0;
+/*0x264*/ int          MaxChars = -1;
+/*0x268*/ int          MaxBytesUTF8 = -1;
+/*0x26c*/ uint8_t      _pad_0x26c[4];
+/*0x270*/ CXStr        InputText;
+/*0x278*/ int          TagPrintableStarts[EDITWND_MAX_TAGS];
+/*0x2a0*/ int          TagPrintableEnds[EDITWND_MAX_TAGS];
+/*0x2c8*/ int          TagOriginalStarts[EDITWND_MAX_TAGS];
+/*0x2f0*/ int          TagOriginalEnds[EDITWND_MAX_TAGS];
+/*0x318*/ int          TagDynamicSize[EDITWND_MAX_TAGS];
+/*0x340*/ int          TagCodes[EDITWND_MAX_TAGS];
+/*0x368*/ CXStr        TagStrings[EDITWND_MAX_TAGS];
+/*0x3b8*/ int          TagCount;
+/*0x3bc*/ uint32_t     EditStyle;
+/*0x3c0*/
 };
 
 enum EditWndMode
@@ -591,6 +595,8 @@ enum EditWndMode
 	ewmAlphaNumOnly,
 	ewmCount
 };
+
+constexpr size_t CEditWnd_size = 0x3f8; // @sizeof(CEditWnd) :: 2026-04-15 (live) — forensics/ceditwnd_apr15_vtable.md (vftable 0x140aec7e0, 114 slots; 16 CXWnd-overrides + 9 new virtuals across CEditBaseWnd/CEditWnd; -0x10 shift)
 
 class [[offsetcomments]] CEditWnd : public CEditBaseWnd
 {
@@ -654,18 +660,23 @@ public:
 	}
 
 	//----------------------------------------------------------------------------
-	// data members
+	// data members — apr15: shifted -0x10 from upstream
 
-/*0x3d0*/ bool         bAnchorAtStart;
-/*0x3d1*/ bool         bCaretAtEnd;
-/*0x3d2*/ bool         bAutoVScrollCalc;
-/*0x3d3*/ bool         bEditable;
-/*0x3d8*/ CXStr        FilterChars;
-/*0x3e0*/ int          EditMode;
-/*0x3e4*/ wchar_t      PasswordChar;
-/*0x3e8*/ ArrayClass2<uint32_t> LineIndices;
-/*0x408*/
+/*0x3c0*/ bool         bAnchorAtStart;            // ctor inits to 1 (true)
+/*0x3c1*/ bool         bCaretAtEnd;               // ctor inits to 0 (false)
+/*0x3c2*/ bool         bAutoVScrollCalc;          // ctor inits to 1 (true)
+/*0x3c3*/ bool         bEditable;                 // ctor inits to 1 (true) — gates LBtn/MouseMove/Keyboard/DrawCaret
+/*0x3c4*/ uint8_t      _pad_0x3c4[4];
+/*0x3c8*/ CXStr        FilterChars;
+/*0x3d0*/ int          EditMode;                  // 0=Normal, 1=Name, 2=AlphaOnly, 3=NumericOnly, 4=AlphaNumOnly
+/*0x3d4*/ wchar_t      PasswordChar;              // ctor inits to L'*'
+/*0x3d6*/ uint8_t      _pad_0x3d6[2];
+/*0x3d8*/ ArrayClass2<uint32_t> LineIndices;      // 0x20 bytes, ctor inits chunk-size=0x20, mask=0x1f, shift=5
+/*0x3f8*/
 };
+
+SIZE_CHECK(CEditBaseWnd, CEditBaseWnd_size);
+SIZE_CHECK(CEditWnd, CEditWnd_size);
 
 //============================================================================
 // CEditLabelWnd
