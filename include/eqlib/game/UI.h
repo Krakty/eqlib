@@ -980,6 +980,8 @@ public:
 	virtual bool GetText(int index, int subItem, CXStr& text) const = 0;
 };
 
+constexpr size_t CListWnd_size = 0x338; // @sizeof(CListWnd) :: 2026-04-15 (live) — forensics/clistwnd_apr15_vtable.md (vtable 0x140ae8cc0, 116 slots, 23 overrides + 11 new virtuals; dtor __eq_delete(this, 0x338); -0x10 shift from upstream 0x348)
+
 class [[offsetcomments]] CListWnd : public CXWnd
 {
 public:
@@ -1140,60 +1142,68 @@ public:
 	int GetItemCount() const { return ItemsArray.GetLength(); }
 
 	//----------------------------------------------------------------------------
-	// data members
+	// data members — apr15: shifted -0x10 from upstream, sizeof 0x338
 
-/*0x268*/ int                 Unknown0x1f0;
-/*0x270*/ ArrayClass<SListWndLine> ItemsArray;
-/*0x288*/ ArrayClass<SListWndColumn> Columns;
-/*0x2a0*/ int                 CurSel;
-/*0x2a4*/ int                 CurCol;
-/*0x2a8*/ int                 DownItem;
-/*0x2ac*/ int                 ScrollOffsetY;
-/*0x2b0*/ int                 HeaderHeight;
-/*0x2b4*/ int                 FirstVisibleLine;
-/*0x2b8*/ int                 SortCol;
-/*0x2bc*/ bool                bSortAsc;
-/*0x2bd*/ bool                bFixedHeight;
-/*0x2be*/ bool                bOwnerDraw;
-/*0x2bf*/ bool                bCalcHeights;
-/*0x2c0*/ bool                bColumnSizable;
-/*0x2c4*/ int                 LineHeight;
-/*0x2c8*/ int                 ColumnSepDragged;
-/*0x2cc*/ int                 ColumnSepMouseOver;
-/*0x2d0*/ COLORREF            HeaderText;
-/*0x2d4*/ COLORREF            Highlight;
-/*0x2d8*/ COLORREF            Selected;
-/*0x2e0*/ CUITextureInfo      BGHeader;
-/*0x300*/ COLORREF            BGHeaderTint;
-/*0x308*/ CTextureAnimation*  pRowSep;
-/*0x310*/ CTextureAnimation*  pColumnSep;
-/*0x318*/ CEditBaseWnd*       pEditCell;
-/*0x320*/ IListItemDataHandler* pItemDataHandler;
-/*0x328*/ bool                bHasItemTooltips;
-/*0x32c*/ CXRect              PrevInsideRect;
-/*0x33c*/ uint32_t            ListWndStyle;
-/*0x340*/ eqtime_t            LastVisibleTime;
-/*0x348*/
+/*0x258*/ int                 Unknown0x1f0;              // RButton press-state bitfield
+/*0x260*/ ArrayClass<SListWndLine> ItemsArray;
+/*0x278*/ ArrayClass<SListWndColumn> Columns;
+/*0x290*/ int                 CurSel;
+/*0x294*/ int                 CurCol;
+/*0x298*/ int                 DownItem;
+/*0x29c*/ int                 ScrollOffsetY;
+/*0x2a0*/ int                 HeaderHeight;
+/*0x2a4*/ int                 FirstVisibleLine;
+/*0x2a8*/ int                 SortCol;
+/*0x2ac*/ bool                bSortAsc;
+/*0x2ad*/ bool                bFixedHeight;
+/*0x2ae*/ bool                bOwnerDraw;
+/*0x2af*/ bool                bCalcHeights;
+/*0x2b0*/ bool                bColumnSizable;
+/*0x2b1*/ uint8_t             _apr15_internal_byte_0x2b1; // RW byte gates HandleMouseMove early-out (apr15-specific runtime "mouse-tracking-active" flag); also read by Draw separator path. No upstream counterpart.
+/*0x2b2*/ uint8_t             _pad_0x2b2[2];
+/*0x2b4*/ int                 LineHeight;
+/*0x2b8*/ int                 ColumnSepDragged;
+/*0x2bc*/ int                 ColumnSepMouseOver;
+/*0x2c0*/ COLORREF            HeaderText;
+/*0x2c4*/ COLORREF            Highlight;
+/*0x2c8*/ COLORREF            Selected;
+/*0x2cc*/ uint8_t             _pad_0x2cc[4];
+/*0x2d0*/ CUITextureInfo      BGHeader;                  // 0x20 bytes
+/*0x2f0*/ COLORREF            BGHeaderTint;
+/*0x2f4*/ uint8_t             _pad_0x2f4[4];
+/*0x2f8*/ CTextureAnimation*  pRowSep;                   // FindAnimation("A_DividerMiddle")
+/*0x300*/ CTextureAnimation*  pColumnSep;                // FindAnimation("A_DividerVertical")
+/*0x308*/ CEditBaseWnd*       pEditCell;
+/*0x310*/ IListItemDataHandler* pItemDataHandler;
+/*0x318*/ bool                bHasItemTooltips;
+/*0x319*/ uint8_t             _pad_0x319[3];
+/*0x31c*/ CXRect              PrevInsideRect;            // 0x10 bytes (+0x31c..+0x32b)
+/*0x32c*/ uint32_t            ListWndStyle;              // 19/23 overrides bit-test this
+/*0x330*/ eqtime_t            LastVisibleTime;
+/*0x338*/
 
 	struct [[offsetcomments]] VirtualFunctionTable : public CXWnd::VirtualFunctionTable
 	{
-	/*0x348*/ void* OnColumnClick;
-	/*0x350*/ void* OnHeaderClick;
-	/*0x358*/ void* DrawColumnSeparators;
-	/*0x360*/ void* DrawSeparator;
-	/*0x368*/ void* DrawLine;
-	/*0x370*/ void* DrawHeader;
-	/*0x378*/ void* DrawItem;
-	/*0x380*/ void* DeleteAll;
-	/*0x388*/ void* Compare;
-	/*0x390*/ void* Unknown0x188;
-	/*0x398*/ void* Sort;
-	/*0x3a0*/
+	// apr15: 11 new CListWnd virtuals at vtable extent 0x340..0x398 (matches CXWnd vftable end at 0x340)
+	/*0x340*/ void* OnColumnClick;
+	/*0x348*/ void* OnHeaderClick;
+	/*0x350*/ void* DrawColumnSeparators;
+	/*0x358*/ void* DrawSeparator;
+	/*0x360*/ void* DrawLine;
+	/*0x368*/ void* DrawHeader;
+	/*0x370*/ void* DrawItem;
+	/*0x378*/ void* DeleteAll;
+	/*0x380*/ void* Compare;
+	/*0x388*/ void* Unknown0x188;
+	/*0x390*/ void* Sort;
+	/*0x398*/
 	};
 
 	// points to the eq instance of the virtual function table for this class
 	static VirtualFunctionTable* sm_vftable;
 };
+
+SIZE_CHECK(CListWnd, CListWnd_size);
 
 //============================================================================
 // CPageWnd
