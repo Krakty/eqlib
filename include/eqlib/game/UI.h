@@ -687,6 +687,8 @@ public:
 // CGaugeWnd
 //============================================================================
 
+constexpr size_t CGaugeWnd_size = 0x300; // @sizeof(CGaugeWnd) :: 2026-04-15 (live) — forensics/cgaugewnd_apr15_vtable.md (vtable 0x140a173a8, 105 slots, 6 overrides; last observed field +0x2f4, 8B-aligned sizeof = 0x300)
+
 class [[offsetcomments]] CGaugeWnd : public CXWnd
 {
 public:
@@ -704,31 +706,42 @@ public:
 	EQLIB_OBJECT void SetAttributesFromSidl(CParamScreenPiece*);
 
 	//----------------------------------------------------------------------------
-	// data members
+	// data members — apr15: shifted -0x10 from upstream + reorganized middle
 
-/*0x268*/ int          EQType;
-/*0x26c*/ D3DCOLOR     FillTint;
-/*0x270*/ D3DCOLOR     LinesFillTint;
-/*0x274*/ bool         bDrawLinesFill;
-/*0x278*/ int          TextOffsetX;
-/*0x27c*/ int          TextOffsetY;
-/*0x280*/ int          GaugeOffsetX;
-/*0x284*/ int          GaugeOffsetY;
-/*0x288*/ float        LastFrameVal;
+/*0x258*/ int          EQType;                       // ctor param 11; gauge selector for __GetGaugeValueFromEQ
+/*0x25c*/ D3DCOLOR     FillTint;                     // ctor param 12
+/*0x260*/ D3DCOLOR     LinesFillTint;                // ctor param 13
+/*0x264*/ bool         bDrawLinesFill;               // ctor param 14
+/*0x265*/ uint8_t      _pad_0x265[3];
+/*0x268*/ int          TextOffsetX;                  // ctor param 15
+/*0x26c*/ int          TextOffsetY;                  // ctor param 16
+/*0x270*/ int          GaugeOffsetX;                 // ctor param 17
+/*0x274*/ int          GaugeOffsetY;                 // ctor param 18
+/*0x278*/ float        LastFrameVal;
+/*0x27c*/ uint8_t      _pad_0x27c[4];
+/*0x280*/ CXStr        LastDrawnNextStr;             // apr15 NEW slot (caches prev frame's NextDrawStr for tooltip-refresh skip-redundant detection)
+/*0x288*/ DWORD        LastFrameTime;                // GetTickCount stamp
+/*0x28c*/ float        LastFrameTarget;              // ctor inits to -1.0f
 /*0x290*/ CXStr        LastFrameName;
-/*0x298*/ int          LastFrameTime;
-/*0x29c*/ int          LastFrameTarget;
-/*0x2a0*/ CXStr        GaugeTooltip;
-/*0x2a8*/ int          TooltipVal;
-/*0x2ac*/ int          Unknown0x228;
-/*0x2b0*/ CGaugeDrawTemplate DrawTemplate;
-/*0x2e8*/ CTextObjectInterface* pTextObject;
-/*0x2f0*/ CXStr        NextDrawStr;
-/*0x2f8*/ bool         bSmooth;
-/*0x2fc*/ int          TargetVal;
-/*0x300*/ bool         bUseTargetVal;
-/*0x304*/
+/*0x298*/ float        LastFrameTargetCmp;           // ctor inits to -2.0f (apr15 NEW: caches LastFrameTarget at last tooltip update)
+/*0x29c*/ int          TooltipFormatSelector;        // apr15 NEW: switch selector for tooltip format string (was upstream Unknown0x228 area)
+/*0x2a0*/ CGaugeDrawTemplate DrawTemplate;           // 0x38 bytes: strName CXStr + 6 CTextureAnimation* (Background/Fill/Lines/LinesFill/EndCapLeft/EndCapRight)
+/*0x2d8*/ CTextObjectInterface* pTextObject;
+/*0x2e0*/ CXStr        NextDrawStr;
+/*0x2e8*/ bool         bSmooth;                      // ctor inits 1
+/*0x2e9*/ uint8_t      _pad_0x2e9[3];
+/*0x2ec*/ float        TargetVal;
+/*0x2f0*/ bool         bUseTargetVal;                // ctor inits 0
+/*0x2f1*/ uint8_t      _pad_0x2f1[3];
+/*0x2f4*/ uint32_t     FactionID;                    // apr15 NEW: ctor inits 0; faction-gauge type 0xb5 in __GetGaugeValueFromEQ (med)
+/*0x2f8*/ uint8_t      _pad_0x2f8[8];                // tail pad to 8B-aligned sizeof
+/*0x300*/
+
+	// Upstream had TooltipVal@0x2a8 + Unknown0x228@0x2ac — both DROPPED in apr15.
+	// "GaugeTooltip" CXStr migrated to NextDrawStr@0x2e0 role.
 };
+
+SIZE_CHECK(CGaugeWnd, CGaugeWnd_size);
 
 //============================================================================
 // CHotButton
