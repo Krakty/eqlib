@@ -834,7 +834,8 @@ public:
 /*0x0fc*/ bool               bLeftAnchoredToLeft;       // apr15: VERIFIED (GetRelativeRect 0x1405c7aa0, ctor 0x1405c1ecd init=1)
 /*0x0fd*/ uint8_t            _pad_0x0fd[7];
 /*0x104*/ int                Transition;                // apr15: VERIFIED (master +disambig, OnProcessFrame 0x1405c9050)
-/*0x108*/ uint8_t            _pad_0x108[8];
+/*0x108*/ int                managerArrayIndex;         // apr15: VERIFIED (member-fn sweep, CXWndManager::RemoveWnd 0x1405ee5d0 reads as direct slot index into manager+0x10 array, -1 sentinel)
+/*0x10c*/ uint8_t            _pad_0x10c[4];
 /*0x110*/ CStaticTintedBlendAnimationTemplate* TitlePiece2; // apr15: VERIFIED (master +pass4, 0x1405c4e30)
 /*0x118*/ int                VScrollPos;                // apr15: VERIFIED (master, 0x1405c4800)
 /*0x11c*/ uint8_t            _pad_0x11c[4];
@@ -883,7 +884,7 @@ public:
 /*0x1d0*/ ArrayClass2<uint32_t> RuntimeTypes;           // apr15: VERIFIED (member-fn sweep, IsType 0x1405c8530 paged-hash: length@+0x1d0, mask@+0x1d8, shift@+0x1dc, buckets@+0x1e0; 32B span)
 /*0x1f0*/ int                BlinkDuration;             // apr15: VERIFIED (master +pass3, OnProcessFrame 0x1405c9050)
 /*0x1f4*/ uint32_t           LastTimeMouseOver;         // apr15: VERIFIED (OnProcessFrame 0x1405c9050, ctor 0x1405c1f1c init=0)
-/*0x1f8*/ uint8_t            _pad_0x1f8[4];
+/*0x1f8*/ int                managerArrayIndex_2;       // apr15: VERIFIED (member-fn sweep, CXWndManager unregister 0x1405ee5d0 secondary-list slot index; -1 sentinel)
 /*0x1fc*/ int                WindowStyle;               // apr15: VERIFIED (master, 0x1405c4800)
 /*0x200*/ uint8_t            _pad_0x200[16];
 /*0x210*/ ControllerBase*    pController;               // apr15: VERIFIED (master +disambig, 0x1405ca7f0)
