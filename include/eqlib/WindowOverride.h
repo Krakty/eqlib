@@ -118,8 +118,8 @@ public:
 	virtual bool ShouldProcessControllerFrame() const override;
 	virtual void SetDrawTemplate(CXWndDrawTemplate* drawTemplate) override;
 	virtual void SetBGType(uint32_t Value) override;
-	// apr15-2026-live: SetBGColor REMOVED from CXWnd (no apr15 offset verified within budget)
-	//void SetBGColor(COLORREF Value) override;
+	// apr15-2026-live: SetBGColor RESTORED at +0x060 (master pass-3)
+	virtual void SetBGColor(COLORREF Value) override;
 	virtual int UpdateGeometry(const CXRect& rect, bool updateLayout = true, bool forceUpdateLayout = false, bool completeMoveOrResize = false, bool moveAutoStretch = false) override;
 	virtual int Move(const CXPoint& point) override;
 	virtual int Minimize(bool) override;
@@ -144,11 +144,9 @@ public:
 	virtual void OnReloadSidl() override;
 	virtual bool HasActivatedFirstTimeAlert() const override;
 	virtual void SetHasActivatedFirstTimeAlert(bool) override;
-	// apr15-2026-live: GetMinClientSize / GetMaxClientSize REMOVED from CXWnd
-	// (MinClientSize @ +0x0e4 conflicts with bFullyScreenClipped@+0x0e5 + DataStr@+0x0e8;
-	//  MaxClientSize @ +0x0fc conflicts with bLeftAnchoredToLeft@+0x0fc).
-	//virtual const CXSize& GetMinClientSize() const override;
-	//virtual const CXSize& GetMaxClientSize() const override;
+	// apr15-2026-live: GetMinClientSize / GetMaxClientSize RESTORED at +0x1ac/+0x0f4 (master pass-3)
+	virtual const CXSize& GetMinClientSize() const override;
+	virtual const CXSize& GetMaxClientSize() const override;
 	virtual CEditWnd* GetActiveEditWnd() const override;
 	virtual void UpdateLayout(bool finish = false) override;
 };

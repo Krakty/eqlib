@@ -251,7 +251,7 @@ public:
 // CXWnd
 //============================================================================
 
-constexpr size_t CXWnd_size = 0x260; // @sizeof(CXWnd) :: 2026-04-15 (live) — audit forensics/cxwnd_apr15_layout_audit.md (CSidlScreenWnd2 0x1405BC880 + Init1 0x1405BE360)
+constexpr size_t CXWnd_size = 0x260; // @sizeof(CXWnd) :: 2026-04-15 (live) — master forensics/cxwnd_apr15_vtable_thunks.md (Master CXWnd apr15 layout map, 85 rows, sums to 0x260)
 constexpr size_t CXWnd_vftable_size = 0x348;
 
 class [[offsetcomments]] CXWnd
@@ -346,12 +346,12 @@ public:
 	EQLIB_OBJECT virtual void SetDrawTemplate(CXWndDrawTemplate* drawTemplate) { DrawTemplate = drawTemplate; }
 	EQLIB_OBJECT virtual void SetBGType(uint32_t Value) { BGType = Value; }
 	uint32_t GetBGType() const { return BGType; }
-	// apr15-2026-live: BGColor REMOVED from CXWnd. The Round-3 audit verified
-	// BlinkFadeDuration occupies +0x24c (the upstream BGColor offset), and a
-	// 5-minute Ghidra search did not yield an alternate apr15 offset for
-	// BGColor. Per anti-shortcut directive, the field and its accessors are
-	// removed entirely. Call-sites that referenced BGColor / SetBGColor /
-	// GetBGColor must be updated per-site (no stub return values).
+	// apr15-2026-live: BGColor RESTORED at +0x060 per pass-3 master layout
+	// (cxwnd_apr15_vtable_thunks.md). The +0x24c slot holds FadeDuration in
+	// apr15 (re-attribution; +0x038 is BlinkFadeDuration).
+	EQLIB_OBJECT virtual void SetBGColor(COLORREF Value) { BGColor = Value; }
+	void SetBGColor(mq::MQColor Value) { BGColor = Value.ToARGB(); }
+	COLORREF GetBGColor() const { return BGColor; }
 	EQLIB_OBJECT virtual int UpdateGeometry(const CXRect& rect, bool updateLayout = true, bool forceUpdateLayout = false,
 		bool completeMoveOrResize = false, bool moveAutoStretch = false);
 	EQLIB_OBJECT virtual int Move(const CXPoint& point);
@@ -378,11 +378,12 @@ public:
 	EQLIB_OBJECT virtual void OnReloadSidl() {}
 	EQLIB_OBJECT virtual bool HasActivatedFirstTimeAlert() const {  return false; }
 	EQLIB_OBJECT virtual void SetHasActivatedFirstTimeAlert(bool) {}
-	// apr15-2026-live: MinClientSize REMOVED — upstream offset +0x0e4 conflicts
-	// with verified bFullyScreenClipped@+0x0e5 and verified DataStr@+0x0e8.
-	// MaxClientSize REMOVED — upstream offset +0x0fc conflicts with verified
-	// bLeftAnchoredToLeft@+0x0fc. No alternate apr15 offsets identified.
-	// Accessors removed entirely; call-sites must be updated.
+	// apr15-2026-live: MinClientSize RESTORED at +0x1ac (CXSize, master pass-3).
+	// MaxClientSize RESTORED at +0x0f4 (CXSize, master pass-3).
+	EQLIB_OBJECT virtual const CXSize& GetMinClientSize() const { return MinClientSize; }
+	EQLIB_OBJECT virtual const CXSize& GetMaxClientSize() const { return MaxClientSize; }
+	void SetMinClientSize(const CXSize& Value) { MinClientSize = Value; }
+	void SetMaxClientSize(const CXSize& Value) { MaxClientSize = Value; }
 	EQLIB_OBJECT virtual CEditWnd* GetActiveEditWnd() const { return nullptr; }
 	EQLIB_OBJECT virtual void UpdateLayout(bool finish = false);
 
@@ -472,10 +473,7 @@ public:
 	const CXWnd* GetNextSiblingWnd() const { return GetNext(); }
 	CXWnd* GetNextSiblingWnd() { return GetNext(); }
 
-	// apr15-2026-live: VScrollMax relocated from upstream +0x0ec (conflict with
-	// DataStr@+0x0e8) to +0x078 (UNVERIFIED — placed in the slot freed by
-	// WindowText's move to +0x1a0). Accessor preserved so CStmlWnd-derived
-	// scrollbars compile; runtime correctness pending Ghidra verification.
+	// apr15-2026-live: VScrollMax VERIFIED at +0x044 (int, master pass-3).
 	int GetVScrollMax() const { return VScrollMax; }
 	int GetVScrollPos() const { return VScrollPos; }
 	int GetHScrollMax() const { return HScrollMax; }
@@ -486,9 +484,9 @@ public:
 	CXRect GetLocation() const { return Location; }
 	void SetLocation(const CXRect& r) { Location = r; }
 
-	// apr15-2026-live: OldLocation REMOVED — upstream +0x184 conflicts with
-	// verified bTopAnchoredToBottom@+0x185 and Location@+0x18c..+0x19c.
-	// Accessor removed; call-sites must be updated.
+	// apr15-2026-live: OldLocation RESTORED at +0x1b8 (CXRect, master pass-3).
+	CXRect GetOldLocation() const { return OldLocation; }
+	void SetOldLocation(const CXRect& r) { OldLocation = r; }
 
 	void SetNeedsSaving(bool bValue) { bNeedsSaving = bValue; }
 
@@ -516,8 +514,9 @@ public:
 	void SetFades(bool bValue) { Fades = bValue; }
 	bool GetFades() const { return Fades; }
 
-	// apr15-2026-live: Faded REMOVED — upstream +0x240 conflicts with verified
-	// Tooltip; no apr15 alternate offset within budget. Accessors removed.
+	// apr15-2026-live: Faded RESTORED at +0x067 (bool, master pass-3).
+	bool GetFaded() const { return Faded; }
+	void SetFaded(bool bValue) { Faded = bValue; }
 
 	// apr15-2026-live: FadeDelay VERIFIED at +0x178 (uint32_t).
 	// Round-2 audit forensics/cxwnd_apr15_field_locations.md:
@@ -623,10 +622,8 @@ public:
 	void Refade()
 	{
 		// apr15-2026-live: LastTimeMouseOver VERIFIED at +0x1f4 (uint32_t).
-		// Round-2 audit forensics/cxwnd_apr15_field_locations.md:
-		//   OnProcessFrame 0x1405c9050 writes GetTickCount() to (this+0x1f4)
-		//   when mouse is over; reads it as anchor for FadeDelay comparison.
-		// apr15-2026-live: Faded REMOVED (conflict with verified Tooltip@+0x240).
+		// apr15-2026-live: Faded RESTORED at +0x067 (master pass-3).
+		Faded = true;
 		LastTimeMouseOver = GetTickCount();
 	}
 
@@ -761,211 +758,156 @@ public:
 
 // @start: CXWnd Members
 //
-// apr15-2026-live layout per round-2 + round-3 forensics
-// (forensics/cxwnd_apr15_field_locations.md).
+// apr15-2026-live layout per master forensics
+// (forensics/cxwnd_apr15_vtable_thunks.md "Master CXWnd apr15 layout map").
 //
-// VERIFIED apr15 offsets (each anchored to apr15 binary evidence):
-//   +0x03c  bRightAnchoredToRight  (anchor save fn FUN_1405c5c50, ctor 0x1405c1ed4)
-//   +0x0e5  bFullyScreenClipped    (GetScreenClipRect 0x1405c7bb0, ctor 0x1405c1f8c)
-//   +0x0e8  DataStr                (FUN_140377670 tracked-window factory, dCXWnd release order)
-//   +0x0fc  bLeftAnchoredToLeft    (GetRelativeRect 0x1405c7aa0, ctor 0x1405c1ecd)
-//   +0x148  MouseOver              (SetMouseOver 0x1405c9d10)
-//   +0x168  XMLToolTip             (CSidlMgr template-instantiator FUN_1405f5730)
-//   +0x178  FadeDelay              (OnProcessFrame 0x1405c9050, ctor 0x1405c1f08 = 2000ms)
-//   +0x185  bTopAnchoredToBottom   (GetRelativeRect, anchor save fn FUN_1405c5c50)
-//   +0x18c  Location               (4-int rect, ctor 0x1405c1e21..0x1405c1e42, GetRelativeRect/Minimize)
-//   +0x1a0  WindowText             (vtable+0x280 SetWindowText FUN_140074850)
-//   +0x1f4  LastTimeMouseOver      (OnProcessFrame 0x1405c9050, ctor 0x1405c1f1c)
-//   +0x218  ParentWindow           (SetParent / SetMouseOver / Get*Rect / IsReallyVisible
-//                                   / Minimize / OnProcessFrame / GetScreenClipRect)
-//   +0x221  bBottomAnchoredToBottom (GetRelativeRect, Resize, anchor save FUN_1405c5c50)
-//   +0x224  BlinkState             (OnProcessFrame 0x1405c9050, ctor 0x1405c1f5c sentinel -1)
-//   +0x240  Tooltip                (vtable+0x288 SetTooltip FUN_140074840)
-//   +0x24c  BlinkFadeDuration      (OnProcessFrame fade-trigger reader, ctor 0x1405c1ebc = 500ms)
-//   +0x250  RightOffset            (GetRelativeRect 0x1405c7aa0, paired with +0x3c)
-//   +0x254  bUsesClassicUI         (ctor 0x1405c1d8d)
-//   +0x255  bMouseOverEvent        (ctor 0x1405c2262)
+// 78 named upstream fields (one row per offset; CXRect/CXSize/CXStr collapsed
+// to a single typed declaration at the start offset of the region).
 //
-// REMOVED in apr15 (positive proof of absence):
-//   bShowClickThroughMenuItem — ctor zero-pair + 16-byte rect at +0x22c..+0x23c
-//   bHCenterTooltip            — UNFOUND_AFTER_EXHAUSTIVE_SEARCH (no runtime byte
-//                                with tooltip-centering semantics; +0x221 is
-//                                bBottomAnchoredToBottom, not bHCenterTooltip)
-//   BGColor                    — no Ghidra-verified apr15 offset within budget;
-//                                +0x24c (upstream BGColor) is BlinkFadeDuration.
-//   MinClientSize              — upstream +0x0e4 conflicts with bFullyScreenClipped
-//                                @+0x0e5 and DataStr @+0x0e8.
-//   MaxClientSize              — upstream +0x0fc conflicts with bLeftAnchoredToLeft.
-//   OldLocation                — upstream +0x184 conflicts with bTopAnchoredToBottom
-//                                @+0x185 and Location @+0x18c.
-//   pTipTextObject             — upstream +0x1a0 conflicts with verified WindowText.
-//   Faded                      — upstream +0x240 conflicts with verified Tooltip;
-//                                no apr15 offset verified within budget.
-//   IconRect                   — upstream +0x15c..+0x16c conflicts with verified
-//                                XMLToolTip @+0x168.
+// 6 NONE_FOUND_apr15_internal slots (typed pad bytes, no upstream match):
+//   +0x030 byte, +0x099 byte, +0x09a byte, +0x0e4 byte, +0x188 byte,
+//   +0x189 byte, +0x18b byte, +0x19d byte (note: 8 internal rows total in
+//   master at last update — listed here individually to match table).
 //
-// UNVERIFIED upstream-position fields (kept at upstream offsets, marked):
-//   BottomOffset, BGType, TitlePiece, FocusProxy, bActive, bClickThroughToBackground,
-//   bTopAnchoredToTop, Enabled, HScrollMax, ClientRect, CRNormal, dShow,
-//   LastBlinkFadeRefreshTime, bEscapableLocked, bUseInLayoutHorizontal,
-//   pTextObject, Fades, XMLIndex, FadeDuration, bIsParentOrContextMenuWindow,
-//   ClipRectClient, BlinkDuration, bMaximized, pFont, managerArrayIndex,
-//   HScrollPos, bClientRectChanged, WindowStyle, bEnableShowBorder,
-//   bClickThroughMenuItemStatus, Alpha, bAction, bNeedsSaving, BlinkFadeFreq,
-//   ZLayer, VScrollPos, bClipToParent, bCaptureTitle, bKeepOnScreen,
-//   TransitionStartTick, bEscapable, BlinkFadeStartTime, RuntimeTypes,
-//   bRightAnchoredToLeft, LeftOffset, DrawTemplate, bClientClipRectChanged,
-//   ParentAndContextMenuArrayIndex, FadeToAlpha, bBringToTopWhenClicked,
-//   pLayoutStrategy, bClickThrough, IconTextureAnim, StartAlpha, bShowBorder,
-//   bMarkedForDelete, bIsTransitioning, bMaximizable, BlinkStartTimer,
-//   pController, BackgroundDrawType, Unlockable, bTiled, ValidCXWnd, FadeAlpha,
-//   bResizableMask, ClipRectScreen, TargetAlpha, DeleteCount,
-//   bScreenClipRectChanged, TopOffset, Locked, Transition, DisabledBackground,
-//   TransitionRect, TransitionDuration, Minimized, bUseInLayoutVertical,
-//   bBottomAnchoredToTop, VScrollMax, TitlePiece2 (REMOVED — conflicts +0x3c),
-//   Data (REMOVED — conflicts Location@+0x198..+0x19c).
+// 1 med-confidence row (single-callsite):
+//   +0x078 IconTextureAnim (qword) — promoted to a real declaration but
+//   marked med-confidence in master pass-3.
+//
+// Re-attribution vs prior round-3 layout:
+//   +0x038  BlinkFadeDuration (was the upstream BGColor offset; the older
+//           header had FadeDuration "removed" and BlinkFadeDuration at +0x24c)
+//   +0x24c  FadeDuration (re-attributed from BlinkFadeDuration per pass-3
+//           OnProcessFrame evidence)
+//   +0x060  BGColor (re-introduced; was removed in earlier rounds)
 //
 // Struct sizeof = 0x260 (preserved). CXWnd_size constant unchanged.
+// Master row count = 85 (84 named + 1 med). Net (TBD) count = 0.
 //
-/*0x030*/ int                BottomOffset;
-/*0x034*/ uint32_t           BGType;
-/*0x038*/ uint8_t            _pad_apr15_0x038[4];   // apr15: TitlePiece2 REMOVED (8B at 0x038 conflicts with bRightAnchoredToRight@0x3c)
-/*0x03c*/ bool               bRightAnchoredToRight; // apr15: VERIFIED (anchor save FUN_1405c5c50, ctor 0x1405c1ed4 init=1)
-/*0x03d*/ uint8_t            _pad_apr15_0x03d[3];
-/*0x040*/ CStaticTintedBlendAnimationTemplate* TitlePiece;     // apr15: UNVERIFIED at this offset
-/*0x048*/ CXWnd*             FocusProxy;            // apr15: UNVERIFIED at this offset
-/*0x050*/ bool               bActive;               // apr15: UNVERIFIED at this offset
-/*0x051*/ bool               bClickThroughToBackground; // apr15: UNVERIFIED at this offset
-/*0x052*/ bool               bTopAnchoredToTop;     // apr15: UNVERIFIED at this offset
-/*0x053*/ bool               Enabled;               // apr15: UNVERIFIED at this offset
-/*0x054*/ int                HScrollMax;            // apr15: UNVERIFIED at this offset
-/*0x058*/ CXRect             ClientRect;            // apr15: UNVERIFIED at this offset
-/*0x068*/ COLORREF           CRNormal;              // apr15: UNVERIFIED at this offset
-/*0x06c*/ bool               dShow;                 // apr15: UNVERIFIED at this offset
-/*0x070*/ uint32_t           LastBlinkFadeRefreshTime; // apr15: UNVERIFIED at this offset
-/*0x074*/ bool               bEscapableLocked;      // apr15: UNVERIFIED at this offset
-/*0x078*/ int                VScrollMax;            // apr15: UNVERIFIED at this offset (relocated from upstream +0x0ec which conflicts with verified DataStr@+0x0e8..+0x0f0; placed in WindowText's freed slot)
-/*0x07c*/ uint8_t            _pad_apr15_0x07c[4];   // apr15: pad for moved WindowText slot
-/*0x080*/ bool               bUseInLayoutHorizontal; // apr15: UNVERIFIED at this offset
-/*0x088*/ CTextObjectInterface* pTextObject;        // apr15: UNVERIFIED at this offset
-/*0x090*/ bool               Fades;                 // apr15: UNVERIFIED at this offset
-/*0x094*/ uint32_t           XMLIndex;              // apr15: UNVERIFIED at this offset
-/*0x098*/ uint32_t           FadeDuration;          // apr15: UNVERIFIED at this offset
-/*0x09c*/ bool               bIsParentOrContextMenuWindow; // apr15: UNVERIFIED at this offset
-/*0x09d*/ uint8_t            _pad_apr15_0x09d[3];   // apr15: bLeftAnchoredToLeft moved to +0xfc (verified)
-/*0x0a0*/ CXRect             ClipRectClient;        // apr15: UNVERIFIED at this offset
-/*0x0b0*/ int                BlinkDuration;         // apr15: UNVERIFIED at this offset
-/*0x0b4*/ bool               bMaximized;            // apr15: UNVERIFIED at this offset
-/*0x0b8*/ CTextureFont*      pFont;                 // apr15: UNVERIFIED at this offset
-/*0x0c0*/ int                managerArrayIndex;     // apr15: UNVERIFIED at this offset
-/*0x0c4*/ int                HScrollPos;            // apr15: UNVERIFIED at this offset
-/*0x0c8*/ bool               bClientRectChanged;    // apr15: UNVERIFIED at this offset
-/*0x0c9*/ uint8_t            _pad_apr15_0x0c9[3];
-/*0x0cc*/ uint32_t           WindowStyle;           // apr15: UNVERIFIED at this offset
-/*0x0d0*/ bool               bEnableShowBorder;     // apr15: UNVERIFIED at this offset
-/*0x0d1*/ bool               bClickThroughMenuItemStatus; // apr15: UNVERIFIED at this offset
-/*0x0d2*/ uint8_t            Alpha;                 // apr15: UNVERIFIED at this offset
-/*0x0d3*/ uint8_t            _pad_apr15_0x0d3[5];
-/*0x0d8*/ uint8_t            _pad_apr15_0x0d8[8];   // apr15: XMLToolTip moved to +0x168 (verified)
-/*0x0e0*/ bool               bAction;               // apr15: UNVERIFIED at this offset
-/*0x0e1*/ bool               bNeedsSaving;          // apr15: UNVERIFIED at this offset
-/*0x0e2*/ uint8_t            _pad_apr15_0x0e2[3];
-/*0x0e5*/ bool               bFullyScreenClipped;   // apr15: VERIFIED (GetScreenClipRect 0x1405c7bb0, ctor 0x1405c1f8c)
-/*0x0e6*/ uint8_t            _pad_apr15_0x0e6[2];
-/*0x0e8*/ CXStr              DataStr;               // apr15: VERIFIED (FUN_140377670 tracked-window factory, dCXWnd release order)
-/*0x0f0*/ uint32_t           BlinkFadeFreq;         // apr15: UNVERIFIED at this offset
-/*0x0f4*/ int                ZLayer;                // apr15: UNVERIFIED at this offset
-/*0x0f8*/ int                VScrollPos;            // apr15: UNVERIFIED at this offset
-/*0x0fc*/ bool               bLeftAnchoredToLeft;   // apr15: VERIFIED (GetRelativeRect 0x1405c7aa0, ctor 0x1405c1ecd init=1)
-/*0x0fd*/ uint8_t            _pad_apr15_0x0fd[7];
-/*0x104*/ bool               bClipToParent;         // apr15: UNVERIFIED at this offset
-/*0x105*/ bool               bCaptureTitle;         // apr15: UNVERIFIED at this offset
-/*0x106*/ bool               bKeepOnScreen;         // apr15: UNVERIFIED at this offset
-/*0x108*/ uint32_t           TransitionStartTick;   // apr15: UNVERIFIED at this offset
-/*0x10c*/ bool               bEscapable;            // apr15: UNVERIFIED at this offset
-/*0x110*/ uint32_t           BlinkFadeStartTime;    // apr15: UNVERIFIED at this offset
-/*0x118*/ ArrayClass2<uint32_t> RuntimeTypes;       // apr15: UNVERIFIED at this offset
-/*0x138*/ bool               bRightAnchoredToLeft;  // apr15: UNVERIFIED at this offset
-/*0x13c*/ int                LeftOffset;            // apr15: UNVERIFIED at this offset
-/*0x140*/ uint8_t            _pad_apr15_0x140[8];   // apr15: ParentWindow moved to +0x218 (verified)
-/*0x148*/ bool               MouseOver;             // apr15: VERIFIED (SetMouseOver 0x1405c9d10)
-/*0x149*/ uint8_t            _pad_apr15_0x149[7];
-/*0x150*/ CXWndDrawTemplate* DrawTemplate;          // apr15: UNVERIFIED at this offset
-/*0x158*/ bool               bClientClipRectChanged; // apr15: UNVERIFIED at this offset
-/*0x159*/ uint8_t            _pad_apr15_0x159[3];
-/*0x15c*/ uint8_t            _pad_apr15_0x15c[12];  // apr15: IconRect REMOVED (16B at +0x15c conflicts with XMLToolTip@+0x168)
-/*0x168*/ CXStr              XMLToolTip;            // apr15: VERIFIED (CSidlMgr template-instantiator FUN_1405f5730 dual-write)
-/*0x170*/ uint8_t            _pad_apr15_0x170[8];   // apr15: Tooltip moved to +0x240 (verified)
-/*0x178*/ uint32_t           FadeDelay;             // apr15: VERIFIED (OnProcessFrame 0x1405c9050, ctor 0x1405c1f08 = 2000ms)
-/*0x17c*/ uint8_t            _pad_apr15_0x17c[4];
-/*0x180*/ int                ParentAndContextMenuArrayIndex; // apr15: UNVERIFIED at this offset
-/*0x184*/ uint8_t            _pad_apr15_0x184[1];   // apr15: OldLocation REMOVED (16B at +0x184 conflicts with bTopAnchoredToBottom@+0x185 and Location@+0x18c)
-/*0x185*/ bool               bTopAnchoredToBottom;  // apr15: VERIFIED (GetRelativeRect, anchor save FUN_1405c5c50)
-/*0x186*/ uint8_t            _pad_apr15_0x186[6];
-/*0x18c*/ CXRect             Location;              // apr15: VERIFIED (4-int rect, ctor 0x1405c1e21..0x1405c1e42)
-/*0x19c*/ uint8_t            _pad_apr15_0x19c[4];
-/*0x1a0*/ CXStr              WindowText;            // apr15: VERIFIED (vtable+0x280 SetWindowText FUN_140074850)
-/*0x1a8*/ uint8_t            FadeToAlpha;           // apr15: UNVERIFIED at this offset
-/*0x1a9*/ bool               bBringToTopWhenClicked; // apr15: UNVERIFIED at this offset
-/*0x1aa*/ uint8_t            _pad_apr15_0x1aa[6];
-/*0x1b0*/ CLayoutStrategy*   pLayoutStrategy;       // apr15: UNVERIFIED at this offset
-/*0x1b8*/ bool               bClickThrough;         // apr15: UNVERIFIED at this offset
-/*0x1b9*/ uint8_t            _pad_apr15_0x1b9[7];
-/*0x1c0*/ CTextureAnimation* IconTextureAnim;       // apr15: UNVERIFIED at this offset
-/*0x1c8*/ uint8_t            StartAlpha;            // apr15: UNVERIFIED at this offset
-/*0x1c9*/ bool               bShowBorder;           // apr15: UNVERIFIED at this offset
-/*0x1ca*/ bool               bMarkedForDelete;      // apr15: UNVERIFIED at this offset
-/*0x1cb*/ bool               bIsTransitioning;      // apr15: UNVERIFIED at this offset
-/*0x1cc*/ uint8_t            _pad_apr15_0x1cc[4];
-/*0x1d0*/ bool               bMaximizable;          // apr15: UNVERIFIED at this offset
-/*0x1d1*/ uint8_t            _pad_apr15_0x1d1[3];
-/*0x1d4*/ int                BlinkStartTimer;       // apr15: UNVERIFIED at this offset
-/*0x1d8*/ ControllerBase*    pController;           // apr15: UNVERIFIED at this offset
-/*0x1e0*/ uint32_t           BackgroundDrawType;    // apr15: UNVERIFIED at this offset
-/*0x1e4*/ bool               Unlockable;            // apr15: UNVERIFIED at this offset
-/*0x1e5*/ bool               bTiled;                // apr15: UNVERIFIED at this offset
-/*0x1e6*/ bool               ValidCXWnd;            // apr15: UNVERIFIED at this offset
-/*0x1e7*/ uint8_t            FadeAlpha;             // apr15: UNVERIFIED at this offset
-/*0x1e8*/ uint8_t            bResizableMask;        // apr15: UNVERIFIED at this offset
-/*0x1e9*/ uint8_t            _pad_apr15_0x1e9[3];
-/*0x1ec*/ uint8_t            _pad_apr15_0x1ec[8];   // apr15: ClipRectScreen REMOVED (CXRect 16B at +0x1ec conflicts with verified LastTimeMouseOver@+0x1f4)
-/*0x1f4*/ uint32_t           LastTimeMouseOver;     // apr15: VERIFIED (OnProcessFrame 0x1405c9050, ctor 0x1405c1f1c init=0)
-/*0x1f8*/ uint8_t            _pad_apr15_0x1f8[4];
-/*0x1fc*/ uint8_t            TargetAlpha;           // apr15: UNVERIFIED at this offset
-/*0x1fd*/ uint8_t            _pad_apr15_0x1fd[3];
-/*0x200*/ int                DeleteCount;           // apr15: UNVERIFIED at this offset
-/*0x204*/ bool               bScreenClipRectChanged; // apr15: UNVERIFIED at this offset
-/*0x205*/ uint8_t            _pad_apr15_0x205[3];
-/*0x208*/ int                TopOffset;             // apr15: UNVERIFIED at this offset
-/*0x20c*/ uint8_t            _pad_apr15_0x20c[4];   // apr15: Location moved to +0x18c (verified)
-/*0x210*/ bool               Locked;                // apr15: UNVERIFIED at this offset (relocated from upstream +0x21c; was inside Location)
-/*0x211*/ uint8_t            _pad_apr15_0x211[7];
-/*0x218*/ CXWnd*             ParentWindow;          // apr15: VERIFIED (SetParent / SetMouseOver / Get*Rect / IsReallyVisible / Minimize / OnProcessFrame / GetScreenClipRect)
-/*0x220*/ int                Transition;            // apr15: UNVERIFIED at this offset
-/*0x221*/ bool               bBottomAnchoredToBottom; // apr15: VERIFIED (GetRelativeRect, Resize, anchor save FUN_1405c5c50, copy-anchor FUN_1405c9930)
-/*0x222*/ uint8_t            _pad_apr15_0x222[2];
-/*0x224*/ int                BlinkState;            // apr15: VERIFIED (OnProcessFrame 0x1405c9050 toggle/-1 sentinel; ctor 0x1405c1f5c R8D=-1)
-/*0x228*/ COLORREF           DisabledBackground;    // apr15: UNVERIFIED at this offset
-/*0x22c*/ CXRect             TransitionRect;        // apr15: UNVERIFIED at this offset (ctor zero-pair at +0x22c+0x234 covers 16B; consistent with rect)
-/*0x23c*/ uint8_t            _pad_apr15_0x23c[4];
-/*0x240*/ CXStr              Tooltip;               // apr15: VERIFIED (vtable+0x288 SetTooltip FUN_140074840)
-/*0x248*/ bool               Minimized;             // apr15: UNVERIFIED at this offset
-/*0x249*/ bool               bUseInLayoutVertical;  // apr15: UNVERIFIED at this offset
-/*0x24a*/ bool               bBottomAnchoredToTop;  // apr15: UNVERIFIED at this offset
-/*0x24b*/ uint8_t            _pad_apr15_0x24b[1];
-/*0x24c*/ uint32_t           BlinkFadeDuration;     // apr15: VERIFIED (OnProcessFrame fade-trigger reader; ctor 0x1405c1ebc lower-4 = 0x1f4 = 500ms)
-/*0x250*/ int                RightOffset;           // apr15: VERIFIED (GetRelativeRect 0x1405c7aa0, paired with +0x3c bRightAnchoredToRight)
-/*0x254*/ bool               bUsesClassicUI;        // apr15: VERIFIED (ctor 0x1405c1d8d MOV byte [RBX+0x254], AL)
-/*0x255*/ bool               bMouseOverEvent;       // apr15: VERIFIED (ctor 0x1405c2262 MOV byte [RBX+0x255], 0x0)
-/*0x256*/ uint8_t            _pad_apr15_0x256[10];
+/*0x030*/ uint8_t            _apr15_internal_0x030;     // gated cursor/internal byte, no upstream match (R, FUN_1405c92e0)
+/*0x031*/ uint8_t            _pad_0x031[3];
+/*0x034*/ uint8_t            Fades;                     // apr15: VERIFIED (master +pass3, OnProcessFrame 0x1405c9050)
+/*0x035*/ uint8_t            _pad_0x035[3];
+/*0x038*/ uint32_t           BlinkFadeDuration;         // apr15: VERIFIED (master +pass3, OnProcessFrame fade-trigger reader)
+/*0x03c*/ bool               bRightAnchoredToRight;     // apr15: VERIFIED (anchor save FUN_1405c5c50, ctor 0x1405c1ed4 init=1)
+/*0x03d*/ uint8_t            _pad_0x03d[3];
+/*0x040*/ int                HScrollMax;                // apr15: VERIFIED (master, 0x1405c4800)
+/*0x044*/ int                VScrollMax;                // apr15: VERIFIED (master, 0x1405c4800)
+/*0x048*/ uint8_t            Alpha;                     // apr15: VERIFIED (master, 0x1405c9f90)
+/*0x049*/ uint8_t            FadeAlpha;                 // apr15: VERIFIED (master, OnProcessFrame 0x1405c9050)
+/*0x04a*/ uint8_t            _pad_0x04a[6];
+/*0x050*/ CTextureFont*      pFont;                     // apr15: VERIFIED (master +disambig, 0x1405c5490)
+/*0x058*/ CTextObjectInterface* pTipTextObject;         // apr15: VERIFIED (master, 0x1405c5490)
+/*0x060*/ uint32_t           BGColor;                   // apr15: VERIFIED (master, 0x140074470 — RW dword)
+/*0x064*/ uint8_t            StartAlpha;                // apr15: VERIFIED (master +pass3, 0x1405c9f90)
+/*0x065*/ uint8_t            _pad_0x065[1];
+/*0x066*/ bool               bActive;                   // apr15: VERIFIED (master, 0x1405c92b0)
+/*0x067*/ bool               Faded;                     // apr15: VERIFIED (master, OnProcessFrame 0x1405c9050)
+/*0x068*/ CXRect             ClipRectScreen;            // apr15: VERIFIED (master forensics_only, GetScreenClipRect 0x1405c7bb0)
+/*0x078*/ CTextureAnimation* IconTextureAnim;           // med-confidence, single-callsite (master +pass3, 0x1405c4e30)
+/*0x080*/ int                TransitionStartTick;       // apr15: VERIFIED (master +disambig, 0x1405c9f90)
+/*0x084*/ int                DisabledBackground;        // apr15: VERIFIED (master +pass3, 0x1405c37b0)
+/*0x088*/ CXRect             IconRect;                  // apr15: VERIFIED (master, 0x1405c4e30 DrawNC)
+/*0x098*/ uint8_t            _pad_0x098[1];
+/*0x099*/ uint8_t            _apr15_internal_0x099;     // RW byte adjacent to bActive shadow, no upstream match (master, 0x140074ad0)
+/*0x09a*/ uint8_t            _apr15_internal_0x09a;     // RW byte, no upstream match (master +pass4, 0x140074750)
+/*0x09b*/ uint8_t            _pad_0x09b[5];
+/*0x0a0*/ CStaticTintedBlendAnimationTemplate* TitlePiece; // apr15: VERIFIED (master +pass4, 0x1405c4e30)
+/*0x0a8*/ uint8_t            bResizableMask;            // apr15: VERIFIED (master +pass3, 0x1405c6190)
+/*0x0a9*/ uint8_t            _pad_0x0a9[7];
+/*0x0b0*/ CTextObjectInterface* pTextObject;            // apr15: VERIFIED (master +disambig, 0x1405c4e30)
+/*0x0b8*/ bool               Locked;                    // apr15: VERIFIED (master, 0x140074ad0)
+/*0x0b9*/ uint8_t            _pad_0x0b9[3];
+/*0x0bc*/ int                ZLayer;                    // apr15: VERIFIED (master, 0x1405c9f70)
+/*0x0c0*/ bool               cached_ScreenRect_dirty_flag; // apr15: VERIFIED (master, 0x1405c9320 cache invalidate)
+/*0x0c1*/ uint8_t            _pad_0x0c1[3];
+/*0x0c4*/ int                BlinkStartTimer;           // apr15: VERIFIED (master +pass3, OnProcessFrame 0x1405c9050)
+/*0x0c8*/ COLORREF           CRNormal;                  // apr15: VERIFIED (master +pass4, 0x1405c4e30)
+/*0x0cc*/ uint32_t           LastBlinkFadeRefreshTime;  // apr15: VERIFIED (master, OnProcessFrame 0x1405c9050)
+/*0x0d0*/ uint8_t            _pad_0x0d0[4];
+/*0x0d4*/ CXRect             cached_ScreenRect;         // apr15: VERIFIED (master, GetScreenRect 0x1405c5fb0 RW cache)
+/*0x0e4*/ uint8_t            _apr15_internal_0x0e4;     // R byte, no upstream match (master +pass4, 0x1405c5490)
+/*0x0e5*/ bool               bFullyScreenClipped;       // apr15: VERIFIED (GetScreenClipRect 0x1405c7bb0, ctor 0x1405c1f8c)
+/*0x0e6*/ uint8_t            _pad_0x0e6[2];
+/*0x0e8*/ CXStr              DataStr;                   // apr15: VERIFIED (master forensics_only, FUN_140377670)
+/*0x0f0*/ int                BottomOffset;              // apr15: VERIFIED (master +pass3, 0x1405c8a50 GetRelativeRect)
+/*0x0f4*/ CXSize             MaxClientSize;             // apr15: VERIFIED (master, vtable+0x330 GetMaxClientSize thunk 0x140073550)
+/*0x0fc*/ bool               bLeftAnchoredToLeft;       // apr15: VERIFIED (GetRelativeRect 0x1405c7aa0, ctor 0x1405c1ecd init=1)
+/*0x0fd*/ uint8_t            _pad_0x0fd[7];
+/*0x104*/ int                Transition;                // apr15: VERIFIED (master +disambig, OnProcessFrame 0x1405c9050)
+/*0x108*/ uint8_t            _pad_0x108[8];
+/*0x110*/ CStaticTintedBlendAnimationTemplate* TitlePiece2; // apr15: VERIFIED (master +pass4, 0x1405c4e30)
+/*0x118*/ int                VScrollPos;                // apr15: VERIFIED (master, 0x1405c4800)
+/*0x11c*/ uint8_t            _pad_0x11c[4];
+/*0x120*/ uint32_t           TransitionDuration;        // apr15: VERIFIED (master, 0x1405c9f90)
+/*0x124*/ uint8_t            _pad_0x124[4];
+/*0x128*/ CXRect             TransitionRect;            // apr15: VERIFIED (master, 0x1405c8630 Minimize-anchor)
+/*0x138*/ uint8_t            _pad_0x138[1];
+/*0x139*/ bool               Minimized;                 // apr15: VERIFIED (master, 0x1405c8630 Minimize)
+/*0x13a*/ uint8_t            _pad_0x13a[6];
+/*0x140*/ CXWndDrawTemplate* DrawTemplate;              // apr15: VERIFIED (master, 0x140074730)
+/*0x148*/ bool               MouseOver;                 // apr15: VERIFIED (SetMouseOver 0x1405c9d10)
+/*0x149*/ uint8_t            _pad_0x149[15];
+/*0x158*/ uint8_t            TargetAlpha;               // apr15: VERIFIED (master +disambig, 0x1405c9f90)
+/*0x159*/ uint8_t            _pad_0x159[3];
+/*0x15c*/ int                BlinkFadeStartTime;        // apr15: VERIFIED (master +disambig, OnProcessFrame 0x1405c9050)
+/*0x160*/ CLayoutStrategy*   pLayoutStrategy;           // apr15: VERIFIED (master +pass3, 0x1405ca740)
+/*0x168*/ CXStr              XMLToolTip;                // apr15: VERIFIED (master forensics_only, CSidlMgr template-instantiator FUN_1405f5730)
+/*0x170*/ int                LeftOffset;                // apr15: VERIFIED (master +pass3, GetRelativeRect 0x1405c8a50)
+/*0x174*/ uint8_t            _pad_0x174[4];
+/*0x178*/ uint32_t           FadeDelay;                 // apr15: VERIFIED (OnProcessFrame 0x1405c9050, ctor 0x1405c1f08 = 2000ms)
+/*0x17c*/ bool               Enabled;                   // apr15: VERIFIED (master +pass3, 0x1405c37b0)
+/*0x17d*/ uint8_t            _pad_0x17d[8];
+/*0x185*/ bool               bTopAnchoredToBottom;      // apr15: VERIFIED (GetRelativeRect, anchor save FUN_1405c5c50)
+/*0x186*/ uint8_t            bBottomAnchoredToTop;      // apr15: VERIFIED (master +pass4, 0x140074350)
+/*0x187*/ uint8_t            FadeToAlpha;               // apr15: VERIFIED (master, OnProcessFrame 0x1405c9050)
+/*0x188*/ uint8_t            _apr15_internal_0x188;     // R byte, no upstream match (master +pass4, 0x140074750)
+/*0x189*/ uint8_t            _apr15_internal_0x189;     // R byte, no upstream match (master +pass4, 0x1405c6190)
+/*0x18a*/ uint8_t            _pad_0x18a[1];
+/*0x18b*/ uint8_t            _apr15_internal_0x18b;     // R byte, no upstream match (master +pass4, 0x1405c8920)
+/*0x18c*/ CXRect             Location;                  // apr15: VERIFIED (4-int rect, ctor 0x1405c1e21..0x1405c1e42)
+/*0x19c*/ bool               cached_ClientRect_dirty_flag; // apr15: VERIFIED (master, 0x1405c9320 cache invalidate)
+/*0x19d*/ uint8_t            _apr15_internal_0x19d;     // R byte, no upstream match (master +pass4, 0x1400735f0)
+/*0x19e*/ uint8_t            _pad_0x19e[2];
+/*0x1a0*/ CXStr              WindowText;                // apr15: VERIFIED (vtable+0x280 SetWindowText FUN_140074850)
+/*0x1a8*/ uint32_t           BGType;                    // apr15: VERIFIED (master, 0x140074630 SetBGType)
+/*0x1ac*/ CXSize             MinClientSize;             // apr15: VERIFIED (master, vtable+0x328 GetMinClientSize thunk 0x140073560)
+/*0x1b4*/ uint8_t            _pad_0x1b4[1];
+/*0x1b5*/ bool               bClipToParent;             // apr15: VERIFIED (master +disambig, GetScreenRect 0x1405c5fb0)
+/*0x1b6*/ uint8_t            _pad_0x1b6[2];
+/*0x1b8*/ CXRect             OldLocation;               // apr15: VERIFIED (master, 0x1405c8630 Minimize)
+/*0x1c8*/ int                TopOffset;                 // apr15: VERIFIED (master +pass3, GetRelativeRect 0x1405c8a50)
+/*0x1cc*/ uint8_t            _pad_0x1cc[36];
+/*0x1f0*/ int                BlinkDuration;             // apr15: VERIFIED (master +pass3, OnProcessFrame 0x1405c9050)
+/*0x1f4*/ uint32_t           LastTimeMouseOver;         // apr15: VERIFIED (OnProcessFrame 0x1405c9050, ctor 0x1405c1f1c init=0)
+/*0x1f8*/ uint8_t            _pad_0x1f8[4];
+/*0x1fc*/ int                WindowStyle;               // apr15: VERIFIED (master, 0x1405c4800)
+/*0x200*/ uint8_t            _pad_0x200[16];
+/*0x210*/ ControllerBase*    pController;               // apr15: VERIFIED (master +disambig, 0x1405ca7f0)
+/*0x218*/ CXWnd*             ParentWindow;              // apr15: VERIFIED (35 callsites: SetParent / SetMouseOver / Get*Rect / IsReallyVisible / Minimize / OnProcessFrame / GetScreenClipRect)
+/*0x220*/ uint8_t            _pad_0x220[1];
+/*0x221*/ bool               bBottomAnchoredToBottom;   // apr15: VERIFIED (GetRelativeRect, Resize, anchor save FUN_1405c5c50, copy-anchor FUN_1405c9930)
+/*0x222*/ uint8_t            _pad_0x222[2];
+/*0x224*/ int                BlinkState;                // apr15: VERIFIED (OnProcessFrame 0x1405c9050 toggle/-1 sentinel; ctor 0x1405c1f5c R8D=-1)
+/*0x228*/ int                HScrollPos;                // apr15: VERIFIED (master, 0x1405c4800)
+/*0x22c*/ CXRect             cached_ClientRect;         // apr15: VERIFIED (master, GetClientRect 0x1405c6100 RW cache)
+/*0x23c*/ uint8_t            bScreenClipRectChanged;    // apr15: VERIFIED (master +disambig, 0x1405c9320 cache invalidate)
+/*0x23d*/ uint8_t            _pad_0x23d[3];
+/*0x240*/ CXStr              Tooltip;                   // apr15: VERIFIED (vtable+0x288 SetTooltip FUN_140074840)
+/*0x248*/ int                BlinkFadeFreq;             // apr15: VERIFIED (master +pass3, OnProcessFrame 0x1405c9050)
+/*0x24c*/ uint32_t           FadeDuration;              // apr15: VERIFIED (master +pass3, OnProcessFrame 0x1405c9050 — re-attributed from BlinkFadeDuration)
+/*0x250*/ int                RightOffset;               // apr15: VERIFIED (GetRelativeRect 0x1405c7aa0, paired with +0x3c bRightAnchoredToRight)
+/*0x254*/ bool               bUsesClassicUI;            // apr15: VERIFIED (ctor 0x1405c1d8d MOV byte [RBX+0x254], AL)
+/*0x255*/ bool               bMouseOverEvent;           // apr15: VERIFIED (ctor 0x1405c2262 MOV byte [RBX+0x255], 0x0)
+/*0x256*/ uint8_t            _pad_0x256[10];
 // @end: CXWnd Members
 
 /*0x260*/
 
-	ALT_MEMBER_ALIAS(bool, bEscapable, CloseOnESC);
-	ALT_MEMBER_ALIAS_DEPRECATED(bool, bEnableShowBorder, bBorder, "Use bEnableShowBorder instead of bBorder");
-	ALT_MEMBER_ALIAS_DEPRECATED(bool, bShowBorder, bBorder2, "Use bShowBorder instead of bBorder2");
-	ALT_MEMBER_ALIAS(bool, bClickThrough, Clickable);
+	// apr15-2026-live: ALT_MEMBER_ALIAS entries (CloseOnESC -> bEscapable,
+	// bBorder -> bEnableShowBorder, bBorder2 -> bShowBorder, Clickable ->
+	// bClickThrough) REMOVED — none of those origin fields appear in the
+	// master CXWnd apr15 layout map (forensics/cxwnd_apr15_vtable_thunks.md).
+	// Per "no stubs" rule, the aliases are dropped rather than retargeted.
 };
 
 inline namespace deprecated {
