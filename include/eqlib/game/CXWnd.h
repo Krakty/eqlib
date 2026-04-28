@@ -936,8 +936,8 @@ enum eIniFlags
 	eIniFlag_All                     = 0xffffffff
 };
 
-constexpr size_t CSidlScreenWnd_size = 0x2D0; // @sizeof(CSidlScreenWnd) :: 2026-03-10 (live) @ 0x1405F4F11
-constexpr size_t CSidlScreenWnd_vftable_size = 0x380;
+constexpr size_t CSidlScreenWnd_size = 0x2c0; // @sizeof(CSidlScreenWnd) :: 2026-04-15 (live) -- verified via ctors at 0x1405BC7B0/0x1405BC880 and dtor 0x1405BCBC0
+constexpr size_t CSidlScreenWnd_vftable_size = 0x380; // 2026-04-15 (live) -- verified via vtable at 0x140ae7f48 (112 slots x 8B)
 
 class [[offsetcomments]] CSidlScreenWnd : public CXWnd
 {
@@ -971,24 +971,29 @@ public:
 	EQLIB_OBJECT virtual bool GetScreenWndType();
 
 	//----------------------------------------------------------------------------
-	// data members
-/*0x268*/ bool                         bControlsCreated;
-/*0x270*/ CXStr                        SidlText;
-/*0x278*/ CScreenTemplate*             SidlPiece;
-/*0x280*/ ArrayClass<CRadioGroup*>     RadioGroup;
-/*0x298*/ bool                         bInitVisibility;
-/*0x299*/ bool                         bVisibleBeforeResize;
-/*0x29c*/ int                          IniFlags;
-/*0x2a0*/ CXStr                        IniStorageName;
-/*0x2a8*/ int                          IniVersion;
-/*0x2ac*/ int                          LastResX;
-/*0x2b0*/ int                          LastResY;
-/*0x2b4*/ bool                         bLastResFullscreen;
-/*0x2b8*/ int                          ContextMenuID;
-/*0x2c0*/ CXWnd*                       pFirstVScrollChild;
-/*0x2c8*/ int                          ContextMenuTipID;
-/*0x2cc*/ bool                         bHasActivatedFirstTimeAlert;
-/*0x2d0*/
+	// data members (apr15-2026-live verified -- see forensics/csidlscreenwnd_apr15_vtable.md)
+/*0x260*/ CXStr                        SidlText;                       // upstream was +0x270
+/*0x268*/ CScreenTemplate*             SidlPiece;                      // upstream was +0x278
+/*0x270*/ uint8_t                      RadioGroup_data[0x14];          // ArrayClass<CRadioGroup*> internals: m_length(+0x270 4B) + pad(4B) + m_array(+0x278 8B) + m_alloc(+0x280 4B); apr15 packs to 0x14 (no trailing pad before bControlsCreated). Upstream was +0x280..+0x297 (0x18B with m_isValid).
+/*0x284*/ bool                         bControlsCreated;               // upstream was +0x268
+/*0x285*/ uint8_t                      _pad_apr15_0x285[3];
+/*0x288*/ bool                         bInitVisibility;                // upstream was +0x298
+/*0x289*/ bool                         bVisibleBeforeResize;           // upstream was +0x299
+/*0x28a*/ uint8_t                      _pad_apr15_0x28a[2];
+/*0x28c*/ int                          IniFlags;                       // upstream was +0x29c
+/*0x290*/ CXStr                        IniStorageName;                 // upstream was +0x2a0
+/*0x298*/ int                          IniVersion;                     // upstream was +0x2a8
+/*0x29c*/ int                          LastResX;                       // upstream was +0x2ac
+/*0x2a0*/ int                          LastResY;                       // upstream was +0x2b0
+/*0x2a4*/ bool                         bLastResFullscreen;             // upstream was +0x2b4
+/*0x2a5*/ uint8_t                      _pad_apr15_0x2a5[3];
+/*0x2a8*/ int                          ContextMenuTipID;               // upstream was +0x2c8 -- CORRECTED (apr15 swaps ContextMenuTipID/ContextMenuID slot order)
+/*0x2ac*/ uint8_t                      _pad_apr15_0x2ac[4];
+/*0x2b0*/ CXWnd*                       pFirstVScrollChild;             // upstream was +0x2c0
+/*0x2b8*/ int                          ContextMenuID;                  // upstream was +0x2b8 -- same offset, role swap with ContextMenuTipID
+/*0x2bc*/ bool                         bHasActivatedFirstTimeAlert;    // upstream was +0x2cc
+/*0x2bd*/ uint8_t                      _pad_apr15_0x2bd[3];
+/*0x2c0*/                              // sizeof = 0x2c0 (apr15)
 
 	//----------------------------------------------------------------------------
 	// functions that we provide offsets for
