@@ -503,6 +503,24 @@ public:
 	void AddStyle(uint32_t Value) { WindowStyle |= Value; }
 	void RemoveStyle(uint32_t Value) { WindowStyle &= ~Value; }
 
+	// apr15-2026-live: upstream CXWnd has separate bShowBorder/bClickThrough/
+	// bClickThroughToBackground bool fields, but apr15 consolidated these into
+	// CWS_* bits in the WindowStyle dword. Verified by member-fn sweep Batch 9
+	// (cxwnd_apr15_member_function_sweep.md): each bit has a confirmed reader
+	// gating the expected behavior. Property accessors restore the upstream
+	// field-style usage so plugin code `pWnd->bShowBorder = true` still works.
+	__declspec(property(get = GetShowBorder, put = SetShowBorder)) bool bShowBorder;
+	bool GetShowBorder() const { return (WindowStyle & CWS_BORDER) != 0; }
+	void SetShowBorder(bool v) { if (v) WindowStyle |= CWS_BORDER; else WindowStyle &= ~CWS_BORDER; }
+
+	__declspec(property(get = GetClickThrough, put = SetClickThrough)) bool bClickThrough;
+	bool GetClickThrough() const { return (WindowStyle & CWS_TRANSPARENT) != 0; }
+	void SetClickThrough(bool v) { if (v) WindowStyle |= CWS_TRANSPARENT; else WindowStyle &= ~CWS_TRANSPARENT; }
+
+	__declspec(property(get = GetClickThroughToBackground, put = SetClickThroughToBackground)) bool bClickThroughToBackground;
+	bool GetClickThroughToBackground() const { return (WindowStyle & CWS_TRANSPARENTCONTROL) != 0; }
+	void SetClickThroughToBackground(bool v) { if (v) WindowStyle |= CWS_TRANSPARENTCONTROL; else WindowStyle &= ~CWS_TRANSPARENTCONTROL; }
+
 	void SetClipToParent(bool bValue) { bClipToParent = bValue; }
 	void SetUseInLayoutHorizontal(bool bValue) { bUseInLayoutHorizontal = bValue; }
 	void SetUseInLayoutVertical(bool bValue) { bUseInLayoutVertical = bValue; }
