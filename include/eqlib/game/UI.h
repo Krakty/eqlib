@@ -3065,6 +3065,8 @@ public:
 // CContainerWnd
 //============================================================================
 
+constexpr size_t CContainerWnd_size = 0x388; // @sizeof(CContainerWnd) :: 2026-04-15 (live) — forensics/ccontainerwnd_apr15_vtable.md (vtable 0x1409fff10, 8 overrides / 0 new; dtor __eq_delete(this, 0x388); -0x10 shift from upstream 0x398)
+
 class [[offsetcomments]] CContainerWnd : public CSidlScreenWnd
 {
 	FORCE_SYMBOLS
@@ -3082,36 +3084,39 @@ public:
 	EQLIB_OBJECT bool ContainsNoDrop();
 	EQLIB_OBJECT void HandleCombine();
 
-	// TODO: Fix for inaccuracies
-/*0x2d0*/ ItemPtr       Container;
-/*0x2e0*/ ItemGlobalIndex Location;
-/*0x2f0*/ VeArray<CInvSlotWnd*> InvSlotWnds;
-/*0x308*/ CButtonWnd*   pCombineButton;
-/*0x310*/ CButtonWnd*   pDoneButton;
-/*0x318*/ CButtonWnd*   pStandardDoneButton;
-/*0x320*/ CButtonWnd*   pCombineDoneButton;
-/*0x328*/ CButtonWnd*   pContainerIcon;
-/*0x330*/ CButtonWnd*   pContainerStandardIcon;
-/*0x338*/ CButtonWnd*   pContainerCombineIcon;
-/*0x340*/ CTextureAnimation* pIconAnimation;
-/*0x348*/ CLabel*       ContainerLabel;
-/*0x350*/ CInvSlotWnd*  pContainerSlotTemplate;
-/*0x358*/ CXWnd*        pStandardItems;
-/*0x360*/ CXWnd*        pStandardItemsWithDone;
-/*0x368*/ CXWnd*        pCombineItems;
-/*0x370*/ CStmlWnd*     pStandardSize;
-/*0x378*/ CStmlWnd*     pCombineSize;
-/*0x380*/ bool          bCombineValid;
-/*0x381*/ bool          bUserCloseable;
-/*0x384*/ int           ContainerType;            // classic = 0, standard = 1, combine = 2
-/*0x388*/ int           IndexDoneButton;
-/*0x390*/ CContextMenu* ContextMenu;
-/*0x398*/
+	// apr15: all 22 fields shifted -0x10 from upstream offsets per ctor SIDL-piece-name
+	// evidence (16 strings verified verbatim against upstream pXxx names)
+/*0x2c0*/ ItemPtr       Container;
+/*0x2d0*/ ItemGlobalIndex Location;
+/*0x2e0*/ VeArray<CInvSlotWnd*> InvSlotWnds;
+/*0x2f8*/ CButtonWnd*   pCombineButton;
+/*0x300*/ CButtonWnd*   pDoneButton;
+/*0x308*/ CButtonWnd*   pStandardDoneButton;
+/*0x310*/ CButtonWnd*   pCombineDoneButton;
+/*0x318*/ CButtonWnd*   pContainerIcon;
+/*0x320*/ CButtonWnd*   pContainerStandardIcon;
+/*0x328*/ CButtonWnd*   pContainerCombineIcon;
+/*0x330*/ CTextureAnimation* pIconAnimation;
+/*0x338*/ CLabel*       ContainerLabel;
+/*0x340*/ CInvSlotWnd*  pContainerSlotTemplate;
+/*0x348*/ CXWnd*        pStandardItems;
+/*0x350*/ CXWnd*        pStandardItemsWithDone;
+/*0x358*/ CXWnd*        pCombineItems;
+/*0x360*/ CStmlWnd*     pStandardSize;
+/*0x368*/ CStmlWnd*     pCombineSize;
+/*0x370*/ bool          bCombineValid;
+/*0x371*/ bool          bUserCloseable;
+/*0x374*/ int           ContainerType;            // POSITION_UNRESOLVED in apr15 — kept at upstream-shifted offset; not accessed by sampled overrides; likely set by CheckCloseable/ContainsNoDrop (out of vtable scope)
+/*0x378*/ int           IndexDoneButton;
+/*0x380*/ CContextMenu* ContextMenu;
+/*0x388*/
 
 	DEPRECATE("CContainerWnd: Use Container instead of pContents")
 	ItemClient* get_pContents() { return Container.get(); }
 	__declspec(property(get = get_pContents)) ItemClient* pContents;
 };
+
+SIZE_CHECK(CContainerWnd, CContainerWnd_size);
 
 inline namespace deprecated {
 	using EQCONTAINERWINDOW DEPRECATE("Use CContainerWnd instead of EQCONTAINERWINDOW") = CContainerWnd;
