@@ -434,6 +434,8 @@ inline namespace deprecated {
 // CCheckBoxWnd
 //============================================================================
 
+constexpr size_t CCheckBoxWnd_size = 0x340; // @sizeof(CCheckBoxWnd) :: 2026-04-15 (live) — forensics/ccheckboxwnd_apr15_vtable.md (vtable 0x140aef558, 117 inherited / 5 overrides / 0 new; dtor __eq_delete(this, 0x340))
+
 class [[offsetcomments]] CCheckBoxWnd : public CButtonWnd
 {
 public:
@@ -452,9 +454,13 @@ public:
 	EQLIB_OBJECT void SetRadioLook();
 
 	// protected
-/*0x348*/ bool bOrgState;
-/*0x34c*/
+/*0x338*/ bool bOrgState;                           // apr15: VERIFIED (HandleLButtonDown saves Checked snapshot; HandleLButtonUp restores on out-of-rect mouseup; upstream was +0x348)
+/*0x339*/ uint8_t _apr15_internal_byte_0x339;       // CCheckBoxWnd-specific, zero-init by both ctors, not read by 5 sampled overrides — likely SetRadioLook (non-virtual) writes
+/*0x33a*/ uint8_t _pad_0x33a[6];
+/*0x340*/
 };
+
+SIZE_CHECK(CCheckBoxWnd, CCheckBoxWnd_size);
 
 //============================================================================
 // CComboWnd
