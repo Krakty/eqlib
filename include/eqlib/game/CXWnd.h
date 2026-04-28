@@ -863,7 +863,7 @@ public:
 /*0x120*/ uint32_t           TransitionDuration;        // apr15: VERIFIED (master, 0x1405c9f90)
 /*0x124*/ uint8_t            _pad_0x124[4];
 /*0x128*/ CXRect             TransitionRect;            // apr15: VERIFIED (master, 0x1405c8630 Minimize-anchor)
-/*0x138*/ uint8_t            _pad_0x138[1];
+/*0x138*/ bool               bEscapable;                // apr15: VERIFIED (member-fn sweep batch 11, SetEscapable 0x1405c9a40 writes +0x138 gated on +0x18a==0 (bEscapableLocked) OR force-flag)
 /*0x139*/ bool               bMaximizable;              // apr15: VERIFIED (member-fn sweep batch 11, CXWnd::Minimize restore-branch gate 0x1405c8696 + CXWnd::MinimizeImpl restore gate 0x1405c881d — read only on un-minimize path = "is allowed to be restored")
 /*0x13a*/ uint8_t            _pad_0x13a[6];
 /*0x140*/ CXWndDrawTemplate* DrawTemplate;              // apr15: VERIFIED (master, 0x140074730)
