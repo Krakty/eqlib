@@ -1226,6 +1226,8 @@ SIZE_CHECK(CListWnd, CListWnd_size);
 // CPageWnd
 //============================================================================
 
+constexpr size_t CPageWnd_size = 0x300; // @sizeof(CPageWnd) :: 2026-04-15 (live) — forensics/cpagewnd_apr15_vtable.md (vtable 0x140aecb78, 112 slots, 1 override (dtor only); -0x10 shift from upstream 0x310)
+
 class [[offsetcomments]] CPageWnd : public CSidlScreenWnd
 {
 public:
@@ -1238,20 +1240,24 @@ public:
 	EQLIB_OBJECT void SetTabText(CXStr&) const;
 	EQLIB_OBJECT void FlashTab(bool flash, int msTime) const;
 
-/*0x2d0*/ CXStr              TabText;
-/*0x2d8*/ CXStr              OrigTabText;
-/*0x2e0*/ COLORREF           CRTabText;
-/*0x2e4*/ COLORREF           CRTabTextActive;
-/*0x2e8*/ CTextureAnimation* pTATabIcon;
-/*0x2f0*/ CTextureAnimation* pTATabIconActive;
-/*0x2f8*/ int                Unknown0x250;
-/*0x2fc*/ int                Unknown0x254;
-/*0x300*/ int64_t            LastFlashTime;
-/*0x308*/ COLORREF           CRHighlightFlashColor;
-/*0x30c*/ bool               bHighlightOnNewMessages;
-/*0x30d*/ bool               bFlashing;
-/*0x310*/
+	// apr15: all fields shifted -0x10 from upstream
+/*0x2c0*/ CXStr              TabText;
+/*0x2c8*/ CXStr              OrigTabText;
+/*0x2d0*/ COLORREF           CRTabText;
+/*0x2d4*/ COLORREF           CRTabTextActive;
+/*0x2d8*/ CTextureAnimation* pTATabIcon;
+/*0x2e0*/ CTextureAnimation* pTATabIconActive;
+/*0x2e8*/ int                Unknown0x250;
+/*0x2ec*/ int                Unknown0x254;                      // MEDIUM: position-by-sandwich, no field access in scope
+/*0x2f0*/ int64_t            LastFlashTime;
+/*0x2f8*/ COLORREF           CRHighlightFlashColor;
+/*0x2fc*/ bool               bHighlightOnNewMessages;
+/*0x2fd*/ bool               bFlashing;
+/*0x2fe*/ uint8_t            _pad_0x2fe[2];
+/*0x300*/
 };
+
+SIZE_CHECK(CPageWnd, CPageWnd_size);
 
 //============================================================================
 // CSliderWnd
@@ -1522,6 +1528,8 @@ SIZE_CHECK(CStmlWnd, CStmlWnd_size);
 // CTabWnd
 //============================================================================
 
+constexpr size_t CTabWnd_size = 0x2a8; // @sizeof(CTabWnd) :: 2026-04-15 (live) — forensics/ctabwnd_apr15_vtable.md (vtable 0x140ae94b8, 106 slots, 6 overrides + 1 NEW virtual at slot 105 (tab-hover-tooltip handler); -0xc shift from upstream 0x2b4)
+
 class [[offsetcomments]] CTabWnd : public CXWnd
 {
 public:
@@ -1559,19 +1567,23 @@ public:
 
 
 	//----------------------------------------------------------------------------
-	// data members
+	// data members — apr15: shifted -0x10 from upstream
 
-/*0x268*/ CTAFrameDraw*           pTabBorder;
-/*0x270*/ CTAFrameDraw*           pPageBorder;
-/*0x278*/ ArrayClass<CPageWnd*>   PageArray;
-/*0x290*/ int                     CurTabIndex;
-/*0x294*/ int                     TabHeight;
-/*0x298*/ CXRect                  PageRect;
-/*0x2a8*/ bool                    bShowTabs;
-/*0x2ac*/ int                     TabStyle;
-/*0x2b0*/ int                     TabWidth;
-/*0x2b4*/
+/*0x258*/ CTAFrameDraw*           pTabBorder;
+/*0x260*/ CTAFrameDraw*           pPageBorder;
+/*0x268*/ ArrayClass<CPageWnd*>   PageArray;       // 0x18 bytes
+/*0x280*/ int                     CurTabIndex;
+/*0x284*/ int                     TabHeight;
+/*0x288*/ CXRect                  PageRect;        // 0x10 bytes
+/*0x298*/ bool                    bShowTabs;
+/*0x299*/ uint8_t                 _pad_0x299[3];
+/*0x29c*/ int                     TabStyle;
+/*0x2a0*/ int                     TabWidth;
+/*0x2a4*/ uint8_t                 _pad_0x2a4[4];   // tail-align to 8B
+/*0x2a8*/
 };
+
+SIZE_CHECK(CTabWnd, CTabWnd_size);
 
 //============================================================================
 // CTreeViewWnd
