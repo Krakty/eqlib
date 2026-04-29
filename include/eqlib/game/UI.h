@@ -1405,6 +1405,8 @@ enum ESTMLParseState
 };
 
 
+constexpr size_t CStmlWnd_size = 0x350; // @sizeof(CStmlWnd) :: 2026-04-15 (live) — forensics/cstmlwnd_apr15_vtable.md (vtable 0x140ae9ba8, 105 slots, 9 real overrides + 0 new; -0xc shift from upstream 0x35c)
+
 class [[offsetcomments]] CStmlWnd : public CXWnd
 {
 public:
@@ -1480,39 +1482,41 @@ public:
 	void SetText(const CXStr& str) { STMLText = str; }
 
 	//----------------------------------------------------------------------------
-	// data members
+	// data members — apr15: shifted -0x10 from upstream + one trailing
+	// Unknown* int dropped (sizeof shrunk by -0xc total)
 
-	// todo: verify
-/*0x268*/ CXStr                        STMLText;
-/*0x270*/ CircularArrayClass2<STextLine> TextLines;
-/*0x2a0*/ int32_t                      TextTotalHeight;
-/*0x2a4*/ int32_t                      TextTotalWidth;
-/*0x2a8*/ int32_t                      Unknown0x224;
-/*0x2b0*/ ArrayClass2<SLinkInfo>       Links;
-/*0x2d0*/ ArrayClass<STable>           Tables;
-/*0x2e8*/ bool                         bReparseNow;
-/*0x2e9*/ bool                         bResized;
-/*0x2ea*/ bool                         bAlignCenter;
-/*0x2ec*/ int                          LineSpacingAdjust;
-/*0x2f0*/ int32_t                      CapturedLinkID;
-/*0x2f4*/ int32_t                      MousedOverLinkID;
-/*0x2f8*/ COLORREF                     BackGroundColor;
-/*0x2fc*/ COLORREF                     TextColor;
-/*0x300*/ COLORREF                     LinkColor;
-/*0x304*/ COLORREF                     VLinkColor;
-/*0x308*/ COLORREF                     ALinkColor;
-/*0x30c*/ COLORREF                     MLinkColor;
-/*0x310*/ ESTMLParseState              CurrentParseState;
-/*0x318*/ ArrayClass2<SHistoryElement> HistoryArray;
-/*0x338*/ int32_t                      HistoryIndex;
-/*0x340*/ CStmlReport*                 pStmlReport;
-/*0x348*/ int                          MaxLines;
-/*0x34c*/ int                          PlayerContextMenuIndex;
-/*0x350*/ int                          Unknown0x2ac;
-/*0x354*/ int                          Unknown0x2b0;
-/*0x358*/ int                          Unknown0x2b4;
-/*0x35c*/
+/*0x258*/ CXStr                        STMLText;
+/*0x260*/ CircularArrayClass2<STextLine> TextLines;       // 0x30 bytes
+/*0x290*/ int32_t                      TextTotalHeight;
+/*0x294*/ int32_t                      TextTotalWidth;
+/*0x298*/ int32_t                      Unknown0x224;
+/*0x2a0*/ ArrayClass2<SLinkInfo>       Links;             // 0x20 bytes
+/*0x2c0*/ ArrayClass<STable>           Tables;            // element size 0x48
+/*0x2d8*/ bool                         bReparseNow;
+/*0x2d9*/ bool                         bResized;
+/*0x2da*/ bool                         bAlignCenter;
+/*0x2db*/ uint8_t                      _pad_0x2db[1];
+/*0x2dc*/ int                          LineSpacingAdjust;
+/*0x2e0*/ int32_t                      CapturedLinkID;
+/*0x2e4*/ int32_t                      MousedOverLinkID;
+/*0x2e8*/ COLORREF                     BackGroundColor;
+/*0x2ec*/ COLORREF                     TextColor;
+/*0x2f0*/ COLORREF                     LinkColor;
+/*0x2f4*/ COLORREF                     VLinkColor;
+/*0x2f8*/ COLORREF                     ALinkColor;        // ADVISORY: pending accessor evidence (cstmlwnd_apr15_vtable.md)
+/*0x2fc*/ COLORREF                     MLinkColor;        // ADVISORY: pending accessor evidence
+/*0x300*/ ESTMLParseState              CurrentParseState;
+/*0x308*/ ArrayClass2<SHistoryElement> HistoryArray;      // 0x20 bytes
+/*0x328*/ int32_t                      HistoryIndex;
+/*0x330*/ CStmlReport*                 pStmlReport;
+/*0x338*/ int                          MaxLines;
+/*0x33c*/ uint8_t                      _pad_0x33c[4];
+/*0x340*/ uint64_t                     _apr15_unknown_0x340; // tail CXStr-pointer or qword (was upstream Unknown0x2ac/0x2b0/0x2b4 triplet — one int dropped in apr15)
+/*0x348*/ uint64_t                     _apr15_unknown_0x348;
+/*0x350*/
 };
+
+SIZE_CHECK(CStmlWnd, CStmlWnd_size);
 
 //============================================================================
 // CTabWnd
