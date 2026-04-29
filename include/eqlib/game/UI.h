@@ -5819,7 +5819,14 @@ inline namespace deprecated {
 	using PEQKBASSIGN DEPRECATE("Use KeyboardAssignmentData* instead of PEQKBASSIGN") = KeyboardAssignmentData*;
 }
 
-// size 0x904 3-10-2004
+// apr15: sizeof MASSIVELY larger than upstream's stale 0x904/0xcf0 — apr15 is 0x2950
+// (per forensics/coptionswindow_apr15_vtable.md). Layout details NOT yet remapped;
+// only the size constant is updated. Upstream's KeyboardAssignmentData Binds[0xA1]
+// at +0x2e0 is INVALID for apr15 — the field map is entirely different (per-page
+// pointer fanout: ChatPage@2D8, DisplayPage@4F0, ColorPage@708, KeyboardPage@768,
+// SubwindowsTab@2D0, ColorList@2610, plus 16-element array at +0x788, lastFrameTick@2948).
+constexpr size_t COptionsWnd_size = 0x2950; // @sizeof(COptionsWnd) :: 2026-04-15 (live) — forensics/coptionswindow_apr15_vtable.md (vtable 0x140A668B8, 114 slots: 6 overrides + 2 NEW; PopDialogHandler subobject at +0x2C0; WndEventHandler NOT live in apr15 — vftable briefly written then overwritten in ctor)
+
 class [[offsetcomments]] COptionsWnd : public CSidlScreenWnd, public PopDialogHandler, public WndEventHandler
 {
 public:
@@ -6665,6 +6672,11 @@ public:
 // CTextEntryWnd
 //============================================================================
 
+// apr15 forensics (ctextentrywnd_apr15_vtable.md): WndEventHandler claim NOT
+// supported in apr15 — no separate vftable subobject. Inheritance is
+// CSidlScreenWnd-only. Layout shifted -0x10 from upstream.
+constexpr size_t CTextEntryWnd_size = 0x300; // @sizeof(CTextEntryWnd) :: 2026-04-15 (live) — forensics/ctextentrywnd_apr15_vtable.md (vtable 0x140AB01F0, 112 slots, 4 overrides; -0x10 shift from upstream 0x310)
+
 class [[offsetcomments]] CTextEntryWnd : public CSidlScreenWnd, public WndEventHandler
 {
 	FORCE_SYMBOLS
@@ -6680,16 +6692,21 @@ public:
 	EQLIB_OBJECT void Callback(bool);
 	EQLIB_OBJECT void UpdateButtons();
 
-/*0x2d4*/ int          m_minLength;
-/*0x2d8*/ int          m_maxLength;
-/*0x2e0*/ CXStr        m_text;
-/*0x2e8*/ CXWnd*       m_parent;
-/*0x2f0*/ CEditWnd*    m_entry;
-/*0x2f8*/ CLabel*      m_prompt;
-/*0x300*/ CButtonWnd*  m_ok;
-/*0x308*/ CButtonWnd*  m_cancel;
-/*0x310*/
+	// apr15: shifted -0x10 from upstream
+/*0x2c0*/ int          lastTick;            // apr15 NEW (was lower upstream — frame timestamp)
+/*0x2c4*/ int          m_minLength;
+/*0x2c8*/ int          m_maxLength;
+/*0x2cc*/ uint8_t      _pad_0x2cc[4];
+/*0x2d0*/ CXStr        m_text;
+/*0x2d8*/ CXWnd*       m_parent;
+/*0x2e0*/ CEditWnd*    m_entry;
+/*0x2e8*/ CLabel*      m_prompt;
+/*0x2f0*/ CButtonWnd*  m_ok;
+/*0x2f8*/ CButtonWnd*  m_cancel;
+/*0x300*/
 };
+
+SIZE_CHECK(CTextEntryWnd, CTextEntryWnd_size);
 
 inline namespace deprecated {
 	using CTEXTENTRYWND DEPRECATE("Use CTextEntryWnd instead of CTEXTENTRYWND") = CTextEntryWnd;
