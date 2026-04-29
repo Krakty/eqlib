@@ -337,17 +337,16 @@ public:
 	// HitTestSubRects / HandleLButtonDown / CreateChildrenFromSidl /
 	// CreateXWndFromTemplate searched for separate-byte writers, none
 	// match Unlockable semantics).
-	// Locked-as-separate-byte also UNFOUND in the sweep; ApplyLockedStyle
-	// writes [+0x9a]=1 and ctor writes [+0x9a]=0, so the apr15 Locked
-	// byte candidate is +0x9a (currently labelled _apr15_internal_0x09a
-	// in the master layout). Promotion of +0x9a -> Locked is a separate
-	// NAME-ALIAS task (audit row Cat C re-categorisation pending).
-	// SetLocked body is gated on GetUnlockable() (always false) so the
-	// upstream "only-locks-if-unlockable" semantic is preserved as a
-	// no-op. Compat stubs here are NOT TODO stubs -- the upstream fields
-	// are genuinely absent (positive proof) in apr15.
+	// Locked is at +0x9a (NAME-ALIAS PROMOTION applied per audit Cat C->A
+	// re-categorisation): ApplyLockedStyle 0x1405ede28 writes [+0x9a]=1 and
+	// ctor writes [+0x9a]=0, so the apr15 Locked byte IS +0x9a. The
+	// previous "_apr15_internal_0x09a" placeholder is now declared as
+	// 'bool Locked' in the master layout below. SetLocked body remains a
+	// no-op because the upstream "only-locks-if-unlockable" semantic is
+	// gated on GetUnlockable() which is positively-absent in apr15
+	// (compat stub returning false). IsLocked reads the actual bit.
 	EQLIB_OBJECT virtual void SetLocked(bool /*bValue*/) { /* no-op: GetUnlockable() always false in apr15 */ }
-	bool IsLocked() const { return false; }
+	bool IsLocked() const { return Locked; }
 	EQLIB_OBJECT virtual int HitTest(const CXPoint& pos, int* result) const;
 	EQLIB_OBJECT virtual CXRect GetHitTestRect(int code) const;
 	EQLIB_OBJECT virtual CXRect GetInnerRect() const;
@@ -632,20 +631,17 @@ public:
 	// exist as a separate bool, the semantic IS Transition != 0 && != 3.
 	bool GetIsTransitioning() const { return Transition != 0 && Transition != 3; }
 
-	// apr15-2026-live: TitlePiece2 -- audit row Cat C marks this as
-	// REMOVED in apr15 per forensics/cxwnd_apr15_field_locations.md
-	// (Field 8: positive absence proof for upstream +0x038 slot --
-	// region is bRightAnchoredToRight + 0x64 ints, NOT a pointer).
-	// HOWEVER, the master pass-4 layout retains a verified animation
-	// pointer at +0x110 currently labelled TitlePiece2 (DrawNC reader at
-	// 0x1405c4e30). The pass-4 attribution and the field_locations
-	// absence-proof are in tension: pass-4 is "is there an anim ptr at
-	// +0x110" (yes) and field_locations is "is the +0x038 slot
-	// TitlePiece2" (no). The +0x110 storage is therefore RETAINED as
-	// canonical apr15 storage (do-not-remove rule); this getter exists
-	// as the audit-Cat-C compat path documenting the absence-of-upstream
-	// proof. Not a TODO stub.
-	void* GetTitlePiece2() const { return nullptr; }
+	// apr15-2026-live: TitlePiece2 conflict RESOLVED per audit Cat C->A
+	// re-categorisation. The field_locations.md "Field 8 REMOVED" verdict
+	// referred to upstream's +0x038 slot which contains
+	// bRightAnchoredToRight + 0x64 ints (NOT a pointer) — that
+	// upstream-offset hunt was the wrong location. The CORRECT apr15
+	// location is +0x110, where master pass-4 positively verifies a
+	// CStaticTintedBlendAnimationTemplate* with DrawNC reader at
+	// 0x1405c4e30. TitlePiece2 is therefore present, just relocated from
+	// upstream +0x038 to apr15 +0x110. The field is declared in the
+	// master layout below as 'CStaticTintedBlendAnimationTemplate*
+	// TitlePiece2' at +0x110; no compat-stub getter is needed.
 
 	DEPRECATE("Use GetClickThrough instead of GetClickable")
 	bool GetClickable() const { return bClickThrough; }
@@ -885,10 +881,11 @@ public:
 // 78 named upstream fields (one row per offset; CXRect/CXSize/CXStr collapsed
 // to a single typed declaration at the start offset of the region).
 //
-// 6 NONE_FOUND_apr15_internal slots (typed pad bytes, no upstream match):
-//   +0x030 byte, +0x099 byte, +0x09a byte, +0x0e4 byte, +0x188 byte,
-//   +0x189 byte, +0x18b byte, +0x19d byte (note: 8 internal rows total in
+// 5 NONE_FOUND_apr15_internal slots (typed pad bytes, no upstream match):
+//   +0x030 byte, +0x099 byte, +0x0e4 byte, +0x188 byte,
+//   +0x189 byte, +0x18b byte, +0x19d byte (note: 7 internal rows total in
 //   master at last update — listed here individually to match table).
+//   +0x09a was promoted to 'bool Locked' per audit Cat C->A re-categorisation.
 //
 // 1 med-confidence row (single-callsite):
 //   +0x078 IconTextureAnim (qword) — promoted to a real declaration but
@@ -932,7 +929,7 @@ public:
 /*0x088*/ CXRect             IconRect;                  // apr15: VERIFIED (master, 0x1405c4e30 DrawNC)
 /*0x098*/ uint8_t            _pad_0x098[1];
 /*0x099*/ bool               dShow;                     // apr15: VERIFIED (member-fn sweep, IsReallyVisible 0x1405c84e0 self+parent-chain visibility gate)
-/*0x09a*/ uint8_t            _apr15_internal_0x09a;     // RW byte, no upstream match (master +pass4, 0x140074750)
+/*0x09a*/ bool               Locked;                    // apr15: VERIFIED (NAME-ALIAS PROMOTION from _apr15_internal_0x09a per audit re-categorization Cat C->A: ApplyLockedStyle 0x1405ede28 writes [+0x9a]=1; ctor writes [+0x9a]=0; upstream "Locked" name maps to apr15 +0x9a; no separate Locked byte exists elsewhere per Batch 9+11 exhaustive sweep)
 /*0x09b*/ uint8_t            _pad_0x09b[5];
 /*0x0a0*/ CStaticTintedBlendAnimationTemplate* TitlePiece; // apr15: VERIFIED (master +pass4, 0x1405c4e30)
 /*0x0a8*/ uint8_t            bResizableMask;            // apr15: VERIFIED (master +pass3, 0x1405c6190)
