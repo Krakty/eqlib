@@ -3055,6 +3055,8 @@ SIZE_CHECK(CChatWindow, CChatWindow_size);
 // CColorPickerWnd
 //============================================================================
 
+constexpr size_t CColorPickerWnd_size = 0x3a8; // @sizeof(CColorPickerWnd) :: 2026-04-15 (live) — forensics/ccolorpickerwnd_apr15_vtable.md (vtable 0x1409F9098, 112 slots; WndEventHandler MI thunk at slot 37 confirms subobject offset +0x2C0; -0x10 shift from upstream 0x3b8)
+
 class [[offsetcomments]] CColorPickerWnd : public CSidlScreenWnd, public WndEventHandler
 {
 	FORCE_SYMBOLS
@@ -3075,24 +3077,30 @@ public:
 	EQLIB_OBJECT int Open(CXWnd* pwndCaller, D3DCOLOR CurrentColor = 0x00FFFFFF);
 
 	//----------------------------------------------------------------------------
-	// data members
+	// data members — apr15: shifted -0x10 from upstream
 
-/*0x2d4*/ int                ContextMenuIndex;
-/*0x2d8*/ int                MaxSliderValue;
-/*0x2e0*/ CXWnd*             pwndCaller;
-/*0x2e8*/ CButtonWnd*        ColorButton[16];
-/*0x368*/ int                RedSliderValue;
-/*0x370*/ CSliderWnd*        RedSlider;
-/*0x378*/ CEditWnd*          RedSliderInputEdit;
-/*0x380*/ int                GreenSliderValue;
-/*0x388*/ CSliderWnd*        GreenSlider;
-/*0x390*/ CEditWnd*          GreenSliderInputEdit;
-/*0x398*/ int                BlueSliderValue;
-/*0x3a0*/ CSliderWnd*        BlueSlider;
-/*0x3a8*/ CEditWnd*          BlueSliderInputEdit;
-/*0x3b0*/ CButtonWnd*        AcceptButton;
-/*0x3b8*/
+/*0x2c4*/ int                ContextMenuIndex;
+/*0x2c8*/ int                MaxSliderValue;
+/*0x2cc*/ uint8_t            _pad_0x2cc[4];
+/*0x2d0*/ CXWnd*             pwndCaller;
+/*0x2d8*/ CButtonWnd*        ColorButton[16];
+/*0x358*/ int                RedSliderValue;
+/*0x35c*/ uint8_t            _pad_0x35c[4];
+/*0x360*/ CSliderWnd*        RedSlider;
+/*0x368*/ CEditWnd*          RedSliderInputEdit;
+/*0x370*/ int                GreenSliderValue;
+/*0x374*/ uint8_t            _pad_0x374[4];
+/*0x378*/ CSliderWnd*        GreenSlider;
+/*0x380*/ CEditWnd*          GreenSliderInputEdit;
+/*0x388*/ int                BlueSliderValue;
+/*0x38c*/ uint8_t            _pad_0x38c[4];
+/*0x390*/ CSliderWnd*        BlueSlider;
+/*0x398*/ CEditWnd*          BlueSliderInputEdit;
+/*0x3a0*/ CButtonWnd*        AcceptButton;
+/*0x3a8*/
 };
+
+SIZE_CHECK(CColorPickerWnd, CColorPickerWnd_size);
 
 //============================================================================
 // CCombatAbilityWnd
@@ -3187,6 +3195,8 @@ inline namespace deprecated {
 
 // This is actually CPopDialogWnd.
 // TODO: Rename this
+constexpr size_t CConfirmationDialog_size = 0x340; // @sizeof(CConfirmationDialog) :: 2026-04-15 (live) — forensics/cconfirmationdialog_apr15_vtable.md (vtable 0x140A73610, 113 slots: 1 NEW Activate at slot 112; +0x30 vs upstream's documented 0x310 — apr15 has full structured Activate state, not opaque "Unknown0x170")
+
 class [[offsetcomments]] CConfirmationDialog : public CSidlScreenWnd
 {
 	FORCE_SYMBOLS
@@ -3195,33 +3205,33 @@ public:
 	CConfirmationDialog(CXWnd*);
 	virtual ~CConfirmationDialog();
 
-	virtual int Draw() override;
 	virtual int OnProcessFrame() override;
 	virtual int WndNotification(CXWnd*, uint32_t, void*) override;
 
-	// probably wrong
+	// apr15 NEW slot 112: Activate(handler, msgId, text, userPos, timeoutTicks, userdata)
 	virtual void Activate(PopDialogHandler* handler, int msg, const char* text,
-		int, int, int, int);
+		int userPos, int timeoutTicks, int userdata, int);
 
-	// this is all invalid
-	//EQLIB_OBJECT void HandleButtonNoPressed();
-	//EQLIB_OBJECT void HandleButtonOkPressed();
-	//EQLIB_OBJECT void HandleButtonYesPressed();
-	//EQLIB_OBJECT void ProcessNo(int);
-	//EQLIB_OBJECT void ProcessYes();
-	//EQLIB_OBJECT void SetNameApprovalData(char*, char*, int, int, char*);
-	//EQLIB_OBJECT void ExpireCurrentDialog();
-	//EQLIB_OBJECT void ResetFocusOnClose();
-
-	// Data members
-/*0x2d0*/ CStmlWnd*    OutputText;
-/*0x2d8*/ CButtonWnd*  pYesButton;
-/*0x2e0*/ CButtonWnd*  pNoButton;
-/*0x2e8*/ CButtonWnd*  pCancelButton;
-/*0x2f0*/ CButtonWnd*  pOKButton;
-/*0x2f8*/ BYTE         Unknown0x170[0x18]; // fixme x64
-/*0x310*/
+	// Data members — apr15: shifted -0x10 + structured Activate state revealed
+/*0x2c0*/ CStmlWnd*    OutputText;
+/*0x2c8*/ CButtonWnd*  pYesButton;
+/*0x2d0*/ CButtonWnd*  pNoButton;
+/*0x2d8*/ CButtonWnd*  pCancelButton;
+/*0x2e0*/ CButtonWnd*  pOKButton;
+/*0x2e8*/ CXStr        text;                 // apr15: Activate's text param stored here
+/*0x2f0*/ int          userPos;              // apr15: Activate's userPos
+/*0x2f4*/ uint8_t      _pad_0x2f4[4];
+/*0x2f8*/ PopDialogHandler* pHandler;        // apr15: Activate's handler
+/*0x300*/ int          msgId;                // apr15: Activate's msgId
+/*0x304*/ int          timeoutDeadline;      // apr15: tick at which dialog times out
+/*0x308*/ int          userdata;
+/*0x30c*/ uint8_t      _pad_0x30c[4];
+/*0x318*/ uint8_t      _Activate_aux_array[0x20]; // 8-elem array (likely button state cache)
+/*0x338*/ CXStr        auxText;              // apr15: secondary CXStr (e.g., dialog title)
+/*0x340*/
 };
+
+SIZE_CHECK(CConfirmationDialog, CConfirmationDialog_size);
 
 //============================================================================
 // CContainerWnd
@@ -3338,7 +3348,12 @@ SIZE_CHECK(CContainerMgr, CContainerMgr_size);
 constexpr int MAX_CONTEXT_MENU_DEPTH = 8;
 constexpr int MAX_CONTEXT_MENUS = 1024;
 
-// combination of CContexTMenuManager and CContextMenuManagerBase
+// combination of CContextMenuManager and CContextMenuManagerBase
+// Note: apr15 binary actually splits these into two classes:
+//   CContextMenuManagerBase ctor 0x1405DA750, vtable 0x140AE9810 (CXWnd + 2 NEW with _purecall stubs)
+//   CContextMenuManager     ctor 0x1403CE8F0, vtable 0x140A01D30 (overrides the 2 NEW with concrete impls)
+constexpr size_t CContextMenuManager_size = 0x22E0; // @sizeof(CContextMenuManager) :: 2026-04-15 (live) — forensics/ccontextmenumanager_apr15_vtable.md (107 slots, -0x8 shift from upstream 0x22E8 — apr15 has 8 default-item indices not 7)
+
 class [[offsetcomments]] CContextMenuManager : public CXWnd
 {
 	FORCE_SYMBOLS
@@ -3372,25 +3387,30 @@ public:
 	EQLIB_OBJECT void WarnDefaultMenu(CXWnd*);
 
 	//----------------------------------------------------------------------------
-	// data members
+	// data members — apr15: shifted -0x10 from upstream + apr15 has 8 default-item indices not 7
 
-/*0x0268*/ CXWnd*             pParentMenuWnd;
-/*0x0270*/ CContextMenu*      pCurrMenus[MAX_CONTEXT_MENU_DEPTH];
-/*0x02b0*/ int                NumVisibleMenus;
-/*0x02b4*/ int                CurrMenu;
-/*0x02b8*/ CContextMenu*      pMenus[MAX_CONTEXT_MENUS];
-/*0x22b8*/ int                NumMenus;
-/*0x22c0*/ CXWnd*             pHandlerWnd;
-/*0x22c8*/ int                HandlerCmd;
-/*0x22cc*/ int                DefaultMenuIndex;
-/*0x22d0*/ int                DefaultHelpItem;
-/*0x22d4*/ int                DefaultBGItem;
-/*0x22d8*/ int                DefaultMinItem;
-/*0x22dc*/ int                DefaultCloseItem;
-/*0x22e0*/ int                DefaultLockItem;
-/*0x22e4*/ int                DefaultEscapeItem;
-/*0x22e8*/
+/*0x0258*/ CXWnd*             pParentMenuWnd;
+/*0x0260*/ CContextMenu*      pCurrMenus[MAX_CONTEXT_MENU_DEPTH];
+/*0x02a0*/ int                NumVisibleMenus;
+/*0x02a4*/ int                CurrMenu;
+/*0x02a8*/ CContextMenu*      pMenus[MAX_CONTEXT_MENUS];        // ends at 0x22a8
+/*0x22a8*/ int                NumMenus;
+/*0x22ac*/ uint8_t            _pad_0x22ac[4];
+/*0x22b0*/ CXWnd*             pHandlerWnd;
+/*0x22b8*/ int                HandlerCmd;
+/*0x22bc*/ int                DefaultMenuIndex;
+/*0x22c0*/ int                DefaultHelpItem;
+/*0x22c4*/ int                DefaultBGItem;
+/*0x22c8*/ int                DefaultMinItem;
+/*0x22cc*/ int                DefaultCloseItem;
+/*0x22d0*/ int                DefaultLockItem;
+/*0x22d4*/ int                DefaultEscapeItem;
+/*0x22d8*/ int                DefaultExtraItem;                 // apr15 NEW: 8th default-item index (was just 7 in upstream)
+/*0x22dc*/ uint8_t            _pad_0x22dc[4];
+/*0x22e0*/
 };
+
+SIZE_CHECK(CContextMenuManager, CContextMenuManager_size);
 
 //============================================================================
 // CContextMenu
