@@ -251,7 +251,7 @@ public:
 // CXWnd
 //============================================================================
 
-constexpr size_t CXWnd_size = 0x260; // @sizeof(CXWnd) :: 2026-04-15 (live) — master forensics/cxwnd_apr15_vtable_thunks.md (Master CXWnd apr15 layout map, 85 rows, sums to 0x260)
+constexpr size_t CXWnd_size = 0x258; // @sizeof(CXWnd) :: 2026-04-15 (live) — RedGuides/eqlibdev commit 02cd49a (Apr 16, "Shift CXWnd-derived offsets by 8 bytes (CXWnd size 0x260 → 0x258)") canonical; CButtonWnd's MouseButtonState (int @+0x258) + bPicture (bool @+0x25c) are CButtonWnd's first own fields, NOT packed into CXWnd's tail
 constexpr size_t CXWnd_vftable_size = 0x348;
 
 class [[offsetcomments]] CXWnd
@@ -924,10 +924,10 @@ public:
 /*0x250*/ int                RightOffset;               // apr15: VERIFIED (GetRelativeRect 0x1405c7aa0, paired with +0x3c bRightAnchoredToRight)
 /*0x254*/ bool               bUsesClassicUI;            // apr15: VERIFIED (ctor 0x1405c1d8d MOV byte [RBX+0x254], AL)
 /*0x255*/ bool               bMouseOverEvent;           // apr15: VERIFIED (ctor 0x1405c2262 MOV byte [RBX+0x255], 0x0)
-/*0x256*/ uint8_t            _pad_0x256[10];
+/*0x256*/ uint8_t            _pad_0x256[2];
 // @end: CXWnd Members
 
-/*0x260*/
+/*0x258*/
 
 	// apr15-2026-live: ALT_MEMBER_ALIAS entries (CloseOnESC -> bEscapable,
 	// bBorder -> bEnableShowBorder, bBorder2 -> bShowBorder, Clickable ->
@@ -997,28 +997,31 @@ public:
 	EQLIB_OBJECT virtual bool GetScreenWndType();
 
 	//----------------------------------------------------------------------------
-	// data members (apr15-2026-live verified -- see forensics/csidlscreenwnd_apr15_vtable.md)
-/*0x260*/ CXStr                        SidlText;                       // upstream was +0x270
-/*0x268*/ CScreenTemplate*             SidlPiece;                      // upstream was +0x278
-/*0x270*/ uint8_t                      RadioGroup_data[0x14];          // ArrayClass<CRadioGroup*> internals: m_length(+0x270 4B) + pad(4B) + m_array(+0x278 8B) + m_alloc(+0x280 4B); apr15 packs to 0x14 (no trailing pad before bControlsCreated). Upstream was +0x280..+0x297 (0x18B with m_isValid).
-/*0x284*/ bool                         bControlsCreated;               // upstream was +0x268
-/*0x285*/ uint8_t                      _pad_apr15_0x285[3];
-/*0x288*/ bool                         bInitVisibility;                // upstream was +0x298
-/*0x289*/ bool                         bVisibleBeforeResize;           // upstream was +0x299
-/*0x28a*/ uint8_t                      _pad_apr15_0x28a[2];
-/*0x28c*/ int                          IniFlags;                       // upstream was +0x29c
-/*0x290*/ CXStr                        IniStorageName;                 // upstream was +0x2a0
-/*0x298*/ int                          IniVersion;                     // upstream was +0x2a8
-/*0x29c*/ int                          LastResX;                       // upstream was +0x2ac
-/*0x2a0*/ int                          LastResY;                       // upstream was +0x2b0
-/*0x2a4*/ bool                         bLastResFullscreen;             // upstream was +0x2b4
-/*0x2a5*/ uint8_t                      _pad_apr15_0x2a5[3];
-/*0x2a8*/ int                          ContextMenuTipID;               // upstream was +0x2c8 -- CORRECTED (apr15 swaps ContextMenuTipID/ContextMenuID slot order)
-/*0x2ac*/ uint8_t                      _pad_apr15_0x2ac[4];
-/*0x2b0*/ CXWnd*                       pFirstVScrollChild;             // upstream was +0x2c0
-/*0x2b8*/ int                          ContextMenuID;                  // upstream was +0x2b8 -- same offset, role swap with ContextMenuTipID
-/*0x2bc*/ bool                         bHasActivatedFirstTimeAlert;    // upstream was +0x2cc
-/*0x2bd*/ uint8_t                      _pad_apr15_0x2bd[3];
+	// data members (apr15-2026-live verified -- see forensics/csidlscreenwnd_apr15_vtable.md
+	// + RedGuides/eqlibdev cross-check at commit c12b766 — CXWnd_size = 0x258 means
+	// CSidlScreenWnd-specific fields start at +0x258 not +0x260; layout shifted -0x08)
+/*0x258*/ CXStr                        SidlText;                       // upstream was +0x270; eqlibdev has at +0x258
+/*0x260*/ CScreenTemplate*             SidlPiece;                      // upstream was +0x278
+/*0x268*/ uint8_t                      RadioGroup_data[0x14];          // ArrayClass<CRadioGroup*> internals (m_length+pad+m_array+m_alloc, 0x14 bytes apr15)
+/*0x27c*/ bool                         bControlsCreated;
+/*0x27d*/ uint8_t                      _pad_apr15_0x27d[3];
+/*0x280*/ bool                         bInitVisibility;
+/*0x281*/ bool                         bVisibleBeforeResize;
+/*0x282*/ uint8_t                      _pad_apr15_0x282[2];
+/*0x284*/ int                          IniFlags;
+/*0x288*/ CXStr                        IniStorageName;
+/*0x290*/ int                          IniVersion;
+/*0x294*/ int                          LastResX;
+/*0x298*/ int                          LastResY;
+/*0x29c*/ bool                         bLastResFullscreen;
+/*0x29d*/ uint8_t                      _pad_apr15_0x29d[3];
+/*0x2a0*/ int                          ContextMenuTipID;
+/*0x2a4*/ uint8_t                      _pad_apr15_0x2a4[4];
+/*0x2a8*/ CXWnd*                       pFirstVScrollChild;
+/*0x2b0*/ int                          ContextMenuID;
+/*0x2b4*/ bool                         bHasActivatedFirstTimeAlert;
+/*0x2b5*/ uint8_t                      _pad_apr15_0x2b5[3];
+/*0x2b8*/ uint8_t                      _pad_apr15_0x2b8[8];            // tail-align to 0x2c0 (eqlibdev keeps sizeof=0x2c0 across all CSidlScreenWnd-derived classes)
 /*0x2c0*/                              // sizeof = 0x2c0 (apr15)
 
 	//----------------------------------------------------------------------------
