@@ -4951,7 +4951,7 @@ enum ItemDisplayFlags
 	FROM_BARTER_SEARCH = 0x00000010
 };
 
-constexpr size_t CItemDisplayWnd_size = 0xAA8; // @sizeof(CItemDisplayWnd) :: 2026-03-10 (live) @ 0x140440E54
+constexpr size_t CItemDisplayWnd_size = 0xAA0; // @sizeof(CItemDisplayWnd) :: 2026-04-15 (live) — forensics/citemdisplaywnd_apr15_vtable.md (vtable 0x140a338c0, 112 slots, 6 overrides; -0x8 shift from upstream 0xAA8)
 
 class [[offsetcomments]] CItemDisplayWnd : public CSidlScreenWnd
 {
@@ -5905,7 +5905,7 @@ public:
 
 constexpr const int MAX_PET_BUTTONS = 14;
 
-constexpr size_t CPetInfoWnd_size = 0x3D0; // @sizeof(CPetInfoWnd) :: 2026-03-10 (live) @ 0x14019B83A
+constexpr size_t CPetInfoWnd_size = 0x3C0; // @sizeof(CPetInfoWnd) :: 2026-04-15 (live) — forensics/cpetinfownd_apr15_vtable.md (vtable 0x140a69d50, 112 slots, 5 overrides; -0x10 shift from upstream 0x3D0)
 
 class [[offsetcomments]] CPetInfoWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -6044,7 +6044,7 @@ enum ECombatState
 };
 
 
-constexpr size_t CPlayerWnd_size = 0x408; // @sizeof(CPlayerWnd) :: 2026-03-10 (live) @ 0x14019C1B0
+constexpr size_t CPlayerWnd_size = 0x3F8; // @sizeof(CPlayerWnd) :: 2026-04-15 (live) — forensics/cplayerwnd_apr15_vtable.md (vtable 0x140a71700, 112 slots, 7 overrides; -0x10 shift from upstream 0x408)
 
 class [[offsetcomments]] CPlayerWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -6441,7 +6441,7 @@ enum ESpellDisplayType
 	SpellDisplayType_TargetBuff,
 };
 
-constexpr size_t CSpellDisplayWnd_size = 0x3B8; // @sizeof(CSpellDisplayWnd) :: 2026-03-10 (live) @ 0x14051551E
+constexpr size_t CSpellDisplayWnd_size = 0x3A8; // @sizeof(CSpellDisplayWnd) :: 2026-04-15 (live) — forensics/cspelldisplaywnd_apr15_vtable.md (vtable 0x140a9ffa8, 112 slots, 4 overrides; -0x10 shift from upstream 0x3B8; bActive at +0x390 not +0x378)
 
 class [[offsetcomments]] CSpellDisplayWnd : public CSidlScreenWnd
 {
