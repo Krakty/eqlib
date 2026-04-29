@@ -3750,7 +3750,7 @@ enum FindLocationType {
 };
 EQLIB_API const char* FindLocationTypeToString(FindLocationType type);
 
-constexpr size_t CFindLocationWnd_size = 0x7C0; // @sizeof(CFindLocationWnd) :: 2026-03-10 (live) @ 0x14019CFB9
+constexpr size_t CFindLocationWnd_size = 0x7B0; // @sizeof(CFindLocationWnd) :: 2026-04-15 (live) — forensics/cfindlocationwnd_apr15_vtable.md (vtable 0x140a139b8, 115 slots, 6 overrides; 5 inline SoeUtil::Optional<UI-component> entries with stride 0xa8 at +0x3d0/+0x470/+0x518/+0x5c0/+0x668; -0x10 shift from upstream 0x7C0)
 
 class [[offsetcomments]] CFindLocationWnd : public CGFScreenWnd
 {
@@ -3855,6 +3855,8 @@ SIZE_CHECK(CFindLocationWnd, CFindLocationWnd_size);
 //============================================================================
 // CFileSelectionWnd
 //============================================================================
+
+constexpr size_t CFileSelectionWnd_size = 0xFB8; // @sizeof(CFileSelectionWnd) :: 2026-04-15 (live) — forensics/cfileselectionwnd_apr15_vtable.md (vtable 0x140a11d10, 112 slots, 4 overrides; CXStr[128] array at +0x788..+0xb88)
 
 class [[offsetcomments]] CFileSelectionWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -5472,7 +5474,7 @@ public:
 	static VirtualFunctionTable* sm_vftable;
 };
 
-constexpr size_t CMapViewWnd_size = 0x858; // @sizeof(CMapViewWnd) :: 2026-03-10 (live) @ 0x14019BD74
+constexpr size_t CMapViewWnd_size = 0x838; // @sizeof(CMapViewWnd) :: 2026-04-15 (live) — forensics/cmapviewwnd_apr15_vtable.md (vtable 0x140a4dc20, 112 slots, 10 overrides; -0x20 shift from upstream 0x858)
 
 class [[offsetcomments]] CMapViewWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -5889,6 +5891,8 @@ inline namespace deprecated {
 // COverseerWnd
 //============================================================================
 
+constexpr size_t COverseerWnd_size = 0x770; // @sizeof(COverseerWnd) :: 2026-04-15 (live) — forensics/coverseerwnd_apr15_vtable.md (vtable 0x1408eac98, 112 slots, 7 overrides)
+
 class [[offsetcomments]] COverseerWnd : public CSidlScreenWnd
 {
 public:
@@ -6226,6 +6230,8 @@ public:
 //============================================================================
 
 // size: 0x500
+constexpr size_t CRaidWnd_size = 0x4F8; // @sizeof(CRaidWnd) :: 2026-04-15 (live) — forensics/craidwnd_apr15_vtable.md (vtable 0x140a80590, 112 slots, 7 overrides; 2 parallel hand-rolled dynamic arrays at +0x4c0/+0x4d8 element_size=0x48 with shared dtor 0x1404d40b0)
+
 class [[offsetcomments]] CRaidWnd : public CSidlScreenWnd, public WndEventHandler, public CVivoxObserver
 {
 	FORCE_SYMBOLS
