@@ -2045,7 +2045,7 @@ public:
 // CBankWnd
 //============================================================================
 
-constexpr size_t CBankWnd_size = 0x2360; // @sizeof(CBankWnd) :: 2026-03-10 (live) @ 0x14019C3D6
+constexpr size_t CBankWnd_size = 0x2350; // @sizeof(CBankWnd) :: 2026-04-15 (live) — forensics/cbankwnd_apr15_vtable.md (vtable 0x1409d3800, 115 slots, 9 overrides; -0x10 shift from upstream 0x2360)
 
 class [[offsetcomments]] CBankWnd : public CGFScreenWnd, public WndEventHandler
 {
@@ -3153,7 +3153,8 @@ inline namespace deprecated {
 	using PCOMPASSDATAINFO DEPRECATE("Use CompassLineSource* instead of PCOMPASSDATAINFO") = CompassLineSource*;
 }
 
-// size 0x2a0 @ 0x56fda5 2021-05-14 (live)
+constexpr size_t CCompassWnd_size = 0x350; // @sizeof(CCompassWnd) :: 2026-04-15 (live) — forensics/ccompasswnd_apr15_vtable.md (vtable 0x1409fca00, 112 slots, 5 overrides; CCompassWnd-specific data offsets MATCH upstream exactly because WndEventHandler subobject absorbs the CSidlScreenWnd -0x10 shift)
+
 class [[offsetcomments]] CCompassWnd : public CSidlScreenWnd, public WndEventHandler
 {
 	FORCE_SYMBOLS
@@ -3179,10 +3180,12 @@ public:
 /*0x2f0*/ int                           timestamp;
 /*0x2f8*/ double                        speed;
 /*0x300*/ int                           timer;
-/*0x304*/ CompassLineSource             lineAdventure;
-/*0x338*/ ArrayClass<CompassLineSource*> lineData;
+/*0x304*/ CompassLineSource             lineAdventure;       // 0x30 bytes upstream — apr15 may extend to 0x40 (forensics flagged for verification)
+/*0x338*/ ArrayClass<CompassLineSource*> lineData;            // confirmed at +0x338 by slot 5 decompile (param_1+0x67)
 /*0x350*/
 };
+
+SIZE_CHECK(CCompassWnd, CCompassWnd_size);
 
 inline namespace deprecated {
 	using EQCOMPASSWINDOW DEPRECATE("Use CCompassWnd instead of EQCOMPASSWINDOW") = CCompassWnd;
@@ -3490,7 +3493,7 @@ enum ECursorAttachmentType
 	eCursorAttachment_EquipmentKeyRingLink,
 };
 
-constexpr size_t CCursorAttachment_size = 0x648; // @sizeof(CCursorAttachment) :: 2026-03-10 (live) @ 0x14019B293
+constexpr size_t CCursorAttachment_size = 0x638; // @sizeof(CCursorAttachment) :: 2026-04-15 (live) — forensics/ccursorattachment_apr15_vtable.md (vtable 0x140a03958, 115 slots, 8 overrides; sizeof estimate [0x638..0x640] from dtor field-iter, no embedded literal — MEDIUM confidence pending __eq_new caller scan)
 
 class [[offsetcomments]] CCursorAttachment : public CGFScreenWnd, public WndEventHandler
 {
