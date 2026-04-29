@@ -4752,9 +4752,10 @@ public:
 // C
 //============================================================================
 
-// NOTE: CInventoryWnd_size NOT anchored by single sizeof literal in apr15 binary.
-// Forensics flagged slot-113 field offset +0x1d90 exceeds upstream's declared 0x1184.
-// SIZE_CHECK deferred pending exact-sizeof verification.
+// apr15 sizeof confirmed via raw-asm dtor scan: slot 1 dtor 0x14040fb90 has
+// MOV EDX, 0x22b8 before __eq_delete. Apr15 grew CInventoryWnd by 0x1134
+// bytes (4404 bytes) vs upstream's stale 0x1184 — significant layout overhaul.
+constexpr size_t CInventoryWnd_size = 0x22b8; // @sizeof :: 2026-04-15 (live) — forensics/cinventorywnd_apr15_vtable.md (vtable 0x140a2c540, 117 slots, 11+2 overrides)
 
 class [[offsetcomments]] CInventoryWnd : public CGFScreenWnd, public PopDialogHandler, public WndEventHandler, public IObserver
 {
