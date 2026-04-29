@@ -4509,6 +4509,9 @@ public:
 
 struct guildmotdSet;
 
+// CGuild inherits GuildBase (a non-window data manager), NOT CSidlScreenWnd
+constexpr size_t CGuild_size = 0x1438; // @sizeof :: 2026-04-15 (live) — forensics/cguild_apr15_vtable.md (vtable 0x140888b50, 8 slots, 4 overrides; static singleton @ DAT_140eb0170)
+
 class [[offsetcomments]] CGuild : public GuildBase
 {
 public:
@@ -6216,6 +6219,9 @@ public:
 // CPurchaseGroupWnd
 //============================================================================
 
+// Upstream UI.h declares this class EMPTY but apr15 binary has ~12 instance fields
+constexpr size_t CPurchaseGroupWnd_size = 0x350; // @sizeof :: 2026-04-15 (live) — forensics/cpurchasegroupwnd_apr15_vtable.md (vtable 0x1408ed7b0, 114 slots: 4 inherited overrides + 2 secondary-base extension slots; secondary subobject @ +0x2C0 vtable 0x1408edb30; 12 instance fields not declared upstream)
+
 class [[offsetcomments]] CPurchaseGroupWnd : public CSidlScreenWnd
 {
 public:
@@ -7186,6 +7192,8 @@ public:
 
 SIZE_CHECK(ZoneGuideManagerClient, ZoneGuideManagerClient_size)
 
+constexpr size_t CZoneGuideWnd_size = 0x438; // @sizeof :: 2026-04-15 (live) — forensics/czoneguidewnd_apr15_vtable.md (vtable 0x140990ad8, 112 slots, 6 overrides; 38 child-window pointers @+0x2C8..+0x3E8)
+
 class [[offsetcomments]] CZoneGuideWnd : public CSidlScreenWnd, public WndEventHandler
 {
 	FORCE_SYMBOLS
@@ -7251,6 +7259,8 @@ public:
 /*0x444*/
 };
 
+constexpr size_t CZonePathWnd_size = 0x2D8; // @sizeof :: 2026-04-15 (live) — forensics/czonepathwnd_apr15_vtable.md (vtable 0x140992b38, 112 slots, 7 overrides; 3 fields: currentZone +0x2C4, zonePathDirty +0x2C8, listZones +0x2D0)
+
 class [[offsetcomments]] CZonePathWnd : public CSidlScreenWnd, public WndEventHandler
 {
 public:
@@ -7276,6 +7286,8 @@ enum EStaticScreenPieceClasses
 
 	StaticScreenPieceMax,
 };
+
+constexpr size_t CSidlManagerBase_size = 0x298; // @sizeof :: 2026-04-15 (live) — forensics/csidlmanagerbase_apr15_vtable.md (top-level class, vtable 0x140aeb4a0, 2 slots: ~CSidlManagerBase + CreateXWnd; dispatches 17 template-tag cases for non-game-only window types)
 
 class [[offsetcomments]] CSidlManagerBase
 {
@@ -7398,6 +7410,8 @@ public:
 /*0x290*/ CXStr                                  ErrorString;
 /*0x298*/
 };
+
+constexpr size_t CSidlManager_size = 0x298; // @sizeof :: 2026-04-15 (live) — forensics/csidlmanager_apr15_vtable.md (vtable 0x140a973a0, 2 slots both overridden, 0 new fields; CreateXWnd handles 5 in-game-only template tags: SpellGem 0x1F, Gauge 0x20, InvSlot 0x21, Label 0x24, HotButton 0x35)
 
 class [[offsetcomments]] CSidlManager : public CSidlManagerBase
 {
@@ -7561,6 +7575,9 @@ private:
 //----------------------------------------------------------------------------
 
 // This is the frame the holds the EQ and store buttons
+// apr15 has 2 EXTRA fields not in upstream: timer @+0x2E4 + 4-byte field @+0x2EC
+constexpr size_t CEQMainWnd_size = 0x2F0; // @sizeof :: 2026-04-15 (live) — forensics/ceqmainwnd_apr15_vtable.md (vtable 0x140a0acd8, 113 slots: 5 overrides + 1 NEW UpdateCascadeMenuItems at slot 112; +0xc growth from upstream-implied 0x2E4)
+
 class [[offsetcomments]] CEQMainWnd : public CSidlScreenWnd
 {
 public:
