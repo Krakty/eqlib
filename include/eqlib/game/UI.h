@@ -1251,7 +1251,8 @@ public:
 // CSliderWnd
 //============================================================================
 
-// size: 0x258 6/10/2019 (test)
+constexpr size_t CSliderWnd_size = 0x2f8; // @sizeof(CSliderWnd) :: 2026-04-15 (live) — forensics/csliderwnd_apr15_vtable.md (vtable 0x140ae9168, 105 slots, 8 overrides; -0x10 shift from upstream + apr15 adds Value/trackLength/NumTicks/etc trailing fields)
+
 class [[offsetcomments]] CSliderWnd : public CXWnd
 {
 public:
@@ -1283,15 +1284,27 @@ public:
 	EQLIB_OBJECT void UpdateThumb();
 
 	//----------------------------------------------------------------------------
-	// data members
+	// data members — apr15: shifted -0x10 from upstream; apr15 also adds 7 trailing
+	// fields (Value/trackLength/NumTicks/thumbPixelOffset/leftClampPad/yCenterOffset/
+	// bIsDragging/bIsHovering) not declared upstream
 
-/*0x268*/ CButtonDrawTemplate      bdtThumb;
-/*0x2d0*/ CTextureAnimation*       ptaBackground;
-/*0x2d8*/ CTextureAnimation*       ptaEndCapLeft;
-/*0x2e0*/ CTextureAnimation*       ptaEndCapRight;
-/*0x2e8*/
-	// more ...
+/*0x258*/ CButtonDrawTemplate      bdtThumb;          // 0x68 bytes (13 ptrs)
+/*0x2c0*/ CTextureAnimation*       ptaBackground;
+/*0x2c8*/ CTextureAnimation*       ptaEndCapRight;    // apr15: physically swapped vs upstream (ctor writes template+0x80 → +0x2c8)
+/*0x2d0*/ CTextureAnimation*       ptaEndCapLeft;     // apr15: physically swapped vs upstream
+/*0x2d8*/ int                      Value;             // apr15 NEW
+/*0x2dc*/ int                      trackLength;       // apr15 NEW
+/*0x2e0*/ int                      NumTicks;          // apr15 NEW
+/*0x2e4*/ int                      thumbPixelOffset;  // apr15 NEW
+/*0x2e8*/ int                      leftClampPad;      // apr15 NEW
+/*0x2ec*/ int                      yCenterOffset;     // apr15 NEW
+/*0x2f0*/ bool                     bIsDragging;       // apr15 NEW
+/*0x2f1*/ bool                     bIsHovering;       // apr15 NEW
+/*0x2f2*/ uint8_t                  _pad_0x2f2[6];
+/*0x2f8*/
 };
+
+SIZE_CHECK(CSliderWnd, CSliderWnd_size);
 
 //============================================================================
 // CStmlWnd
