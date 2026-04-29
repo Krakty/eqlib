@@ -1915,6 +1915,8 @@ class RefreshCorpseItemChoices;
 class CGroupMemberBase;
 struct RaidMember;
 
+constexpr size_t CAdvancedLootWnd_size = 0x410; // @sizeof :: 2026-04-15 (live) — forensics/cadvancedlootwnd_apr15_vtable.md (vtable 0x14086bf90, 112 slots, 9 overrides)
+
 class [[offsetcomments]] CAdvancedLootWnd : public CSidlScreenWnd, public PopDialogHandler, public WndEventHandler
 {
 public:
@@ -2029,6 +2031,8 @@ public:
 //============================================================================
 // CBandolierWnd
 //============================================================================
+
+constexpr size_t CBandolierWnd_size = 0x348; // @sizeof :: 2026-04-15 (live) — forensics/cbandolierwnd_apr15_vtable.md (vtable 0x1409d1b38, 112 slots, 4 overrides; 4 weapon-set sub-objects @+0x320..+0x338)
 
 class [[offsetcomments]] CBandolierWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -2476,6 +2480,8 @@ public:
 //============================================================================
 // CBodyTintWnd
 //============================================================================
+
+constexpr size_t CBodyTintWnd_size = 0x390; // @sizeof :: 2026-04-15 (live) — forensics/cbodytintwnd_apr15_vtable.md (vtable 0x1409e0e70, 112 slots, 7 overrides; uses DAT_140eb2318 render-context)
 
 class [[offsetcomments]] CBodyTintWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -3573,6 +3579,8 @@ SIZE_CHECK(CCursorAttachment, CCursorAttachment_size);
 // CDragonHoardWnd
 //============================================================================
 
+constexpr size_t CDragonHoardWnd_size = 0x368; // @sizeof :: 2026-04-15 (live) — forensics/cdragonhoardwnd_apr15_vtable.md (vtable 0x140897b90, 112 slots, 6 overrides; slot 56 override calls PcClient::AlertInventoryChanged)
+
 class [[offsetcomments]] CDragonHoardWnd : public CSidlScreenWnd, public WndEventHandler
 {
 public:
@@ -3641,6 +3649,8 @@ inline namespace deprecated {
 //============================================================================
 // CPlayerCustomizationWnd
 //============================================================================
+
+constexpr size_t CPlayerCustomizationWnd_size = 0x3F8; // @sizeof :: 2026-04-15 (live) — forensics/cplayercustomizationwnd_apr15_vtable.md (vtable 0x140a6dc08, 112 slots, 6 overrides; uses DAT_140eb2318 render-context)
 
 class [[offsetcomments]] CPlayerCustomizationWnd : public CSidlScreenWnd
 {
