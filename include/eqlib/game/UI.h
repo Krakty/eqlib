@@ -3300,7 +3300,7 @@ public:
 /*0x368*/ CStmlWnd*     pCombineSize;
 /*0x370*/ bool          bCombineValid;
 /*0x371*/ bool          bUserCloseable;
-/*0x374*/ int           ContainerType;            // POSITION_UNRESOLVED in apr15 — kept at upstream-shifted offset; not accessed by sampled overrides; likely set by CheckCloseable/ContainsNoDrop (out of vtable scope)
+/*0x374*/ int           ContainerType;            // apr15: VERIFIED HIGH (Round-2 close: SetContainer FUN_1403cd7b0 has 12 accesses to [this+0x374] — 1 init=0 classic, 1 conditional write iVar20 (1=standard/2=combine), 8 read sites comparing 0/1/2 gating pStandardItems/pCombineItems/pStandardSize/pCombineSize). Apr15 layout = upstream -0x10 uniform shift, no field deletions/reorders.
 /*0x378*/ int           IndexDoneButton;
 /*0x380*/ CContextMenu* ContextMenu;
 /*0x388*/
