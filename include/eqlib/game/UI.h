@@ -4644,6 +4644,8 @@ public:
 // CHotButtonWnd
 //============================================================================
 
+constexpr size_t CHotButtonWnd_size = 0x458; // @sizeof(CHotButtonWnd) :: 2026-04-15 (live) — forensics/chotbuttonwnd_apr15_vtable.md (vtable 0x140a28640 + 2-slot secondary 0x140a289c0 at +0x2c0 for popup-callback subobject — NOT extra primary slots)
+
 class [[offsetcomments]] CHotButtonWnd : public CSidlScreenWnd, public PopDialogHandler
 {
 public:
@@ -4707,6 +4709,8 @@ public:
 //============================================================================
 
 // size: 0x318
+constexpr size_t CInspectWnd_size = 0x310; // @sizeof(CInspectWnd) :: 2026-04-15 (live) — forensics/cinspectwnd_apr15_vtable.md (vtable 0x140a2a8d0, 112 slots; ctor variant 2 0x1405bc880; embedded IString state at +0x2c0)
+
 class [[offsetcomments]] CInspectWnd : public CSidlScreenWnd, public WndEventHandler
 {
 	FORCE_SYMBOLS
@@ -6775,6 +6779,8 @@ public:
 // CTradeSkillDepotWnd
 //============================================================================
 
+constexpr size_t CTradeskillDepotWnd_size = 0x388; // @sizeof(CTradeskillDepotWnd) :: 2026-04-15 (live) — forensics/ctradeskilldepotwnd_apr15_vtable.md (vtable 0x1408f32b0, 112 slots; embedded IString state at +0x2c0)
+
 class [[offsetcomments]] CTradeskillDepotWnd : public CSidlScreenWnd, public WndEventHandler
 {
 public:
@@ -6828,6 +6834,8 @@ inline namespace deprecated {
 }
 
 // size: 0x10e0 2022-11-22 (test)
+constexpr size_t CTradeSkillWnd_size = 0x10c8; // @sizeof(CTradeSkillWnd) :: 2026-04-15 (live) — forensics/ctradeskillwnd_apr15_vtable.md (vtable 0x140ab7640, 112 slots; embeds SoeUtil::IString @+0x1058, HashListMap recipes @+0x3a8, 12 CTextureAnimation @+0xf30, 500-entry favorites @+0x724..+0x1054, 12 child slots @+0x340..+0x388)
+
 class [[offsetcomments]] CTradeSkillWnd : public CSidlScreenWnd
 {
 	FORCE_SYMBOLS;
