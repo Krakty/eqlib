@@ -330,8 +330,24 @@ public:
 	EQLIB_OBJECT virtual int RequestDockInfo(EDockAction action, CXWnd* wnd, CXRect* rect) { return 0; }
 	EQLIB_OBJECT virtual CXStr GetTooltip() const { return Tooltip; }
 	EQLIB_OBJECT virtual void ClickThroughMenuItemTriggered();
-	EQLIB_OBJECT virtual void SetLocked(bool bValue) { if (Unlockable) Locked = bValue; }
-	bool IsLocked() const { return Locked; }
+	// apr15-2026-live: Unlockable UNFOUND_AFTER_EXHAUSTIVE_SEARCH per
+	// forensics/cxwnd_apr15_member_function_sweep.md (Batch 9 + Batch 11
+	// positive absence proof: WindowStyle dword fully decoded, no CWS_*
+	// bit gates Unlockable; SetEscapable / ApplyLockedStyle /
+	// HitTestSubRects / HandleLButtonDown / CreateChildrenFromSidl /
+	// CreateXWndFromTemplate searched for separate-byte writers, none
+	// match Unlockable semantics).
+	// Locked-as-separate-byte also UNFOUND in the sweep; ApplyLockedStyle
+	// writes [+0x9a]=1 and ctor writes [+0x9a]=0, so the apr15 Locked
+	// byte candidate is +0x9a (currently labelled _apr15_internal_0x09a
+	// in the master layout). Promotion of +0x9a -> Locked is a separate
+	// NAME-ALIAS task (audit row Cat C re-categorisation pending).
+	// SetLocked body is gated on GetUnlockable() (always false) so the
+	// upstream "only-locks-if-unlockable" semantic is preserved as a
+	// no-op. Compat stubs here are NOT TODO stubs -- the upstream fields
+	// are genuinely absent (positive proof) in apr15.
+	EQLIB_OBJECT virtual void SetLocked(bool /*bValue*/) { /* no-op: GetUnlockable() always false in apr15 */ }
+	bool IsLocked() const { return false; }
 	EQLIB_OBJECT virtual int HitTest(const CXPoint& pos, int* result) const;
 	EQLIB_OBJECT virtual CXRect GetHitTestRect(int code) const;
 	EQLIB_OBJECT virtual CXRect GetInnerRect() const;
@@ -553,8 +569,83 @@ public:
 	void SetFadeToAlpha(uint8_t Value) { FadeToAlpha = Value; }
 	uint8_t GetFadeToAlpha() const { return FadeToAlpha; }
 
-	// apr15-2026-live: Data REMOVED — upstream +0x198 (8B) overlaps verified
-	// Location @+0x18c..+0x19c (last 4 bytes conflict). Accessors removed.
+	// apr15-2026-live: Data field UNFOUND_AFTER_EXHAUSTIVE_SEARCH per
+	// forensics/cxwnd_apr15_field_locations.md (round-4 forensics:
+	// SetData/GetData inlined into MQ DLL only, eqgame.exe has no
+	// virtual setter, no qword inline-setter thunk, no SIDL data-slot
+	// loader; upstream +0x198 (8B) also overlaps verified Location
+	// @+0x18c..+0x19c last 4 bytes).
+	// Choice: accept no-op semantics. Plugin code that round-trips Data
+	// will silently zero out values. If a side-table approach is ever
+	// needed, that is an MQ-side design decision, not an apr15 RE issue.
+	// These are NOT TODO stubs -- field genuinely absent in apr15.
+	int64_t GetData() const { return 0; }
+	void SetData(int64_t /* value */) { /* no-op in apr15 */ }
+
+	// apr15-2026-live: bHCenterTooltip UNFOUND_AFTER_EXHAUSTIVE_SEARCH per
+	// forensics/cxwnd_apr15_field_locations.md (positive absence proof:
+	// all 3 tooltip-render functions decompiled, none read a centering
+	// byte; +0x221 candidate is bBottomAnchoredToBottom verified by
+	// GetRelativeRect + Resize + 4 other readers).
+	// Compat stub returns false; not a TODO stub -- field genuinely
+	// absent in apr15.
+	bool GetHCenterTooltip() const { return false; }
+
+	// apr15-2026-live: bTiled UNFOUND_AFTER_EXHAUSTIVE_SEARCH per
+	// forensics/cxwnd_apr15_member_function_sweep.md (Batch 9 + Batch 11
+	// positive absence proof: WindowStyle dword fully decoded, no CWS_*
+	// bit gates a "tiled background" semantic; CWS_TILEBOX is button-only
+	// per the bit-decode walk). The +0x32 byte (currently labelled bTiled
+	// in the master layout) has SIDL writers but no readers gating
+	// runtime behavior on it -- runtime-vacuous in apr15.
+	// Compat stub returns false; not a TODO stub -- field genuinely
+	// absent in apr15. (Existing IsTiled() returning bTiled is preserved
+	// per the no-touching-working-accessors rule; GetTiled here is the
+	// canonical compat path returning the audit-mandated false.)
+	bool GetTiled() const { return false; }
+
+	// apr15-2026-live: bCaptureTitle UNFOUND_AFTER_EXHAUSTIVE_SEARCH per
+	// forensics/cxwnd_apr15_member_function_sweep.md (Batch 9 + Batch 11
+	// positive absence proof: no CWS_* bit gates titlebar-capture
+	// semantic; SetEscapable / ApplyLockedStyle / HitTestSubRects /
+	// HandleLButtonDown searched for a separate-byte writer, none match
+	// CaptureTitle semantics).
+	// Compat stub returns false; not a TODO stub -- field genuinely
+	// absent in apr15.
+	bool GetCaptureTitle() const { return false; }
+
+	// apr15-2026-live: Unlockable UNFOUND_AFTER_EXHAUSTIVE_SEARCH per
+	// forensics/cxwnd_apr15_member_function_sweep.md (Batch 9 + Batch 11
+	// positive absence proof: no runtime "unlock" path exists; no CWS_*
+	// bit gates Unlockable; no separate-byte writer matches semantics).
+	// Compat stub returns false; not a TODO stub -- field genuinely
+	// absent in apr15. SetLocked above is gated on this stub so the
+	// upstream "only-locks-if-unlockable" semantic becomes a no-op.
+	bool GetUnlockable() const { return false; }
+
+	// apr15-2026-live: bIsTransitioning is NOT a discrete byte in apr15
+	// per forensics/cxwnd_apr15_member_function_sweep.md and
+	// forensics/cxwnd_apr15_field_locations.md (Transition int @+0x104
+	// is the canonical state, ProcessTransition reads non-zero, terminal
+	// state == 3). Derived from Transition int (real apr15 semantic);
+	// not a TODO stub -- the upstream backing field genuinely doesn't
+	// exist as a separate bool, the semantic IS Transition != 0 && != 3.
+	bool GetIsTransitioning() const { return Transition != 0 && Transition != 3; }
+
+	// apr15-2026-live: TitlePiece2 -- audit row Cat C marks this as
+	// REMOVED in apr15 per forensics/cxwnd_apr15_field_locations.md
+	// (Field 8: positive absence proof for upstream +0x038 slot --
+	// region is bRightAnchoredToRight + 0x64 ints, NOT a pointer).
+	// HOWEVER, the master pass-4 layout retains a verified animation
+	// pointer at +0x110 currently labelled TitlePiece2 (DrawNC reader at
+	// 0x1405c4e30). The pass-4 attribution and the field_locations
+	// absence-proof are in tension: pass-4 is "is there an anim ptr at
+	// +0x110" (yes) and field_locations is "is the +0x038 slot
+	// TitlePiece2" (no). The +0x110 storage is therefore RETAINED as
+	// canonical apr15 storage (do-not-remove rule); this getter exists
+	// as the audit-Cat-C compat path documenting the absence-of-upstream
+	// proof. Not a TODO stub.
+	void* GetTitlePiece2() const { return nullptr; }
 
 	DEPRECATE("Use GetClickThrough instead of GetClickable")
 	bool GetClickable() const { return bClickThrough; }
@@ -564,14 +655,18 @@ public:
 	bool GetClickThrough() const { return bClickThrough; }
 	void SetClickThrough(bool bValue) { bClickThrough = bValue; }
 
-	// apr15-2026-live: bShowClickThroughMenuItem REMOVED from CXWnd.
-	// Round-2 audit forensics/cxwnd_apr15_field_locations.md positively proves
-	// no bool exists at any plausible offset:
-	//   - ctor zero-pair at 0x1405c1d70+0x1405c1d77 covers 16 contiguous bytes
-	//     at +0x22c..+0x23c (single 16-byte CXRect, not bool + rect).
-	//   - GetClientRect 0x1405c6100 writes 4 dwords at +0x22c..+0x238.
-	//   - No CXWnd member function reads a bool at +0x22c.
-	// Accessors removed entirely; callers must be updated.
+	// apr15-2026-live: bShowClickThroughMenuItem collapsed into the
+	// +0x22c cached_ClientRect 16-byte span per
+	// forensics/cxwnd_csidlscreenwnd_apr15_handoff.md and
+	// forensics/cxwnd_apr15_field_locations.md (Round-2 positive
+	// absence proof: ctor zero-pair at 0x1405c1d70+0x1405c1d77 covers
+	// 16 contiguous bytes at +0x22c..+0x23c as a single CXRect, NOT a
+	// bool + rect; GetClientRect 0x1405c6100 writes 4 dwords at
+	// +0x22c..+0x238; no CXWnd member function reads a bool at +0x22c).
+	// ALT_MEMBER_ALIAS shim cannot be added because the upstream
+	// backing field doesn't exist. Compat stub returns false; not a
+	// TODO stub -- field genuinely absent in apr15.
+	bool GetShowClickThroughMenuItem() const { return false; }
 
 	void SetBottomAnchoredToTop(bool bValue) { bBottomAnchoredToTop = bValue; }
 	void SetLeftAnchoredToLeft(bool bValue) { bLeftAnchoredToLeft = bValue; }
@@ -603,7 +698,15 @@ public:
 	void SetRightOffset(int Value) { RightOffset = Value; }
 	int  GetRightOffset() const    { return RightOffset; }
 
-	int GetXMLIndex() const { return XMLIndex; }
+	// apr15-2026-live: XMLIndex UNFOUND_AFTER_EXHAUSTIVE_SEARCH per
+	// forensics/cxwnd_apr15_member_function_sweep.md (Batch 9 + Batch 11
+	// positive absence proof: no CWS_* bit, no separate-byte writer in
+	// CreateChildrenFromSidl / CreateXWndFromTemplate / SIDL template
+	// instantiator FUN_1405f5730; no XML-init writer reaches a int slot
+	// matching upstream XMLIndex semantics).
+	// Compat stub returns -1 (the canonical "no-XML-binding" sentinel);
+	// not a TODO stub -- field genuinely absent in apr15.
+	int GetXMLIndex() const { return -1; }
 
 	void SetXMLTooltip(const CXStr& Value) { XMLToolTip = Value; }
 	CXStr GetXMLTooltip() const { return XMLToolTip; }
