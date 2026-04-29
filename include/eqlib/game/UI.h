@@ -1632,20 +1632,28 @@ SIZE_CHECK(CTreeViewWnd, CTreeViewWnd_size);
 
 //============================================================================
 
+constexpr size_t CLayoutWnd_size = 0x2d8; // @sizeof(CLayoutWnd) :: 2026-04-15 (live) — forensics/clayoutwnd_apr15_vtable.md (vtable 0x140aeb5b8, 114 slots: 3 overrides + 2 NEW virtuals (LoadIniInfo/StoreIniInfo extension hooks); -0x10 shift from upstream 0x2e8)
+
 class [[offsetcomments]] CLayoutWnd : public CSidlScreenWnd
 {
 public:
 	CLayoutWnd(CXWnd*, uint32_t, const CXRect&, const CXStr&);
 	virtual ~CLayoutWnd();
 
-/*0x2d0*/ uint32_t             spacing;
-/*0x2d4*/ bool                 expandLast;
-/*0x2d8*/ int                  paddingLeft;
-/*0x2dc*/ int                  paddingRight;
-/*0x2e0*/ int                  paddingTop;
-/*0x2e4*/ int                  paddingBottom;
-/*0x2e8*/
+	// apr15: shifted -0x10 from upstream
+/*0x2c0*/ uint32_t             spacing;
+/*0x2c4*/ bool                 expandLast;
+/*0x2c5*/ uint8_t              _pad_0x2c5[3];
+/*0x2c8*/ int                  paddingLeft;
+/*0x2cc*/ int                  paddingRight;
+/*0x2d0*/ int                  paddingTop;
+/*0x2d4*/ int                  paddingBottom;
+/*0x2d8*/
 };
+
+SIZE_CHECK(CLayoutWnd, CLayoutWnd_size);
+
+constexpr size_t CHorizontalLayoutWnd_size = 0x318; // @sizeof :: 2026-04-15 (live) — forensics/chorizontallayoutwnd_apr15_vtable.md (vtable 0x140aeb948, 114 slots: 8 overrides + 2 NEW virtuals using INI key "%s.ch%d.wd")
 
 // Horizontal and Vertical layouts are basically the same, but transposed.
 class [[offsetcomments]] CHorizontalLayoutWnd : public CLayoutWnd
@@ -1653,43 +1661,62 @@ class [[offsetcomments]] CHorizontalLayoutWnd : public CLayoutWnd
 	FORCE_SYMBOLS
 
 public:
-/*0x2e8*/ ArrayClass<CXWnd*>         visibleChildren;
-/*0x300*/ ArrayClass<CXRect>         dividerRects;
-/*0x318*/ int                        activeDivider;
-/*0x31c*/ bool                       dividerHover;
-/*0x31d*/ bool                       dividerMoving;
-/*0x320*/ int                        oldPosCoord;              // X for horizontal, Y for vertical
-/*0x324*/ bool                       bStyle_Dividers;          // the Style_Dividers property from XML
-/*0x328*/
+	// apr15: shifted -0x10 from upstream
+/*0x2d8*/ ArrayClass<CXWnd*>         visibleChildren;
+/*0x2f0*/ ArrayClass<CXRect>         dividerRects;
+/*0x308*/ int                        activeDivider;
+/*0x30c*/ bool                       dividerHover;
+/*0x30d*/ bool                       dividerMoving;
+/*0x30e*/ uint8_t                    _pad_0x30e[2];
+/*0x310*/ int                        oldPosCoord;              // X for horizontal, Y for vertical
+/*0x314*/ bool                       bStyle_Dividers;          // the Style_Dividers property from XML
+/*0x315*/ uint8_t                    _pad_0x315[3];
+/*0x318*/
 };
+
+SIZE_CHECK(CHorizontalLayoutWnd, CHorizontalLayoutWnd_size);
+
+constexpr size_t CVerticalLayoutWnd_size = 0x318; // @sizeof :: 2026-04-15 (live) — forensics/cverticallayoutwnd_apr15_vtable.md (vtable 0x140aebcd8, byte-identical layout to CHorizontalLayoutWnd; INI key "%s.ch%d.ht")
 
 class [[offsetcomments]] CVerticalLayoutWnd : public CLayoutWnd
 {
 public:
-/*0x2e8*/ ArrayClass<CXWnd*>         visibleChildren;
-/*0x300*/ ArrayClass<CXRect>         dividerRects;
-/*0x318*/ int                        activeDivider;
-/*0x31c*/ bool                       dividerHover;
-/*0x31d*/ bool                       dividerMoving;
-/*0x320*/ int                        oldPosCoord;              // X for horizontal, Y for vertical
-/*0x324*/ bool                       bStyle_Dividers;          // the Style_Dividers property from XML
-/*0x328*/
+	// apr15: byte-identical to CHorizontalLayoutWnd (-0x10 shift from upstream)
+/*0x2d8*/ ArrayClass<CXWnd*>         visibleChildren;
+/*0x2f0*/ ArrayClass<CXRect>         dividerRects;
+/*0x308*/ int                        activeDivider;
+/*0x30c*/ bool                       dividerHover;
+/*0x30d*/ bool                       dividerMoving;
+/*0x30e*/ uint8_t                    _pad_0x30e[2];
+/*0x310*/ int                        oldPosCoord;              // X for horizontal, Y for vertical
+/*0x314*/ bool                       bStyle_Dividers;          // the Style_Dividers property from XML
+/*0x315*/ uint8_t                    _pad_0x315[3];
+/*0x318*/
 };
+
+SIZE_CHECK(CVerticalLayoutWnd, CVerticalLayoutWnd_size);
+
+constexpr size_t CTileLayoutWnd_size = 0x2f0; // @sizeof :: 2026-04-15 (live) — forensics/ctilelayoutwnd_apr15_vtable.md (vtable 0x140aec068, 114 slots: 5 overrides + 2 NEW virtuals (inherits CLayoutWnd's empty defaults))
 
 class [[offsetcomments]] CTileLayoutWnd : public CLayoutWnd
 {
 	FORCE_SYMBOLS
 
 public:
-/*0x2e8*/ bool                       horizontalFirst;
-/*0x2e9*/ bool                       anchorToTop;
-/*0x2ea*/ bool                       anchorToLeft;
-/*0x2ec*/ int                        secondarySpacing;
-/*0x2f0*/ bool                       firstPieceTemplate;
-/*0x2f1*/ bool                       snapToChildren;
-/*0x2f8*/ CXWnd*                     autoStretchWindow;
-/*0x300*/
+	// apr15: shifted -0x10 from upstream
+/*0x2d8*/ bool                       horizontalFirst;
+/*0x2d9*/ bool                       anchorToTop;
+/*0x2da*/ bool                       anchorToLeft;
+/*0x2db*/ uint8_t                    _pad_0x2db[1];
+/*0x2dc*/ int                        secondarySpacing;
+/*0x2e0*/ bool                       firstPieceTemplate;       // ctor write only — no read site found in scope
+/*0x2e1*/ bool                       snapToChildren;
+/*0x2e2*/ uint8_t                    _pad_0x2e2[6];
+/*0x2e8*/ CXWnd*                     autoStretchWindow;
+/*0x2f0*/
 };
+
+SIZE_CHECK(CTileLayoutWnd, CTileLayoutWnd_size);
 
 //============================================================================
 //============================================================================
