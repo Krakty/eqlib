@@ -1589,12 +1589,27 @@ SIZE_CHECK(CTabWnd, CTabWnd_size);
 // CTreeViewWnd
 //============================================================================
 
+constexpr size_t CTreeViewWnd_size = 0x360; // @sizeof(CTreeViewWnd) :: 2026-04-15 (live) — forensics/ctreeviewwnd_apr15_vtable.md (vtable 0x140aea7c8, 116 slots, 2 overrides; 5 NEW data fields not declared in upstream UI.h)
+
 class [[offsetcomments]] CTreeViewWnd : public CListWnd
 {
 public:
 	CTreeViewWnd(CXWnd*, uint32_t, CXRect, int);
 	virtual ~CTreeViewWnd();
+
+	virtual int WndNotification(CXWnd*, uint32_t, void*) override; // dispatches XWN_LCLICK to OnLineClick to toggle node expand
+
+	// apr15 NEW data members (not declared upstream UI.h — UI.h's CTreeViewWnd was empty)
+/*0x338*/ void*    RootItem;                    // qword, root tree node
+/*0x340*/ uint8_t  InlineComparator[0x10];      // 1-virtual mini-class subobject (vt 0x140aea7c0, string-compare functor body at 0x1405abc30)
+/*0x350*/ void*    pComparator;                 // qword, pointer to comparator (may point to InlineComparator above or external)
+/*0x358*/ bool     bComparatorOwned;
+/*0x359*/ uint8_t  _pad_0x359[3];
+/*0x35c*/ int      TotalWidth;
+/*0x360*/
 };
+
+SIZE_CHECK(CTreeViewWnd, CTreeViewWnd_size);
 
 //============================================================================
 
@@ -3303,6 +3318,8 @@ public:
 // CContextMenu
 //============================================================================
 
+constexpr size_t CContextMenu_size = 0x340; // @sizeof(CContextMenu) :: 2026-04-15 (live) — forensics/ccontextmenu_apr15_vtable.md (vtable 0x140aea2a8, 116 slots, 3 overrides — slot 50 is CFG no-op suppression to 0x140066810; -0xc shift from upstream 0x34c)
+
 class [[offsetcomments]] CContextMenu : public CListWnd
 {
 	FORCE_SYMBOLS
@@ -3327,11 +3344,14 @@ public:
 		bool bChecked, COLORREF Color, bool bEnable);
 
 	//----------------------------------------------------------------------------
-	// data members
+	// data members — apr15: shifted -0x10 from upstream
 
-/*0x348*/ int          NumItems;
-/*0x34c*/
+/*0x338*/ int          NumItems;
+/*0x33c*/ uint8_t      _pad_0x33c[4];
+/*0x340*/
 };
+
+SIZE_CHECK(CContextMenu, CContextMenu_size);
 
 class CGFContextMenu : public CContextMenu
 {
