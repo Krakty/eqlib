@@ -2225,6 +2225,8 @@ struct BarterSearchedItem
 
 // sizeof(CBarterWnd) == 0x4c8 // test 2022-02-07
 
+constexpr size_t CBarterWnd_size = 0x4c0; // @sizeof :: 2026-04-15 (live) — forensics/cbarterwnd_apr15_vtable.md (vtable 0x1409d9190, 112 slots, 6 overrides; opcodes 0x4df4/0x80b7)
+
 class [[offsetcomments]] CBarterWnd : public CSidlScreenWnd
 {
 public:
@@ -2288,6 +2290,8 @@ struct [[offsetcomments]] BarterBuyerSearchData
 };
 
 // Size: 3c8
+
+constexpr size_t CBarterSearchWnd_size = 0x3c8; // @sizeof :: 2026-04-15 (live) — forensics/cbartersearchwnd_apr15_vtable.md (vtable 0x1409d7240, 112 slots, 6 overrides; opcodes 0x4df4/0x80b7)
 
 class [[offsetcomments]] CBarterSearchWnd : public CSidlScreenWnd
 {
@@ -2363,6 +2367,8 @@ struct [[offsetcomments]] BazaarSearchResults
 };
 
 // CBazaarSearchWnd_size: 0x9720
+constexpr size_t CBazaarSearchWnd_size = 0x9718; // @sizeof :: 2026-04-15 (live) — forensics/cbazaarsearchwnd_apr15_vtable.md (vtable 0x1409db4b8, 112 slots, 7 overrides incl slot 106; opcodes 0xeabe/0xf555)
+
 class [[offsetcomments]] CBazaarSearchWnd : public CSidlScreenWnd, public WndEventHandler
 {
 	FORCE_SYMBOLS
@@ -2445,6 +2451,8 @@ inline namespace deprecated {
 constexpr int MAX_BAZAAR_ITEMS = 200;
 
 // size: 0xdf0
+constexpr size_t CBazaarWnd_size = 0xdf0; // @sizeof :: 2026-04-15 (live) — forensics/cbazaarwnd_apr15_vtable.md (vtable 0x1409dd490, 112 slots, 7 overrides; opcodes 0x4df4/0x80b7)
+
 class [[offsetcomments]] CBazaarWnd : public CSidlScreenWnd, public WndEventHandler
 {
 	FORCE_SYMBOLS
@@ -5591,6 +5599,8 @@ SIZE_CHECK(CMapViewWnd, CMapViewWnd_size);
 //============================================================================
 // CMarketplaceWnd
 //============================================================================
+
+constexpr size_t CMarketplaceWnd_size = 0xa00; // @sizeof :: 2026-04-15 (live) — forensics/cmarketplacewnd_apr15_vtable.md (vtable 0x140a4ff30, 112 slots, 10 overrides incl slots 106/107; TWO helper sub-instances at +0x2c0 + +0x2d0; opcode 0xad48)
 
 class [[offsetcomments]] CMarketplaceWnd : public CSidlScreenWnd
 {
