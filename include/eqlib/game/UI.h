@@ -3664,7 +3664,7 @@ public:
 // CFindItemWnd
 //============================================================================
 
-constexpr size_t CFindItemWnd_size = 0x400; // @sizeof(CFindItemWnd) :: 2026-03-10 (live) @ 0x14019C7FB
+constexpr size_t CFindItemWnd_size = 0x3F0; // @sizeof(CFindItemWnd) :: 2026-04-15 (live) — forensics/cfinditemwnd_apr15_vtable.md (vtable 0x1408b6840, 112 slots, 7 overrides; -0x10 shift from upstream 0x400)
 
 class [[offsetcomments]] CFindItemWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -3966,7 +3966,7 @@ public:
 // CGiveWnd
 //============================================================================
 
-constexpr size_t CGiveWnd_size = 0xB50; // @sizeof(CGiveWnd) :: 2026-03-10 (live) @ 0x14019CA6B
+constexpr size_t CGiveWnd_size = 0xB40; // @sizeof(CGiveWnd) :: 2026-04-15 (live) — forensics/cgivewnd_apr15_vtable.md (vtable 0x140a1adb0, 117 slots: 7 overrides + 2 NEW (secondary-base dtor thunk + popup-id-0x79 dispatcher); inherits CGFScreenWnd + PopDialogHandler@+0x3a8 + WndEventHandler@+0x3b0; -0x10 shift)
 
 class [[offsetcomments]] CGiveWnd : public CGFScreenWnd, public PopDialogHandler, public WndEventHandler
 {
@@ -4731,6 +4731,10 @@ public:
 // C
 //============================================================================
 
+// NOTE: CInventoryWnd_size NOT anchored by single sizeof literal in apr15 binary.
+// Forensics flagged slot-113 field offset +0x1d90 exceeds upstream's declared 0x1184.
+// SIZE_CHECK deferred pending exact-sizeof verification.
+
 class [[offsetcomments]] CInventoryWnd : public CGFScreenWnd, public PopDialogHandler, public WndEventHandler, public IObserver
 {
 public:
@@ -5135,7 +5139,7 @@ public:
 // CKeyRingWnd
 //============================================================================
 
-constexpr size_t CKeyRingWnd_size = 0x4A8; // @sizeof(CKeyRingWnd) :: 2026-03-10 (live) @ 0x14019C388
+constexpr size_t CKeyRingWnd_size = 0x498; // @sizeof(CKeyRingWnd) :: 2026-04-15 (live) — forensics/ckeyringwnd_apr15_vtable.md (vtable 0x1408b8988, 112 slots, 6 overrides; WndEventHandler@+0x2c0; -0x10 shift)
 
 class [[offsetcomments]] CKeyRingWnd : public CSidlScreenWnd, public WndEventHandler
 {
