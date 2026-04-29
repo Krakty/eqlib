@@ -929,11 +929,35 @@ public:
 
 /*0x258*/
 
-	// apr15-2026-live: ALT_MEMBER_ALIAS entries (CloseOnESC -> bEscapable,
-	// bBorder -> bEnableShowBorder, bBorder2 -> bShowBorder, Clickable ->
-	// bClickThrough) REMOVED — none of those origin fields appear in the
-	// master CXWnd apr15 layout map (forensics/cxwnd_apr15_vtable_thunks.md).
-	// Per "no stubs" rule, the aliases are dropped rather than retargeted.
+	// apr15-2026-live plugin-compat aliases (RedGuides/eqlibdev-style shims).
+	// Where the underlying name in apr15 is a real bool field, ALT_MEMBER_ALIAS
+	// is used (binds reference to the storage byte). Where the underlying name
+	// is a __declspec property over a WindowStyle bit (apr15 consolidated those
+	// bools into CWS_* bits), the alias is also a __declspec property pointing
+	// at the same bit — matching the existing bShowBorder / bClickThrough
+	// property pattern earlier in the class declaration.
+	//
+	// `bEnableShowBorder` (eqlibdev's would-be alias source for bBorder) does
+	// NOT exist as a field or property in apr15 CXWnd
+	// (forensics/cxwnd_apr15_vtable_thunks.md, master layout map). Adding
+	// `bBorder` as a deprecated alias for it would require fabricating a
+	// non-existent storage location, so that alias is INTENTIONALLY OMITTED
+	// per the "no stubs / no fabrication" project rules. Callers that
+	// reference `pWnd->bBorder` will fail to compile and must migrate.
+
+	ALT_MEMBER_ALIAS(bool, bEscapable, CloseOnESC);
+
+	// bBorder2 -> bShowBorder property bit. Deprecated.
+	DEPRECATE("Use bShowBorder instead of bBorder2")
+	bool getter_bBorder2() const { return (WindowStyle & CWS_BORDER) != 0; }
+	DEPRECATE("Use bShowBorder instead of bBorder2")
+	void setter_bBorder2(bool v) { if (v) WindowStyle |= CWS_BORDER; else WindowStyle &= ~CWS_BORDER; }
+	__declspec(property(get = getter_bBorder2, put = setter_bBorder2)) bool bBorder2;
+
+	// Clickable -> bClickThrough property bit. Live alias (no deprecation).
+	bool getter_Clickable() const { return (WindowStyle & CWS_TRANSPARENT) != 0; }
+	void setter_Clickable(bool v) { if (v) WindowStyle |= CWS_TRANSPARENT; else WindowStyle &= ~CWS_TRANSPARENT; }
+	__declspec(property(get = getter_Clickable, put = setter_Clickable)) bool Clickable;
 };
 
 inline namespace deprecated {
