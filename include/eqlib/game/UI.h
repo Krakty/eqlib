@@ -791,6 +791,8 @@ enum HotButtonTypes
 
 EQLIB_OBJECT const char* HotButtonTypeToString(HotButtonTypes type);
 
+constexpr size_t CHotButton_size = 0x308; // @sizeof(CHotButton) :: 2026-04-15 (live) — forensics/chotbutton_apr15_vtable.md (vtable 0x140931f68, 105 slots, 5 overrides; -0x10 shift from upstream 0x318)
+
 class [[offsetcomments]] CHotButton : public CXWnd
 {
 public:
@@ -804,36 +806,41 @@ public:
 	EQLIB_OBJECT const HotButtonData* GetHotButtonData() const;
 
 	//----------------------------------------------------------------------------
-	// data members
+	// data members — apr15: shifted -0x10 from upstream
 
-/*0x268*/ int                BarIndex;
-/*0x26c*/ int                ButtonIndex;
-/*0x270*/ uint32_t           Timer;
-/*0x278*/ CTextureAnimation* DecalIcon;
-/*0x280*/ HotButtonTypes     LastButtonType;
-/*0x284*/ int                LastButtonSlot;
-/*0x288*/ char               LastButtonPage;
-/*0x289*/ EqItemGuid         LastItemGuid;
-/*0x29c*/ int                LastItemId;
-/*0x2a0*/ int                LastIconType;
-/*0x2a4*/ int                LastIconSlot;
-/*0x2a8*/ CXStr              LastLabel;
-/*0x2b0*/ CXStr              DefaultLabel;
-/*0x2b8*/ bool               bForceUpdate;
-/*0x2c0*/ CTextObjectInterface* pKeyMapText;
-/*0x2c8*/ int                Unknown0x228;
-/*0x2d0*/ CButtonWnd*        pButtonWnd;
-/*0x2d8*/ CInvSlotWnd*       pInvSlotWnd;
-/*0x2e0*/ CSpellGemWnd*      pSpellGemWnd;
-/*0x2e8*/ CXSize             BaseSize;
-/*0x2f0*/ int                ButtonPercentSize;
-/*0x2f4*/ CXSize             BaseButtonSize;
-/*0x2fc*/ CXSize             BaseDecalSize;
-/*0x304*/ CXSize             BaseInvButtonSize;
-/*0x30c*/ CXSize             BaseSpellButtonSize;
-/*0x314*/ int                Unknown0x264;
-/*0x318*/
+/*0x258*/ int                BarIndex;
+/*0x25c*/ int                ButtonIndex;
+/*0x260*/ uint32_t           Timer;
+/*0x264*/ uint8_t            _pad_0x264[4];
+/*0x268*/ CTextureAnimation* DecalIcon;
+/*0x270*/ HotButtonTypes     LastButtonType;
+/*0x274*/ int                LastButtonSlot;
+/*0x278*/ char               LastButtonPage;
+/*0x279*/ EqItemGuid         LastItemGuid;
+/*0x28c*/ int                LastItemId;
+/*0x290*/ int                LastIconType;
+/*0x294*/ int                LastIconSlot;
+/*0x298*/ CXStr              LastLabel;
+/*0x2a0*/ CXStr              DefaultLabel;
+/*0x2a8*/ bool               bForceUpdate;
+/*0x2a9*/ uint8_t            _pad_0x2a9[7];
+/*0x2b0*/ CTextObjectInterface* pKeyMapText;
+/*0x2b8*/ int                Unknown0x228;
+/*0x2bc*/ uint8_t            _pad_0x2bc[4];
+/*0x2c0*/ CButtonWnd*        pButtonWnd;
+/*0x2c8*/ CInvSlotWnd*       pInvSlotWnd;
+/*0x2d0*/ CSpellGemWnd*      pSpellGemWnd;
+/*0x2d8*/ CXSize             BaseSize;
+/*0x2e0*/ int                ButtonPercentSize;
+/*0x2e4*/ CXSize             BaseButtonSize;
+/*0x2ec*/ CXSize             BaseDecalSize;
+/*0x2f4*/ CXSize             BaseInvButtonSize;
+/*0x2fc*/ CXSize             BaseSpellButtonSize;
+/*0x304*/ int                Unknown0x264;
+/*0x308*/
 };
+
+SIZE_CHECK(CHotButton, CHotButton_size);
 //============================================================================
 // CLabelWnd
 //============================================================================
@@ -6360,7 +6367,8 @@ SIZE_CHECK(CSpellDisplayWnd, CSpellDisplayWnd_size);
 // CSpellGemWnd
 //============================================================================
 
-// CSpellGemWnd_size: 0x3f8
+constexpr size_t CSpellGemWnd_size = 0x3f0; // @sizeof(CSpellGemWnd) :: 2026-04-15 (live) — forensics/cspellgemwnd_apr15_vtable.md (vtable 0x140aa3698, 122 slots, 11 overrides; -0x10 shift from upstream 0x400)
+
 class [[offsetcomments]] CSpellGemWnd : public CButtonWnd
 {
 	FORCE_SYMBOLS
@@ -6374,29 +6382,32 @@ public:
 	EQLIB_OBJECT void SetSpellIconIndex(int);
 
 	//----------------------------------------------------------------------------
-	// data members
+	// data members — apr15: all fields shifted -0x10 from upstream
 
-/*0x348*/ int                MouseButtonState;
-/*0x34c*/ bool               bChecked;
-/*0x350*/ unsigned int       LastRefresh;
-/*0x354*/ D3DCOLOR           SpellGemTintArray[11];
-/*0x380*/ int                SpellGemAlphaArray[11];
-/*0x3ac*/ int                SpellIconOffsetX;
-/*0x3b0*/ int                SpellIconOffsetY;
-/*0x3b4*/ int                SpellIconWidth;
-/*0x3b8*/ int                SpellIconHeight;
-/*0x3bc*/ int                SpellIconIndex;           // if this is equal to -1 there is no spell memmed in this slot
-/*0x3c0*/ int                spellstate;               // 1 = cast in progress or refreshtime not met 2 means we ducked or aborted cast, 0 means its ok to cast, should really rename this to tintstage
-/*0x3c4*/ int                TintIndex;
-/*0x3c8*/ CTextureAnimation* SpellIconTexture;         // CTextureAnimation
-/*0x3d0*/ CTextureAnimation* CustomIconTexture;        // CTextureAnimation
-/*0x3d8*/ int                SpellSlot;
-/*0x3dc*/ int                Percent;
-/*0x3e0*/ CSpellGemDrawTemplate DrawTemplate;
-/*0x400*/
+/*0x338*/ int                MouseButtonState;        // CSpellGemWnd's own LMB/RMB latch dword (distinct from CButtonWnd's at +0x258)
+/*0x33c*/ bool               bChecked;
+/*0x33d*/ uint8_t             _pad_0x33d[3];
+/*0x340*/ unsigned int       LastRefresh;
+/*0x344*/ D3DCOLOR           SpellGemTintArray[11];   // 0x2c bytes
+/*0x370*/ int                SpellGemAlphaArray[11];  // 0x2c bytes
+/*0x39c*/ int                SpellIconOffsetX;
+/*0x3a0*/ int                SpellIconOffsetY;
+/*0x3a4*/ int                SpellIconWidth;
+/*0x3a8*/ int                SpellIconHeight;
+/*0x3ac*/ int                SpellIconIndex;          // -1 = no spell memmed
+/*0x3b0*/ int                spellstate;              // 0=ok-to-cast 1=cast-in-progress/refresh 2=ducked/aborted
+/*0x3b4*/ int                TintIndex;
+/*0x3b8*/ CTextureAnimation* SpellIconTexture;
+/*0x3c0*/ CTextureAnimation* CustomIconTexture;
+/*0x3c8*/ int                SpellSlot;
+/*0x3cc*/ int                Percent;
+/*0x3d0*/ CSpellGemDrawTemplate DrawTemplate;         // 0x20 bytes
+/*0x3f0*/
 
 	ALT_MEMBER_GETTER(int, SpellIconIndex, spellicon);
 };
+
+SIZE_CHECK(CSpellGemWnd, CSpellGemWnd_size);
 
 inline namespace deprecated {
 	using EQCASTSPELLGEM DEPRECATE("Use CSpellGemWnd instead of EQCASTSPELLGEM") = CSpellGemWnd;
