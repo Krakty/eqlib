@@ -2525,7 +2525,7 @@ enum BuffWindowType
 	BuffWindowShortDuration,
 };
 
-constexpr size_t CBuffWindow_size = 0x350; // @sizeof(CBuffWindow) :: 2026-03-10 (live) @ 0x14019BEFA
+constexpr size_t CBuffWindow_size = 0x340; // @sizeof(CBuffWindow) :: 2026-04-15 (live) — forensics/cbuffwindow_apr15_vtable.md (vtable 0x1409e6530, 112 slots, 7 overrides; -0x10 shift from upstream 0x350)
 
 class [[offsetcomments]] CBuffWindow : public CSidlScreenWnd, public WndEventHandler
 {
@@ -2633,26 +2633,28 @@ public:
 	#pragma endregion
 
 	//----------------------------------------------------------------------------
-	// data members
+	// data members — apr15: shifted -0x10 from upstream
 
-/*0x2d4*/ bool                  bOldIconArrangement;
-/*0x2d8*/ CTextureAnimation*    ptaBlueIconBackground;
-/*0x2e0*/ CTextureAnimation*    ptaRedIconBackground;
-/*0x2e8*/ CTextureAnimation*    ptaYellowIconBackground;
-/*0x2f0*/ SoeUtil::Array<BuffWindowPlayerBuffInfo> Buffs;
-/*0x308*/ SoeUtil::Map<int, CButtonWnd*> ButtonMap;
-/*0x320*/ uint32_t              nextRefreshTime;
-/*0x324*/ int                   initWindowWidth;
-/*0x328*/ int                   initWindowHeight;
-/*0x32c*/ BuffWindowType        buffWindowType;
-/*0x330*/ int                   firstEffectSlot;
-/*0x334*/ int                   lastEffectSlot;                  // was: MaxLongBuffs 0x2a (NUM_LONG_BUFFS)
-/*0x338*/ int                   maxBuffButtons;                  // was: MaxShortBuffs 0x37 (NUM_SHORT_BUFFS)
-/*0x33c*/ int                   contextMenuId;
-/*0x340*/ CXWnd*                selectedButtonWnd;               // this field doesn't always appear to be initialize
-/*0x348*/ bool                  updatedMenuItems;
-/*0x34c*/ int                   lastBuffRefreshTime;
-/*0x350*/
+/*0x2c4*/ bool                  bOldIconArrangement;
+/*0x2c5*/ uint8_t                _pad_0x2c5[3];
+/*0x2c8*/ CTextureAnimation*    ptaBlueIconBackground;
+/*0x2d0*/ CTextureAnimation*    ptaRedIconBackground;
+/*0x2d8*/ CTextureAnimation*    ptaYellowIconBackground;
+/*0x2e0*/ SoeUtil::Array<BuffWindowPlayerBuffInfo> Buffs;       // 0x18 bytes (vptr + data + length)
+/*0x2f8*/ SoeUtil::Map<int, CButtonWnd*> ButtonMap;             // 0x18 bytes (rb-tree)
+/*0x310*/ uint32_t              nextRefreshTime;
+/*0x314*/ int                   initWindowWidth;
+/*0x318*/ int                   initWindowHeight;
+/*0x31c*/ BuffWindowType        buffWindowType;
+/*0x320*/ int                   firstEffectSlot;
+/*0x324*/ int                   lastEffectSlot;                  // was: MaxLongBuffs 0x2a (NUM_LONG_BUFFS)
+/*0x328*/ int                   maxBuffButtons;                  // was: MaxShortBuffs 0x37 (NUM_SHORT_BUFFS)
+/*0x32c*/ int                   contextMenuId;
+/*0x330*/ CXWnd*                selectedButtonWnd;               // this field doesn't always appear to be initialize
+/*0x338*/ bool                  updatedMenuItems;
+/*0x339*/ uint8_t                _pad_0x339[3];
+/*0x33c*/ int                   lastBuffRefreshTime;
+/*0x340*/
 };
 
 SIZE_CHECK(CBuffWindow, CBuffWindow_size);
@@ -2728,31 +2730,37 @@ public:
 	};
 
 	//----------------------------------------------------------------------------
-	// data members
+	// data members — apr15: shifted -0x10 from upstream
 
-/*0x2e0*/ CPopDialogWnd*       pCurrentPop;
-/*0x2e8*/ uint32_t             lastRefresh;
-/*0x2ec*/ bool                 bHorizontal;
-/*0x2f0*/ CSpellGemWnd*        SpellSlots[NUM_SPELL_GEMS];     // CSPW_Spell%d
-/*0x360*/ CButtonWnd*          pBtnSpellBook;                  // CSPW_SpellBook
-/*0x368*/ CButtonWnd*          pBtnSpellBookH;                 // CSPW_SpellBookH
-/*0x370*/ CButtonWnd*          pBtnSpellBookV;                 // CSPW_SpellBookV
-/*0x378*/ CXWnd*               pHorizontalTemplate;            // CSPW_HorizontalOrientationTemplate
-/*0x380*/ CXWnd*               pVerticalTemplate;              // CSPW_VerticalOrientationTemplate
-/*0x388*/ CTileLayoutWnd*      pSpellGemLayout;                // CSPW_SpellGemLayout
-/*0x390*/ CXWnd*               pHorizontalBook;                // CSPW_HorizontalOrientationBook
-/*0x398*/ CXWnd*               pVerticalBook;                  // CSPW_VerticalOrientationBook
-/*0x3a0*/ ArrayClass<SpellCategoryMajor*> CategorizedSpells;
-/*0x3b8*/ int                  SpellSelectMenuID;
-/*0x3bc*/ int                  GemMemming;
-/*0x3c0*/ int                  LoadoutMenu;
-/*0x3c4*/ int                  SaveLoadoutIndex;
-/*0x3c8*/ CContextMenu*        pMainMenu;
-/*0x3d0*/ CContextMenu*        pLoadMenu;
-/*0x3d8*/ CContextMenu*        pSaveMenu;
-/*0x3e0*/ CContextMenu*        pDeleteMenu;
-/*0x3e8*/
+/*0x2c0*/ uint8_t              _PopDialogHandler_vptr_and_pCurrentPop[0x10]; // PopDialogHandler subobject (vptr + pCurrentPop CPopDialogWnd*)
+/*0x2d0*/ uint8_t              _pad_0x2d0[8];
+/*0x2d8*/ uint32_t             lastRefresh;                    // 200ms throttle in PostDraw
+/*0x2dc*/ bool                 bHorizontal;
+/*0x2dd*/ uint8_t              _pad_0x2dd[3];
+/*0x2e0*/ CSpellGemWnd*        SpellSlots[NUM_SPELL_GEMS];     // CSPW_Spell%d (14 ptrs = 0x70 bytes)
+/*0x350*/ CButtonWnd*          pBtnSpellBook;                  // CSPW_SpellBook
+/*0x358*/ CButtonWnd*          pBtnSpellBookH;                 // CSPW_SpellBookH
+/*0x360*/ CButtonWnd*          pBtnSpellBookV;                 // CSPW_SpellBookV
+/*0x368*/ CXWnd*               pHorizontalTemplate;            // CSPW_HorizontalOrientationTemplate
+/*0x370*/ CXWnd*               pVerticalTemplate;              // CSPW_VerticalOrientationTemplate
+/*0x378*/ CTileLayoutWnd*      pSpellGemLayout;                // CSPW_SpellGemLayout
+/*0x380*/ CXWnd*               pHorizontalBook;                // CSPW_HorizontalOrientationBook
+/*0x388*/ CXWnd*               pVerticalBook;                  // CSPW_VerticalOrientationBook
+/*0x390*/ ArrayClass<SpellCategoryMajor*> CategorizedSpells;
+/*0x3a8*/ int                  SpellSelectMenuID;
+/*0x3ac*/ int                  GemMemming;
+/*0x3b0*/ int                  LoadoutMenu;
+/*0x3b4*/ int                  SaveLoadoutIndex;
+/*0x3b8*/ CContextMenu*        pMainMenu;
+/*0x3c0*/ CContextMenu*        pLoadMenu;
+/*0x3c8*/ CContextMenu*        pSaveMenu;
+/*0x3d0*/ CContextMenu*        pDeleteMenu;
+/*0x3d8*/ uint8_t              _pad_0x3d8[8];                  // tail-align to 0x3e0
+/*0x3e0*/
 };
+
+constexpr size_t CCastSpellWnd_size = 0x3e0; // @sizeof(CCastSpellWnd) :: 2026-04-15 (live) — forensics/ccastspellwnd_apr15_vtable.md (vtable 0x1409efc80, 112 slots, 7 overrides; secondary PopDialogHandler vftable 0x1409f0000 at +0x2c0; -0x8 shift from upstream 0x3e8)
+SIZE_CHECK(CCastSpellWnd, CCastSpellWnd_size);
 
 inline namespace deprecated {
 	using EQCASTSPELLWINDOW DEPRECATE("Use CCastSpellWnd instead of EQCASTSPELLWINDOW") = CCastSpellWnd;
