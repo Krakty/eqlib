@@ -845,6 +845,8 @@ SIZE_CHECK(CHotButton, CHotButton_size);
 // CLabelWnd
 //============================================================================
 
+constexpr size_t CLabelWnd_size = 0x288; // @sizeof(CLabelWnd) :: 2026-04-15 (live) — forensics/clabelwnd_apr15_vtable.md (vtable 0x140aecf00, 107 slots: 2 overrides + 2 NEW virtuals UpdateText/ResizeHeightToText; -0xc shift from upstream 0x294)
+
 class [[offsetcomments]] CLabelWnd : public CXWnd
 {
 public:
@@ -862,22 +864,29 @@ public:
 	CXStr GetText() const { return Text; }
 	void SetText(const CXStr& text) { Text = text; }
 
-	// data members
-/*0x268*/ bool         bNoWrap;
-/*0x269*/ bool         bAlignRight;
-/*0x26a*/ bool         bAlignCenter;
-/*0x26c*/ int          xOffset;
-/*0x270*/ bool         bResizeHeightToText;
-/*0x278*/ CXStr        PrependText;
-/*0x280*/ CXStr        Text;
-/*0x288*/ CXStr        AppendText;
-/*0x290*/ bool         bTextDirty;
-/*0x294*/
+	// data members — apr15: shifted -0x10 + CXStr trio reordered
+/*0x258*/ bool         bNoWrap;
+/*0x259*/ bool         bAlignRight;
+/*0x25a*/ bool         bAlignCenter;
+/*0x25b*/ uint8_t      _pad_0x25b[1];
+/*0x25c*/ int          xOffset;
+/*0x260*/ bool         bResizeHeightToText;
+/*0x261*/ uint8_t      _pad_0x261[7];
+/*0x268*/ CXStr        AppendText;                  // apr15: order swapped vs upstream (was 0x288)
+/*0x270*/ CXStr        Text;                        // apr15: -0x10 from upstream (was 0x280)
+/*0x278*/ CXStr        PrependText;                 // apr15: order swapped vs upstream (was 0x278)
+/*0x280*/ bool         bTextDirty;
+/*0x281*/ uint8_t      _pad_0x281[7];
+/*0x288*/
 };
+
+SIZE_CHECK(CLabelWnd, CLabelWnd_size);
 
 //============================================================================
 // CLabel
 //============================================================================
+
+constexpr size_t CLabel_size = 0x290; // @sizeof(CLabel) :: 2026-04-15 (live) — forensics/clabel_apr15_vtable.md (vtable 0x140a3b1d8, 107 slots: 1 override (UpdateText slot 105); -0xc shift from upstream 0x29c)
 
 class [[offsetcomments]] CLabel : public CLabelWnd
 {
@@ -890,9 +899,12 @@ public:
 	virtual void UpdateText() override;
 
 	// data members
-/*0x298*/ int          EQType;
-/*0x29c*/
+/*0x288*/ int          EQType;                      // apr15: -0x10 from upstream (was 0x298)
+/*0x28c*/ uint8_t      _pad_0x28c[4];
+/*0x290*/
 };
+
+SIZE_CHECK(CLabel, CLabel_size);
 
 inline namespace deprecated {
 	using CLABEL DEPRECATE("Use CLabel instead of CLABEL") = CLabel;
