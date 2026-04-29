@@ -506,13 +506,19 @@ public:
 	EQLIB_OBJECT CXStr GetCurChoiceText() const;
 
 	//----------------------------------------------------------------------------
-	// data members
-/*0x268*/ CListWnd*                    pListWnd;
-/*0x270*/ int                          ListHeightMax;
-/*0x274*/ int                          ListHeight;
-/*0x278*/ CButtonDrawTemplate          ButtonDrawTemplate;
-/*0x2e0*/
+	// data members — apr15: shifted -0x10 from upstream + bAutoSize NEW field
+
+/*0x258*/ CListWnd*                    pListWnd;
+/*0x260*/ int                          ListHeightMax;
+/*0x264*/ int                          ListHeight;
+/*0x268*/ bool                         bAutoSize;                  // apr15 NEW: 7th ctor param, not in upstream
+/*0x269*/ uint8_t                      _pad_0x269[7];
+/*0x270*/ CButtonDrawTemplate          ButtonDrawTemplate;         // 0x68 bytes
+/*0x2d8*/
 };
+
+constexpr size_t CComboWnd_size = 0x2d8; // @sizeof(CComboWnd) :: 2026-04-15 (live) — forensics/ccombownd_apr15_vtable.md (vtable 0x140ae8940, 106 slots: 8 overrides + 1 new virtual GetMinSize 2-arg overload at slot 105)
+SIZE_CHECK(CComboWnd, CComboWnd_size);
 
 //============================================================================
 // CEditWnd
