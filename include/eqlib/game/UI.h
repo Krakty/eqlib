@@ -2950,6 +2950,8 @@ public:
 // CChatWindow
 //============================================================================
 
+constexpr size_t CChatContainerWindow_size = 0x300; // @sizeof(CChatContainerWindow) :: 2026-04-15 (live) — forensics/cchatcontainerwindow_apr15_vtable.md (vtable 0x140891428, 112 slots, 5 overrides; embedded SoeUtil::Array<CChatWindow*> at +0x2d0)
+
 class [[offsetcomments]] CChatContainerWindow : public CSidlScreenWnd
 {
 	FORCE_SYMBOLS
@@ -2958,7 +2960,21 @@ public:
 	EQLIB_OBJECT CChatContainerWindow(CXWnd* parent);
 	EQLIB_OBJECT virtual ~CChatContainerWindow();
 
+	// apr15: 13 evidence-anchored fields per cchatcontainerwindow_apr15_vtable.md
+/*0x2c0*/ CXWnd*       CCW_ChatWindows;             // tab parent
+/*0x2c8*/ CXWnd*       CCW_ChatPageTemplate;
+/*0x2d0*/ uint8_t      _ChatWindowsArray[0x18];     // SoeUtil::Array<CChatWindow*> (vftable + data + length + capacity)
+/*0x2e8*/ int          ColorPickerTargetMode;
+/*0x2ec*/ int          SelectedPageIdx;
+/*0x2f0*/ int          ManagerAssignedId;
+/*0x2f4*/ int          PageCount;
+/*0x2f8*/ bool         bShowOnFirstOpen;
+/*0x2f9*/ bool         bForceResizeOnShow;
+/*0x2fa*/ uint8_t      _pad_0x2fa[6];
+/*0x300*/
 };
+
+SIZE_CHECK(CChatContainerWindow, CChatContainerWindow_size);
 
 //============================================================================
 // CChatWindow
@@ -2996,28 +3012,36 @@ public:
 	//EQLIB_OBJECT void PageUp();
 	//EQLIB_OBJECT void SetChatFont(int);
 
-/*0x2d0*/ CChatWindowManager* ChatManager;
-/*0x2d8*/ CEditWnd*    InputWnd;
-/*0x2e0*/ CStmlWnd*    OutputWnd;
-/*0x2e8*/ int          ChatChannel;
-/*0x2ec*/ int          ChatChannelIndex;
-/*0x2f0*/ char         TellTarget[0x40];
-/*0x330*/ int          Language;
-/*0x334*/ bool         bIsMainChat;
-/*0x335*/ bool         bIsTellWnd;
-/*0x338*/ int          TimestampFormat;
-/*0x33c*/ COLORREF     TimestampColor;
-/*0x340*/ bool         bTimestampMatchChatColor;
-/*0x348*/ CXStr        CommandHistory[0x28];
-/*0x488*/ int          HistoryIndex;
-/*0x48c*/ int          HistoryLastShown;
-/*0x490*/ int          FontSize;                 // style
-/*0x494*/ int          AlwaysChathereIndex;      // menu
-/*0x498*/ int          NamesContextMenu;         // guess
-/*0x49c*/ int          ContextMenuID;            // also a guess
-/*0x4a0*/ int          ContextMenuSubID[0xa];    // this is not correct but ill fix it later.
+	// apr15: ChatManager pointer DROPPED from upstream layout; class starts
+	// with ChatWindowIndex int. All other fields shifted -0x10 from upstream.
+/*0x2c0*/ int          ChatWindowIndex;             // apr15 NEW (was ChatManager pointer in upstream)
+/*0x2c4*/ uint8_t      _pad_0x2c4[4];
+/*0x2c8*/ CEditWnd*    InputWnd;
+/*0x2d0*/ CStmlWnd*    OutputWnd;
+/*0x2d8*/ int          ChatChannel;
+/*0x2dc*/ int          ChatChannelIndex;
+/*0x2e0*/ char         TellTarget[0x40];
+/*0x320*/ int          Language;
+/*0x324*/ bool         bIsMainChat;
+/*0x325*/ bool         bIsTellWnd;
+/*0x326*/ uint8_t      _pad_0x326[2];
+/*0x328*/ int          TimestampFormat;
+/*0x32c*/ COLORREF     TimestampColor;
+/*0x330*/ bool         bTimestampMatchChatColor;
+/*0x331*/ uint8_t      _pad_0x331[7];
+// apr15: CommandHistory shifted to +0x338..+0x477, HistoryIndex/HistoryLastShown/etc follow
+/*0x338*/ CXStr        CommandHistory[0x28];        // 40 entries × 8B = 0x140
+/*0x478*/ int          HistoryIndex;
+/*0x47c*/ int          HistoryLastShown;
+/*0x480*/ CContextMenu* pContextMenu;                // upstream NamesContextMenu/etc — apr15 evidence shows single ptr
+/*0x488*/ uint8_t      _pad_0x488[4];
+/*0x48c*/ int          ContextMenuItemIDs[14];      // 14 menu-item ids (was upstream ContextMenuID + ContextMenuSubID[10] = 11)
+/*0x4c4*/ uint8_t      _pad_0x4c4[4];
 /*0x4c8*/
 };
+
+constexpr size_t CChatWindow_size = 0x4c8; // @sizeof(CChatWindow) :: 2026-04-15 (live) — forensics/cchatwindow_apr15_vtable.md (vtable 0x1409f55f8, 112 slots, 5 overrides; sizeof matches upstream — fields shifted -0x10 + ChatManager dropped + ContextMenuItemIDs expanded)
+SIZE_CHECK(CChatWindow, CChatWindow_size);
 
 //============================================================================
 // CColorPickerWnd
