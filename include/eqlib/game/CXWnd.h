@@ -1031,7 +1031,7 @@ public:
 /*0x1f0*/ int                BlinkDuration;             // apr15: VERIFIED (master +pass3, OnProcessFrame 0x1405c9050)
 /*0x1f4*/ uint32_t           LastTimeMouseOver;         // apr15: VERIFIED (OnProcessFrame 0x1405c9050, ctor 0x1405c1f1c init=0)
 /*0x1f8*/ int                ParentAndContextMenuArrayIndex; // apr15: VERIFIED (member-fn sweep batch 11, RemoveWnd 0x1405ee79f reads as secondary-array index; rebuild-array 0x1405eee5d writes; ctor inits to -1 sentinel)
-/*0x1fc*/ int                WindowStyle;               // apr15: VERIFIED (master, 0x1405c4800)
+/*0x1fc*/ uint32_t           WindowStyle;               // apr15: VERIFIED (master, 0x1405c4800). Type uint32_t (was int) to match GetWindowStyle() return + ColumnCheckBoxFlags signature
 /*0x200*/ uint8_t            _pad_0x200[16];
 /*0x210*/ ControllerBase*    pController;               // apr15: VERIFIED (master +disambig, 0x1405ca7f0)
 /*0x218*/ CXWnd*             ParentWindow;              // apr15: VERIFIED (35 callsites: SetParent / SetMouseOver / Get*Rect / IsReallyVisible / Minimize / OnProcessFrame / GetScreenClipRect)
