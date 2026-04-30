@@ -29,6 +29,13 @@ namespace eqlib {
 #ifdef CXWnd__IsType_x
 FUNCTION_AT_ADDRESS(bool, CXWnd::IsType(enum EWndRuntimeType) const, CXWnd__IsType);
 #endif
+// apr15-2026-live: GetChildItem thunked to native binary function because
+// our re-implementation depends on GetXMLData->GetXMLIndex which is a stub
+// (XMLIndex UNFOUND in apr15). The native function uses the binary's actual
+// child-lookup mechanism, bypassing our broken XMLData path.
+#ifdef CXWnd__GetChildItem_x
+FUNCTION_AT_ADDRESS(CXWnd*, CXWnd::GetChildItem(const CXStr&), CXWnd__GetChildItem);
+#endif
 #ifdef CXWnd__SetFocus_x
 FUNCTION_AT_ADDRESS(CXWnd*, CXWnd::SetFocus(), CXWnd__SetFocus);
 #endif

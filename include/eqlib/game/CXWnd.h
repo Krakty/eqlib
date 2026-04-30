@@ -251,7 +251,7 @@ public:
 // CXWnd
 //============================================================================
 
-constexpr size_t CXWnd_size = 0x260; // @sizeof(CXWnd) :: 2026-04-15 (live) — master forensics/cxwnd_apr15_vtable_thunks.md (Master CXWnd apr15 layout map, 85 rows, sums to 0x260)
+constexpr size_t CXWnd_size = 0x258; // @sizeof(CXWnd) :: 2026-04-15 (live) — RedGuides/eqlibdev commit 02cd49a (Apr 16, "Shift CXWnd-derived offsets by 8 bytes (CXWnd size 0x260 → 0x258)") canonical; CButtonWnd's MouseButtonState (int @+0x258) + bPicture (bool @+0x25c) are CButtonWnd's first own fields, NOT packed into CXWnd's tail
 constexpr size_t CXWnd_vftable_size = 0x348;
 
 class [[offsetcomments]] CXWnd
@@ -479,7 +479,9 @@ public:
 	EQLIB_OBJECT CXMLData* GetXMLData() const;
 	EQLIB_OBJECT CXMLData* GetXMLData(CXMLDataManager* dataMgr) const;
 	EQLIB_OBJECT CXWnd* GetChildItem(const CXStr&);
-	EQLIB_OBJECT CXWnd* GetChildItem(CXMLDataManager* dataMgr, const CXStr&);
+	// apr15-2026-live: two-arg GetChildItem(CXMLDataManager*, CXStr&) removed —
+	// only caller was our re-impl of the one-arg version, now thunked to the
+	// binary's native function. No plugin/main callers in the tree.
 
 	bool IsVisible() const { return dShow; }
 	void SetVisible(bool bValue) { dShow = bValue; }
@@ -1049,10 +1051,10 @@ public:
 /*0x250*/ int                RightOffset;               // apr15: VERIFIED (GetRelativeRect 0x1405c7aa0, paired with +0x3c bRightAnchoredToRight)
 /*0x254*/ bool               bUsesClassicUI;            // apr15: VERIFIED (ctor 0x1405c1d8d MOV byte [RBX+0x254], AL)
 /*0x255*/ bool               bMouseOverEvent;           // apr15: VERIFIED (ctor 0x1405c2262 MOV byte [RBX+0x255], 0x0)
-/*0x256*/ uint8_t            _pad_0x256[10];
+/*0x256*/ uint8_t            _pad_0x256[2];
 // @end: CXWnd Members
 
-/*0x260*/
+/*0x258*/
 
 	// apr15-2026-live plugin-compat aliases (RedGuides/eqlibdev-style shims).
 	// Where the underlying name in apr15 is a real bool field, ALT_MEMBER_ALIAS
@@ -1147,26 +1149,35 @@ public:
 
 	//----------------------------------------------------------------------------
 	// data members (apr15-2026-live verified -- see forensics/csidlscreenwnd_apr15_vtable.md)
-/*0x260*/ CXStr                        SidlText;                       // upstream was +0x270
-/*0x268*/ CScreenTemplate*             SidlPiece;                      // upstream was +0x278
-/*0x270*/ uint8_t                      RadioGroup_data[0x14];          // ArrayClass<CRadioGroup*> internals: m_length(+0x270 4B) + pad(4B) + m_array(+0x278 8B) + m_alloc(+0x280 4B); apr15 packs to 0x14 (no trailing pad before bControlsCreated). Upstream was +0x280..+0x297 (0x18B with m_isValid).
-/*0x284*/ bool                         bControlsCreated;               // upstream was +0x268
+	//
+	// CRITICAL: sizeof(CXWnd) = 0x258 (eqlibdev right; CXWnd ctor's highest write
+	// is +0x255 bMouseOverEvent, aligns to 0x258), but CSidlScreenWnd::SidlText
+	// is at +0x260 (forensics: dtor 0x1405bcbc0 LEA RCX,[RCX+0x260]; ctor
+	// 0x1405bc7b0 MOV [R14+0x260],0). 8-byte gap at +0x258 has no explicit ctor
+	// init -- likely an unidentified anonymous member, MSVC alignment artifact,
+	// or compiler-generated reserved space. Documented as _pad_apr15_csidl_lead_in
+	// to make the binary layout match without claiming knowledge we don't have.
+/*0x258*/ uint8_t                      _pad_apr15_csidl_lead_in[8];    // mystery 8-byte gap; no ctor write; CXWnd ends at 0x258, SidlText at 0x260
+/*0x260*/ CXStr                        SidlText;                       // VERIFIED: ctor 0x1405bc7b0 MOV [R14+0x260],0; dtor LEA RCX,[RCX+0x260]
+/*0x268*/ CScreenTemplate*             SidlPiece;                      // VERIFIED: ctor Init1 0x1405be4d6 MOV [RBX+0x268],RDI=0
+/*0x270*/ uint8_t                      RadioGroup_data[0x14];          // ArrayClass<CRadioGroup*> internals (m_length+pad+m_array+m_alloc; ctor writes m_length@+0x270, m_array@+0x278, m_alloc@+0x280)
+/*0x284*/ bool                         bControlsCreated;               // VERIFIED: ctor 0x1405bc821 MOV [R14+0x284],0x1
 /*0x285*/ uint8_t                      _pad_apr15_0x285[3];
-/*0x288*/ bool                         bInitVisibility;                // upstream was +0x298
-/*0x289*/ bool                         bVisibleBeforeResize;           // upstream was +0x299
+/*0x288*/ bool                         bInitVisibility;
+/*0x289*/ bool                         bVisibleBeforeResize;
 /*0x28a*/ uint8_t                      _pad_apr15_0x28a[2];
-/*0x28c*/ int                          IniFlags;                       // upstream was +0x29c
-/*0x290*/ CXStr                        IniStorageName;                 // upstream was +0x2a0
-/*0x298*/ int                          IniVersion;                     // upstream was +0x2a8
-/*0x29c*/ int                          LastResX;                       // upstream was +0x2ac
-/*0x2a0*/ int                          LastResY;                       // upstream was +0x2b0
-/*0x2a4*/ bool                         bLastResFullscreen;             // upstream was +0x2b4
+/*0x28c*/ int                          IniFlags;
+/*0x290*/ CXStr                        IniStorageName;                 // VERIFIED: ctor 0x1405bc829 MOV [R14+0x290],0
+/*0x298*/ int                          IniVersion;
+/*0x29c*/ int                          LastResX;
+/*0x2a0*/ int                          LastResY;
+/*0x2a4*/ bool                         bLastResFullscreen;             // VERIFIED: Init1 0x1405be4f9 MOV [RBX+0x2a4],0
 /*0x2a5*/ uint8_t                      _pad_apr15_0x2a5[3];
-/*0x2a8*/ int                          ContextMenuTipID;               // upstream was +0x2c8 -- CORRECTED (apr15 swaps ContextMenuTipID/ContextMenuID slot order)
+/*0x2a8*/ int                          ContextMenuTipID;               // apr15 swap: TipID first, ID second (per pre-existing eqlibdev convention)
 /*0x2ac*/ uint8_t                      _pad_apr15_0x2ac[4];
-/*0x2b0*/ CXWnd*                       pFirstVScrollChild;             // upstream was +0x2c0
-/*0x2b8*/ int                          ContextMenuID;                  // upstream was +0x2b8 -- same offset, role swap with ContextMenuTipID
-/*0x2bc*/ bool                         bHasActivatedFirstTimeAlert;    // upstream was +0x2cc
+/*0x2b0*/ CXWnd*                       pFirstVScrollChild;             // VERIFIED: Init1 0x1405be4e0 MOV [RBX+0x2b0],0
+/*0x2b8*/ int                          ContextMenuID;                  // VERIFIED: Init1 0x1405be517 MOV [RBX+0x2b8],ESI
+/*0x2bc*/ bool                         bHasActivatedFirstTimeAlert;
 /*0x2bd*/ uint8_t                      _pad_apr15_0x2bd[3];
 /*0x2c0*/                              // sizeof = 0x2c0 (apr15)
 

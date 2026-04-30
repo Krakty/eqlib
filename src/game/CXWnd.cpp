@@ -115,52 +115,16 @@ CXMLData* CXWnd::GetXMLData() const
 	return GetXMLData(mgr);
 }
 
-static CXWnd* RecurseAndFindName(CXMLDataManager* dataMgr, CXWnd* pWnd, const CXStr& Name)
-{
-	if (!pWnd)
-	{
-		return nullptr;
-	}
-
-	if (CXMLData* pXMLData = pWnd->GetXMLData(dataMgr))
-	{
-		if (mq::ci_equals(pXMLData->Name, Name))
-		{
-			return pWnd;
-		}
-
-		if (mq::ci_equals(pXMLData->ScreenID, Name))
-		{
-			return pWnd;
-		}
-	}
-
-	if (CXWnd* pChildWnd = pWnd->GetFirstNode())
-	{
-		if (CXWnd* tmp = RecurseAndFindName(dataMgr, pChildWnd, Name))
-		{
-			return tmp;
-		}
-	}
-
-	if (CXWnd* pSiblingWnd = pWnd->GetNext())
-	{
-		return RecurseAndFindName(dataMgr, pSiblingWnd, Name);
-	}
-
-	return nullptr;
-}
-
-CXWnd* CXWnd::GetChildItem(const CXStr& Name)
-{
-	CXMLDataManager* mgr = pSidlMgr->GetParamManager();
-	return GetChildItem(mgr, Name);
-}
-
-CXWnd* CXWnd::GetChildItem(CXMLDataManager* dataMgr, const CXStr& Name)
-{
-	return RecurseAndFindName(dataMgr, this, Name);
-}
+// apr15-2026-live: GetChildItem re-implementation removed — it depended on
+// GetXMLData() -> GetXMLIndex() which is a stub returning -1 (XMLIndex was
+// UNFOUND_AFTER_EXHAUSTIVE_SEARCH in apr15 RE), so RecurseAndFindName never
+// matched any child by name. Plugin GetChildItem("CW_ChatInput") returned
+// nullptr -> MQ2ChatWnd null-derefed at +0x1B5D.
+//
+// Replaced with FUNCTION_AT_ADDRESS thunk to the binary's native
+// CXWnd::GetChildItem (CXWnd__GetChildItem at 0x1405C5D90) — see FunctionDefs.cpp.
+// The two-arg overload (CXMLDataManager*, CXStr&) is dead code in apr15 since
+// the only caller was the one-arg overload; left out entirely.
 
 CXStr CXWnd::GetXMLName() const
 {
