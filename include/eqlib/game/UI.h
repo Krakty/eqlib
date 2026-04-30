@@ -312,7 +312,7 @@ public:
 // CButtonWnd
 //============================================================================
 
-constexpr size_t CButtonWnd_size = 0x338; // @sizeof(CButtonWnd) :: 2026-04-15 (live) — forensics/cbuttonwnd_apr15_vtable.md (vtable 0x140aeab70, 122 slots, 15 overrides + 17 new; -0x10 shift from upstream 0x348; CXWnd_size=0x258 means MouseButtonState/bPicture are CButtonWnd's first own fields at +0x258/+0x25c)
+constexpr size_t CButtonWnd_size = 0x348; // @sizeof(CButtonWnd) :: 2026-03-10 (live) @ 0x1405F35E0
 
 class [[offsetcomments]] CButtonWnd : public CXWnd
 {
@@ -369,38 +369,33 @@ public:
 	void SetDecalTint(mq::MQColor color) { DecalTint = color.ToARGB(); }
 
 	//----------------------------------------------------------------------------
-	// data members — apr15: shifted -0x10 from upstream (CXWnd_size 0x258 means
-	// CButtonWnd's first own fields start at +0x258)
-/*0x258*/ int                   MouseButtonState;
-/*0x25c*/ bool                  bPicture;
-/*0x25d*/ uint8_t                _pad_0x25d[3];
-/*0x260*/ CRadioGroup*          pGroup;
-/*0x268*/ bool                  Checked;
-/*0x269*/ bool                  bMouseOverLastFrame;
-/*0x26a*/ uint8_t                _pad_0x26a[2];
-/*0x26c*/ CXPoint               DecalOffset;
-/*0x274*/ CXSize                DecalSize;
-/*0x27c*/ COLORREF              DecalTint;
-/*0x280*/ CXRect                TextOffsets;
-/*0x290*/ int                   TextModeBits;
-/*0x294*/ COLORREF              Mouseover;
-/*0x298*/ COLORREF              Pressed;
-/*0x29c*/ COLORREF              Disabled;
-/*0x2a0*/ unsigned int          CoolDownBeginTime;
-/*0x2a4*/ unsigned int          CoolDownDuration;
-/*0x2a8*/ CXStr                 Indicator;
-/*0x2b0*/ unsigned int          IndicatorVal;
-/*0x2b4*/ uint8_t                _pad_0x2b4[4];
-/*0x2b8*/ CTextObjectInterface* pIndicatorTextObject;
-/*0x2c0*/ unsigned int          Unknown0x248;
-/*0x2c4*/ uint8_t                _pad_0x2c4[4];
-/*0x2c8*/ CButtonDrawTemplate   DrawTemplate;
-/*0x330*/ bool                  bAllowButtonClickThrough;
-/*0x331*/ bool                  bCoolDownDoDelayedStart;
-/*0x332*/ bool                  bIsCheckbox;
-/*0x333*/ bool                  bIsDrawLasso;
-/*0x334*/ uint32_t              ButtonStyle;
-/*0x338*/
+	// data members
+/*0x268*/ int                   MouseButtonState;
+/*0x26c*/ bool                  bPicture;
+/*0x270*/ CRadioGroup*          pGroup;
+/*0x278*/ bool                  Checked;
+/*0x279*/ bool                  bMouseOverLastFrame;
+/*0x27c*/ CXPoint               DecalOffset;
+/*0x284*/ CXSize                DecalSize;
+/*0x28c*/ COLORREF              DecalTint;                // Color
+/*0x290*/ CXRect                TextOffsets;
+/*0x2a0*/ int                   TextModeBits;
+/*0x2a4*/ COLORREF              Mouseover;
+/*0x2a8*/ COLORREF              Pressed;
+/*0x2ac*/ COLORREF              Disabled;
+/*0x2b0*/ unsigned int          CoolDownBeginTime;
+/*0x2b4*/ unsigned int          CoolDownDuration;
+/*0x2b8*/ CXStr                 Indicator;
+/*0x2c0*/ unsigned int          IndicatorVal;
+/*0x2c8*/ CTextObjectInterface* pIndicatorTextObject;
+/*0x2d0*/ unsigned int          Unknown0x248;
+/*0x2d8*/ CButtonDrawTemplate   DrawTemplate;
+/*0x340*/ bool                  bAllowButtonClickThrough;
+/*0x341*/ bool                  bCoolDownDoDelayedStart;
+/*0x342*/ bool                  bIsCheckbox;
+/*0x343*/ bool                  bIsDrawLasso;
+/*0x344*/ uint32_t              ButtonStyle;              // tbd
+/*0x348*/
 
 	ALT_MEMBER_ALIAS(bool, Checked, bChecked);
 
