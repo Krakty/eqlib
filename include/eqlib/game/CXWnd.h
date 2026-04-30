@@ -262,7 +262,10 @@ public:
 	EQLIB_OBJECT CXWnd(CXWnd* parent = nullptr, uint32_t id = 0, CXRect rect = {}, bool useClassicUI = true);
 
 	//----------------------------------------------------------------------------
-	EQLIB_OBJECT virtual bool IsValid() const { return ValidCXWnd; }
+	// apr15-2026-live: ValidCXWnd UNFOUND_AFTER_EXHAUSTIVE_SEARCH (no apr15
+	// magic-byte sentinel field). Compat stub returns true; allocated
+	// CXWnd objects are always valid (no negative-validity tracking in apr15).
+	EQLIB_OBJECT virtual bool IsValid() const { return true; }
 	EQLIB_OBJECT virtual ~CXWnd();
 	EQLIB_OBJECT virtual const char* GetWndClassName() const { return "CXWnd"; }
 	EQLIB_OBJECT virtual int DrawNC() const;
@@ -313,7 +316,10 @@ public:
 	EQLIB_OBJECT bool IsMinimized() const { return bMinimized; }
 	EQLIB_OBJECT void SetMinimized(bool bValue) { bMinimized = bValue; }
 	EQLIB_OBJECT virtual int OnMaximizeBox();
-	EQLIB_OBJECT bool IsMaximized() const { return bMaximized; }
+	// apr15-2026-live: bMaximized UNFOUND_AFTER_EXHAUSTIVE_SEARCH (no
+	// CWS_MAXIMIZED bit, no separate-byte writer in apr15). Compat stub
+	// returns false; not a TODO -- field genuinely absent in apr15.
+	EQLIB_OBJECT bool IsMaximized() const { return false; }
 	EQLIB_OBJECT virtual int OnTileBox();
 	EQLIB_OBJECT bool IsTiled() const { return bTiled; }
 	EQLIB_OBJECT virtual int OnTile() { return 0; }
@@ -406,8 +412,14 @@ public:
 	EQLIB_OBJECT CXRect GetClientRectNonVirtual() const;
 
 	void SetClientRectDirty(bool dirty);
-	bool IsClientRectDirty() const { return bClientRectChanged; }
-	bool IsClientClipRectDirty() const { return bClientClipRectChanged; }
+	// apr15-2026-live: bClientRectChanged UNFOUND in apr15 (no separate
+	// dirty flag for client rect; cached_ClientRect at +0x22c is updated
+	// directly without a dirty marker). Compat stub returns false.
+	bool IsClientRectDirty() const { return false; }
+	// apr15-2026-live: bClientClipRectChanged renamed to ClipRectClient_dirty_flag
+	// at +0x0c0 (member-fn sweep, GetClientClipRect 0x1405c5fb0 dirty gate
+	// for +0x0d4 rect). Read the existing dirty flag.
+	bool IsClientClipRectDirty() const { return ClipRectClient_dirty_flag; }
 	bool IsScreenClipRectDirty() const { return bScreenClipRectChanged; }
 	DEPRECATE("CGetWindowText: Use GetWindowText() instead") CXStr CGetWindowText() const { return GetWindowText(); }
 	DEPRECATE("CSetWindowText: Use SetWindowText() instead") void CSetWindowText(const CXStr& text) { SetWindowText(text); }
@@ -505,7 +517,9 @@ public:
 
 	void SetNeedsSaving(bool bValue) { bNeedsSaving = bValue; }
 
-	void SetClientRectChanged(bool bValue) { bClientRectChanged = bValue; }
+	// apr15-2026-live: bClientRectChanged UNFOUND in apr15 (see IsClientRectDirty).
+	// Compat no-op setter; not a TODO -- field genuinely absent.
+	void SetClientRectChanged(bool /*bValue*/) {}
 
 	void SetDisabledBackground(COLORREF Value) { DisabledBackground = Value; }
 	COLORREF GetDisabledBackground() const { return DisabledBackground; }
@@ -537,8 +551,11 @@ public:
 	void SetClickThroughToBackground(bool v) { if (v) WindowStyle |= CWS_TRANSPARENTCONTROL; else WindowStyle &= ~CWS_TRANSPARENTCONTROL; }
 
 	void SetClipToParent(bool bValue) { bClipToParent = bValue; }
-	void SetUseInLayoutHorizontal(bool bValue) { bUseInLayoutHorizontal = bValue; }
-	void SetUseInLayoutVertical(bool bValue) { bUseInLayoutVertical = bValue; }
+	// apr15-2026-live: bUseInLayoutHorizontal/Vertical UNFOUND in apr15
+	// (no CWS_* bit gates them, no separate-byte writers per Batch 11
+	// member-fn sweep). Compat no-op setters; fields genuinely absent.
+	void SetUseInLayoutHorizontal(bool /*bValue*/) {}
+	void SetUseInLayoutVertical(bool /*bValue*/) {}
 
 	CXWndDrawTemplate* GetDrawTemplate() const { return DrawTemplate; }
 
@@ -648,8 +665,10 @@ public:
 	DEPRECATE("Use SetClickThrough instead of SetClickable")
 	void SetClickable(bool bValue) { bClickThrough = bValue; }
 
-	bool GetClickThrough() const { return bClickThrough; }
-	void SetClickThrough(bool bValue) { bClickThrough = bValue; }
+	// apr15-2026-live: GetClickThrough/SetClickThrough are declared as
+	// __declspec(property) accessors at lines 531-533 (WindowStyle bit
+	// derivation). The legacy field-backed pair below was a duplicate
+	// declaration that triggers C2535 - removed.
 
 	// apr15-2026-live: bShowClickThroughMenuItem collapsed into the
 	// +0x22c cached_ClientRect 16-byte span per
@@ -666,8 +685,12 @@ public:
 
 	void SetBottomAnchoredToTop(bool bValue) { bBottomAnchoredToTop = bValue; }
 	void SetLeftAnchoredToLeft(bool bValue) { bLeftAnchoredToLeft = bValue; }
-	void SetRightAnchoredToLeft(bool bValue) { bRightAnchoredToLeft = bValue; }
-	void SetTopAnchoredToTop(bool bValue) { bTopAnchoredToTop = bValue; }
+	// apr15-2026-live: bRightAnchoredToLeft and bTopAnchoredToTop UNFOUND
+	// in apr15 master layout (only bRightAnchoredToRight @+0x03c and
+	// bBottomAnchoredToBottom exist; the *-AnchoredTo<opposite> variants
+	// are upstream-only). Compat no-op setters; fields genuinely absent.
+	void SetRightAnchoredToLeft(bool /*bValue*/) {}
+	void SetTopAnchoredToTop(bool /*bValue*/) {}
 
 	void SetOffsets(const CXRect& rect)
 	{
@@ -710,7 +733,9 @@ public:
 	void SetCRNormal(mq::MQColor Value) { CRNormal = Value.ToARGB(); }
 	void SetCRNormal(COLORREF Value) { CRNormal = Value; }
 
-	void SetBringToTopWhenClicked(bool bValue) { bBringToTopWhenClicked = bValue; }
+	// apr15-2026-live: bBringToTopWhenClicked UNFOUND_AFTER_EXHAUSTIVE_SEARCH
+	// per Batch 11 member-fn sweep. Compat no-op setter; field absent.
+	void SetBringToTopWhenClicked(bool /*bValue*/) {}
 
 	bool GetNeedsSaving() const { return bNeedsSaving; }
 	int GetParentAndContextMenuArrayIndex() const { return ParentAndContextMenuArrayIndex; }
