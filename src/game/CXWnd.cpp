@@ -42,10 +42,13 @@ DESTRUCTOR_AT_ADDRESS(CXWnd::~CXWnd(), CXWnd__dCXWnd);
 
 void CXWnd::SetClientRectDirty(bool dirty)
 {
-	bClientRectChanged = dirty;
-	if (bClientRectChanged)
+	// apr15-2026-live: bClientRectChanged UNFOUND (no apr15 dirty flag for
+	// the client rect; cached_ClientRect at +0x22c is updated directly).
+	// bClientClipRectChanged renamed to ClipRectClient_dirty_flag at +0x0c0.
+	// Recursive-mark-children semantics preserved.
+	if (dirty)
 	{
-		bClientClipRectChanged = true;
+		ClipRectClient_dirty_flag = true;
 		bScreenClipRectChanged = true;
 
 		for (CXWnd* wnd = GetFirstNode(); wnd != nullptr; wnd = wnd->GetNext())
