@@ -907,14 +907,6 @@ public:
 /*0x20be*/ uint8_t           PC_pad_20BE[2];               // MQ-RE W19 tail pad to 0x20C0
 /*0x20c0*/
 
-	// apr15-2026-live: deprecated aliases for fields renamed during apr7-2026 RE work
-	// (forward-ported in commit b444fc2). Old names preserved as __declspec(property)
-	// shims so plugin code referencing the prior names still compiles with a warning.
-	ALT_MEMBER_ALIAS_DEPRECATED(unsigned int, LastRangedUsedTime, LastSecondaryUseTime,
-		"LastSecondaryUseTime has been renamed to LastRangedUsedTime")
-	ALT_MEMBER_ALIAS_DEPRECATED(float, BearingToTarget, CameraOffset,
-		"CameraOffset has been renamed to BearingToTarget")
-
 	void Initialize(PlayerClient*, unsigned char, unsigned int, unsigned char, char*);
 	~PlayerClient();
 
