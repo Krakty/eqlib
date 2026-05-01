@@ -520,7 +520,7 @@ public:
 /*0x03c4*/ bool                     bStationary;
 /*0x03c5*/ uint8_t                  Unknown0x03C5[0x3];          // MQ-RE registry
 /*0x03c8*/ float                    RunSpeed;
-/*0x03cc*/ unsigned int             LastRangedUsedTime;       // apr15: forward-ported rename from apr7 RE work (was LastSecondaryUseTime; field tracks last ranged-attack use, not generic secondary use)
+/*0x03cc*/ unsigned int             LastSecondaryUseTime;
 /*0x03d0*/ bool                     bAnimationOnPop;
 /*0x03d1*/ uint8_t                  GMRank;
 /*0x03d2*/ uint8_t                  Unknown0x03D2[0x6];          // MQ-RE registry
@@ -550,7 +550,7 @@ public:
 /*0x0450*/ uint8_t                  Blind;
 /*0x0451*/ uint8_t                  Unknown0x0451[0x3];          // MQ-RE registry
 /*0x0454*/ unsigned int             SitStartTime;
-/*0x0458*/ float                    BearingToTarget;          // apr15: forward-ported rename from apr7 RE work (was CameraOffset; field is the bearing-to-target angle, not a camera offset)
+/*0x0458*/ float                    CameraOffset;
 /*0x045c*/ unsigned int             LastMealTime;
 /*0x0460*/ bool                     berserker;
 /*0x0461*/ uint8_t                  Unknown0x0461;          // MQ-RE registry
