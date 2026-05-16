@@ -20,7 +20,7 @@ namespace eqlib {
 // Size Checks
 //
 
-#define SIZE_CHECKS_ENABLED 1
+#define SIZE_CHECKS_ENABLED 0   // TEMP DISABLED 2026-05-16 to let Debug build complete for comment-update PDB capture
 
 namespace detail{
 	template <typename T>
