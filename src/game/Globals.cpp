@@ -154,34 +154,6 @@ ServerID GetServerIDFromServerName(const char* serverName)
 	static const mq::ci_unordered::map<std::string_view, ServerID> serverMapping{
 #if defined(TEST)
 		{ "test", ServerID::Test },
-#elif defined(LIVE)
-		{ "antonius", ServerID::Antonius },
-		{ "aradune", ServerID::Aradune },
-		{ "bertox", ServerID::Bertox },
-		{ "bristle", ServerID::Bristle },
-		{ "cazic", ServerID::Cazic },
-		{ "drinal", ServerID::Drinal },
-		{ "erollisi", ServerID::Erollisi },
-		{ "fangbreaker", ServerID::Fangbreaker },
-		{ "firiona", ServerID::Firiona },
-		{ "luclin", ServerID::Luclin },
-		{ "mangler", ServerID::Mangler },
-		{ "mayong", ServerID::Mayong },
-		{ "mischief", ServerID::Mischief },
-		{ "oakwynd", ServerID::Oakwynd },
-		{ "povar", ServerID::Povar },
-		{ "ragefire", ServerID::Ragefire },
-		{ "rathe", ServerID::Rathe },
-		{ "rizlona", ServerID::Rizlona },
-		{ "teek", ServerID::Teek },
-		{ "thornblade", ServerID::Thornblade },
-		{ "tormax", ServerID::Tormax },
-		{ "tunare", ServerID::Tunare },
-		{ "vaniki", ServerID::Vaniki },
-		{ "vox", ServerID::Vox },
-		{ "xegony", ServerID::Xegony },
-		{ "yelinak", ServerID::Yelinak },
-		{ "zek", ServerID::Zek },
 #endif
 	};
 

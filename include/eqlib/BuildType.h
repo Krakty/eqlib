@@ -44,23 +44,7 @@
 #define IS_CLIENT_DATE(x) (__ClientDate >= x)
 
 
-#if defined(TEST)
-	#define IS_LIVE_CLIENT 1
-	#define IS_TEST_CLIENT 0
-	#define IS_EMU_CLIENT 0
-#elif defined (TEST)
-	#define IS_LIVE_CLIENT 0
-	#define IS_TEST_CLIENT 1
-	#define IS_EMU_CLIENT 0
-#elif defined (EMULATOR)
-	#define IS_LIVE_CLIENT 0
-	#define IS_TEST_CLIENT 0
-	#define IS_EMU_CLIENT 1
-#else
-	#define IS_LIVE_CLIENT 0
-	#define IS_TEST_CLIENT 0
-	#define IS_EMU_CLIENT 0
-#endif
+#define IS_TEST_CLIENT 1
 
 
 //----------------------------------------------------------------------------
@@ -138,7 +122,7 @@
 // Torment of Luclin.
 #define HAS_MERCHANTS_PERK IS_EXPANSION_LEVEL(EXPANSION_LEVEL_TOL)
 
-// Emu client technically supports this, but the server does not. Just gate it on a test expansion.
+// Gated on a test expansion.
 #define HAS_MULTIPLE_ITEM_MOVE_MANAGER IS_EXPANSION_LEVEL(EXPANSION_LEVEL_TOL)
 
 // Tabbed chat was added on March 13, 2019
@@ -156,22 +140,8 @@
 //----------------------------------------------------------------------------
 // Compiler architecture error detection
 
-#if IS_EMU_CLIENT && !defined(MQ_BUILD_AS_X64)
-#if defined(_M_AMD64)
-#error Win32 Configuration is required to build this
-#endif // defined(_M_AMD64)
-#else
 #if !defined(_M_AMD64)
 #error x64 Configuration is required to build this
-#endif
-#endif
-
-//----------------------------------------------------------------------------
-// Legacy Defines
-
-// If this expansion level is only up to ROF, then flag this as an ROF2EMU build
-#if !IS_EXPANSION_LEVEL(EXPANSION_LEVEL_COTF) && IS_EXPANSION_LEVEL(EXPANSION_LEVEL_ROF)
-#define ROF2EMU
 #endif
 
 //----------------------------------------------------------------------------

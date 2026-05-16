@@ -3,15 +3,9 @@
  <PropertyGroup Label="UserMacros">
  <eqlibClientTarget>Test</eqlibClientTarget>
 
- <eqlibClientDefine Condition="'$(eqlibClientTarget)' == 'Test'">TEST</eqlibClientDefine>
- <eqlibClientDefine Condition="'$(eqlibClientTarget)' == 'Emu'">EMULATOR</eqlibClientDefine>
- <eqlibClientDefine Condition="'$(eqlibClientTarget)' == 'Beta'">BETA</eqlibClientDefine>
- <eqlibClientDefine Condition="'$(eqlibClientTarget)' == ''"></eqlibClientDefine>
+ <eqlibClientDefine>TEST</eqlibClientDefine>
 
-	<eqlibResourceDefine Condition="'$(eqlibClientTarget)' == 'Test'">EQLIB_TARGET=\"Test\"</eqlibResourceDefine>
- <eqlibResourceDefine Condition="'$(eqlibClientTarget)' == 'Emu'">EQLIB_TARGET=\"Emu\"</eqlibResourceDefine>
- <eqlibResourceDefine Condition="'$(eqlibClientTarget)' == 'Beta'">EQLIB_TARGET=\"Beta\"</eqlibResourceDefine>
- <eqlibResourceDefine Condition="'$(eqlibClientTarget)' == ''">EQLIB_TARGET=\"Unknown\"</eqlibResourceDefine>
+ <eqlibResourceDefine>EQLIB_TARGET=\"Test\"</eqlibResourceDefine>
 
  <eqlibRoot>$(MSBuildThisFileDirectory)</eqlibRoot>
  </PropertyGroup>

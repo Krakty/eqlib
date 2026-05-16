@@ -28,23 +28,8 @@ macro(target_eqlib_props TARGET_NAME)
 	# ---------------------------------------------------------------------
 	set(eqlibClientTarget "Test")
 
-	if("${eqlibClientTarget}" STREQUAL "Test")
-		set(eqlibClientDefine "TEST")
-	elseif("${eqlibClientTarget}" STREQUAL "Emu")
-		set(eqlibClientDefine "EMULATOR")
-	elseif("${eqlibClientTarget}" STREQUAL "Beta")
-		set(eqlibClientDefine "BETA")
-	endif()
-
-	if("${eqlibClientTarget}" STREQUAL "Test")
-		set(eqlibResourceDefine "EQLIB_TARGET=\"Test\"")
-	elseif("${eqlibClientTarget}" STREQUAL "Emu")
-		set(eqlibResourceDefine "EQLIB_TARGET=\"Emu\"")
-	elseif("${eqlibClientTarget}" STREQUAL "Beta")
-		set(eqlibResourceDefine "EQLIB_TARGET=\"Beta\"")
-	elseif("${eqlibClientTarget}" STREQUAL "")
-		set(eqlibResourceDefine "EQLIB_TARGET=\"Unknown\"")
-	endif()
+	set(eqlibClientDefine "TEST")
+	set(eqlibResourceDefine "EQLIB_TARGET=\"Test\"")
 
 
 	# ---------------------------------------------------------------------

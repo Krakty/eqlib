@@ -100,7 +100,7 @@
 	"(Ghost)",                                             // 82
 	"(Ghoul)",                                             // 83
 	"(Giant Bat)",                                         // 84
-	"(Beta KOS Copy 9)",                                   // 85
+	"(Test KOS Copy 9)",                                   // 85
 	"(Giant Rat)",                                         // 86
 	"(Giant Snake)",                                       // 87
 	"(Giant Spider)",                                      // 88
@@ -359,7 +359,7 @@
 	"(Priests of Life)",                                   // 341
 	"(Order of Three)",                                    // 342
 	"(Surefall Protected Animals)",                        // 343
-	"(Beta Neutral)",                                      // 344
+	"(Test Neutral)",                                      // 344
 	"(Karana Residents)",                                  // 345
 	"(Commons Residents)",                                 // 346
 	"(Shark)",                                             // 347
@@ -491,10 +491,10 @@
 	"(Kejek Village)",                                     // 473
 	"(Sporali)",                                           // 474
 	"(King Xorbb)",                                        // 475
-	"(Beta Good)",                                         // 476
-	"(Beta Evil)",                                         // 477
-	"(Beta Warmly)",                                       // 478
-	"(Beta KOS)",                                          // 479
+	"(Test Good)",                                         // 476
+	"(Test Evil)",                                         // 477
+	"(Test Warmly)",                                       // 478
+	"(Test KOS)",                                          // 479
 	"(Faction480)",                                        // 480
 	"(Faction481)",                                        // 481
 	"(Tribunal (Race))",                                   // 482
@@ -696,13 +696,13 @@
 	"(Luggald Robed)",                                     // 678
 	"(Drogmor (Race))",                                    // 679
 	"(Dream Delvers)",                                     // 680
-	"(Beta Ally)",                                         // 681
-	"(Beta Warmly)",                                       // 682
-	"(Beta Kindly)",                                       // 683
-	"(Beta Amiable)",                                      // 684
-	"(Beta Apprehensive)",                                 // 685
-	"(Beta Dubious)",                                      // 686
-	"(Beta Threatening)",                                  // 687
+	"(Test Ally)",                                         // 681
+	"(Test Warmly)",                                       // 682
+	"(Test Kindly)",                                       // 683
+	"(Test Amiable)",                                      // 684
+	"(Test Apprehensive)",                                 // 685
+	"(Test Dubious)",                                      // 686
+	"(Test Threatening)",                                  // 687
 	"(Shissar (Race))",                                    // 688
 	"(Shik Nar (Race))",                                   // 689
 	"(Shik Nar of Mons Letalis)",                          // 690
@@ -716,14 +716,14 @@
 	"(Faction698)",                                        // 698
 	"(Faction699)",                                        // 699
 	"(Mercenary Coalition)",                               // 700
-	"(Beta KOS Copy 1)",                                   // 701
-	"(Beta KOS Copy 2)",                                   // 702
-	"(Beta KOS Copy 3)",                                   // 703
-	"(Beta KOS Copy 4)",                                   // 704
-	"(Beta KOS Copy 5)",                                   // 705
-	"(Beta KOS Copy 6)",                                   // 706
-	"(Beta KOS Copy 7)",                                   // 707
-	"(Beta KOS Copy 8)",                                   // 708
+	"(Test KOS Copy 1)",                                   // 701
+	"(Test KOS Copy 2)",                                   // 702
+	"(Test KOS Copy 3)",                                   // 703
+	"(Test KOS Copy 4)",                                   // 704
+	"(Test KOS Copy 5)",                                   // 705
+	"(Test KOS Copy 6)",                                   // 706
+	"(Test KOS Copy 7)",                                   // 707
+	"(Test KOS Copy 8)",                                   // 708
 	"(The Yendan)",                                        // 709
 	"(Guardians of War)",                                  // 710
 	"(Castle Rulnavis)",                                   // 711
@@ -1186,9 +1186,9 @@
 	"(Minions of Solusek Ro)",                             // 1168
 	"(Blacksail Smugglers)",                               // 1169
 	"(Combine Empire Merchants)",                          // 1170
-	"(Beta Enemy)",                                        // 1171
-	"(Beta Friend)",                                       // 1172
-	"(Beta Neutral 2)",                                    // 1173
+	"(Test Enemy)",                                        // 1171
+	"(Test Friend)",                                       // 1172
+	"(Test Neutral 2)",                                    // 1173
 	"(The Cursed of Monkey Rock (Instance))",              // 1174
 	"(Captains of Dyn`leth)",                              // 1175
 	"(Blood of Solusek)",                                  // 1176
@@ -1621,7 +1621,7 @@
 	"(Dryads of the Grove)",                               // 1603
 	"(Clan Grikbar)",                                      // 1604
 	"(Haven Smuggler Associates)",                         // 1605
-	"(KOS to Beta Neutral)",                               // 1606
+	"(KOS to Test Neutral)",                               // 1606
 	"(Plague Bringer)",                                    // 1607
 	"(Spirits of Lxanvom)",                                // 1608
 	"(Askr the Lost)",                                     // 1609
@@ -1646,7 +1646,7 @@
 	"(Creatures of Justice)",                              // 1628
 	"(Gralloks)",                                          // 1629
 	"(Burning Dead)",                                      // 1630
-	"(KOS All PC And Beta Neutral)",                       // 1631
+	"(KOS All PC And Test Neutral)",                       // 1631
 	"(Denizens of Water)",                                 // 1632
 	"(Minions of Coirnav)",                                // 1633
 	"(Fish Lords)",                                        // 1634
