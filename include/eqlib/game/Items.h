@@ -1214,8 +1214,8 @@ public:
 	// Convertible Item and Collection fields
 	bool IsCollected() const { return bCollected; }
 	bool IsConvertible() const { return bConvertable; }
-	int GetConvertItemID() const { return ConvertItemID; }
-	CXStr GetConvertItemName() const { return ConvertItemName; }
+	int GetConvertItemID() const { return 0; }                 // may11 / apr07: binary literal-zero return (no field storage)
+	CXStr GetConvertItemName() const { return CXStr(); }       // may11 / apr07: binary literal-empty return (no field storage)
 
 	// Luck Accessors
 	int GetLuck() const { return Luck; }
