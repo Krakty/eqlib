@@ -1003,7 +1003,6 @@ public:
 };
 
 SIZE_CHECK(CSidlScreenWnd, CSidlScreenWnd_size);
-static_assert(sizeof(CSidlScreenWnd) == CSidlScreenWnd_size, "CSidlScreenWnd compiled layout drift");
 SIZE_CHECK2(CSidlScreenWnd_vftable, CSidlScreenWnd::VirtualFunctionTable, CSidlScreenWnd_vftable_size);
 
 inline namespace deprecated {
