@@ -875,7 +875,6 @@ inline namespace deprecated {
 }
 
 SIZE_CHECK(CXWnd, CXWnd_size);
-static_assert(sizeof(CXWnd) == CXWnd_size, "CXWnd compiled layout drift — sizeof != declared");
 SIZE_CHECK2(CXWnd_vftable, CXWnd::VirtualFunctionTable, CXWnd_vftable_size);
 
 //============================================================================
