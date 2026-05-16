@@ -1082,10 +1082,10 @@ public:
 /*0x010*/ bool bCollected;
 /*0x014*/ ItemGlobalIndex GlobalIndex;
 /*0x020*/ int Charges;
-/*0x028*/ ItemDefinition* ItemDef;
+/*0x028*/ ItemDefinition* ItemDef;          // VESTIGIAL in may11 — always NULL across 32 live items; real ItemDef pointer lives in ItemClient::SharedItemDef at 0x118/0x120. Use GetItemDefinition() (virtual, thunked to binary's may11 native impl).
 /*0x030*/ int MerchantQuantity;
 /*0x038*/ ItemContainer Contents;
-/*0x060*/ unsigned int RespawnTime;
+/*0x060*/ unsigned int RespawnTime;          // AMBIGUOUS: 0x60 + 0x84 are both 4-byte int slots written by ItemBase deserialize (src+0x24 -> dst+0x60, src+0x38 -> dst+0x84). Name-to-slot pairing of RespawnTime vs ActorTag1 not disambiguated by static analysis; see work/may11_live_field_hunt_AB_2026-05-16.md.
 /*0x064*/ int Power;
 /*0x068*/ bool bDisableAugTexture;
 /*0x070*/ ItemEvolutionDataPtr pEvolutionData;
@@ -1109,6 +1109,7 @@ public:
 /*0x0e8*/ EqItemGuid ItemGUID;
 /*0x0fc*/ int ArmorType;
 /*0x100*/ bool bItemNeedsUpdate;
+/*0x108*/ uint32_t Unknown0x108_PerInstanceCounter; // NEW may11 field; sequential per-instance int observed across 32 live items (0x116dX..0x116eX). Semantic unknown; likely internal allocation counter / per-instance handle. Discovered via live audit 2026-05-16.
 /*0x110*/ unsigned int Tint;
 /*0x118*/
 // @end: ItemBase Members
