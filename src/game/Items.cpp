@@ -314,7 +314,7 @@ ItemBase::ItemBase()
 	OrnamentationIcon = 0;
 	MerchantQuantity = 1;
 	bItemNeedsUpdate = false;
-	Price = 0;
+	DontKnow = 0;   // may11: opaque handle/smart-pointer at 0x0a0; ctor zero-init matches binary
 	Open = 0;
 	NoteStatus = 0;
 	bConvertable = false;
