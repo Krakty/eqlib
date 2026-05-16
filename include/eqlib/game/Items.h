@@ -1071,46 +1071,54 @@ class [[offsetcomments]] ItemBase : public IChildItemContainer
 {
 public:
 // @start: ItemBase Members
-/*0x008*/ bool bCopied;
-/*0x00c*/ int Luck;
-/*0x010*/ int ActorTag2;
-/*0x018*/ ItemContainer Contents;
-/*0x040*/ int NoteStatus;
-/*0x044*/ EqItemGuid ItemGUID;
-/*0x058*/ int64_t Price;
-/*0x060*/ bool bConvertable;
-/*0x064*/ int OrnamentationIcon;
-/*0x068*/ ItemDefinition* ItemDef;
-/*0x070*/ unsigned int ItemHash;
-/*0x074*/ bool bCollected;
-/*0x078*/ int ScriptIndex;
-/*0x080*/ SoeUtil::String SaveString;
-/*0x098*/ int AugFlag;
-/*0x09c*/ unsigned int NewArmorID;
-/*0x0a0*/ unsigned int RespawnTime;
-/*0x0a4*/ int ActorTag1;
-/*0x0a8*/ bool bDisableAugTexture;
-/*0x0ac*/ int ConvertItemID;
-/*0x0b0*/ int Charges;
-/*0x0b4*/ int ID;
-/*0x0b8*/ bool bRankDisabled;
-/*0x0bc*/ int StackCount;
-/*0x0c0*/ bool bItemNeedsUpdate;
-/*0x0c4*/ unsigned int LastCastTime;
-/*0x0c8*/ int RealEstateID;
-/*0x0d0*/ int64_t DontKnow;
-/*0x0d8*/ int Open;
-/*0x0dc*/ int Power;
-/*0x0e0*/ ItemEvolutionDataPtr pEvolutionData;
-/*0x0f0*/ unsigned int Tint;
-/*0x0f4*/ int ArmorType;
-/*0x0f8*/ CXStr ConvertItemName;
-/*0x100*/ ItemGlobalIndex GlobalIndex;
-/*0x10c*/ int MerchantQuantity;
-/*0x110*/ int64_t MerchantSlot;
-/*0x118*/ int NoDropFlag;
-/*0x11c*/
+// may11-test layout per work/may11_items_audit_2026-05-14.md (sizeof=0x118)
+// 35 SHIFTED fields below; UNVERIFIED fields (DontKnow, ConvertItemID, ConvertItemName) in #if 0 below.
+/*0x008*/ bool bConvertable;
+/*0x009*/ bool bRankDisabled;
+/*0x00a*/ bool bCopied;
+/*0x00c*/ int OrnamentationIcon;
+/*0x010*/ bool bCollected;
+/*0x014*/ ItemGlobalIndex GlobalIndex;
+/*0x020*/ int Charges;
+/*0x028*/ ItemDefinition* ItemDef;
+/*0x030*/ int MerchantQuantity;
+/*0x038*/ ItemContainer Contents;
+/*0x060*/ unsigned int RespawnTime;
+/*0x064*/ int Power;
+/*0x068*/ bool bDisableAugTexture;
+/*0x070*/ ItemEvolutionDataPtr pEvolutionData;
+/*0x080*/ unsigned int ItemHash;
+/*0x084*/ int ActorTag1;
+/*0x088*/ int AugFlag;
+/*0x08c*/ unsigned int NewArmorID;
+/*0x090*/ int NoDropFlag;
+/*0x094*/ int Open;
+/*0x098*/ int ID;
+/*0x09c*/ int ScriptIndex;
+/*0x0a0*/ int64_t Price;
+/*0x0a8*/ unsigned int LastCastTime;
+/*0x0b0*/ int64_t MerchantSlot;
+/*0x0b8*/ int NoteStatus;
+/*0x0c0*/ SoeUtil::String SaveString;
+/*0x0d8*/ int RealEstateID;
+/*0x0dc*/ int ActorTag2;
+/*0x0e0*/ int StackCount;
+/*0x0e4*/ int Luck;
+/*0x0e8*/ EqItemGuid ItemGUID;
+/*0x0fc*/ int ArmorType;
+/*0x100*/ bool bItemNeedsUpdate;
+/*0x110*/ unsigned int Tint;
+/*0x118*/
 // @end: ItemBase Members
+
+#if 0  // may11: UNVERIFIED fields - carried forward per fields-dont-get-deleted rule
+       // DontKnow: per work/may11_items_audit_2026-05-14.md UNVERIFIED_STILL, may11 placement unknown
+       // ConvertItemID, ConvertItemName: not in may11 anchor TSV; apr07 corpus has them as zero-returning stubs
+       //   (no field-storage evidence); preserved for upstream-compatibility audit trail.
+	int64_t DontKnow;             // TODO: may11 unverified, apr07 0x30, verdict=UNVERIFIED_STILL
+	int ConvertItemID;            // TODO: may11 not anchored; apr07 returned literal 0 (no storage)
+	CXStr ConvertItemName;        // TODO: may11 not anchored; apr07 returned empty CXStr (no storage)
+#endif
 
 	EQLIB_OBJECT ItemBase();
 
@@ -1255,7 +1263,7 @@ public:
 	__declspec(property(get = get_Item2)) ItemDefinition* Item2;
 };
 
-constexpr size_t ItemClient_size = 0x138; // @sizeof(ItemClient) :: 2026-03-10 @ 0x1401EB0B9
+constexpr size_t ItemClient_size = 0x130; // @sizeof(ItemClient) :: 2026-05-11 (test) per work/may11_items_audit_2026-05-14.md (__eq_new(0x140) at ItemClient::CreateItemClient; 0x10 is shared_ptr control header)
 
 class [[offsetcomments]] ItemClient : public ItemBase
 {
@@ -1269,9 +1277,9 @@ public:
 
 	EQLIB_OBJECT static ItemPtr Create() { return eqstd::make_shared<ItemClient>(); }
 
-/*0x120*/ ItemDefinitionPtr SharedItemDef;
-/*0x130*/ CXStr ClientString;
-/*0x138*/
+/*0x118*/ ItemDefinitionPtr SharedItemDef;
+/*0x128*/ CXStr ClientString;
+/*0x130*/
 };
 
 SIZE_CHECK(ItemClient, ItemClient_size);
