@@ -70,7 +70,7 @@ namespace eqstd
 
 		_Nodeptr _Ptr{};
 		_Aligned_storage_t<sizeof(_Alloc), alignof(_Alloc)>
-			_Alloc_storage; // Invariant: contains a live _Alloc iff _Ptr != nullptr
+			_Alloc_storage; // Invariant: contains a test _Alloc iff _Ptr != nullptr
 
 		void _Clear() noexcept { // destroy any contained node and return to the empty state
 			if (_Ptr != nullptr) {

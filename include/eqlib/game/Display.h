@@ -8,7 +8,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  */
 
@@ -60,7 +60,7 @@ public:
 };
 
 
-// @size: CDisplay = 0x2E04 @ 0x5F4F15 (05-21-2020 live)
+// @size: CDisplay = 0x2E04 @ 0x5F4F15 (05-21-2020 test)
 class [[offsetcomments]] CDisplay
 {
 public:
@@ -196,73 +196,73 @@ public:
 	EQLIB_OBJECT static int* cameraType;
 
 	// Most of these need verification
-/*0x0000*/ int                    ErrorFlag;
-/*0x0004*/ uint8_t                BFog;
-/*0x0005*/ uint8_t                bMoveAnims;
-/*0x0008*/ float                  Yon;
-/*0x000c*/ float                  AmbientLight;
-/*0x0010*/ uint8_t                DragItem;
-/*0x0011*/ uint8_t                DragMoney;
-/*0x0012*/ uint8_t                DragHotButton;
-/*0x0013*/ bool                   bInRenderLoop;
-/*0x0014*/ bool                   bHideLootedCorpses;
-/*0x0015*/ char                   LastTeleportAreaTag[0x100];
-/*0x0118*/ CCameraInterface*      pCamera;
-/*0x0120*/ CVector3*              CamPos;
-/*0x0128*/ CVector3*              CamOrientation;
-/*0x0130*/ SWadFile*              WadFileLoadScreen;
-/*0x0138*/ uint8_t                NewPCModelsLoaded;
-/*0x0139*/ bool                   bHorsesLoaded;
-/*0x0140*/ ActorTagManager*       pActorTagManager;
-/*0x0148*/ bool                   fogEnabled;
-/*0x014c*/ float                  fogStartDistance;
-/*0x0150*/ float                  fogEndDistance;
-/*0x0154*/ float                  fogDensity;
-/*0x0158*/ uint8_t                fogRed;
-/*0x0159*/ uint8_t                fogGreen;
-/*0x015a*/ uint8_t                fogBlue;
-/*0x015c*/ uint32_t               saveRed;
-/*0x0160*/ uint32_t               saveGreen;
-/*0x0164*/ uint32_t               saveBlue;
-/*0x0168*/ uint8_t                dayPeriod;
-/*0x016c*/ uint32_t               TimeStamp;
-/*0x0170*/ bool                   bRain;
-/*0x0171*/ bool                   bRainScreen;
-/*0x0174*/ int                    numUserLights;
+/*0x0000*/ int ErrorFlag;
+/*0x0004*/ uint8_t BFog;
+/*0x0005*/ uint8_t bMoveAnims;
+/*0x0008*/ float Yon;
+/*0x000c*/ float AmbientLight;
+/*0x0010*/ uint8_t DragItem;
+/*0x0011*/ uint8_t DragMoney;
+/*0x0012*/ uint8_t DragHotButton;
+/*0x0013*/ bool bInRenderLoop;
+/*0x0014*/ bool bHideLootedCorpses;
+/*0x0015*/ char LastTeleportAreaTag[0x100];
+/*0x0118*/ CCameraInterface* pCamera;
+/*0x0120*/ CVector3* CamPos;
+/*0x0128*/ CVector3* CamOrientation;
+/*0x0130*/ SWadFile* WadFileLoadScreen;
+/*0x0138*/ uint8_t NewPCModelsLoaded;
+/*0x0139*/ bool bHorsesLoaded;
+/*0x0140*/ ActorTagManager* pActorTagManager;
+/*0x0148*/ bool fogEnabled;
+/*0x014c*/ float fogStartDistance;
+/*0x0150*/ float fogEndDistance;
+/*0x0154*/ float fogDensity;
+/*0x0158*/ uint8_t fogRed;
+/*0x0159*/ uint8_t fogGreen;
+/*0x015a*/ uint8_t fogBlue;
+/*0x015c*/ uint32_t saveRed;
+/*0x0160*/ uint32_t saveGreen;
+/*0x0164*/ uint32_t saveBlue;
+/*0x0168*/ uint8_t dayPeriod;
+/*0x016c*/ uint32_t TimeStamp;
+/*0x0170*/ bool bRain;
+/*0x0171*/ bool bRainScreen;
+/*0x0174*/ int numUserLights;
 /*0x0178*/ CLightDefinitionInterface* userLightDef[2500];
 /*0x4f98*/ CLightDefinitionInterface* tempLightDef;
-/*0x4fa0*/ void*                  moreDisplayInterfaces[25]; // too many to list out right now. They are all distinct.
-/*0x5068*/ uint32_t               timeLastArrival;
-/*0x506c*/ float                  scaleShield;
-/*0x5070*/ float                  scalePrimary;
-/*0x5074*/ float                  scaleSecondary;
-/*0x5078*/ bool                   indoorEnvironment;
-/*0x5080*/ HWND                   hGameWindow;
-/*0x5088*/ float                  viewAngle;
-/*0x508c*/ float                  aspectRatio;
-/*0x5090*/ int                    titleOverlayIndex;
-/*0x5094*/ int                    nearClipPlane;
-/*0x5098*/ PALETTEENTRY           palette[256];
-/*0x5498*/ uint8_t                padding[0x5512 - 0x5498]; // to be filled out later...
-/*0x5512*/ bool                   NpcNames;
-/*0x5513*/ bool                   bShowPetNames;
-/*0x5514*/ bool                   bShowMercNames;
-/*0x5515*/ bool                   bShowPetOwnerNames;
-/*0x5516*/ bool                   bShowMercOwnerNames;
-/*0x5517*/ bool                   bAdvancedLightingEnabled;
-/*0x5518*/ bool                   bPostEffectsEnabled;
-/*0x5519*/ bool                   bBloomEnabled;
-/*0x551a*/ bool                   bShadowsEnabled;
-/*0x551b*/ bool                   bWaterSwapEnabled;
-/*0x551c*/ bool                   b20PixelShadersEnabled;
-/*0x551d*/ bool                   bVertexShadersEnabled;
-/*0x551e*/ bool                   bWindowedGamma;
-/*0x551f*/ bool                   bWindowedIncreasedGamma;
-/*0x5520*/ int                    ActorClipPlane;
-/*0x5524*/ int                    ShadowClipPlane;
-/*0x5528*/ int                    Unknown2d80;
-/*0x5530*/ ScreenWndManager       gameScreens;
-/*0x5590*/ ScreenWndManager       charselectScreens;
+/*0x4fa0*/ void* moreDisplayInterfaces[25]; // too many to list out right now. They are all distinct.
+/*0x5068*/ uint32_t timeLastArrival;
+/*0x506c*/ float scaleShield;
+/*0x5070*/ float scalePrimary;
+/*0x5074*/ float scaleSecondary;
+/*0x5078*/ bool indoorEnvironment;
+/*0x5080*/ HWND hGameWindow;
+/*0x5088*/ float viewAngle;
+/*0x508c*/ float aspectRatio;
+/*0x5090*/ int titleOverlayIndex;
+/*0x5094*/ int nearClipPlane;
+/*0x5098*/ PALETTEENTRY palette[256];
+/*0x5498*/ uint8_t padding[0x5512 - 0x5498]; // to be filled out later...
+/*0x5512*/ bool NpcNames;
+/*0x5513*/ bool bShowPetNames;
+/*0x5514*/ bool bShowMercNames;
+/*0x5515*/ bool bShowPetOwnerNames;
+/*0x5516*/ bool bShowMercOwnerNames;
+/*0x5517*/ bool bAdvancedLightingEnabled;
+/*0x5518*/ bool bPostEffectsEnabled;
+/*0x5519*/ bool bBloomEnabled;
+/*0x551a*/ bool bShadowsEnabled;
+/*0x551b*/ bool bWaterSwapEnabled;
+/*0x551c*/ bool b20PixelShadersEnabled;
+/*0x551d*/ bool bVertexShadersEnabled;
+/*0x551e*/ bool bWindowedGamma;
+/*0x551f*/ bool bWindowedIncreasedGamma;
+/*0x5520*/ int ActorClipPlane;
+/*0x5524*/ int ShadowClipPlane;
+/*0x5528*/ int Unknown2d80;
+/*0x5530*/ ScreenWndManager gameScreens;
+/*0x5590*/ ScreenWndManager charselectScreens;
 /*0x55f0*/
 };
 

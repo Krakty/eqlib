@@ -8,7 +8,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  */
 
@@ -255,7 +255,7 @@ void EQLibImpl::HandleCreateGroundItem(EQGroundItem* groundItem)
 	m_pendingGroundItems.push_back(groundItem);
 }
 
-void EQLibImpl::HandleDestroyGroundItem(EQGroundItem* groundItem)  
+void EQLibImpl::HandleDestroyGroundItem(EQGroundItem* groundItem) 
 {
 	auto it = std::find(m_pendingGroundItems.begin(), m_pendingGroundItems.end(), groundItem);
 	if (it != m_pendingGroundItems.end())
@@ -341,7 +341,7 @@ public:
 		// In EQ, this function actually calls DisplayChatText, however in the RoF2 client, this call is inlined, and the
 		// chat hook does not capture it. So we will manually render the notification here.
 
-		// in the live client, this is no longer needed because the call is not inlined.
+		// in the test client, this is no longer needed because the call is not inlined.
 
 		if (ucNotificationCount > 0)
 		{
@@ -535,20 +535,20 @@ struct UNICODE_STRING
 
 struct LDR_DLL_NOTIFICATION_DATA
 {
-	uint32_t        Flags;
+	uint32_t Flags;
 	UNICODE_STRING* FullDllName;
 	UNICODE_STRING* BaseDllName;
-	uintptr_t       DllBase;
-	uint32_t        SizeOfImage;
+	uintptr_t DllBase;
+	uint32_t SizeOfImage;
 };
 
 constexpr uint32_t LDR_DLL_NOTIFICATION_REASON_LOADED = 1;
 constexpr uint32_t LDR_DLL_NOTIFICATION_REASON_UNLOADED = 2;
 
 void __stdcall LdrDllNotificationCallback(
-	uint32_t                         NotificationReason,
+	uint32_t NotificationReason,
 	const LDR_DLL_NOTIFICATION_DATA* NotificationData,
-	void*                            Context)
+	void* Context)
 {
 	if (NotificationReason == LDR_DLL_NOTIFICATION_REASON_LOADED)
 	{
@@ -571,16 +571,16 @@ void __stdcall LdrDllNotificationCallback(
 }
 
 using PLDR_DLL_NOTIFICATION_FUNCTION = void(__stdcall*)(
-	uint32_t                         NotificationReason,
+	uint32_t NotificationReason,
 	const LDR_DLL_NOTIFICATION_DATA* NotificationData,
-	void*                            Context
+	void* Context
 );
 
 using PLDR_REGISTER_DLL_NOTIFICATION = uint32_t(__stdcall*)(
-	uint32_t                       Flags,
+	uint32_t Flags,
 	PLDR_DLL_NOTIFICATION_FUNCTION NotificationFunction,
-	void*                          Context,
-	void**                         Cookie
+	void* Context,
+	void** Cookie
 );
 
 using PLDR_UNREGISTER_DLL_NOTIFICATION = uint32_t(__stdcall*)(

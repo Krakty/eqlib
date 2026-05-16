@@ -8,7 +8,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  */
 
@@ -37,53 +37,53 @@ class CUnSerializeBuffer;
 
 enum ItemContainerInstance
 {
-	eItemContainerInvalid                        = -1,
-	eItemContainerPossessions                    = 0,
-	eItemContainerBank                           = 1,
-	eItemContainerSharedBank                     = 2,
-	eItemContainerTrade                          = 3,
-	eItemContainerWorld                          = 4,
-	eItemContainerLimbo                          = 5,
-	eItemContainerTribute                        = 6,
-	eItemContainerTrophyTribute                  = 7,
-	eItemContainerGuildTribute                   = 8,
-	eItemContainerMerchant                       = 9,
-	eItemContainerDeleted                        = 10,
-	eItemContainerCorpse                         = 11,
-	eItemContainerBazaar                         = 12,
-	eItemContainerInspect                        = 13,
-	eItemContainerRealEstate                     = 14,
-	eItemContainerViewModPC                      = 15,
-	eItemContainerViewModBank                    = 16,
-	eItemContainerViewModSharedBank              = 17,
-	eItemContainerViewModLimbo                   = 18,
-	eItemContainerAltStorage                     = 19,
-	eItemContainerArchived                       = 20,
-	eItemContainerMail                           = 21,
-	eItemContainerGuildTrophyTribute             = 22,
-	eItemContainerKrono                          = 23,
-	eItemContainerOther                          = 24,
-	eItemContainerMercenaryItems                 = 25,
-	eItemContainerViewModMercenaryItems          = 26,
-	eItemContainerMountKeyRingItems              = 27,
-	eItemContainerViewModMountKeyRingItems       = 28,
-	eItemContainerIllusionKeyRingItems           = 29,
-	eItemContainerViewModIllusionKeyRingItems    = 30,
-	eItemContainerFamiliarKeyRingItems           = 31,
-	eItemContainerViewModFamiliarKeyRingItems    = 32,
-	eItemContainerHeroForgeKeyRingItems          = 33,
-	eItemContainerViewModHeroForgeKeyRingItems   = 34,
-	eItemContainerTeleportationKeyRingItems      = 35,
+	eItemContainerInvalid = -1,
+	eItemContainerPossessions = 0,
+	eItemContainerBank = 1,
+	eItemContainerSharedBank = 2,
+	eItemContainerTrade = 3,
+	eItemContainerWorld = 4,
+	eItemContainerLimbo = 5,
+	eItemContainerTribute = 6,
+	eItemContainerTrophyTribute = 7,
+	eItemContainerGuildTribute = 8,
+	eItemContainerMerchant = 9,
+	eItemContainerDeleted = 10,
+	eItemContainerCorpse = 11,
+	eItemContainerBazaar = 12,
+	eItemContainerInspect = 13,
+	eItemContainerRealEstate = 14,
+	eItemContainerViewModPC = 15,
+	eItemContainerViewModBank = 16,
+	eItemContainerViewModSharedBank = 17,
+	eItemContainerViewModLimbo = 18,
+	eItemContainerAltStorage = 19,
+	eItemContainerArchived = 20,
+	eItemContainerMail = 21,
+	eItemContainerGuildTrophyTribute = 22,
+	eItemContainerKrono = 23,
+	eItemContainerOther = 24,
+	eItemContainerMercenaryItems = 25,
+	eItemContainerViewModMercenaryItems = 26,
+	eItemContainerMountKeyRingItems = 27,
+	eItemContainerViewModMountKeyRingItems = 28,
+	eItemContainerIllusionKeyRingItems = 29,
+	eItemContainerViewModIllusionKeyRingItems = 30,
+	eItemContainerFamiliarKeyRingItems = 31,
+	eItemContainerViewModFamiliarKeyRingItems = 32,
+	eItemContainerHeroForgeKeyRingItems = 33,
+	eItemContainerViewModHeroForgeKeyRingItems = 34,
+	eItemContainerTeleportationKeyRingItems = 35,
 	eItemContainerViewModTeleportationKeyRingItems = 36,
-	eItemContainerActivatedKeyRingItems          = 37,
-	eItemContainerViewModKeyRingItems            = 38,
-	eItemContainerEquipmentKeyRingItems          = 39,
-	eItemContainerViewModEquipmentKeyRingItems   = 40,
-	eItemContainerOverflow                       = 41,
-	eItemContainerDragonHoard                    = 42,
-	eItemContainerTradeskillDepot                = 43,
-	eItemContainerGuildDepot                     = 44,
-	eItemContainerPersonaEquip                   = 45,
+	eItemContainerActivatedKeyRingItems = 37,
+	eItemContainerViewModKeyRingItems = 38,
+	eItemContainerEquipmentKeyRingItems = 39,
+	eItemContainerViewModEquipmentKeyRingItems = 40,
+	eItemContainerOverflow = 41,
+	eItemContainerDragonHoard = 42,
+	eItemContainerTradeskillDepot = 43,
+	eItemContainerGuildDepot = 44,
+	eItemContainerPersonaEquip = 45,
 
 	eNumItemContainers,
 };
@@ -103,8 +103,8 @@ inline namespace deprecated
 	{
 	public:
 	/*0x00*/ ITEMBASEARRAY* pItems;
-	/*0x08*/ size_t         Size;
-	/*0x10*/ unsigned int   Capacity;
+	/*0x08*/ size_t Size;
+	/*0x10*/ unsigned int Capacity;
 	/*0x14*/
 	};
 }
@@ -538,7 +538,7 @@ public:
 	// A visitor to count the number of items.
 	struct ItemCountVisitor
 	{
-		void operator() (const ItemPtr&, const ItemIndex&) { ++m_count;  }
+		void operator() (const ItemPtr&, const ItemIndex&) { ++m_count; }
 		uint32_t GetCount() const { return m_count; }
 
 	private:
@@ -576,12 +576,12 @@ protected:
 	const_iterator GetEndIterator(int slot) const;
 
 protected:
-/*0x00*/ uint32_t                m_size;
-/*0x04*/ ItemContainerInstance   m_type;
-/*0x08*/ ItemArray               m_items;
-/*0x20*/ uint8_t                 m_atDepth = 0;
-/*0x22*/ short                   m_slots[ItemIndex::MAX_INVENTORY_DEPTH - 1];
-/*0x26*/ bool                    m_bDynamic;
+/*0x00*/ uint32_t m_size;
+/*0x04*/ ItemContainerInstance m_type;
+/*0x08*/ ItemArray m_items;
+/*0x20*/ uint8_t m_atDepth = 0;
+/*0x22*/ short m_slots[ItemIndex::MAX_INVENTORY_DEPTH - 1];
+/*0x26*/ bool m_bDynamic;
 /*0x28*/
 
 public:
@@ -704,17 +704,17 @@ inline namespace deprecated
 	// size is 0x64 02-16-2007
 	struct [[offsetcomments]] ITEMSPELLS
 	{
-		/*0x00*/ int   SpellID;
-		/*0x04*/ BYTE  RequiredLevel;
-		/*0x05*/ BYTE  EffectType;                       // bIsActivated
-		/*0x08*/ int   EffectiveCasterLevel;
-		/*0x0c*/ int   MaxCharges;
-		/*0x10*/ int   CastTime;
-		/*0x14*/ int   TimerID;                          // RecastTime
-		/*0x18*/ int   RecastType;
-		/*0x1c*/ int   ProcRate;                         // chance to proc
-		/*0x20*/ char  OtherName[0x40];                  // some kind of override
-		/*0x60*/ int   OtherID;                          // Description ID
+		/*0x00*/ int SpellID;
+		/*0x04*/ BYTE RequiredLevel;
+		/*0x05*/ BYTE EffectType; // bIsActivated
+		/*0x08*/ int EffectiveCasterLevel;
+		/*0x0c*/ int MaxCharges;
+		/*0x10*/ int CastTime;
+		/*0x14*/ int TimerID; // RecastTime
+		/*0x18*/ int RecastType;
+		/*0x1c*/ int ProcRate; // chance to proc
+		/*0x20*/ char OtherName[0x40]; // some kind of override
+		/*0x60*/ int OtherID; // Description ID
 		/*0x64*/
 
 			// Currently necessary because of MQ2DataTypes
@@ -730,17 +730,17 @@ class [[offsetcomments]] ItemSpellData
 public:
 	struct [[offsetcomments]] SpellData
 	{
-	/*0x00*/ int                   SpellID;
-	/*0x04*/ uint8_t               RequiredLevel;
-	/*0x05*/ eItemEffectType       EffectType;
-	/*0x08*/ int                   EffectiveCasterLevel;
-	/*0x0c*/ int                   MaxCharges;
-	/*0x10*/ int                   CastTime;
-	/*0x14*/ int                   RecastTime;
-	/*0x18*/ int                   RecastType;
-	/*0x1c*/ int                   ProcRate;
-	/*0x20*/ char                  OverrideName[64];            // name override
-	/*0x60*/ int                   OverrideDesc;                // override description id
+	/*0x00*/ int SpellID;
+	/*0x04*/ uint8_t RequiredLevel;
+	/*0x05*/ eItemEffectType EffectType;
+	/*0x08*/ int EffectiveCasterLevel;
+	/*0x0c*/ int MaxCharges;
+	/*0x10*/ int CastTime;
+	/*0x14*/ int RecastTime;
+	/*0x18*/ int RecastType;
+	/*0x1c*/ int ProcRate;
+	/*0x20*/ char OverrideName[64]; // name override
+	/*0x60*/ int OverrideDesc; // override description id
 	/*0x64*/
 
 		EQLIB_OBJECT SpellData();
@@ -751,7 +751,7 @@ public:
 	};
 
 /*0x000*/ SpellData Spells[ItemSpellType_Max];
-/*0x2bc*/ uint32_t  SkillMask[20];               // bit field for each skill required to use
+/*0x2bc*/ uint32_t SkillMask[20]; // bit field for each skill required to use
 /*0x30c*/
 
 	// Convenience accessors
@@ -803,167 +803,167 @@ public:
 	}
 };
 
-constexpr size_t ItemDefinition_size = 0x640; // @sizeof(ItemDefinition) :: 2026-03-10 (live) @ 0x140222F24
+constexpr size_t ItemDefinition_size = 0x640; // @sizeof(ItemDefinition) :: 2026-03-10 @ 0x140222F24
 
 class [[offsetcomments]] ItemDefinition
 {
 public:
-/*0x000*/ char                Name[ITEM_NAME_LEN];
-/*0x040*/ char                LoreName[LORE_NAME_LEN];
-/*0x090*/ char                AdvancedLoreName[32];
-/*0x0b0*/ int                 IDFile;
-/*0x0b4*/ int                 IDFile2;
-/*0x0b8*/ int                 ItemNumber;                        // recordnum
-/*0x0bc*/ int                 EquipSlots;                        // its position, where it can be equipped
-/*0x0c0*/ int                 Cost;
-/*0x0c4*/ int                 IconNumber;
-/*0x0c8*/ uint8_t             eGMRequirement;                    // this is an unmapped enum
-/*0x0c9*/ bool                bPoofOnDeath;
-/*0x0cc*/ int                 Weight;
-/*0x0d0*/ bool                NoRent;                            // 0=temp, 1=default
-/*0x0d1*/ bool                IsDroppable;                       // 0=no drop, 1=can drop
-/*0x0d2*/ bool                Attuneable;
-/*0x0d3*/ bool                Heirloom;
-/*0x0d4*/ bool                Collectible;
-/*0x0d5*/ bool                NoDestroy;
-/*0x0d6*/ bool                bNoNPC;
-/*0x0d7*/ bool                NoZone;
-/*0x0d8*/ int                 MakerID;
-/*0x0dc*/ bool                NoGround;
-/*0x0dd*/ bool                bNoLoot;
-/*0x0de*/ bool                MarketPlace;
-/*0x0df*/ bool                bFreeSlot;
-/*0x0e0*/ bool                bAutoUse;
-/*0x0e4*/ int                 Unknown0x0e4;
-/*0x0e8*/ uint8_t             Size;
-/*0x0e9*/ uint8_t             Type;
-/*0x0ea*/ bool                TradeSkills;
-/*0x0ec*/ int                 Lore;                              // -1=Lore 0=Not Lore >=1=Lore Group
-/*0x0f0*/ int                 LoreEquipped;                      // check me
-/*0x0f4*/ bool                Artifact;
-/*0x0f5*/ bool                CashLoot;
-/*0x0f6*/ char                SvCold;
-/*0x0f7*/ char                SvFire;
-/*0x0f8*/ char                SvMagic;
-/*0x0f9*/ char                SvDisease;
-/*0x0fa*/ char                SvPoison;
-/*0x0fb*/ char                SvCorruption;
-/*0x0fc*/ char                STR;
-/*0x0fd*/ char                STA;
-/*0x0fe*/ char                AGI;
-/*0x0ff*/ char                DEX;
-/*0x100*/ char                CHA;
-/*0x101*/ char                INT;
-/*0x102*/ char                WIS;
-/*0x104*/ int                 HP;
-/*0x108*/ int                 Mana;
-/*0x10c*/ int                 AC;
-/*0x110*/ int                 RequiredLevel;
-/*0x114*/ int                 RecommendedLevel;
-/*0x118*/ int                 SkillModType;
-/*0x11c*/ int                 SkillModValue;
-/*0x120*/ int                 SkillModMax;
-/*0x124*/ int                 SkillModBonus;
-/*0x128*/ int                 BaneDMGRace;
-/*0x12c*/ int                 BaneDMGBodyType;
-/*0x130*/ int                 BaneDMGBodyTypeValue;
-/*0x134*/ int                 BaneDMGRaceValue;
-/*0x138*/ int                 InstrumentType;
-/*0x13c*/ int                 InstrumentMod;
-/*0x140*/ int                 Classes;
-/*0x144*/ int                 Races;
-/*0x148*/ int                 Deity;
-/*0x14c*/ uint32_t            MaterialTintIndex;
-/*0x150*/ bool                Magic;
-/*0x151*/ uint8_t             Light;
-/*0x152*/ uint8_t             Delay;
-/*0x153*/ uint8_t             ElementalFlag;              // used to be called DmgBonusType;
-/*0x154*/ uint8_t             ElementalDamage;            // used to be called DmgBonusVal
-/*0x155*/ uint8_t             Range;
-/*0x158*/ int                 Damage;                     // BaseDamage
-/*0x15c*/ int                 BackstabDamage;
-/*0x160*/ int                 HeroicSTR;
-/*0x164*/ int                 HeroicINT;
-/*0x168*/ int                 HeroicWIS;
-/*0x16c*/ int                 HeroicAGI;
-/*0x170*/ int                 HeroicDEX;
-/*0x174*/ int                 HeroicSTA;
-/*0x178*/ int                 HeroicCHA;
-/*0x17c*/ int                 HealAmount;
-/*0x180*/ int                 SpellDamage;
-/*0x184*/ int                 MinLuck;
-/*0x188*/ int                 MaxLuck;
-/*0x18c*/ int                 Prestige;
-/*0x190*/ uint8_t             ItemClass;                  // eItemClass
-/*0x194*/ ArmorProperties     ArmorProps;
-/*0x1a8*/ ItemSocketData      AugData;
-/*0x1d8*/ int                 AugType;
-/*0x1dc*/ uint32_t            AugSkinTypeMask;
-/*0x1e0*/ int                 AugRestrictions;
-/*0x1e4*/ int                 SolventItemID;              // ID# of Solvent (Augs only)
-/*0x1e8*/ uint32_t            LDTheme;
-/*0x1ec*/ int                 LDCost;
-/*0x1f0*/ int                 LDType;
-/*0x1f4*/ int                 PointBuyBackPercent;
-/*0x1f8*/ int                 NeedAdventureCompleted;
-/*0x1fc*/ char                CharmFile[32];
-/*0x21c*/ float               MerchantGreedMod;
-/*0x220*/ ItemSpellData       SpellData;
-/*0x52c*/ int                 DmgBonusSkill;              // SkillMinDamageMod;
-/*0x530*/ int                 DmgBonusValue;              // MinDamageMod;
-/*0x534*/ int                 ScriptID;
-/*0x538*/ int                 FoodDuration;               // 0-5 snack 6-20 meal 21-30 hearty 31-40 banquet 41-50 feast 51-60 enduring 60- miraculous
-/*0x53c*/ uint8_t             ContainerType;
-/*0x53d*/ uint8_t             Slots;
-/*0x53e*/ uint8_t             SizeCapacity;
-/*0x53f*/ uint8_t             WeightReduction;
-/*0x540*/ uint8_t             BookType;                   // 0=note, !0=book
-/*0x541*/ int8_t              BookLang;
-/*0x542*/ char                BookFile[30];
-/*0x560*/ int                 Favor;                      // Tribute Value
-/*0x564*/ int                 GuildFavor;
-/*0x568*/ bool                bIsFVNoDrop;
-/*0x56c*/ int                 Endurance;
-/*0x570*/ int                 Attack;
-/*0x574*/ int                 HPRegen;
-/*0x578*/ int                 ManaRegen;
-/*0x57c*/ int                 EnduranceRegen;
-/*0x580*/ int                 Haste;
-/*0x584*/ int                 AnimationOverride;
-/*0x588*/ int                 PaletteTintIndex;
-/*0x58c*/ bool                bNoPetGive;
-/*0x58d*/ bool                bSomeProfile;
-/*0x590*/ int                 StackSize;
-/*0x594*/ bool                bNoStorage;
-/*0x598*/ int                 MaxPower;
-/*0x59c*/ int                 Purity;
-/*0x5a0*/ int                 RightClickScriptID;
-/*0x5a4*/ int                 ItemLaunchScriptID;
-/*0x5a8*/ bool                QuestItem;
-/*0x5a9*/ bool                Expendable;
-/*0x5ac*/ int                 Clairvoyance;
-/*0x5b0*/ int                 SubClass;
-/*0x5b4*/ bool                bLoginRegReqItem;
-/*0x5b8*/ int                 Placeable;
-/*0x5bc*/ bool                bPlaceableIgnoreCollisions;
-/*0x5c0*/ int                 PlacementType;              // todo: this is an enum need to figure out.
-/*0x5c4*/ int                 RealEstateDefID;
-/*0x5c8*/ float               PlaceableScaleRangeMin;
-/*0x5cc*/ float               PlaceableScaleRangeMax;
-/*0x5d0*/ int                 RealEstateUpkeepID;
-/*0x5d4*/ int                 MaxPerRealEstate;
-/*0x5d8*/ char                HousepetFileName[32];
-/*0x5f8*/ int                 TrophyBenefitID;
-/*0x5fc*/ bool                bDisablePlacementRotation;
-/*0x5fd*/ bool                bDisableFreePlacement;
-/*0x600*/ int                 NpcRespawnInterval;
-/*0x604*/ float               PlaceableDefScale;
-/*0x608*/ float               PlaceableDefHeading;
-/*0x60c*/ float               PlaceableDefPitch;
-/*0x610*/ float               PlaceableDefRoll;
-/*0x614*/ bool                bInteractiveObject;
-/*0x615*/ uint8_t             SocketSubClassCount;
-/*0x618*/ int                 SocketSubClass[10];
+/*0x000*/ char Name[ITEM_NAME_LEN];
+/*0x040*/ char LoreName[LORE_NAME_LEN];
+/*0x090*/ char AdvancedLoreName[32];
+/*0x0b0*/ int IDFile;
+/*0x0b4*/ int IDFile2;
+/*0x0b8*/ int ItemNumber; // recordnum
+/*0x0bc*/ int EquipSlots; // its position, where it can be equipped
+/*0x0c0*/ int Cost;
+/*0x0c4*/ int IconNumber;
+/*0x0c8*/ uint8_t eGMRequirement; // this is an unmapped enum
+/*0x0c9*/ bool bPoofOnDeath;
+/*0x0cc*/ int Weight;
+/*0x0d0*/ bool NoRent; // 0=temp, 1=default
+/*0x0d1*/ bool IsDroppable; // 0=no drop, 1=can drop
+/*0x0d2*/ bool Attuneable;
+/*0x0d3*/ bool Heirloom;
+/*0x0d4*/ bool Collectible;
+/*0x0d5*/ bool NoDestroy;
+/*0x0d6*/ bool bNoNPC;
+/*0x0d7*/ bool NoZone;
+/*0x0d8*/ int MakerID;
+/*0x0dc*/ bool NoGround;
+/*0x0dd*/ bool bNoLoot;
+/*0x0de*/ bool MarketPlace;
+/*0x0df*/ bool bFreeSlot;
+/*0x0e0*/ bool bAutoUse;
+/*0x0e4*/ int Unknown0x0e4;
+/*0x0e8*/ uint8_t Size;
+/*0x0e9*/ uint8_t Type;
+/*0x0ea*/ bool TradeSkills;
+/*0x0ec*/ int Lore; // -1=Lore 0=Not Lore >=1=Lore Group
+/*0x0f0*/ int LoreEquipped; // check me
+/*0x0f4*/ bool Artifact;
+/*0x0f5*/ bool CashLoot;
+/*0x0f6*/ char SvCold;
+/*0x0f7*/ char SvFire;
+/*0x0f8*/ char SvMagic;
+/*0x0f9*/ char SvDisease;
+/*0x0fa*/ char SvPoison;
+/*0x0fb*/ char SvCorruption;
+/*0x0fc*/ char STR;
+/*0x0fd*/ char STA;
+/*0x0fe*/ char AGI;
+/*0x0ff*/ char DEX;
+/*0x100*/ char CHA;
+/*0x101*/ char INT;
+/*0x102*/ char WIS;
+/*0x104*/ int HP;
+/*0x108*/ int Mana;
+/*0x10c*/ int AC;
+/*0x110*/ int RequiredLevel;
+/*0x114*/ int RecommendedLevel;
+/*0x118*/ int SkillModType;
+/*0x11c*/ int SkillModValue;
+/*0x120*/ int SkillModMax;
+/*0x124*/ int SkillModBonus;
+/*0x128*/ int BaneDMGRace;
+/*0x12c*/ int BaneDMGBodyType;
+/*0x130*/ int BaneDMGBodyTypeValue;
+/*0x134*/ int BaneDMGRaceValue;
+/*0x138*/ int InstrumentType;
+/*0x13c*/ int InstrumentMod;
+/*0x140*/ int Classes;
+/*0x144*/ int Races;
+/*0x148*/ int Deity;
+/*0x14c*/ uint32_t MaterialTintIndex;
+/*0x150*/ bool Magic;
+/*0x151*/ uint8_t Light;
+/*0x152*/ uint8_t Delay;
+/*0x153*/ uint8_t ElementalFlag; // used to be called DmgBonusType;
+/*0x154*/ uint8_t ElementalDamage; // used to be called DmgBonusVal
+/*0x155*/ uint8_t Range;
+/*0x158*/ int Damage; // BaseDamage
+/*0x15c*/ int BackstabDamage;
+/*0x160*/ int HeroicSTR;
+/*0x164*/ int HeroicINT;
+/*0x168*/ int HeroicWIS;
+/*0x16c*/ int HeroicAGI;
+/*0x170*/ int HeroicDEX;
+/*0x174*/ int HeroicSTA;
+/*0x178*/ int HeroicCHA;
+/*0x17c*/ int HealAmount;
+/*0x180*/ int SpellDamage;
+/*0x184*/ int MinLuck;
+/*0x188*/ int MaxLuck;
+/*0x18c*/ int Prestige;
+/*0x190*/ uint8_t ItemClass; // eItemClass
+/*0x194*/ ArmorProperties ArmorProps;
+/*0x1a8*/ ItemSocketData AugData;
+/*0x1d8*/ int AugType;
+/*0x1dc*/ uint32_t AugSkinTypeMask;
+/*0x1e0*/ int AugRestrictions;
+/*0x1e4*/ int SolventItemID; // ID# of Solvent (Augs only)
+/*0x1e8*/ uint32_t LDTheme;
+/*0x1ec*/ int LDCost;
+/*0x1f0*/ int LDType;
+/*0x1f4*/ int PointBuyBackPercent;
+/*0x1f8*/ int NeedAdventureCompleted;
+/*0x1fc*/ char CharmFile[32];
+/*0x21c*/ float MerchantGreedMod;
+/*0x220*/ ItemSpellData SpellData;
+/*0x52c*/ int DmgBonusSkill; // SkillMinDamageMod;
+/*0x530*/ int DmgBonusValue; // MinDamageMod;
+/*0x534*/ int ScriptID;
+/*0x538*/ int FoodDuration; // 0-5 snack 6-20 meal 21-30 hearty 31-40 banquet 41-50 feast 51-60 enduring 60- miraculous
+/*0x53c*/ uint8_t ContainerType;
+/*0x53d*/ uint8_t Slots;
+/*0x53e*/ uint8_t SizeCapacity;
+/*0x53f*/ uint8_t WeightReduction;
+/*0x540*/ uint8_t BookType; // 0=note, !0=book
+/*0x541*/ int8_t BookLang;
+/*0x542*/ char BookFile[30];
+/*0x560*/ int Favor; // Tribute Value
+/*0x564*/ int GuildFavor;
+/*0x568*/ bool bIsFVNoDrop;
+/*0x56c*/ int Endurance;
+/*0x570*/ int Attack;
+/*0x574*/ int HPRegen;
+/*0x578*/ int ManaRegen;
+/*0x57c*/ int EnduranceRegen;
+/*0x580*/ int Haste;
+/*0x584*/ int AnimationOverride;
+/*0x588*/ int PaletteTintIndex;
+/*0x58c*/ bool bNoPetGive;
+/*0x58d*/ bool bSomeProfile;
+/*0x590*/ int StackSize;
+/*0x594*/ bool bNoStorage;
+/*0x598*/ int MaxPower;
+/*0x59c*/ int Purity;
+/*0x5a0*/ int RightClickScriptID;
+/*0x5a4*/ int ItemLaunchScriptID;
+/*0x5a8*/ bool QuestItem;
+/*0x5a9*/ bool Expendable;
+/*0x5ac*/ int Clairvoyance;
+/*0x5b0*/ int SubClass;
+/*0x5b4*/ bool bLoginRegReqItem;
+/*0x5b8*/ int Placeable;
+/*0x5bc*/ bool bPlaceableIgnoreCollisions;
+/*0x5c0*/ int PlacementType; // todo: this is an enum need to figure out.
+/*0x5c4*/ int RealEstateDefID;
+/*0x5c8*/ float PlaceableScaleRangeMin;
+/*0x5cc*/ float PlaceableScaleRangeMax;
+/*0x5d0*/ int RealEstateUpkeepID;
+/*0x5d4*/ int MaxPerRealEstate;
+/*0x5d8*/ char HousepetFileName[32];
+/*0x5f8*/ int TrophyBenefitID;
+/*0x5fc*/ bool bDisablePlacementRotation;
+/*0x5fd*/ bool bDisableFreePlacement;
+/*0x600*/ int NpcRespawnInterval;
+/*0x604*/ float PlaceableDefScale;
+/*0x608*/ float PlaceableDefHeading;
+/*0x60c*/ float PlaceableDefPitch;
+/*0x610*/ float PlaceableDefRoll;
+/*0x614*/ bool bInteractiveObject;
+/*0x615*/ uint8_t SocketSubClassCount;
+/*0x618*/ int SocketSubClass[10];
 /*0x640*/
 
 	EQLIB_OBJECT ItemDefinition();
@@ -1054,11 +1054,11 @@ public:
 
 struct [[offsetcomments]] ItemEvolutionData
 {
-/*0x00*/ int    GroupID;
-/*0x04*/ int    EvolvingCurrentLevel;
+/*0x00*/ int GroupID;
+/*0x04*/ int EvolvingCurrentLevel;
 /*0x08*/ double EvolvingExpPct;
-/*0x10*/ int    EvolvingMaxLevel;
-/*0x14*/ int    LastEquipped;
+/*0x10*/ int EvolvingMaxLevel;
+/*0x14*/ int LastEquipped;
 /*0x18*/
 };
 using ItemEvolutionDataPtr = SoeUtil::SharedPtr<ItemEvolutionData>;
@@ -1071,44 +1071,44 @@ class [[offsetcomments]] ItemBase : public IChildItemContainer
 {
 public:
 // @start: ItemBase Members
-/*0x008*/ bool                  bCopied;
-/*0x00c*/ int                   Luck;
-/*0x010*/ int                   ActorTag2;
-/*0x018*/ ItemContainer         Contents;
-/*0x040*/ int                   NoteStatus;
-/*0x044*/ EqItemGuid            ItemGUID;
-/*0x058*/ int64_t               Price;
-/*0x060*/ bool                  bConvertable;
-/*0x064*/ int                   OrnamentationIcon;
-/*0x068*/ ItemDefinition*       ItemDef;
-/*0x070*/ unsigned int          ItemHash;
-/*0x074*/ bool                  bCollected;
-/*0x078*/ int                   ScriptIndex;
-/*0x080*/ SoeUtil::String       SaveString;
-/*0x098*/ int                   AugFlag;
-/*0x09c*/ unsigned int          NewArmorID;
-/*0x0a0*/ unsigned int          RespawnTime;
-/*0x0a4*/ int                   ActorTag1;
-/*0x0a8*/ bool                  bDisableAugTexture;
-/*0x0ac*/ int                   ConvertItemID;
-/*0x0b0*/ int                   Charges;
-/*0x0b4*/ int                   ID;
-/*0x0b8*/ bool                  bRankDisabled;
-/*0x0bc*/ int                   StackCount;
-/*0x0c0*/ bool                  bItemNeedsUpdate;
-/*0x0c4*/ unsigned int          LastCastTime;
-/*0x0c8*/ int                   RealEstateID;
-/*0x0d0*/ int64_t               DontKnow;
-/*0x0d8*/ int                   Open;
-/*0x0dc*/ int                   Power;
-/*0x0e0*/ ItemEvolutionDataPtr  pEvolutionData;
-/*0x0f0*/ unsigned int          Tint;
-/*0x0f4*/ int                   ArmorType;
-/*0x0f8*/ CXStr                 ConvertItemName;
-/*0x100*/ ItemGlobalIndex       GlobalIndex;
-/*0x10c*/ int                   MerchantQuantity;
-/*0x110*/ int64_t               MerchantSlot;
-/*0x118*/ int                   NoDropFlag;
+/*0x008*/ bool bCopied;
+/*0x00c*/ int Luck;
+/*0x010*/ int ActorTag2;
+/*0x018*/ ItemContainer Contents;
+/*0x040*/ int NoteStatus;
+/*0x044*/ EqItemGuid ItemGUID;
+/*0x058*/ int64_t Price;
+/*0x060*/ bool bConvertable;
+/*0x064*/ int OrnamentationIcon;
+/*0x068*/ ItemDefinition* ItemDef;
+/*0x070*/ unsigned int ItemHash;
+/*0x074*/ bool bCollected;
+/*0x078*/ int ScriptIndex;
+/*0x080*/ SoeUtil::String SaveString;
+/*0x098*/ int AugFlag;
+/*0x09c*/ unsigned int NewArmorID;
+/*0x0a0*/ unsigned int RespawnTime;
+/*0x0a4*/ int ActorTag1;
+/*0x0a8*/ bool bDisableAugTexture;
+/*0x0ac*/ int ConvertItemID;
+/*0x0b0*/ int Charges;
+/*0x0b4*/ int ID;
+/*0x0b8*/ bool bRankDisabled;
+/*0x0bc*/ int StackCount;
+/*0x0c0*/ bool bItemNeedsUpdate;
+/*0x0c4*/ unsigned int LastCastTime;
+/*0x0c8*/ int RealEstateID;
+/*0x0d0*/ int64_t DontKnow;
+/*0x0d8*/ int Open;
+/*0x0dc*/ int Power;
+/*0x0e0*/ ItemEvolutionDataPtr pEvolutionData;
+/*0x0f0*/ unsigned int Tint;
+/*0x0f4*/ int ArmorType;
+/*0x0f8*/ CXStr ConvertItemName;
+/*0x100*/ ItemGlobalIndex GlobalIndex;
+/*0x10c*/ int MerchantQuantity;
+/*0x110*/ int64_t MerchantSlot;
+/*0x118*/ int NoDropFlag;
 /*0x11c*/
 // @end: ItemBase Members
 
@@ -1183,7 +1183,7 @@ public:
 		return false;
 	}
 
-	// Old modifiers - in the live client these are all now focus/spell effects or heroic stats instead.
+	// Old modifiers - in the test client these are all now focus/spell effects or heroic stats instead.
 	int GetAccuracy() const { return 0; }
 	int GetAvoidance() const { return 0; }
 	int GetCombatEffects() const { return 0; }
@@ -1195,7 +1195,7 @@ public:
 	int GetStrikeThrough() const { return 0; }
 	int GetStunResist() const { return 0; }
 
-	// Heroic resists - in the live client these no longer exist
+	// Heroic resists - in the test client these no longer exist
 	int GetHeroicSvMagic() const { return 0; }
 	int GetHeroicSvFire() const { return 0; }
 	int GetHeroicSvCold() const { return 0; }
@@ -1217,7 +1217,7 @@ public:
 	// Helpers for item spells
 	ItemSpellData::SpellData* GetSpellData(ItemSpellTypes spellType) { return GetItemDefinition()->GetSpellData(spellType); }
 	int GetSpellID(ItemSpellTypes spellType) const { return GetItemDefinition()->GetSpellData(spellType)->SpellID; }
-	int GetSpellRecastTime(ItemSpellTypes spellType) const { return GetItemDefinition()->GetSpellData(spellType)->RecastTime;  }
+	int GetSpellRecastTime(ItemSpellTypes spellType) const { return GetItemDefinition()->GetSpellData(spellType)->RecastTime; }
 
 	void UpdateItemDefinition();
 
@@ -1255,7 +1255,7 @@ public:
 	__declspec(property(get = get_Item2)) ItemDefinition* Item2;
 };
 
-constexpr size_t ItemClient_size = 0x138; // @sizeof(ItemClient) :: 2026-03-10 (live) @ 0x1401EB0B9
+constexpr size_t ItemClient_size = 0x138; // @sizeof(ItemClient) :: 2026-03-10 @ 0x1401EB0B9
 
 class [[offsetcomments]] ItemClient : public ItemBase
 {
@@ -1270,7 +1270,7 @@ public:
 	EQLIB_OBJECT static ItemPtr Create() { return eqstd::make_shared<ItemClient>(); }
 
 /*0x120*/ ItemDefinitionPtr SharedItemDef;
-/*0x130*/ CXStr             ClientString;
+/*0x130*/ CXStr ClientString;
 /*0x138*/
 };
 
@@ -1332,16 +1332,16 @@ struct INVENTORYARRAY
 #pragma warning(disable: 4996) // Disable ability for these definitions to trigger their own deprecation notices
 
 	DEPRECATE("Instead of accessing Inventory slots directly, use ItemContainer::GetItem or GetInventorySlot().\n"
-		"  For example, do: pObj->ItemContainer.GetItem(InvSlot_Cursor)\n"
-		"       instead of: pObj->pInventoryArray->Inventory.Cursor\n"
-		"    if using PcProfile, you can do: pProfile->GetInventorySlot(InvSlot_Cursor) too.")
+		" For example, do: pObj->ItemContainer.GetItem(InvSlot_Cursor)\n"
+		" instead of: pObj->pInventoryArray->Inventory.Cursor\n"
+		" if using PcProfile, you can do: pProfile->GetInventorySlot(InvSlot_Cursor) too.")
 		INVENTORY& get_Inventory() { return *(INVENTORY*)&InventoryArray[0]; }
 	__declspec(property(get = get_Inventory)) INVENTORY Inventory;
 
 	DEPRECATE("Instead of accessing InventoryArray directly, use ItemContainer::GetItem or GetInventorySlot().\n"
-		"  For example, do: pObj->ItemContainer.GetItem(InvSlot_Head)\n"
-		"       instead of: pObj->pInventoryArray->InventoryArray[InvSlot_Head]\n"
-		"    if using PcProfile, you can do: pProfile->GetInventorySlot(InvSlot_Cursor) too.")
+		" For example, do: pObj->ItemContainer.GetItem(InvSlot_Head)\n"
+		" instead of: pObj->pInventoryArray->InventoryArray[InvSlot_Head]\n"
+		" if using PcProfile, you can do: pProfile->GetInventorySlot(InvSlot_Cursor) too.")
 		ItemClient* InventoryArray[InvSlot_Max];
 
 #pragma warning(default: 4996)
@@ -1602,27 +1602,27 @@ class MultipleItemMoveManager
 public:
 	enum ErrorCodes
 	{
-		ErrorOk                                  = 0,
+		ErrorOk = 0,
 	};
 
 	enum MoveItemFlags
 	{
-		MoveItemFlagNone               = 0x00,
-		MoveItemFlagSwapEnabled        = 0x01,        // allow item swapping when moving items
+		MoveItemFlagNone = 0x00,
+		MoveItemFlagSwapEnabled = 0x01, // allow item swapping when moving items
 	};
 
 	enum MoveSearchOptions
 	{
-		MoveSearchOptionNone,          // don't try to find an item slot
+		MoveSearchOptionNone, // don't try to find an item slot
 	};
 
 	struct MoveItem
 	{
-		ItemGlobalIndex        from;
-		ItemGlobalIndex        to;
-		int                    count = 0;
-		int                    flags = 0;
-		MoveSearchOptions      searchOptions = MoveSearchOptionNone;
+		ItemGlobalIndex from;
+		ItemGlobalIndex to;
+		int count = 0;
+		int flags = 0;
+		MoveSearchOptions searchOptions = MoveSearchOptionNone;
 	};
 
 	using MoveItemArray = ArrayClass2<MoveItem>;

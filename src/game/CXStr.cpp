@@ -33,7 +33,7 @@ CXFreeList* gFreeLists = nullptr;
 
 namespace internal {
 	size_t gStrRepAllocations = 0;
-	size_t gStrRepLiveObjects = 0;
+	size_t gStrRepActiveObjects = 0;
 }
 
 void InitializeCXStr()
@@ -283,7 +283,7 @@ CStrRep* CXStr::AllocRepNoLock(size_type size, EStringEncoding encoding)
 	memset(rep, 0, newSize);
 
 	++internal::gStrRepAllocations;
-	++internal::gStrRepLiveObjects;
+	++internal::gStrRepActiveObjects;
 
 	rep->next = nullptr;
 	rep->length = 0;
@@ -327,7 +327,7 @@ void CXStr::FreeRepNoLock(CStrRep* rep)
 		++i;
 	}
 
-	--internal::gStrRepLiveObjects;
+	--internal::gStrRepActiveObjects;
 
 	eqFree(rep);
 }

@@ -8,19 +8,19 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  */
 
 #pragma once
 
 //----------------------------------------------------------------------------
-// Defines the EverQuest build type (LIVE, TEST, etc)
+// Defines the EverQuest build type (TEST, TEST, etc)
 //----------------------------------------------------------------------------
 
 // Do not change this value. This value identifies the version of the client
 // that this branch of code is designed to work with.
-#define LIVE
+#define TEST
 
 
 //----------------------------------------------------------------------------
@@ -44,7 +44,7 @@
 #define IS_CLIENT_DATE(x) (__ClientDate >= x)
 
 
-#if defined(LIVE)
+#if defined(TEST)
 	#define IS_LIVE_CLIENT 1
 	#define IS_TEST_CLIENT 0
 	#define IS_EMU_CLIENT 0
@@ -79,7 +79,7 @@
 // Autoskills was added April 19, 2017
 #define HAS_AUTOSKILLS IS_CLIENT_DATE(20170419)
 
-// DirectX 11 Support added to Test on 9/12/2023 and Live on 1/16/2024
+// DirectX 11 Support added to Test on 9/12/2023 and test on 1/16/2024
 #define HAS_DIRECTX_11 ((IS_CLIENT_DATE(20230912) && IS_TEST_CLIENT) || IS_CLIENT_DATE(20240116))
 #define HAS_DIRECTX_9 (!HAS_DIRECTX_11)
 
@@ -99,7 +99,7 @@
 // GameFace integration (the new UI system) was first released on test as of March 21, 2023.
 #define HAS_GAMEFACE_UI IS_CLIENT_DATE(20230321)
 
-// Hero Forge went live August 15, 2012
+// Hero Forge was released August 15, 2012
 #define HAS_HERO_FORGE IS_CLIENT_DATE(20120812)
 
 // Item effects for mount, illusion, familiar, etc were combined into "Blessing" effects
@@ -138,7 +138,7 @@
 // Torment of Luclin.
 #define HAS_MERCHANTS_PERK IS_EXPANSION_LEVEL(EXPANSION_LEVEL_TOL)
 
-// Emu client technically supports this, but the server does not. Just gate it on a live expansion.
+// Emu client technically supports this, but the server does not. Just gate it on a test expansion.
 #define HAS_MULTIPLE_ITEM_MOVE_MANAGER IS_EXPANSION_LEVEL(EXPANSION_LEVEL_TOL)
 
 // Tabbed chat was added on March 13, 2019

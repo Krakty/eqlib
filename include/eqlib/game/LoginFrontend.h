@@ -8,7 +8,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  */
 
@@ -43,15 +43,15 @@ public:
 	EQLIB_OBJECT int ProcessKeyboardEvents();
 	EQLIB_OBJECT int ProcessMouseEvents();
 
-/*0x00*/ IDirectInput8A*          pDI;
-/*0x08*/ IDirectInputDevice8A*    pDIKeyboard;
-/*0x10*/ IDirectInputDevice8A*    pDIMouse;
-/*0x18*/ HWND                     hWnd;
-/*0x20*/ HINSTANCE                hInstance;
-/*0x28*/ bool                     bIsKeyboardActive;
-/*0x29*/ bool                     bIsMouseActive;
-/*0x2c*/ uint32_t                 Unknown0x18;
-/*0x30*/ int                      LastInputKey;
+/*0x00*/ IDirectInput8A* pDI;
+/*0x08*/ IDirectInputDevice8A* pDIKeyboard;
+/*0x10*/ IDirectInputDevice8A* pDIMouse;
+/*0x18*/ HWND hWnd;
+/*0x20*/ HINSTANCE hInstance;
+/*0x28*/ bool bIsKeyboardActive;
+/*0x29*/ bool bIsMouseActive;
+/*0x2c*/ uint32_t Unknown0x18;
+/*0x30*/ int LastInputKey;
 /*0x34*/
 };
 
@@ -71,47 +71,47 @@ namespace EQLS {
 
 struct [[offsetcomments]] Date
 {
-/*0x00*/ int8_t    Hours;
-/*0x01*/ int8_t    Minutes;
-/*0x02*/ int8_t    Seconds;
-/*0x03*/ int8_t    Month;
-/*0x04*/ int8_t    Day;
-/*0x06*/ int16_t   Year;
-/*0x08*/ CXStr     Unknown0x08;
-/*0x10*/ CXStr     Unknown0x0c;
-/*0x18*/ CXStr     Unknown0x10;
-/*0x20*/ int64_t   TimeStamp;
+/*0x00*/ int8_t Hours;
+/*0x01*/ int8_t Minutes;
+/*0x02*/ int8_t Seconds;
+/*0x03*/ int8_t Month;
+/*0x04*/ int8_t Day;
+/*0x06*/ int16_t Year;
+/*0x08*/ CXStr Unknown0x08;
+/*0x10*/ CXStr Unknown0x0c;
+/*0x18*/ CXStr Unknown0x10;
+/*0x20*/ int64_t TimeStamp;
 /*0x28*/
 };
 
 enum eServerStatus : uint32_t
 {
-	eServerStatus_Down           = 1,
-	eServerStatus_Locked         = 4,
-	eServerStatus_PopulationLow  = 0x10,
+	eServerStatus_Down = 1,
+	eServerStatus_Locked = 4,
+	eServerStatus_PopulationLow = 0x10,
 	eServerStatus_PopulationHigh = 0x20,
 
 };
 
 struct [[offsetcomments]] EQClientServerData
 {
-/*0x00*/ ServerID      ID;
-/*0x08*/ CXStr         ServerName;
-/*0x10*/ CXStr         HostName;
-/*0x18*/ CXStr         ServerIP;
-/*0x20*/ int           ExternalPort;
-/*0x24*/ int           InternalPort;
-/*0x28*/ Date          DateCreated;
-/*0x50*/ int           Flags;             // 0x100 = all access
-/*0x54*/ int           ServerType;        // uninitialized
-/*0x58*/ CXStr         LanguageCode;
-/*0x60*/ CXStr         CountryCode;
-/*0x68*/ CXStr         RuleSet;
-/*0x70*/ CXStr         Description;
+/*0x00*/ ServerID ID;
+/*0x08*/ CXStr ServerName;
+/*0x10*/ CXStr HostName;
+/*0x18*/ CXStr ServerIP;
+/*0x20*/ int ExternalPort;
+/*0x24*/ int InternalPort;
+/*0x28*/ Date DateCreated;
+/*0x50*/ int Flags; // 0x100 = all access
+/*0x54*/ int ServerType; // uninitialized
+/*0x58*/ CXStr LanguageCode;
+/*0x60*/ CXStr CountryCode;
+/*0x68*/ CXStr RuleSet;
+/*0x70*/ CXStr Description;
 /*0x78*/ eServerStatus StatusFlags;
-/*0x7c*/ int           PopulationRanking; // not populated
-/*0x80*/ int           Expansion;
-/*0x84*/ int           TrueBoxStatus;     // 0 = no, 1 = yes, 2 = relaxed
+/*0x7c*/ int PopulationRanking; // not populated
+/*0x80*/ int Expansion;
+/*0x84*/ int TrueBoxStatus; // 0 = no, 1 = yes, 2 = relaxed
 /*0x88*/
 };
 
@@ -157,24 +157,24 @@ struct [[offsetcomments]] EQDevice
 
 struct [[offsetcomments]] EQLogin
 {
-/*0x000*/ EQDevice  Devices[0x10];
-/*0x400*/ int       NumDevices;
-/*0x408*/ HWND      hEQWnd;
-/*0x410*/ int       ReturnCode; // -1 = failed login
-/*0x414*/ char      Login[0x80];
-/*0x494*/ char      PW[0x80];
-/*0x514*/ char      PW2[0x80];
-/*0x594*/ char      ServerLong[0x80];
-/*0x614*/ int       ServerPort;
-/*0x618*/ char      AccountKey[0x80];
-/*0x698*/ int       ActiveDeviceIndex;
-/*0x69c*/ char      LastZoneEntered[0x20];
-/*0x6bc*/ char      StationName[0x20];
-/*0x6dc*/ char      ExeName[0x20];
-/*0x6fc*/ char      CommandLine[0x1c0];
-/*0x8bc*/ char      ServerShort[0x80];
-/*0x93c*/ char      Session[0x40];
-/*0x97c*/ char      Character[0x40];
+/*0x000*/ EQDevice Devices[0x10];
+/*0x400*/ int NumDevices;
+/*0x408*/ HWND hEQWnd;
+/*0x410*/ int ReturnCode; // -1 = failed login
+/*0x414*/ char Login[0x80];
+/*0x494*/ char PW[0x80];
+/*0x514*/ char PW2[0x80];
+/*0x594*/ char ServerLong[0x80];
+/*0x614*/ int ServerPort;
+/*0x618*/ char AccountKey[0x80];
+/*0x698*/ int ActiveDeviceIndex;
+/*0x69c*/ char LastZoneEntered[0x20];
+/*0x6bc*/ char StationName[0x20];
+/*0x6dc*/ char ExeName[0x20];
+/*0x6fc*/ char CommandLine[0x1c0];
+/*0x8bc*/ char ServerShort[0x80];
+/*0x93c*/ char Session[0x40];
+/*0x97c*/ char Character[0x40];
 /*0x9bc*/ // more...
 };
 
@@ -182,10 +182,10 @@ struct [[offsetcomments]] EQLogin
 
 struct [[offsetcomments]] IniKeyValuePair
 {
-/*0x00*/ CXStr            key;
-/*0x08*/ CXStr            value;
-/*0x10*/ const char*      valueStr;
-/*0x18*/ int              hashVal;
+/*0x00*/ CXStr key;
+/*0x08*/ CXStr value;
+/*0x10*/ const char* valueStr;
+/*0x18*/ int hashVal;
 /*0x20*/ IniKeyValuePair* next;
 /*0x28*/
 };
@@ -193,12 +193,12 @@ struct [[offsetcomments]] IniKeyValuePair
 struct [[offsetcomments]] IniFileSection
 {
 /*0x00*/ HashTable<IniKeyValuePair*> values;
-/*0x18*/ int              numValues;
-/*0x20*/ CXStr            section;
-/*0x28*/ int              hashVal;
+/*0x18*/ int numValues;
+/*0x20*/ CXStr section;
+/*0x28*/ int hashVal;
 /*0x30*/ IniKeyValuePair* firstKeyValue;
 /*0x38*/ IniKeyValuePair* lastKeyValue;
-/*0x40*/ IniFileSection*  nextSection;
+/*0x40*/ IniFileSection* nextSection;
 /*0x48*/
 };
 
@@ -208,17 +208,17 @@ public:
 	virtual ~IniFileWrapper() {}
 
 /*0x08*/ HashTable<IniFileSection*> sections;
-/*0x20*/ int              numSections;
-/*0x28*/ IniFileSection*  firstSection;
-/*0x30*/ IniFileSection*  lastSection;
-/*0x38*/ bool             dirty;
+/*0x20*/ int numSections;
+/*0x28*/ IniFileSection* firstSection;
+/*0x30*/ IniFileSection* lastSection;
+/*0x38*/ bool dirty;
 /*0x3c*/
 };
 
 struct [[offsetcomments]] TimeCheck
 {
-/*0x00*/ int64_t    lastTimeChecked;
-/*0x08*/ int64_t    elapsedTime;
+/*0x00*/ int64_t lastTimeChecked;
+/*0x08*/ int64_t elapsedTime;
 /*0x10*/
 };
 
@@ -230,28 +230,28 @@ public:
 	struct Host
 	{
 		CXStr Name;
-		int   Port;
+		int Port;
 	};
 
-/*0x010*/ EQLS::EQLogin*          pLoginData;
+/*0x010*/ EQLS::EQLogin* pLoginData;
 /*0x018*/ DoublyLinkedList<Host*> Hosts;
-/*0x050*/ Host*                   pHost;
-/*0x058*/ bool                    bRetryConnect;
-/*0x060*/ IniFileWrapper          hostIniFile;
-/*0x0a0*/ IniFileWrapper          systemMacrosIniFile;
-/*0x0e0*/ IniFileWrapper          userMacrosIniFile;
-/*0x120*/ TimeCheck               timeCheck;
-/*0x130*/ CXStr                   LoginName;
-/*0x138*/ CXStr                   Password;
-/*0x140*/ CXStr                   LoginNameCopy;
-/*0x148*/ CXStr                   PasswordCopy;
-/*0x150*/ CXStr                   AccountKey;
-/*0x158*/ int                     accountId;
+/*0x050*/ Host* pHost;
+/*0x058*/ bool bRetryConnect;
+/*0x060*/ IniFileWrapper hostIniFile;
+/*0x0a0*/ IniFileWrapper systemMacrosIniFile;
+/*0x0e0*/ IniFileWrapper userMacrosIniFile;
+/*0x120*/ TimeCheck timeCheck;
+/*0x130*/ CXStr LoginName;
+/*0x138*/ CXStr Password;
+/*0x140*/ CXStr LoginNameCopy;
+/*0x148*/ CXStr PasswordCopy;
+/*0x150*/ CXStr AccountKey;
+/*0x158*/ int accountId;
 /*0x160*/ EQLS::EQClientServerData* selectedServer;
-/*0x168*/ int                     displayDeviceIndex;
-/*0x16c*/ bool                    isLoggingIn;
-/*0x170*/ uint32_t                unknown1;
-/*0x174*/ uint32_t                unknown2;
+/*0x168*/ int displayDeviceIndex;
+/*0x16c*/ bool isLoggingIn;
+/*0x170*/ uint32_t unknown1;
+/*0x174*/ uint32_t unknown2;
 /*0x178*/ DoublyLinkedList<EQLS::EQClientServerData*> ServerList;
 /*0x1b0*/ EQLS::EQClientServerData QuickConnectServer;
 /*0x238*/
@@ -264,12 +264,12 @@ namespace eqmain {
 // CXWnd
 //============================================================================
 
-constexpr size_t CXWnd_size = 0x260; // @sizeof(CXWnd, eqmain) :: 2026-03-10 (live) @ 0x1800D950B
+constexpr size_t CXWnd_size = 0x260; // @sizeof(CXWnd, eqmain) :: 2026-03-10 @ 0x1800D950B
 constexpr size_t CXWnd_vftable_size = 0x2D0;
 
 class [[offsetcomments]] CXWnd
-	: public TListNode<CXWnd>   // node in list of siblings
-	, public TList<CXWnd>       // list of children
+	: public TListNode<CXWnd> // node in list of siblings
+	, public TList<CXWnd> // list of children
 {
 public:
 	//----------------------------------------------------------------------------
@@ -670,111 +670,111 @@ public:
 	};
 
 // @start: CXWnd Members
-/*0x030*/ int                BottomOffset;
-/*0x034*/ uint32_t           BGType;
+/*0x030*/ int BottomOffset;
+/*0x034*/ uint32_t BGType;
 /*0x038*/ CStaticTintedBlendAnimationTemplate* TitlePiece2;
 /*0x040*/ CStaticTintedBlendAnimationTemplate* TitlePiece;
-/*0x048*/ CXWnd*             FocusProxy;
-/*0x050*/ bool               bActive;
-/*0x051*/ bool               bClickThroughToBackground;
-/*0x052*/ bool               bTopAnchoredToTop;
-/*0x053*/ bool               Enabled;
-/*0x054*/ int                HScrollMax;
-/*0x058*/ CXRect             ClientRect;
-/*0x068*/ COLORREF           CRNormal;
-/*0x06c*/ bool               dShow;
-/*0x070*/ uint32_t           LastBlinkFadeRefreshTime;
-/*0x074*/ bool               bEscapableLocked;
-/*0x078*/ CXStr              WindowText;
-/*0x080*/ bool               bUseInLayoutHorizontal;
+/*0x048*/ CXWnd* FocusProxy;
+/*0x050*/ bool bActive;
+/*0x051*/ bool bClickThroughToBackground;
+/*0x052*/ bool bTopAnchoredToTop;
+/*0x053*/ bool Enabled;
+/*0x054*/ int HScrollMax;
+/*0x058*/ CXRect ClientRect;
+/*0x068*/ COLORREF CRNormal;
+/*0x06c*/ bool dShow;
+/*0x070*/ uint32_t LastBlinkFadeRefreshTime;
+/*0x074*/ bool bEscapableLocked;
+/*0x078*/ CXStr WindowText;
+/*0x080*/ bool bUseInLayoutHorizontal;
 /*0x088*/ CTextObjectInterface* pTextObject;
-/*0x090*/ bool               Fades;
-/*0x094*/ uint32_t           XMLIndex;
-/*0x098*/ uint32_t           FadeDuration;
-/*0x09c*/ bool               bIsParentOrContextMenuWindow;
-/*0x09d*/ bool               bLeftAnchoredToLeft;
-/*0x0a0*/ CXRect             ClipRectClient;
-/*0x0b0*/ int                BlinkDuration;
-/*0x0b4*/ bool               bMaximized;
-/*0x0b8*/ CTextureFont*      pFont;
-/*0x0c0*/ int                managerArrayIndex;
-/*0x0c4*/ int                HScrollPos;
-/*0x0c8*/ bool               bClientRectChanged;
-/*0x0c9*/ bool               MouseOver;
-/*0x0cc*/ uint32_t           WindowStyle;
-/*0x0d0*/ bool               bEnableShowBorder;
-/*0x0d1*/ bool               bClickThroughMenuItemStatus;
-/*0x0d2*/ uint8_t            Alpha;
-/*0x0d8*/ CXStr              XMLToolTip;
-/*0x0e0*/ bool               bAction;
-/*0x0e1*/ bool               bNeedsSaving;
-/*0x0e4*/ CXSize             MinClientSize;
-/*0x0ec*/ int                VScrollMax;
-/*0x0f0*/ uint32_t           BlinkFadeFreq;
-/*0x0f4*/ int                ZLayer;
-/*0x0f8*/ int                VScrollPos;
-/*0x0fc*/ CXSize             MaxClientSize;
-/*0x104*/ bool               bClipToParent;
-/*0x105*/ bool               bCaptureTitle;
-/*0x106*/ bool               bKeepOnScreen;
-/*0x108*/ uint32_t           TransitionStartTick;
-/*0x10c*/ bool               bEscapable;
-/*0x110*/ uint32_t           BlinkFadeStartTime;
+/*0x090*/ bool Fades;
+/*0x094*/ uint32_t XMLIndex;
+/*0x098*/ uint32_t FadeDuration;
+/*0x09c*/ bool bIsParentOrContextMenuWindow;
+/*0x09d*/ bool bLeftAnchoredToLeft;
+/*0x0a0*/ CXRect ClipRectClient;
+/*0x0b0*/ int BlinkDuration;
+/*0x0b4*/ bool bMaximized;
+/*0x0b8*/ CTextureFont* pFont;
+/*0x0c0*/ int managerArrayIndex;
+/*0x0c4*/ int HScrollPos;
+/*0x0c8*/ bool bClientRectChanged;
+/*0x0c9*/ bool MouseOver;
+/*0x0cc*/ uint32_t WindowStyle;
+/*0x0d0*/ bool bEnableShowBorder;
+/*0x0d1*/ bool bClickThroughMenuItemStatus;
+/*0x0d2*/ uint8_t Alpha;
+/*0x0d8*/ CXStr XMLToolTip;
+/*0x0e0*/ bool bAction;
+/*0x0e1*/ bool bNeedsSaving;
+/*0x0e4*/ CXSize MinClientSize;
+/*0x0ec*/ int VScrollMax;
+/*0x0f0*/ uint32_t BlinkFadeFreq;
+/*0x0f4*/ int ZLayer;
+/*0x0f8*/ int VScrollPos;
+/*0x0fc*/ CXSize MaxClientSize;
+/*0x104*/ bool bClipToParent;
+/*0x105*/ bool bCaptureTitle;
+/*0x106*/ bool bKeepOnScreen;
+/*0x108*/ uint32_t TransitionStartTick;
+/*0x10c*/ bool bEscapable;
+/*0x110*/ uint32_t BlinkFadeStartTime;
 /*0x118*/ ArrayClass2<uint32_t> RuntimeTypes;
-/*0x138*/ bool               bRightAnchoredToLeft;
-/*0x13c*/ int                LeftOffset;
-/*0x140*/ CXWnd*             ParentWindow;
-/*0x148*/ uint32_t           FadeDelay;
+/*0x138*/ bool bRightAnchoredToLeft;
+/*0x13c*/ int LeftOffset;
+/*0x140*/ CXWnd* ParentWindow;
+/*0x148*/ uint32_t FadeDelay;
 /*0x150*/ CXWndDrawTemplate* DrawTemplate;
-/*0x158*/ bool               bClientClipRectChanged;
-/*0x15c*/ CXRect             IconRect;
-/*0x170*/ CXStr              Tooltip;
-/*0x178*/ CXStr              DataStr;
-/*0x180*/ int                ParentAndContextMenuArrayIndex;
-/*0x184*/ CXRect             OldLocation;
-/*0x198*/ int64_t            Data;
+/*0x158*/ bool bClientClipRectChanged;
+/*0x15c*/ CXRect IconRect;
+/*0x170*/ CXStr Tooltip;
+/*0x178*/ CXStr DataStr;
+/*0x180*/ int ParentAndContextMenuArrayIndex;
+/*0x184*/ CXRect OldLocation;
+/*0x198*/ int64_t Data;
 /*0x1a0*/ CTextObjectInterface* pTipTextObject;
-/*0x1a8*/ uint8_t            FadeToAlpha;
-/*0x1a9*/ bool               bBringToTopWhenClicked;
-/*0x1b0*/ CLayoutStrategy*   pLayoutStrategy;
-/*0x1b8*/ bool               bClickThrough;
+/*0x1a8*/ uint8_t FadeToAlpha;
+/*0x1a9*/ bool bBringToTopWhenClicked;
+/*0x1b0*/ CLayoutStrategy* pLayoutStrategy;
+/*0x1b8*/ bool bClickThrough;
 /*0x1c0*/ CTextureAnimation* IconTextureAnim;
-/*0x1c8*/ uint8_t            StartAlpha;
-/*0x1c9*/ bool               bShowBorder;
-/*0x1ca*/ bool               bMarkedForDelete;
-/*0x1cb*/ bool               bIsTransitioning;
-/*0x1cc*/ uint32_t           LastTimeMouseOver;
-/*0x1d0*/ bool               bMaximizable;
-/*0x1d4*/ int                BlinkStartTimer;
-/*0x1d8*/ ControllerBase*    pController;
-/*0x1e0*/ uint32_t           BackgroundDrawType;
-/*0x1e4*/ bool               Unlockable;
-/*0x1e5*/ bool               bTiled;
-/*0x1e6*/ bool               ValidCXWnd;
-/*0x1e7*/ uint8_t            FadeAlpha;
-/*0x1e8*/ uint8_t            bResizableMask;
-/*0x1ec*/ CXRect             ClipRectScreen;
-/*0x1fc*/ uint8_t            TargetAlpha;
-/*0x200*/ int                DeleteCount;
-/*0x204*/ bool               bScreenClipRectChanged;
-/*0x208*/ int                TopOffset;
-/*0x20c*/ CXRect             Location;
-/*0x21c*/ bool               Locked;
-/*0x220*/ int                Transition;
-/*0x224*/ bool               bHCenterTooltip;
-/*0x228*/ COLORREF           DisabledBackground;
-/*0x22c*/ bool               bShowClickThroughMenuItem;
-/*0x230*/ CXRect             TransitionRect;
-/*0x240*/ bool               Faded;
-/*0x244*/ uint32_t           TransitionDuration;
-/*0x248*/ bool               Minimized;
-/*0x249*/ bool               bUseInLayoutVertical;
-/*0x24a*/ bool               bBottomAnchoredToTop;
-/*0x24c*/ COLORREF           BGColor;
-/*0x250*/ uint32_t           BlinkFadeDuration;
-/*0x254*/ int                BlinkState;
-/*0x258*/ bool               bFullyScreenClipped;
-/*0x25c*/ int                RightOffset;
+/*0x1c8*/ uint8_t StartAlpha;
+/*0x1c9*/ bool bShowBorder;
+/*0x1ca*/ bool bMarkedForDelete;
+/*0x1cb*/ bool bIsTransitioning;
+/*0x1cc*/ uint32_t LastTimeMouseOver;
+/*0x1d0*/ bool bMaximizable;
+/*0x1d4*/ int BlinkStartTimer;
+/*0x1d8*/ ControllerBase* pController;
+/*0x1e0*/ uint32_t BackgroundDrawType;
+/*0x1e4*/ bool Unlockable;
+/*0x1e5*/ bool bTiled;
+/*0x1e6*/ bool ValidCXWnd;
+/*0x1e7*/ uint8_t FadeAlpha;
+/*0x1e8*/ uint8_t bResizableMask;
+/*0x1ec*/ CXRect ClipRectScreen;
+/*0x1fc*/ uint8_t TargetAlpha;
+/*0x200*/ int DeleteCount;
+/*0x204*/ bool bScreenClipRectChanged;
+/*0x208*/ int TopOffset;
+/*0x20c*/ CXRect Location;
+/*0x21c*/ bool Locked;
+/*0x220*/ int Transition;
+/*0x224*/ bool bHCenterTooltip;
+/*0x228*/ COLORREF DisabledBackground;
+/*0x22c*/ bool bShowClickThroughMenuItem;
+/*0x230*/ CXRect TransitionRect;
+/*0x240*/ bool Faded;
+/*0x244*/ uint32_t TransitionDuration;
+/*0x248*/ bool Minimized;
+/*0x249*/ bool bUseInLayoutVertical;
+/*0x24a*/ bool bBottomAnchoredToTop;
+/*0x24c*/ COLORREF BGColor;
+/*0x250*/ uint32_t BlinkFadeDuration;
+/*0x254*/ int BlinkState;
+/*0x258*/ bool bFullyScreenClipped;
+/*0x25c*/ int RightOffset;
 /*0x260*/
 // @end: CXWnd Members
 };
@@ -785,38 +785,38 @@ SIZE_CHECK2(CXWnd_vftable, CXWnd::VirtualFunctionTable, CXWnd_vftable_size);
 class CStmlWnd : public CXWnd
 {
 public:
-/*0x248*/ CXStr              STMLText;
+/*0x248*/ CXStr STMLText;
 };
 
 class [[offsetcomments]] CEditBaseWnd : public CXWnd
 {
 public:
-/*0x260*/ eTextAlign   eAlign = eta_Left;
-/*0x264*/ int          StartPos = 0;
-/*0x268*/ int          EndPos = 0;
-/*0x26c*/ int          MaxChars = -1;
-/*0x270*/ int          MaxBytesUTF8 = -1;
-/*0x278*/ CXStr        InputText;
-/*0x280*/ int          TagPrintableStarts[EDITWND_MAX_TAGS];
-/*0x2a8*/ int          TagPrintableEnds[EDITWND_MAX_TAGS];
-/*0x2d0*/ int          TagOriginalStarts[EDITWND_MAX_TAGS];
-/*0x2f8*/ int          TagOriginalEnds[EDITWND_MAX_TAGS];
-/*0x320*/ int          TagDynamicSize[EDITWND_MAX_TAGS];
-/*0x348*/ int          TagCodes[EDITWND_MAX_TAGS];
-/*0x370*/ CXStr        TagStrings[EDITWND_MAX_TAGS];
-/*0x3c0*/ int          TagCount;
-/*0x3c4*/ uint32_t     EditStyle;
+/*0x260*/ eTextAlign eAlign = eta_Left;
+/*0x264*/ int StartPos = 0;
+/*0x268*/ int EndPos = 0;
+/*0x26c*/ int MaxChars = -1;
+/*0x270*/ int MaxBytesUTF8 = -1;
+/*0x278*/ CXStr InputText;
+/*0x280*/ int TagPrintableStarts[EDITWND_MAX_TAGS];
+/*0x2a8*/ int TagPrintableEnds[EDITWND_MAX_TAGS];
+/*0x2d0*/ int TagOriginalStarts[EDITWND_MAX_TAGS];
+/*0x2f8*/ int TagOriginalEnds[EDITWND_MAX_TAGS];
+/*0x320*/ int TagDynamicSize[EDITWND_MAX_TAGS];
+/*0x348*/ int TagCodes[EDITWND_MAX_TAGS];
+/*0x370*/ CXStr TagStrings[EDITWND_MAX_TAGS];
+/*0x3c0*/ int TagCount;
+/*0x3c4*/ uint32_t EditStyle;
 /*0x3c8*/
 };
 
 class [[offsetcomments]] CListWnd : public CXWnd
 {
 public:
-/*0x260*/ int                 Unknown0x1f0;
+/*0x260*/ int Unknown0x1f0;
 /*0x268*/ ArrayClass<SListWndLine> ItemsArray;
 /*0x280*/ ArrayClass<SListWndColumn> Columns;
-/*0x298*/ int                 CurSel;
-/*0x29c*/ int                 CurCol;
+/*0x298*/ int CurSel;
+/*0x29c*/ int CurCol;
 /*0x2a0*/
 	CXStr GetItemText(int row, int col)
 	{

@@ -8,7 +8,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  */
 
@@ -86,9 +86,9 @@ public:
 	static EQLIB_OBJECT AggroMeterManagerClient& Instance();
 
 /*0x000*/ AggroMeterListEntry aggroData[MAX_AGGRO_METER_SIZE];
-/*0x1e0*/ uint32_t AggroLockID;                     // this can be 0, I dont know what it is...
-/*0x1e4*/ uint32_t AggroTargetID;                   // this is id of whoever we are fighting
-/*0x1e8*/ uint32_t AggroSecondaryID;                // this is id of whoever the npc is fighting
+/*0x1e0*/ uint32_t AggroLockID; // this can be 0, I dont know what it is...
+/*0x1e4*/ uint32_t AggroTargetID; // this is id of whoever we are fighting
+/*0x1e8*/ uint32_t AggroSecondaryID; // this is id of whoever the npc is fighting
 /*0x1ec*/
 };
 
@@ -101,183 +101,183 @@ struct [[offsetcomments]] LabelCache_AggroData
 {
 	FORCE_SYMBOLS
 
-/*0x000*/ int           AggroMostHatedName[64];
-/*0x100*/ int           AggroHatePct[MAX_AGGRO_METER_SIZE];
-/*0x178*/ int           AggroMyHatePct;
+/*0x000*/ int AggroMostHatedName[64];
+/*0x100*/ int AggroHatePct[MAX_AGGRO_METER_SIZE];
+/*0x178*/ int AggroMyHatePct;
 /*0x17c*/
 };
 
 struct [[offsetcomments]] LabelCache
 {
-/*0x000*/ char  Name[64];
-/*0x040*/ char  LastName[64];
-/*0x080*/ int   Level;
-/*0x084*/ char  Class[64];
-/*0x0c4*/ char  Title[64];
-/*0x104*/ int   Deity;
-/*0x108*/ int   Str;
-/*0x10c*/ int   Sta;
-/*0x110*/ int   Dex;
-/*0x114*/ int   Agi;
-/*0x118*/ int   Wis;
-/*0x11c*/ int   Int;
-/*0x120*/ int   Cha;
-/*0x124*/ int   ResistPoison;
-/*0x128*/ int   ResistDisease;
-/*0x12c*/ int   ResistCorruption;
-/*0x130*/ int   ResistFire;
-/*0x134*/ int   ResistCold;
-/*0x138*/ int   ResistMagic;
-/*0x13c*/ int   BaseStr;
-/*0x140*/ int   BaseSta;
-/*0x144*/ int   BaseDex;
-/*0x148*/ int   BaseAgi;
-/*0x14c*/ int   BaseWis;
-/*0x150*/ int   BaseInt;
-/*0x154*/ int   BaseCha;
-/*0x158*/ int   BaseResistPoison;
-/*0x15c*/ int   BaseResistDisease;
-/*0x160*/ int   BaseResistCorruption;
-/*0x164*/ int   BaseResistFire;
-/*0x168*/ int   BaseResistCold;
-/*0x16c*/ int   BaseResistMagic;
-/*0x170*/ int   HeroicStr;
-/*0x174*/ int   HeroicSta;
-/*0x178*/ int   HeroicDex;
-/*0x17c*/ int   HeroicAgi;
-/*0x180*/ int   HeroicWis;
-/*0x184*/ int   HeroicInt;
-/*0x188*/ int   HeroicCha;
-/*0x18c*/ int   MaxStr;
-/*0x190*/ int   MaxSta;
-/*0x194*/ int   MaxDex;
-/*0x198*/ int   MaxAgi;
-/*0x19c*/ int   MaxWis;
-/*0x1a0*/ int   MaxInt;
-/*0x1a4*/ int   MaxCha;
-/*0x1a8*/ int   MaxResistPoison;
-/*0x1ac*/ int   MaxResistDisease;
-/*0x1b0*/ int   MaxResistCorruption;
-/*0x1b4*/ int   MaxResistFire;
-/*0x1b8*/ int   MaxResistCold;
-/*0x1bc*/ int   MaxResistMagic;
-/*0x1c0*/ int   HP;
-/*0x1c4*/ int   MaxHP;
+/*0x000*/ char Name[64];
+/*0x040*/ char LastName[64];
+/*0x080*/ int Level;
+/*0x084*/ char Class[64];
+/*0x0c4*/ char Title[64];
+/*0x104*/ int Deity;
+/*0x108*/ int Str;
+/*0x10c*/ int Sta;
+/*0x110*/ int Dex;
+/*0x114*/ int Agi;
+/*0x118*/ int Wis;
+/*0x11c*/ int Int;
+/*0x120*/ int Cha;
+/*0x124*/ int ResistPoison;
+/*0x128*/ int ResistDisease;
+/*0x12c*/ int ResistCorruption;
+/*0x130*/ int ResistFire;
+/*0x134*/ int ResistCold;
+/*0x138*/ int ResistMagic;
+/*0x13c*/ int BaseStr;
+/*0x140*/ int BaseSta;
+/*0x144*/ int BaseDex;
+/*0x148*/ int BaseAgi;
+/*0x14c*/ int BaseWis;
+/*0x150*/ int BaseInt;
+/*0x154*/ int BaseCha;
+/*0x158*/ int BaseResistPoison;
+/*0x15c*/ int BaseResistDisease;
+/*0x160*/ int BaseResistCorruption;
+/*0x164*/ int BaseResistFire;
+/*0x168*/ int BaseResistCold;
+/*0x16c*/ int BaseResistMagic;
+/*0x170*/ int HeroicStr;
+/*0x174*/ int HeroicSta;
+/*0x178*/ int HeroicDex;
+/*0x17c*/ int HeroicAgi;
+/*0x180*/ int HeroicWis;
+/*0x184*/ int HeroicInt;
+/*0x188*/ int HeroicCha;
+/*0x18c*/ int MaxStr;
+/*0x190*/ int MaxSta;
+/*0x194*/ int MaxDex;
+/*0x198*/ int MaxAgi;
+/*0x19c*/ int MaxWis;
+/*0x1a0*/ int MaxInt;
+/*0x1a4*/ int MaxCha;
+/*0x1a8*/ int MaxResistPoison;
+/*0x1ac*/ int MaxResistDisease;
+/*0x1b0*/ int MaxResistCorruption;
+/*0x1b4*/ int MaxResistFire;
+/*0x1b8*/ int MaxResistCold;
+/*0x1bc*/ int MaxResistMagic;
+/*0x1c0*/ int HP;
+/*0x1c4*/ int MaxHP;
 /*0x1c8*/ float HPPct;
-/*0x1cc*/ int   Mana;
-/*0x1d0*/ int   MaxMana;
+/*0x1cc*/ int Mana;
+/*0x1d0*/ int MaxMana;
 /*0x1d4*/ float ManaPct;
-/*0x1d8*/ int   Endurance;
-/*0x1dc*/ int   MaxEndurance;
+/*0x1d8*/ int Endurance;
+/*0x1dc*/ int MaxEndurance;
 /*0x1e0*/ float EndurancePct;
-/*0x1e4*/ int   Mitigation;
-/*0x1e8*/ int   Evasion;
-/*0x1ec*/ int   Attack;
-/*0x1f0*/ int   Accuracy;
-/*0x1f4*/ int   Weight;
-/*0x1f8*/ int   MaxWeight;
+/*0x1e4*/ int Mitigation;
+/*0x1e8*/ int Evasion;
+/*0x1ec*/ int Attack;
+/*0x1f0*/ int Accuracy;
+/*0x1f4*/ int Weight;
+/*0x1f8*/ int MaxWeight;
 /*0x1fc*/ float ExpPct;
 /*0x200*/ float AAExpPct;
-/*0x204*/ int   AAPoints;
-/*0x208*/ int   AASiphon;
-/*0x20c*/ int   Haste;
-/*0x210*/ int   HPRegen;
-/*0x214*/ int   ManaRegen;
-/*0x218*/ int   EnduranceRegen;
-/*0x21c*/ int   SpellShield;
-/*0x220*/ int   CombatEfficiency;
-/*0x224*/ int   Shielding;
-/*0x228*/ int   DmgShielding;
-/*0x22c*/ int   DoTShielding;
-/*0x230*/ int   DmgShieldMitigation;
-/*0x234*/ int   Avoidance;
-/*0x238*/ int   AccuracyBonus;
-/*0x23c*/ int   StunResist;
-/*0x240*/ int   StrikeThrough;
-/*0x244*/ int   HealAmount;
-/*0x248*/ int   SpellDamage;
-/*0x24c*/ int   Clairvoyance;
-/*0x250*/ int   SkillDmgBash;
-/*0x254*/ int   SkillDmgBackstab;
-/*0x258*/ int   SkillDmgDragonPunch;
-/*0x25c*/ int   SkillDmgEagleStrike;
-/*0x260*/ int   SkillDmgFlyingKick;
-/*0x264*/ int   SkillDmgKick;
-/*0x268*/ int   SkillDmgRoundKick;
-/*0x26c*/ int   SkillDmgTigerClaw;
-/*0x270*/ int   SkillDmgFrenzy;
-/*0x274*/ int   Unused1;
-/*0x278*/ int   LoyaltyTokens;
-/*0x27c*/ int   ParcelCount;
-/*0x280*/ int   CurrentLoyaltyVelocity;
-/*0x284*/ int   OverflowCount;
-/*0x288*/ int   Luck;
-/*0x28c*/ char  TargetName[256];
-/*0x38c*/ int   TargetHPPct;
-/*0x390*/ char  PetName[128];
-/*0x410*/ int   PetHPPct;
-/*0x414*/ int   PetTargetHPPct;
-/*0x418*/ char  GroupName[MAX_GROUP_SIZE - 1][64];
-/*0x558*/ int   GroupHPPct[MAX_GROUP_SIZE - 1];
-/*0x56c*/ int   GroupPetHPPct[MAX_GROUP_SIZE - 1];
-/*0x580*/ int   GroupManaPct[MAX_GROUP_SIZE - 1];
-/*0x594*/ int   GroupSTAPct[MAX_GROUP_SIZE - 1];
-/*0x5a8*/ int   Buff[15];
-/*0x5e4*/ int   BardBuff[6];
-/*0x5fc*/ int   PetBuff[30];
-/*0x674*/ int   Spell[10];
-/*0x69c*/ char  SongTitle[512];                 // mp3 player
-/*0x89c*/ int   SongDurationMin;
-/*0x8a0*/ int   SongDurationSec;
-/*0x8a4*/ int   SongCurrentMin;
-/*0x8a8*/ int   SongCurrentSec;
-/*0x8ac*/ int   GroupLeaderExpPct;             // no longer used
-/*0x8b0*/ int   RaidLeaderExPct;               // no longer used
-/*0x8b4*/ char  TargetOfTargetName[64];
-/*0x8f4*/ int   ExtendedTargetHPPct[MAX_EXTENDED_TARGET_SIZE];
-/*0x950*/ int   ExtendedTargetManaPct[MAX_EXTENDED_TARGET_SIZE];
-/*0x9ac*/ int   ExtendedTargetEndurancePct[MAX_EXTENDED_TARGET_SIZE];
-/*0xa08*/ char  AggroTargetName[64];
-/*0xa48*/ char  AggroMostHatedName[64];
-/*0xa88*/ char  AggroMostHatedNameNoLock[64];
-/*0xac8*/ int   AggroHatePct[MAX_AGGRO_METER_SIZE];
-/*0xb40*/ int   AggroMyHatePct;
-/*0xb44*/ int   AggroMostHatedPct;
+/*0x204*/ int AAPoints;
+/*0x208*/ int AASiphon;
+/*0x20c*/ int Haste;
+/*0x210*/ int HPRegen;
+/*0x214*/ int ManaRegen;
+/*0x218*/ int EnduranceRegen;
+/*0x21c*/ int SpellShield;
+/*0x220*/ int CombatEfficiency;
+/*0x224*/ int Shielding;
+/*0x228*/ int DmgShielding;
+/*0x22c*/ int DoTShielding;
+/*0x230*/ int DmgShieldMitigation;
+/*0x234*/ int Avoidance;
+/*0x238*/ int AccuracyBonus;
+/*0x23c*/ int StunResist;
+/*0x240*/ int StrikeThrough;
+/*0x244*/ int HealAmount;
+/*0x248*/ int SpellDamage;
+/*0x24c*/ int Clairvoyance;
+/*0x250*/ int SkillDmgBash;
+/*0x254*/ int SkillDmgBackstab;
+/*0x258*/ int SkillDmgDragonPunch;
+/*0x25c*/ int SkillDmgEagleStrike;
+/*0x260*/ int SkillDmgFlyingKick;
+/*0x264*/ int SkillDmgKick;
+/*0x268*/ int SkillDmgRoundKick;
+/*0x26c*/ int SkillDmgTigerClaw;
+/*0x270*/ int SkillDmgFrenzy;
+/*0x274*/ int Unused1;
+/*0x278*/ int LoyaltyTokens;
+/*0x27c*/ int ParcelCount;
+/*0x280*/ int CurrentLoyaltyVelocity;
+/*0x284*/ int OverflowCount;
+/*0x288*/ int Luck;
+/*0x28c*/ char TargetName[256];
+/*0x38c*/ int TargetHPPct;
+/*0x390*/ char PetName[128];
+/*0x410*/ int PetHPPct;
+/*0x414*/ int PetTargetHPPct;
+/*0x418*/ char GroupName[MAX_GROUP_SIZE - 1][64];
+/*0x558*/ int GroupHPPct[MAX_GROUP_SIZE - 1];
+/*0x56c*/ int GroupPetHPPct[MAX_GROUP_SIZE - 1];
+/*0x580*/ int GroupManaPct[MAX_GROUP_SIZE - 1];
+/*0x594*/ int GroupSTAPct[MAX_GROUP_SIZE - 1];
+/*0x5a8*/ int Buff[15];
+/*0x5e4*/ int BardBuff[6];
+/*0x5fc*/ int PetBuff[30];
+/*0x674*/ int Spell[10];
+/*0x69c*/ char SongTitle[512]; // mp3 player
+/*0x89c*/ int SongDurationMin;
+/*0x8a0*/ int SongDurationSec;
+/*0x8a4*/ int SongCurrentMin;
+/*0x8a8*/ int SongCurrentSec;
+/*0x8ac*/ int GroupLeaderExpPct; // no longer used
+/*0x8b0*/ int RaidLeaderExPct; // no longer used
+/*0x8b4*/ char TargetOfTargetName[64];
+/*0x8f4*/ int ExtendedTargetHPPct[MAX_EXTENDED_TARGET_SIZE];
+/*0x950*/ int ExtendedTargetManaPct[MAX_EXTENDED_TARGET_SIZE];
+/*0x9ac*/ int ExtendedTargetEndurancePct[MAX_EXTENDED_TARGET_SIZE];
+/*0xa08*/ char AggroTargetName[64];
+/*0xa48*/ char AggroMostHatedName[64];
+/*0xa88*/ char AggroMostHatedNameNoLock[64];
+/*0xac8*/ int AggroHatePct[MAX_AGGRO_METER_SIZE];
+/*0xb40*/ int AggroMyHatePct;
+/*0xb44*/ int AggroMostHatedPct;
 /*0xb48*/ float MercenaryAAExperiencePct;
-/*0xb4c*/ int   MercenaryAAPoints;
-/*0xb50*/ int   MercenaryAAPointsSpent;
-/*0xb54*/ int   MercenaryHP;
-/*0xb58*/ int   MercenaryMaxHP;
-/*0xb5c*/ int   MercenaryMana;
-/*0xb60*/ int   MercenaryMaxMana;
-/*0xb64*/ int   MercenaryEndurance;
-/*0xb68*/ int   MercenaryMaxEndurance;
-/*0xb6c*/ int   MercenaryMitigation;
-/*0xb70*/ int   MercenaryEvasion;
-/*0xb74*/ int   MercenaryAttack;
-/*0xb78*/ int   MercenaryAccuracy;
-/*0xb7c*/ int   MercenaryHaste;
-/*0xb80*/ int   MercenaryStr;
-/*0xb84*/ int   MercenarySta;
-/*0xb88*/ int   MercenaryInt;
-/*0xb8c*/ int   MercenaryWis;
-/*0xb90*/ int   MercenaryAgi;
-/*0xb94*/ int   MercenaryDex;
-/*0xb98*/ int   MercenaryCha;
-/*0xb9c*/ int   MercenaryHeroicStr;
-/*0xba0*/ int   MercenaryHeroicSta;
-/*0xba4*/ int   MercenaryHeroicInt;
-/*0xba8*/ int   MercenaryHeroicWis;
-/*0xbac*/ int   MercenaryHeroicAgi;
-/*0xbb0*/ int   MercenaryHeroicDex;
-/*0xbb4*/ int   MercenaryHeroicCha;
-/*0xbb8*/ int   MercenaryCombatHPRegen;
-/*0xbbc*/ int   MercenaryCombatManaRegen;
-/*0xbc0*/ int   MercenaryCombatEnduranceRegen;
-/*0xbc4*/ int   MercenaryHealAmount;
-/*0xbc8*/ int   MercenarySpellDamage;
-/*0xbcc*/ char  PowerSourcePercent[8];
-/*0xbd4*/ bool  HasMercenary;
+/*0xb4c*/ int MercenaryAAPoints;
+/*0xb50*/ int MercenaryAAPointsSpent;
+/*0xb54*/ int MercenaryHP;
+/*0xb58*/ int MercenaryMaxHP;
+/*0xb5c*/ int MercenaryMana;
+/*0xb60*/ int MercenaryMaxMana;
+/*0xb64*/ int MercenaryEndurance;
+/*0xb68*/ int MercenaryMaxEndurance;
+/*0xb6c*/ int MercenaryMitigation;
+/*0xb70*/ int MercenaryEvasion;
+/*0xb74*/ int MercenaryAttack;
+/*0xb78*/ int MercenaryAccuracy;
+/*0xb7c*/ int MercenaryHaste;
+/*0xb80*/ int MercenaryStr;
+/*0xb84*/ int MercenarySta;
+/*0xb88*/ int MercenaryInt;
+/*0xb8c*/ int MercenaryWis;
+/*0xb90*/ int MercenaryAgi;
+/*0xb94*/ int MercenaryDex;
+/*0xb98*/ int MercenaryCha;
+/*0xb9c*/ int MercenaryHeroicStr;
+/*0xba0*/ int MercenaryHeroicSta;
+/*0xba4*/ int MercenaryHeroicInt;
+/*0xba8*/ int MercenaryHeroicWis;
+/*0xbac*/ int MercenaryHeroicAgi;
+/*0xbb0*/ int MercenaryHeroicDex;
+/*0xbb4*/ int MercenaryHeroicCha;
+/*0xbb8*/ int MercenaryCombatHPRegen;
+/*0xbbc*/ int MercenaryCombatManaRegen;
+/*0xbc0*/ int MercenaryCombatEnduranceRegen;
+/*0xbc4*/ int MercenaryHealAmount;
+/*0xbc8*/ int MercenarySpellDamage;
+/*0xbcc*/ char PowerSourcePercent[8];
+/*0xbd4*/ bool HasMercenary;
 /*0xbd8*/
 };
 
@@ -297,17 +297,17 @@ public:
 	EQLIB_OBJECT void DisplayText(const char* Str, int TextColor, int Priority, int MaxAlpha, UINT FadeInTime, UINT FadeOutTime, UINT DisplayTime);
 
 /*0x00*/ CTextObjectInterface* TextObject;
-/*0x08*/ bool               bBroadcastActive;
-/*0x09*/ bool               bFadingOut;
-/*0x0a*/ bool               bFadingIn;
-/*0x0c*/ UINT               StartTime;
-/*0x10*/ UINT               FadeInTime;
-/*0x14*/ UINT               EndTime;
-/*0x18*/ UINT               FadeOutTime;
-/*0x1c*/ UINT               DisplayTime;
-/*0x20*/ int                BroadcastColor;
-/*0x24*/ int                CurrentPriority;
-/*0x28*/ int                MaxAlpha;
+/*0x08*/ bool bBroadcastActive;
+/*0x09*/ bool bFadingOut;
+/*0x0a*/ bool bFadingIn;
+/*0x0c*/ UINT StartTime;
+/*0x10*/ UINT FadeInTime;
+/*0x14*/ UINT EndTime;
+/*0x18*/ UINT FadeOutTime;
+/*0x1c*/ UINT DisplayTime;
+/*0x20*/ int BroadcastColor;
+/*0x24*/ int CurrentPriority;
+/*0x28*/ int MaxAlpha;
 /*0x2c*/
 };
 inline namespace deprecated {
@@ -361,11 +361,11 @@ public:
 
 struct ResolutionUpdateData
 {
-	int                Width;
-	int                Height;
-	int                BitsPerPixel;
-	int                RefreshRate;
-	bool               bFullscreen;
+	int Width;
+	int Height;
+	int BitsPerPixel;
+	int RefreshRate;
+	bool bFullscreen;
 
 	void Set(int width, int height, int bitsPerPixel, int refreshRate, bool bfullscreen = false)
 	{
@@ -394,31 +394,31 @@ public:
 	EQLIB_OBJECT static void ToggleScreenMode();
 	EQLIB_OBJECT static void UpdateWindowPosition();
 
-	DWORD              vfTable;
-	bool               bIsFullscreen;
-	int                FullscreenBitsPerPixel;
-	int                FullscreenRefreshRate;
-	int                FullscreenWidth;
-	int                FullscreenHeight;
-	int                WindowedWidth;
-	int                WindowedHeight;
-	int                WindowOffsetX;
-	int                WindowOffsetY;
-	int                RestoredWidth;
-	int                RestoredHeight;
-	int                RestoredOffsetX;
-	int                RestoredOffsetY;
-	SDeviceInfo        DeviceTable[0x10];
-	int                DeviceCount;
-	long               DeviceIndex;
-	bool               bUseD3DTextureCompression;
-	bool               bResizable;
-	bool               bMaximized;
-	bool               bAlwaysOnTop;
-	bool               bActive;
-	UINT               ActiveThreadID;
-	HWND               ActiveWnd;
-	bool               bChangingScreenResolutions;
+	DWORD vfTable;
+	bool bIsFullscreen;
+	int FullscreenBitsPerPixel;
+	int FullscreenRefreshRate;
+	int FullscreenWidth;
+	int FullscreenHeight;
+	int WindowedWidth;
+	int WindowedHeight;
+	int WindowOffsetX;
+	int WindowOffsetY;
+	int RestoredWidth;
+	int RestoredHeight;
+	int RestoredOffsetX;
+	int RestoredOffsetY;
+	SDeviceInfo DeviceTable[0x10];
+	int DeviceCount;
+	long DeviceIndex;
+	bool bUseD3DTextureCompression;
+	bool bResizable;
+	bool bMaximized;
+	bool bAlwaysOnTop;
+	bool bActive;
+	UINT ActiveThreadID;
+	HWND ActiveWnd;
+	bool bChangingScreenResolutions;
 };
 
 class CResolutionHandler : public CResolutionHandlerBase
@@ -557,7 +557,7 @@ public:
 class [[offsetcomments]] FactionManagerClient
 {
 public:
-/*0x00*/ void*         vftable;
+/*0x00*/ void* vftable;
 /*0x08*/ // todo: map it
 
 	EQLIB_OBJECT static FactionManagerClient& Instance();
@@ -588,12 +588,12 @@ public:
 
 enum SpeakerType
 {
-	SpeakerTypeNormal                  = 0, // AIL_3D_2_SPEAKER
-	SpeakerTypeHeadphone               = 1, // AIL_3D_HEADPHONE
-	SpeakerTypeSurround                = 2, // AIL_3D_SURROUND
-	SpeakerTypeFour                    = 3, // AIL_3D_4_SPEAKER
-	SpeakerTypeDolby51                 = 4, // AIL_3D_51_SPEAKER
-	SpeakerTypeDolby71                 = 5, // AIL_3D_71_SPEAKER
+	SpeakerTypeNormal = 0, // AIL_3D_2_SPEAKER
+	SpeakerTypeHeadphone = 1, // AIL_3D_HEADPHONE
+	SpeakerTypeSurround = 2, // AIL_3D_SURROUND
+	SpeakerTypeFour = 3, // AIL_3D_4_SPEAKER
+	SpeakerTypeDolby51 = 4, // AIL_3D_51_SPEAKER
+	SpeakerTypeDolby71 = 5, // AIL_3D_71_SPEAKER
 };
 
 class [[offsetcomments]] EqSoundManager
@@ -646,29 +646,29 @@ public:
 	EQLIB_OBJECT void ReleaseZoneSpecificWaves();
 	EQLIB_OBJECT void UpdateEmitterStates();
 
-/*0x0000*/ Mp3Manager*        pMp3Manager;
-/*0x0008*/ SoundManager*      pSoundManager;
-/*0x0010*/ EmitterManager*    pEmitterManager;
-/*0x0018*/ MusicManager*      pMusicManager;
-/*0x0020*/ SoundAsset*        pGlobalMidiAsset;
-/*0x0028*/ SoundAsset*        pOpenerMidiAsset;
-/*0x0030*/ SoundAsset*        pOpenerMp3Asset;
-/*0x0038*/ SoundAsset*        pDeathMp3Asset;
-/*0x0040*/ SoundAsset*        pCombatMp3Asset;
-/*0x0048*/ SoundAsset*        pMerchantMp3Asset;
-/*0x0050*/ SoundAsset*        pZoneMidiAsset;
-/*0x0058*/ SoundAsset*        pScriptMp3Asset;
-/*0x0060*/ bool               bDisabled;
-/*0x0064*/ int                NextMusicID;
-/*0x0068*/ SoundEmitter*      pEmitters[1000];
-/*0x1fa8*/ int                EmittersCount;
-/*0x1fb0*/ SoundEmitter*      pRainEmitter;
-/*0x1fb8*/ SoundEmitter*      pWindEmitter;
-/*0x1fc0*/ int                EnvironmentHigh;
-/*0x1fc4*/ int                EnvironmentLow;
-/*0x1fc8*/ int                EnvironmentOutside;
-/*0x1fcc*/ float              fEffectsLevel;
-/*0x1fd0*/ float              fWaveVolumeLevel;
+/*0x0000*/ Mp3Manager* pMp3Manager;
+/*0x0008*/ SoundManager* pSoundManager;
+/*0x0010*/ EmitterManager* pEmitterManager;
+/*0x0018*/ MusicManager* pMusicManager;
+/*0x0020*/ SoundAsset* pGlobalMidiAsset;
+/*0x0028*/ SoundAsset* pOpenerMidiAsset;
+/*0x0030*/ SoundAsset* pOpenerMp3Asset;
+/*0x0038*/ SoundAsset* pDeathMp3Asset;
+/*0x0040*/ SoundAsset* pCombatMp3Asset;
+/*0x0048*/ SoundAsset* pMerchantMp3Asset;
+/*0x0050*/ SoundAsset* pZoneMidiAsset;
+/*0x0058*/ SoundAsset* pScriptMp3Asset;
+/*0x0060*/ bool bDisabled;
+/*0x0064*/ int NextMusicID;
+/*0x0068*/ SoundEmitter* pEmitters[1000];
+/*0x1fa8*/ int EmittersCount;
+/*0x1fb0*/ SoundEmitter* pRainEmitter;
+/*0x1fb8*/ SoundEmitter* pWindEmitter;
+/*0x1fc0*/ int EnvironmentHigh;
+/*0x1fc4*/ int EnvironmentLow;
+/*0x1fc8*/ int EnvironmentOutside;
+/*0x1fcc*/ float fEffectsLevel;
+/*0x1fd0*/ float fWaveVolumeLevel;
 /*0x1fd4*/ // more here but i only need volume for now so...
 };
 
@@ -687,7 +687,7 @@ constexpr int MAX_ZONE_LONGNAME = 256;
 // 0x2 newbie zone
 // 0x4 = ?
 // 0x20 no bind
-constexpr uint64_t EQZoneFlag_NoMount        = 0x00000200;
+constexpr uint64_t EQZoneFlag_NoMount = 0x00000200;
 // 0x4000 = no air
 // 0x8000 water/mountainzone?
 // 0x100000 = HasMinLevel
@@ -703,29 +703,29 @@ class [[offsetcomments]] EQZoneInfo
 	virtual ~EQZoneInfo();
 
 public:
-/*0x008*/ EQExpansion        EQExpansion;
-/*0x00c*/ EQZoneIndex        Id;
-/*0x010*/ char               ShortName[MAX_ZONE_SHORTNAME + 1];
-/*0x091*/ char               LongName[MAX_ZONE_LONGNAME + 1];
-/*0x198*/ uint64_t           ZoneFlags;
-/*0x1a0*/ int                eqstrID;
-/*0x1a4*/ uint8_t            AccessLevel;
-/*0x1a8*/ int                MinLevel;
-/*0x1ac*/ int                CurPlayerCount;
-/*0x1b0*/ int                MaxPlayerCount;
-/*0x1b4*/ uint16_t           NextInstanceID;
-/*0x1b8*/ int                Cpu1;
-/*0x1bc*/ int                Cpu2;
-/*0x1c0*/ int                Memory;
-/*0x1c4*/ int                MemLoad;
-/*0x1c8*/ int                VirtMemLoad;
-/*0x1cc*/ int                ActiveMercenaries;
-/*0x1d0*/ int                SuspendedMercenaries;
-/*0x1d4*/ int                Unknown0x1D4;
+/*0x008*/ EQExpansion EQExpansion;
+/*0x00c*/ EQZoneIndex Id;
+/*0x010*/ char ShortName[MAX_ZONE_SHORTNAME + 1];
+/*0x091*/ char LongName[MAX_ZONE_LONGNAME + 1];
+/*0x198*/ uint64_t ZoneFlags;
+/*0x1a0*/ int eqstrID;
+/*0x1a4*/ uint8_t AccessLevel;
+/*0x1a8*/ int MinLevel;
+/*0x1ac*/ int CurPlayerCount;
+/*0x1b0*/ int MaxPlayerCount;
+/*0x1b4*/ uint16_t NextInstanceID;
+/*0x1b8*/ int Cpu1;
+/*0x1bc*/ int Cpu2;
+/*0x1c0*/ int Memory;
+/*0x1c4*/ int MemLoad;
+/*0x1c8*/ int VirtMemLoad;
+/*0x1cc*/ int ActiveMercenaries;
+/*0x1d0*/ int SuspendedMercenaries;
+/*0x1d4*/ int Unknown0x1D4;
 /*0x1d8*/
 };
 
-constexpr size_t EQWorldData_size = 0x1F88; // @sizeof(EQWorldData) :: 2026-03-10 (live) @ 0x14026D286
+constexpr size_t EQWorldData_size = 0x1F88; // @sizeof(EQWorldData) :: 2026-03-10 @ 0x14026D286
 
 class [[offsetcomments]] EQWorldData
 {
@@ -768,20 +768,20 @@ public:
 	EQLIB_OBJECT void CurrentGameTime(char*);
 	EQLIB_OBJECT void GetFullZoneName(EQZoneIndex, char*);
 
-/*0x0008*/ uint8_t                         Hour;
-/*0x0009*/ uint8_t                         Minute;
-/*0x000a*/ uint8_t                         Day;
-/*0x000b*/ uint8_t                         Month;
-/*0x000c*/ int                             Year;
-/*0x0010*/ uint8_t                         LastHour;
-/*0x0011*/ uint8_t                         LastMinute;
-/*0x0012*/ uint8_t                         LastDay;
-/*0x0013*/ uint8_t                         LastMonth;
-/*0x0014*/ int                             LastYear;
-/*0x0018*/ uint32_t                        LastAdvance;
-/*0x0020*/ eqtime_t                        LastTime;
-/*0x0028*/ uint32_t                        NextMercenaryId;
-/*0x0030*/ EQZoneInfo*                     ZoneArray[MAX_ZONES];
+/*0x0008*/ uint8_t Hour;
+/*0x0009*/ uint8_t Minute;
+/*0x000a*/ uint8_t Day;
+/*0x000b*/ uint8_t Month;
+/*0x000c*/ int Year;
+/*0x0010*/ uint8_t LastHour;
+/*0x0011*/ uint8_t LastMinute;
+/*0x0012*/ uint8_t LastDay;
+/*0x0013*/ uint8_t LastMonth;
+/*0x0014*/ int LastYear;
+/*0x0018*/ uint32_t LastAdvance;
+/*0x0020*/ eqtime_t LastTime;
+/*0x0028*/ uint32_t NextMercenaryId;
+/*0x0030*/ EQZoneInfo* ZoneArray[MAX_ZONES];
 /*0x1f70*/ HashTable<SoeUtil::String, int> ZoneNameHash;
 /*0x1f88*/
 };
@@ -842,10 +842,10 @@ inline int LootFilterBit(LootFilterType type) { return 1 << type; }
 
 struct [[offsetcomments]] ItemFilterData
 {
-/*0x00*/ int           Types;
-/*0x04*/ int           ID;
-/*0x08*/ int           Icon;
-/*0x0c*/ char          Name[ITEM_NAME_LEN];
+/*0x00*/ int Types;
+/*0x04*/ int ID;
+/*0x08*/ int Icon;
+/*0x0c*/ char Name[ITEM_NAME_LEN];
 /*0x4c*/
 };
 
@@ -1210,26 +1210,26 @@ public:
 	EQLIB_OBJECT EQ_Skill(int);
 	EQLIB_OBJECT ~EQ_Skill();
 
-/*0x000*/ int               ImageNumber;
-/*0x004*/ int               ImageDep;
-/*0x008*/ DWORD             nName;
-/*0x00c*/ DWORD             ReuseTimer;
-/*0x010*/ DWORD             BaseDamage;
-/*0x014*/ eSkillCombatType  SkillCombatType;
-/*0x018*/ int               EnduranceCost;
-/*0x01c*/ float             Force;
-/*0x020*/ bool              Activated;
-/*0x021*/ bool              LevelCappedSkill;
-/*0x024*/ DWORD             MinLevel[MAX_CLASSES + 1];      // the level each class gains this skill
-/*0x0b4*/ DWORD             Available[MAX_CLASSES + 1];     // FF=not available for that class (its actually how difficult it is to learn... low num easy, high hard...)
-/*0x144*/ bool              bSkillupable;
+/*0x000*/ int ImageNumber;
+/*0x004*/ int ImageDep;
+/*0x008*/ DWORD nName;
+/*0x00c*/ DWORD ReuseTimer;
+/*0x010*/ DWORD BaseDamage;
+/*0x014*/ eSkillCombatType SkillCombatType;
+/*0x018*/ int EnduranceCost;
+/*0x01c*/ float Force;
+/*0x020*/ bool Activated;
+/*0x021*/ bool LevelCappedSkill;
+/*0x024*/ DWORD MinLevel[MAX_CLASSES + 1]; // the level each class gains this skill
+/*0x0b4*/ DWORD Available[MAX_CLASSES + 1]; // FF=not available for that class (its actually how difficult it is to learn... low num easy, high hard...)
+/*0x144*/ bool bSkillupable;
 /*0x148*/
 };
 using SKILL = EQ_Skill;
 using PSKILL = EQ_Skill*;
 
 
-constexpr size_t SkillManager_size = 0x399C80; // @sizeof(SkillManager) :: 2026-03-10 (live) @ 0x14026D3C6
+constexpr size_t SkillManager_size = 0x399C80; // @sizeof(SkillManager) :: 2026-03-10 @ 0x14026D3C6
 
 class [[offsetcomments]] SkillManager
 {
@@ -1246,16 +1246,16 @@ public:
 	EQLIB_OBJECT unsigned int GetSkillLastUsed(int);
 
 /*0x000000*/ TSafeArrayStatic<EQ_Skill*, NUM_SKILLS> pSkill;
-/*0x000320*/ int       SkillCaps[MAX_CLASSES + 1][NUM_SKILLS][MAX_PC_LEVEL + 1];
-/*0x1ccbe0*/ float     SkillMods[MAX_CLASSES + 1][NUM_SKILLS][MAX_PC_LEVEL + 1];
-/*0x3994a0*/ char      SkillCapsFilename[MAX_PATH];
+/*0x000320*/ int SkillCaps[MAX_CLASSES + 1][NUM_SKILLS][MAX_PC_LEVEL + 1];
+/*0x1ccbe0*/ float SkillMods[MAX_CLASSES + 1][NUM_SKILLS][MAX_PC_LEVEL + 1];
+/*0x3994a0*/ char SkillCapsFilename[MAX_PATH];
 /*0x3995a8*/ HashListSet<EQ_Skill, NUM_SKILLS> SkillHash;
-/*0x3998e8*/ UINT      SkillLastUsed[NUM_SKILLS];
-/*0x399a78*/ UINT      SkillTimerDuration[NUM_SKILLS];
-/*0x399c08*/ UINT      CombatSkillLastUsed[CONCURRENT_SKILLS];
-/*0x399c10*/ UINT      CombatSkillDuration[CONCURRENT_SKILLS];
-/*0x399c18*/ bool      bSkillCanUse[NUM_SKILLS];
-/*0x399c7c*/ bool      bCombatSkillCanUse[CONCURRENT_SKILLS];
+/*0x3998e8*/ UINT SkillLastUsed[NUM_SKILLS];
+/*0x399a78*/ UINT SkillTimerDuration[NUM_SKILLS];
+/*0x399c08*/ UINT CombatSkillLastUsed[CONCURRENT_SKILLS];
+/*0x399c10*/ UINT CombatSkillDuration[CONCURRENT_SKILLS];
+/*0x399c18*/ bool bSkillCanUse[NUM_SKILLS];
+/*0x399c7c*/ bool bCombatSkillCanUse[CONCURRENT_SKILLS];
 /*0x399c80*/
 };
 using CSkillMgr = SkillManager;
@@ -1269,14 +1269,14 @@ struct [[offsetcomments]] tp_coords
 {
 	FORCE_SYMBOLS;
 
-/*0x00*/ int           Index;
-/*0x04*/ float         Y;
-/*0x08*/ float         X;
-/*0x0c*/ float         Z;
-/*0x10*/ float         Heading;
-/*0x14*/ int           ZoneId;
-/*0x18*/ int           FilterID;
-/*0x1c*/ UINT          VehicleID;
+/*0x00*/ int Index;
+/*0x04*/ float Y;
+/*0x08*/ float X;
+/*0x0c*/ float Z;
+/*0x10*/ float Heading;
+/*0x14*/ int ZoneId;
+/*0x18*/ int FilterID;
+/*0x1c*/ UINT VehicleID;
 /*0x20*/
 };
 
@@ -1308,20 +1308,20 @@ struct [[offsetcomments]] CTargetIndicator
 		eFreeTargetInvalid,
 	};
 
-/*0x00*/ bool                      bVisible;
-/*0x01*/ bool                      bSettingsLoaded;
-/*0x08*/ PlayerClient*             lasttarget;
-/*0x10*/ PlayerClient*             MarkedTarget[MarkerCount];
-/*0x30*/ bool                      IndicatorHidden;                // if this is 1 our mouse is over another window and not on the main one - shouldnt cast when this is 1
-/*0x31*/ bool                      CanActivate;                    // if 0 the indicator is red if 1 its green, i.e. it can be activated.
+/*0x00*/ bool bVisible;
+/*0x01*/ bool bSettingsLoaded;
+/*0x08*/ PlayerClient* lasttarget;
+/*0x10*/ PlayerClient* MarkedTarget[MarkerCount];
+/*0x30*/ bool IndicatorHidden; // if this is 1 our mouse is over another window and not on the main one - shouldnt cast when this is 1
+/*0x31*/ bool CanActivate; // if 0 the indicator is red if 1 its green, i.e. it can be activated.
 /*0x38*/ CTargetIndicatorSettings* TargetIndicatorSettings;
 /*0x40*/ CTargetIndicatorSettings* MarkerIndicatorSettings;
-/*0x48*/ ETargetType               IndicatorType;
-/*0x4c*/ float                     SegmentLength;
-/*0x50*/ float                     ControlSegmentLength;
-/*0x58*/ CThickLineInterface*      pTargetThickLine;
-/*0x60*/ CThickLineInterface*      pFreeTargetThickLine;
-/*0x68*/ CThickLineInterface*      pMarkerThickLine[MarkerCount];
+/*0x48*/ ETargetType IndicatorType;
+/*0x4c*/ float SegmentLength;
+/*0x50*/ float ControlSegmentLength;
+/*0x58*/ CThickLineInterface* pTargetThickLine;
+/*0x60*/ CThickLineInterface* pFreeTargetThickLine;
+/*0x68*/ CThickLineInterface* pMarkerThickLine[MarkerCount];
 /*0x88*/
 };
 
@@ -1333,8 +1333,8 @@ struct [[offsetcomments]] STargetData
 	FORCE_SYMBOLS;
 
 /*0x00*/ PlayerClient* player;
-/*0x08*/ float         distanceSquared;
-/*0x0c*/ bool          visited;
+/*0x08*/ float distanceSquared;
+/*0x0c*/ bool visited;
 /*0x10*/
 };
 
@@ -1349,22 +1349,22 @@ public:
 
 	enum { MaxTargetHistory = 10 };
 
-/*0x000*/ STargetData  CycleNPCList[MaxTargetHistory];
-/*0x0a0*/ STargetData  CyclePCList[MaxTargetHistory];
-/*0x140*/ STargetData  CycleCorpseList[MaxTargetHistory];
-/*0x1e0*/ uint32_t     LastTargetID;
-/*0x1e4*/ uint32_t     TabTargetID;
-/*0x1e8*/ uint32_t     AttackTargetID;
-/*0x1ec*/ uint32_t     LastHoverUpdate;
-/*0x1f0*/ uint32_t     HoverUpdateInterval;
-/*0x1f4*/ uint32_t     LastFreeTargetUpdate;
-/*0x1f8*/ uint32_t     FreeTargetUpdateInterval;
-/*0x1fc*/ uint32_t     PreviousTargetID;
-/*0x200*/ uint32_t     HoverTargetID;                    // id of the entity our cursor is over
-/*0x204*/ bool         freeTargetingEnabled;
-/*0x208*/ float        freeTargetingRangeSquared;
-/*0x20c*/ CVector3     lastFreeTargetingPosition;
-/*0x218*/ bool         lastFreeTargetingInRange;         // 0=red 1=green
+/*0x000*/ STargetData CycleNPCList[MaxTargetHistory];
+/*0x0a0*/ STargetData CyclePCList[MaxTargetHistory];
+/*0x140*/ STargetData CycleCorpseList[MaxTargetHistory];
+/*0x1e0*/ uint32_t LastTargetID;
+/*0x1e4*/ uint32_t TabTargetID;
+/*0x1e8*/ uint32_t AttackTargetID;
+/*0x1ec*/ uint32_t LastHoverUpdate;
+/*0x1f0*/ uint32_t HoverUpdateInterval;
+/*0x1f4*/ uint32_t LastFreeTargetUpdate;
+/*0x1f8*/ uint32_t FreeTargetUpdateInterval;
+/*0x1fc*/ uint32_t PreviousTargetID;
+/*0x200*/ uint32_t HoverTargetID; // id of the entity our cursor is over
+/*0x204*/ bool freeTargetingEnabled;
+/*0x208*/ float freeTargetingRangeSquared;
+/*0x20c*/ CVector3 lastFreeTargetingPosition;
+/*0x218*/ bool lastFreeTargetingInRange; // 0=red 1=green
 /*0x21c*/
 };
 
@@ -1493,9 +1493,9 @@ public:
 
 protected:
 /*0x000*/ // vftable
-/*0x018*/ uint8_t                    Unknown0x0000[0x2f8 - 0x18];
-/*0x2f8*/ UdpClockStamp              m_cachedClock;
-/*0x300*/ UdpPlatformGuardObject     m_cachedClockGuard;
+/*0x018*/ uint8_t Unknown0x0000[0x2f8 - 0x18];
+/*0x2f8*/ UdpClockStamp m_cachedClock;
+/*0x300*/ UdpPlatformGuardObject m_cachedClockGuard;
 /*0x308*/
 };
 
@@ -1555,17 +1555,17 @@ public:
 	}
 
 /*0x0000*/ // vftable
-/*0x018*/ uint8_t                   Unknown[0xe0 - 0x18];
-/*0x0e0*/ UdpManager*               m_udpManager;
-/*0x0e8*/ uint8_t                   Unknown0x00e8[0x8];
-/*0x0f0*/ UdpConnectionStatistics   m_stats;
-/*0x1b0*/ uint8_t                   Unknown0x01b0[0x238 - 0x1b0];
-/*0x238*/ UdpClockStamp             m_lastSendTime;
-/*0x240*/ UdpClockStamp             m_lastReceiveTime;
-/*0x248*/ uint8_t                   Unknown0x0248[0x18];
-/*0x260*/ UdpClockStamp             m_disconnectTime;
-/*0x268*/ uint8_t                   Unknown0x0268[0x2e0 - 0x268];
-/*0x2e0*/ UdpPlatformGuardObject    m_guard;
+/*0x018*/ uint8_t Unknown[0xe0 - 0x18];
+/*0x0e0*/ UdpManager* m_udpManager;
+/*0x0e8*/ uint8_t Unknown0x00e8[0x8];
+/*0x0f0*/ UdpConnectionStatistics m_stats;
+/*0x1b0*/ uint8_t Unknown0x01b0[0x238 - 0x1b0];
+/*0x238*/ UdpClockStamp m_lastSendTime;
+/*0x240*/ UdpClockStamp m_lastReceiveTime;
+/*0x248*/ uint8_t Unknown0x0248[0x18];
+/*0x260*/ UdpClockStamp m_disconnectTime;
+/*0x268*/ uint8_t Unknown0x0268[0x2e0 - 0x268];
+/*0x2e0*/ UdpPlatformGuardObject m_guard;
 /*0x2e8*/
 
 	// compatibility shim

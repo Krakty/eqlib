@@ -8,7 +8,7 @@
  *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  * GNU General Public License for more details.
  */
 
@@ -50,24 +50,24 @@ inline namespace deprecated {
 
 static const SClassInfo ClassInfo[] =
 {
-	{ 0, 0, 0, 0, 0, 0, 0, 0, 0,  "",             "",    ""    }, // unk
-	{ 0, 0, 0, 0, 0, 0, 0, 0, 13, "Warrior",      "war", "WAR" }, // war
-	{ 1, 1, 0, 0, 0, 1, 0, 0, 2,  "Cleric",       "clr", "CLR" }, // clr
-	{ 1, 0, 0, 0, 0, 1, 0, 0, 8,  "Paladin",      "pal", "PAL" }, // pal
-	{ 1, 0, 0, 1, 0, 0, 0, 0, 9,  "Ranger",       "rng", "RNG" }, // rng
+	{ 0, 0, 0, 0, 0, 0, 0, 0, 0, "", "", "" }, // unk
+	{ 0, 0, 0, 0, 0, 0, 0, 0, 13, "Warrior", "war", "WAR" }, // war
+	{ 1, 1, 0, 0, 0, 1, 0, 0, 2, "Cleric", "clr", "CLR" }, // clr
+	{ 1, 0, 0, 0, 0, 1, 0, 0, 8, "Paladin", "pal", "PAL" }, // pal
+	{ 1, 0, 0, 1, 0, 0, 0, 0, 9, "Ranger", "rng", "RNG" }, // rng
 	{ 1, 0, 0, 0, 1, 0, 0, 0, 11, "Shadowknight", "shd", "SHD" }, // shd
-	{ 1, 1, 0, 1, 0, 0, 0, 0, 3,  "Druid",        "dru", "DRU" }, // dru
-	{ 0, 0, 0, 0, 0, 0, 0, 0, 6,  "Monk",         "mnk", "MNK" }, // mnk
-	{ 1, 0, 0, 0, 0, 0, 0, 0, 0,  "Bard",         "brd", "BRD" }, // brd
-	{ 0, 0, 0, 0, 0, 0, 0, 0, 10, "Rogue",        "rog", "ROG" }, // rog
-	{ 1, 1, 1, 0, 0, 0, 1, 0, 12, "Shaman",       "shm", "SHM" }, // shm
-	{ 1, 1, 1, 0, 1, 0, 0, 0, 7,  "Necromancer",  "nec", "NEC" }, // nec
-	{ 1, 1, 0, 0, 0, 0, 0, 0, 14, "Wizard",       "wiz", "WIZ" }, // wiz
-	{ 1, 1, 1, 0, 0, 0, 0, 0, 5,  "Mage",         "mag", "MAG" }, // mag
-	{ 1, 1, 0, 0, 0, 0, 0, 0, 4,  "Enchanter",    "enc", "ENC" }, // enc
-	{ 1, 0, 1, 0, 0, 0, 1, 0, 1,  "Beastlord",    "bst", "BST" }, // bst
-	{ 0, 0, 0, 0, 0, 0, 0, 0, 15, "Berserker",    "ber", "BER" }, // ber
-	{ 1, 1, 0, 0, 0, 0, 0, 1, 16, "Mercenary",    "mer", "MER" }, // mer
+	{ 1, 1, 0, 1, 0, 0, 0, 0, 3, "Druid", "dru", "DRU" }, // dru
+	{ 0, 0, 0, 0, 0, 0, 0, 0, 6, "Monk", "mnk", "MNK" }, // mnk
+	{ 1, 0, 0, 0, 0, 0, 0, 0, 0, "Bard", "brd", "BRD" }, // brd
+	{ 0, 0, 0, 0, 0, 0, 0, 0, 10, "Rogue", "rog", "ROG" }, // rog
+	{ 1, 1, 1, 0, 0, 0, 1, 0, 12, "Shaman", "shm", "SHM" }, // shm
+	{ 1, 1, 1, 0, 1, 0, 0, 0, 7, "Necromancer", "nec", "NEC" }, // nec
+	{ 1, 1, 0, 0, 0, 0, 0, 0, 14, "Wizard", "wiz", "WIZ" }, // wiz
+	{ 1, 1, 1, 0, 0, 0, 0, 0, 5, "Mage", "mag", "MAG" }, // mag
+	{ 1, 1, 0, 0, 0, 0, 0, 0, 4, "Enchanter", "enc", "ENC" }, // enc
+	{ 1, 0, 1, 0, 0, 0, 1, 0, 1, "Beastlord", "bst", "BST" }, // bst
+	{ 0, 0, 0, 0, 0, 0, 0, 0, 15, "Berserker", "ber", "BER" }, // ber
+	{ 1, 1, 0, 0, 0, 0, 0, 1, 16, "Mercenary", "mer", "MER" }, // mer
 };
 
 inline namespace deprecated {
@@ -105,7 +105,7 @@ public:
 	bool HasAccess(Caps capability) const { return capabilities.IsBitSet(capability); }
 	Groups GetGroup() const { return group; }
 
-	Groups            group = {};
+	Groups group = {};
 	BitField<NumCaps> capabilities;
 };
 
@@ -201,8 +201,8 @@ public:
 /*0x08*/ float Y;
 /*0x0c*/ float X;
 /*0x10*/ float Z;
-/*0x14*/ float Orientation_Y;                   // old name Heading
-/*0x18*/ float Orientation_X;                   // old name LookAngle
+/*0x14*/ float Orientation_Y; // old name Heading
+/*0x18*/ float Orientation_X; // old name LookAngle
 /*0x1c*/ float Orientation_Z;
 /*0x20*/ float OldPosition_Y;
 /*0x24*/ float OldPosition_X;
@@ -213,39 +213,39 @@ public:
 /*0x38*/ float Distance;
 /*0x3c*/ float DirectionalHeading;
 /*0x40*/ float SideMovement;
-/*0x44*/ float Zoom;                            // old name: ViewAngle
-/*0x48*/ bool  bAutoPitch;
-/*0x49*/ bool  bAutoHeading;
-/*0x4a*/ bool  bSkipFrame;
+/*0x44*/ float Zoom; // old name: ViewAngle
+/*0x48*/ bool bAutoPitch;
+/*0x49*/ bool bAutoHeading;
+/*0x4a*/ bool bSkipFrame;
 /*0x4c*/
 };
 
 using EQCAMERABASE DEPRECATE("Use EQCamera instead of EQCAMERABASE") = EQCamera;
 using PEQCAMERABASE DEPRECATE("Use EQCamera* instead of PEQCAMERABASE") = EQCamera*;
 
-#define MODEL_LABEL                              0
-#define MODEL_LABELINFO                          1
-#define MODEL_NULL2                              2
-#define MODEL_HELD_R                             3
-#define MODEL_HELD_L                             4
-#define MODEL_SHIELD                             5
-#define MODEL_NULL6                              6
+#define MODEL_LABEL 0
+#define MODEL_LABELINFO 1
+#define MODEL_NULL2 2
+#define MODEL_HELD_R 3
+#define MODEL_HELD_L 4
+#define MODEL_SHIELD 5
+#define MODEL_NULL6 6
 
 #if 0
 // Work in progress...
-#define MODEL_HEAD                               0x00
-#define MODEL_HEAD_POINT                         0x01
-#define MODEL_NULL_1                             0x02
-#define MODEL_HELD_R                             0x03
-#define MODEL_HELD_L                             0x04
-#define MODEL_SHIELD                             0x05
-#define MODEL_NULL_2                             0x06
-#define MODEL_TUNIC                              0x07
-#define MODEL_HAIR                               0x08
-#define MODEL_BEARD                              0x09
-#define MODEL_CHEST                              0x0a
-#define MODEL_GLOVES                             0x0b
-#define MODEL_GLOVES2                            0x0c
+#define MODEL_HEAD 0x00
+#define MODEL_HEAD_POINT 0x01
+#define MODEL_NULL_1 0x02
+#define MODEL_HELD_R 0x03
+#define MODEL_HELD_L 0x04
+#define MODEL_SHIELD 0x05
+#define MODEL_NULL_2 0x06
+#define MODEL_TUNIC 0x07
+#define MODEL_HAIR 0x08
+#define MODEL_BEARD 0x09
+#define MODEL_CHEST 0x0a
+#define MODEL_GLOVES 0x0b
+#define MODEL_GLOVES2 0x0c
 #endif
 
 // This is the # of spell gems + 1 (zero-based)
@@ -258,19 +258,19 @@ enum InvisibleTypes
 	eAnimal
 };
 
-#define STANDSTATE_STAND                         0x64
-#define STANDSTATE_CASTING                       0x66
-#define STANDSTATE_BIND                          0x69
-#define STANDSTATE_SIT                           0x6E
-#define STANDSTATE_DUCK                          0x6F
-#define STANDSTATE_FEIGN                         0x73
-#define STANDSTATE_DEAD                          0x78
+#define STANDSTATE_STAND 0x64
+#define STANDSTATE_CASTING 0x66
+#define STANDSTATE_BIND 0x69
+#define STANDSTATE_SIT 0x6E
+#define STANDSTATE_DUCK 0x6F
+#define STANDSTATE_FEIGN 0x73
+#define STANDSTATE_DEAD 0x78
 
 constexpr int MAX_LOADOUT_NAME = 25;
 
 struct [[offsetcomments]] SpellLoadout
 {
-/*0x00*/ int  SpellId[NUM_SPELL_GEMS];
+/*0x00*/ int SpellId[NUM_SPELL_GEMS];
 /*0x38*/ char Name[MAX_LOADOUT_NAME];
 /*0x51*/ bool inuse;
 /*0x52*/ bool changed;
@@ -321,7 +321,7 @@ struct [[offsetcomments]] TargetSetLoadout
 struct [[offsetcomments]] CMDLIST
 {
 /*0x00*/ char* szName;
-/*0x08*/ void  (*fAddress)(PlayerClient*, const char*);
+/*0x08*/ void (*fAddress)(PlayerClient*, const char*);
 /*0x10*/ DWORD Restriction;
 /*0x14*/ DWORD Category;
 /*0x18*/ DWORD Flags;
@@ -343,17 +343,17 @@ using PEQSOCIAL = EQSocial*;
 
 struct [[offsetcomments]] HotButtonData
 {
-/*0x00*/ ItemPtr    Item;
+/*0x00*/ ItemPtr Item;
 /*0x10*/ EqItemGuid ItemGuid;
-/*0x22*/ char       Label[0x40];
-/*0x62*/ char       ItemName[0x40];
-/*0xa4*/ int        ItemId;
-/*0xa8*/ int        IconType;
-/*0xac*/ int        IconSlot;
-/*0xb0*/ int        IconId;
-/*0xb4*/ int        Slot;
-/*0xb8*/ uint8_t    Type;
-/*0xb9*/ uint8_t    ItemValid;
+/*0x22*/ char Label[0x40];
+/*0x62*/ char ItemName[0x40];
+/*0xa4*/ int ItemId;
+/*0xa8*/ int IconType;
+/*0xac*/ int IconSlot;
+/*0xb0*/ int IconId;
+/*0xb4*/ int Slot;
+/*0xb8*/ uint8_t Type;
+/*0xb9*/ uint8_t ItemValid;
 /*0xbc*/
 };
 
@@ -369,17 +369,17 @@ using PEQFRIENDSLIST = EQFRIENDSLIST*;
 
 struct [[offsetcomments]] RaidMember
 {
-/*0x00*/ char      Name[EQ_MAX_NAME];
-/*0x40*/ char      RaidNote[MAX_RAID_NOTE];
-/*0x80*/ int       nLevel;
-/*0x84*/ int       nClass;
-/*0x88*/ bool      RaidLeader;
-/*0x89*/ bool      GroupLeader;
-/*0x8a*/ bool      RaidMainAssist;
-/*0x8b*/ bool      RaidMarker;
-/*0x8c*/ int       MasterLooter;
-/*0x90*/ int       GroupNumber;
-/*0x94*/ BYTE      Unknown0x94[0x8];            // i guess new master looter is in here...
+/*0x00*/ char Name[EQ_MAX_NAME];
+/*0x40*/ char RaidNote[MAX_RAID_NOTE];
+/*0x80*/ int nLevel;
+/*0x84*/ int nClass;
+/*0x88*/ bool RaidLeader;
+/*0x89*/ bool GroupLeader;
+/*0x8a*/ bool RaidMainAssist;
+/*0x8b*/ bool RaidMarker;
+/*0x8c*/ int MasterLooter;
+/*0x90*/ int GroupNumber;
+/*0x94*/ BYTE Unknown0x94[0x8]; // i guess new master looter is in here...
 /*0x9c*/
 };
 
@@ -407,10 +407,10 @@ enum eRaidState : int32_t
 
 struct [[offsetcomments]] RaidData
 {
-/*0x00*/ int      MainAssists[MAX_RAID_ASSISTS];
-/*0x0c*/ char     MainAssistNames[MAX_RAID_ASSISTS][EQ_MAX_NAME];
-/*0xcc*/ int      MainMarkers[MAX_RAID_ASSISTS];
-/*0xd8*/ int      MasterLooter;
+/*0x00*/ int MainAssists[MAX_RAID_ASSISTS];
+/*0x0c*/ char MainAssistNames[MAX_RAID_ASSISTS][EQ_MAX_NAME];
+/*0xcc*/ int MainMarkers[MAX_RAID_ASSISTS];
+/*0xd8*/ int MasterLooter;
 /*0xdc*/
 };
 
@@ -466,25 +466,25 @@ public:
 	//EQLIB_OBJECT void SetLootTypeResponse(SCRaidMessage*);
 	//EQLIB_OBJECT void UpdateLevelAverage();
 
-/*0x0000*/ RaidData          raidData;
-/*0x00dc*/ int               unknown1[2];
-/*0x00e4*/ bool              locations[MAX_RAID_SIZE];
-/*0x012c*/ RaidMember        raidMembers[MAX_RAID_SIZE];
-/*0x2d0c*/ int               raidId;
-/*0x2d10*/ int               RaidMemberCount;
-/*0x2d14*/ char              RaidLeaderName[EQ_MAX_NAME];
-/*0x2d54*/ char              RaidMOTD[MAX_RAID_MOTD];
-/*0x3154*/ char              Inviter[EQ_MAX_NAME];
-/*0x3194*/ eRaidState        raidState;
-/*0x3198*/ int               raidId2;
-/*0x319c*/ bool              bCreateRaidInvite;
-/*0x319d*/ bool              IsRaidLeader;
-/*0x31a0*/ DWORD             RaidTarget;
-/*0x31a4*/ eRaidLootType     LootType;
-/*0x31a8*/ char              RaidLooters[MAX_RAID_LOOTERS][EQ_MAX_NAME];
-/*0x3668*/ DWORD             levelTotal;                   // Average level of raid members
-/*0x366c*/ bool              Locked;
-/*0x366d*/ bool              bGroupOnInvite;
+/*0x0000*/ RaidData raidData;
+/*0x00dc*/ int unknown1[2];
+/*0x00e4*/ bool locations[MAX_RAID_SIZE];
+/*0x012c*/ RaidMember raidMembers[MAX_RAID_SIZE];
+/*0x2d0c*/ int raidId;
+/*0x2d10*/ int RaidMemberCount;
+/*0x2d14*/ char RaidLeaderName[EQ_MAX_NAME];
+/*0x2d54*/ char RaidMOTD[MAX_RAID_MOTD];
+/*0x3154*/ char Inviter[EQ_MAX_NAME];
+/*0x3194*/ eRaidState raidState;
+/*0x3198*/ int raidId2;
+/*0x319c*/ bool bCreateRaidInvite;
+/*0x319d*/ bool IsRaidLeader;
+/*0x31a0*/ DWORD RaidTarget;
+/*0x31a4*/ eRaidLootType LootType;
+/*0x31a8*/ char RaidLooters[MAX_RAID_LOOTERS][EQ_MAX_NAME];
+/*0x3668*/ DWORD levelTotal; // Average level of raid members
+/*0x366c*/ bool Locked;
+/*0x366d*/ bool bGroupOnInvite;
 /*0x3670*/
 
 	ALT_MEMBER_GETTER_ARRAY(bool, MAX_RAID_SIZE, locations, RaidMemberUsed);
@@ -504,7 +504,7 @@ using PEQRAID DEPRECATE("Use CRaid instead of EQRAID") = CRaid*;
 class [[offsetcomments]] StringItem
 {
 public:
-/*0x00*/ uint32_t  ID;
+/*0x00*/ uint32_t ID;
 /*0x08*/ char* String;
 /*0x10*/
 };
@@ -517,9 +517,9 @@ class StringTable
 {
 public:
 /*0x00*/ StringItem** strings;
-/*0x08*/ uint32_t    alloc;
-/*0x0c*/ int         filled;
-/*0x10*/ int         Language;
+/*0x08*/ uint32_t alloc;
+/*0x0c*/ int filled;
+/*0x10*/ int Language;
 
 	EQLIB_OBJECT const char* getString(uint32_t ID, bool* bFound = nullptr);
 
@@ -544,28 +544,28 @@ enum eDynamicZoneType
 
 struct [[offsetcomments]] DynamicZoneData
 {
-/*0x00*/ int                DynamicZoneID;
-/*0x04*/ int                SetID;
-/*0x08*/ eDynamicZoneType   Type;
+/*0x00*/ int DynamicZoneID;
+/*0x04*/ int SetID;
+/*0x08*/ eDynamicZoneType Type;
 /*0x0c*/
 };
 
 struct [[offsetcomments]] DynamicZoneTimerData
 {
-/*0x00*/ int                   DataSetID;
-/*0x08*/ eqtime_t              TimerExpiration;
-/*0x10*/ int                   EventID;
-/*0x14*/ int                   DynamicZoneID;
+/*0x00*/ int DataSetID;
+/*0x08*/ eqtime_t TimerExpiration;
+/*0x10*/ int EventID;
+/*0x14*/ int DynamicZoneID;
 /*0x18*/ DynamicZoneTimerData* pNext;
 /*0x20*/
 };
 
 struct [[offsetcomments]] DynamicZoneClientTimerData
 {
-/*0x000*/ char         ExpeditionName[0x80];
-/*0x080*/ char         EventName[0x100];
-/*0x180*/ eqtime_t     TimeStamp;                      // TimeStamp - Util__FastTime = time left
-/*0x188*/ int          TimerID;
+/*0x000*/ char ExpeditionName[0x80];
+/*0x080*/ char EventName[0x100];
+/*0x180*/ eqtime_t TimeStamp; // TimeStamp - Util__FastTime = time left
+/*0x188*/ int TimerID;
 /*0x190*/ DynamicZoneClientTimerData* pNext;
 /*0x198*/
 };
@@ -586,11 +586,11 @@ enum DynamicZonePlayerStatus
 
 struct [[offsetcomments]] DynamicZonePlayerInfo
 {
-/*0x00*/ char                     Name[EQ_MAX_NAME];
-/*0x40*/ DynamicZonePlayerStatus  Status;
-/*0x48*/ DynamicZonePlayerInfo*   pNext;
-/*0x50*/ bool                     bFlagged;                  // Do we meet the requirements?
-/*0x51*/ bool                     bCheckedZoneReqs;          // Zone reqs serverside checked?
+/*0x00*/ char Name[EQ_MAX_NAME];
+/*0x40*/ DynamicZonePlayerStatus Status;
+/*0x48*/ DynamicZonePlayerInfo* pNext;
+/*0x50*/ bool bFlagged; // Do we meet the requirements?
+/*0x51*/ bool bCheckedZoneReqs; // Zone reqs serverside checked?
 /*0x54*/
 };
 
@@ -608,10 +608,10 @@ enum eSharedTaskPlayerRole
 // Shared Task Member Info
 struct [[offsetcomments]] SharedTaskPlayerInfo
 {
-/*0x00*/ char                     Name[0x40];
-/*0x40*/ int                      ShroudID;
-/*0x44*/ eSharedTaskPlayerRole    Role;
-/*0x48*/ SharedTaskPlayerInfo*    pNext;
+/*0x00*/ char Name[0x40];
+/*0x40*/ int ShroudID;
+/*0x44*/ eSharedTaskPlayerRole Role;
+/*0x48*/ SharedTaskPlayerInfo* pNext;
 /*0x50*/
 
 	ALT_MEMBER_GETTER(DWORD, Role, IsLeader);
@@ -624,12 +624,12 @@ inline namespace deprecated {
 
 struct [[offsetcomments]] DynamicZoneSwitchInfo
 {
-/*0x00*/ int          DZID;
-/*0x04*/ int          Type;
-/*0x08*/ int          DZSwitchID;
-/*0x0c*/ float        SwitchX;
-/*0x10*/ float        SwitchY;
-/*0x14*/ float        SwitchZ;
+/*0x00*/ int DZID;
+/*0x04*/ int Type;
+/*0x08*/ int DZSwitchID;
+/*0x0c*/ float SwitchX;
+/*0x10*/ float SwitchY;
+/*0x14*/ float SwitchZ;
 /*0x18*/
 };
 
@@ -641,15 +641,15 @@ inline namespace deprecated {
 
 struct [[offsetcomments]] DynamicZoneCompass
 {
-/*0x00*/ int          R;
-/*0x04*/ int          G;
-/*0x08*/ int          B;
-/*0x0c*/ float        X;
-/*0x10*/ float        Y;
-/*0x14*/ float        Z;
-/*0x18*/ bool         bVisible;
-/*0x1c*/ int          PixelOffset;
-/*0x20*/ bool         bInWindow;
+/*0x00*/ int R;
+/*0x04*/ int G;
+/*0x08*/ int B;
+/*0x0c*/ float X;
+/*0x10*/ float Y;
+/*0x14*/ float Z;
+/*0x18*/ bool bVisible;
+/*0x1c*/ int PixelOffset;
+/*0x20*/ bool bInWindow;
 /*0x24*/
 };
 
@@ -672,14 +672,14 @@ inline namespace deprecated {
 // CDynamicZone size: 0x128
 struct [[offsetcomments]] CDynamicZone : public PopDialogHandler
 {
-/*0x008*/ uint32_t     NewMemberDZID;
-/*0x00c*/ char         NewMemberName[0x40];
-/*0x04c*/ bool         bNewSwap;
-/*0x04d*/ bool         bNewAssignedToDZ;
-/*0x04e*/ char         LeaderName[0x40];
-/*0x08e*/ char         DZName[0x80];
-/*0x110*/ int          MaxPlayers;
-/*0x114*/ int          MinPlayers;
+/*0x008*/ uint32_t NewMemberDZID;
+/*0x00c*/ char NewMemberName[0x40];
+/*0x04c*/ bool bNewSwap;
+/*0x04d*/ bool bNewAssignedToDZ;
+/*0x04e*/ char LeaderName[0x40];
+/*0x08e*/ char DZName[0x80];
+/*0x110*/ int MaxPlayers;
+/*0x114*/ int MinPlayers;
 /*0x118*/ DynamicZonePlayerInfo* pFirstMember;
 /*0x120*/ DynamicZoneClientTimerData* pFirstTimer;
 /*0x128*/ HashTable<DynamicZoneClientSwitchInfo> Switches;
@@ -740,31 +740,31 @@ public:
 
 	struct [[offsetcomments]] BuddyEntry
 	{
-	/*0x00*/ char          Name[ChatProxy_MaxNameLen];
-	/*0x30*/ BuddyStatus   Status;
-	/*0x34*/ bool          bInMyNamespace;
+	/*0x00*/ char Name[ChatProxy_MaxNameLen];
+	/*0x30*/ BuddyStatus Status;
+	/*0x34*/ bool bInMyNamespace;
 	/*0x38*/
 	};
 
 	// FIXME: This is off and needs to update updated (members don't align with the functions)
 /*0x008*/ UniversalChatProxyHandler* pChatProxyHandler;
-/*0x010*/ void*             pUdpManager;             // UdpLibrary::UdpManager
-/*0x018*/ char**            ChannelList;
-/*0x020*/ int               ActiveChannels;          // number of channels joined, aka channelcount
-/*0x024*/ bool              mAuthenticated;
-/*0x025*/ bool              bLoginSent;
-/*0x026*/ bool              bInvisible;
-/*0x027*/ bool              bFullNotifyMode;
-/*0x028*/ void*             UdpConnection;           // UdpLibrary::UdpConnection
-/*0x030*/ char              ChatID[ChatProxy_MaxNameLen];              // "ServerName.CharName"
-/*0x060*/ char              ChatPass[ChatProxy_MaxNameLen];
-/*0x090*/ char              ServerName[ChatProxy_MaxNameLen];          // "ServerName."
-/*0x0c0*/ int               ServerNameLen;
-/*0x0c4*/ char              Locale[16];
-/*0x0d8*/ const char*       ChatPrefix;
-/*0x0e0*/ int               LastDisconnectCheckTime;
-/*0x0e8*/ BuddyEntry**      BuddyList;
-/*0x0f0*/ int               BuddyListCount;
+/*0x010*/ void* pUdpManager; // UdpLibrary::UdpManager
+/*0x018*/ char** ChannelList;
+/*0x020*/ int ActiveChannels; // number of channels joined, aka channelcount
+/*0x024*/ bool mAuthenticated;
+/*0x025*/ bool bLoginSent;
+/*0x026*/ bool bInvisible;
+/*0x027*/ bool bFullNotifyMode;
+/*0x028*/ void* UdpConnection; // UdpLibrary::UdpConnection
+/*0x030*/ char ChatID[ChatProxy_MaxNameLen]; // "ServerName.CharName"
+/*0x060*/ char ChatPass[ChatProxy_MaxNameLen];
+/*0x090*/ char ServerName[ChatProxy_MaxNameLen]; // "ServerName."
+/*0x0c0*/ int ServerNameLen;
+/*0x0c4*/ char Locale[16];
+/*0x0d8*/ const char* ChatPrefix;
+/*0x0e0*/ int LastDisconnectCheckTime;
+/*0x0e8*/ BuddyEntry** BuddyList;
+/*0x0f0*/ int BuddyListCount;
 /*0x0f8*/ ArrayClass<CXStr> IgnoreList;
 /*0x110*/
 
@@ -783,10 +783,10 @@ inline namespace deprecated {
 // EQ Refers to Auras as SOI or "sphere of influence", but we'll just call them Auras.
 struct [[offsetcomments]] AuraData
 {
-/*0x00*/ char         Name[EQ_MAX_NAME];
-/*0x40*/ uint32_t     SpawnID;
-/*0x44*/ int          Cost;
-/*0x48*/ int          IconID;
+/*0x00*/ char Name[EQ_MAX_NAME];
+/*0x40*/ uint32_t SpawnID;
+/*0x44*/ int Cost;
+/*0x48*/ int IconID;
 /*0x4c*/
 };
 
@@ -842,25 +842,25 @@ inline namespace deprecated {
 
 struct [[offsetcomments]] MercenaryInfo
 {
-/*0x00*/ int                 id;
-/*0x04*/ int                 typeStringId;
-/*0x08*/ int                 subtypeStringId;
-/*0x0c*/ int                 initialCost;
-/*0x10*/ int                 upkeepCost;
-/*0x14*/ int                 altInitialCost;
-/*0x18*/ int                 altUpkeepCost;
-/*0x1c*/ int                 altCurrencyId;
-/*0x20*/ bool                altCurrencyOnly;
-/*0x24*/ uint32_t            timeRemaining;
-/*0x28*/ int                 stanceGroupId;
-/*0x2c*/ int                 stanceId;
-/*0x30*/ int                 numStances;
-/*0x38*/ eqtime_t            unsuspendedTime;
-/*0x40*/ bool                autoAssist;
-/*0x44*/ int                 type;
-/*0x48*/ char                name[EQ_MAX_NAME];
+/*0x00*/ int id;
+/*0x04*/ int typeStringId;
+/*0x08*/ int subtypeStringId;
+/*0x0c*/ int initialCost;
+/*0x10*/ int upkeepCost;
+/*0x14*/ int altInitialCost;
+/*0x18*/ int altUpkeepCost;
+/*0x1c*/ int altCurrencyId;
+/*0x20*/ bool altCurrencyOnly;
+/*0x24*/ uint32_t timeRemaining;
+/*0x28*/ int stanceGroupId;
+/*0x2c*/ int stanceId;
+/*0x30*/ int numStances;
+/*0x38*/ eqtime_t unsuspendedTime;
+/*0x40*/ bool autoAssist;
+/*0x44*/ int type;
+/*0x48*/ char name[EQ_MAX_NAME];
 /*0x88*/ MercenaryStanceInfo stanceData[MAX_MERC_STANCES];
-/*0xd8*/ int                 requiredMembershipLevel;
+/*0xd8*/ int requiredMembershipLevel;
 /*0xdc*/
 
 	// These should all be marked deprecated...
@@ -877,24 +877,24 @@ inline namespace deprecated {
 
 struct [[offsetcomments]] MERCSLIST
 {
-/*0x000*/ MercenaryInfo     mercinfo[7];              // is 7 max, even with slots u can buy for sc?
+/*0x000*/ MercenaryInfo mercinfo[7]; // is 7 max, even with slots u can buy for sc?
 /*0x620*/
 };
 
 enum eMercenaryState {
-	MercenaryState_Dead             = 0,
-	MercenaryState_Suspended        = 1,
+	MercenaryState_Dead = 0,
+	MercenaryState_Suspended = 1,
 
-	MercenaryState_Active           = 6,
+	MercenaryState_Active = 6,
 };
 
 class [[offsetcomments]] MercenaryClientData
 {
 public:
-/*0x00*/ bool                     hasMercenary;
-/*0x04*/ eMercenaryState          suspendedState;
-/*0x08*/ eqtime_t                 restorationTime;
-/*0x10*/ MercenaryInfo            mercenaryInfo;
+/*0x00*/ bool hasMercenary;
+/*0x04*/ eMercenaryState suspendedState;
+/*0x08*/ eqtime_t restorationTime;
+/*0x10*/ MercenaryInfo mercenaryInfo;
 /*0xf0*/
 	inline int GetCurrentStanceId() const { return mercenaryInfo.stanceId; }
 };
@@ -969,23 +969,23 @@ class [[offsetcomments]] CMercenaryManager // a.k.a. CMercenaryClientManager
 {
 public:
 /*0x030*/ ArrayClass<MercenaryInfo> currentMercenaryMerchantInfoList;
-/*0x048*/ ArrayClass<int>           currentMercenaryMerchantTypeList;
-/*0x060*/ MercenaryInfo             currentMechantMercenaryInfo;
-/*0x140*/ MercenaryClientData       currentMercenary;
-/*0x230*/ MercenaryInfoList         mercenaries;
-/*0x248*/ int                       numMercenaries;
-/*0x24c*/ int                       maxMercenaries;
-/*0x250*/ MercenaryStats            mercenaryStats;
-/*0x268*/ int                       currMercenaryIndex;
-/*0x26c*/ uint32_t                  currentMerchantId;
-/*0x270*/ uint32_t                  lastMerchantId;
-/*0x274*/ uint32_t                  mercenarySpawnId;
-/*0x278*/ uint32_t                  initTimeMS;
-/*0x27c*/ uint32_t                  warningTimeMS;
-/*0x280*/ uint32_t                  lastUpdate;
-/*0x288*/ ControllerFactory         uiControllerFactory;
-/*0x2a8*/ MercenaryStancePtrList    merchantStanceList;
-/*0x2c0*/ MercenaryStancePtrList    mercenaryStanceList;
+/*0x048*/ ArrayClass<int> currentMercenaryMerchantTypeList;
+/*0x060*/ MercenaryInfo currentMechantMercenaryInfo;
+/*0x140*/ MercenaryClientData currentMercenary;
+/*0x230*/ MercenaryInfoList mercenaries;
+/*0x248*/ int numMercenaries;
+/*0x24c*/ int maxMercenaries;
+/*0x250*/ MercenaryStats mercenaryStats;
+/*0x268*/ int currMercenaryIndex;
+/*0x26c*/ uint32_t currentMerchantId;
+/*0x270*/ uint32_t lastMerchantId;
+/*0x274*/ uint32_t mercenarySpawnId;
+/*0x278*/ uint32_t initTimeMS;
+/*0x27c*/ uint32_t warningTimeMS;
+/*0x280*/ uint32_t lastUpdate;
+/*0x288*/ ControllerFactory uiControllerFactory;
+/*0x2a8*/ MercenaryStancePtrList merchantStanceList;
+/*0x2c0*/ MercenaryStancePtrList mercenaryStanceList;
 /*0x2d8*/ // extra stuff related to event handling at the end
 /*0x2fc*/ // 370
 
@@ -1037,27 +1037,27 @@ struct [[offsetcomments]] MERCENARYSTATS
 {
 	FORCE_SYMBOLS;
 
-/*0x00*/ DWORD        MaxHP;
-/*0x04*/ DWORD        CurrHP;
-/*0x08*/ DWORD        MaxMana;
-/*0x0c*/ DWORD        CurrMana;
-/*0x10*/ DWORD        MaxEndurance;
-/*0x14*/ DWORD        CurrEndurance;
-/*0x18*/ DWORD        AC;
-/*0x1c*/ DWORD        Attack;
-/*0x20*/ DWORD        Haste;
-/*0x24*/ DWORD        STR;
-/*0x28*/ DWORD        STA;
-/*0x2c*/ DWORD        INT;
-/*0x30*/ DWORD        WIS;
-/*0x34*/ DWORD        AGI;
-/*0x38*/ DWORD        DEX;
-/*0x3c*/ DWORD        CHA;
-/*0x40*/ DWORD        CombatHPRegen;
-/*0x44*/ DWORD        CombatManaRegen;
-/*0x48*/ DWORD        CombatEnduranceRegen;
-/*0x4c*/ DWORD        HealAmount;
-/*0x50*/ DWORD        SpellDamage;
+/*0x00*/ DWORD MaxHP;
+/*0x04*/ DWORD CurrHP;
+/*0x08*/ DWORD MaxMana;
+/*0x0c*/ DWORD CurrMana;
+/*0x10*/ DWORD MaxEndurance;
+/*0x14*/ DWORD CurrEndurance;
+/*0x18*/ DWORD AC;
+/*0x1c*/ DWORD Attack;
+/*0x20*/ DWORD Haste;
+/*0x24*/ DWORD STR;
+/*0x28*/ DWORD STA;
+/*0x2c*/ DWORD INT;
+/*0x30*/ DWORD WIS;
+/*0x34*/ DWORD AGI;
+/*0x38*/ DWORD DEX;
+/*0x3c*/ DWORD CHA;
+/*0x40*/ DWORD CombatHPRegen;
+/*0x44*/ DWORD CombatManaRegen;
+/*0x48*/ DWORD CombatEnduranceRegen;
+/*0x4c*/ DWORD HealAmount;
+/*0x50*/ DWORD SpellDamage;
 /*0x54*/
 };
 
@@ -1114,8 +1114,8 @@ struct [[offsetcomments]] BenefitSelection
 
 struct [[offsetcomments]] EQLogin
 {
-/*0x000*/ uint8_t     Unknown0x00[0x6bc];
-/*0x6bc*/ char        station_name[32];
+/*0x000*/ uint8_t Unknown0x00[0x6bc];
+/*0x6bc*/ char station_name[32];
 /*0x6dc*/
 };
 
@@ -1231,9 +1231,9 @@ public:
 EQLIB_API void GetFactionName(int FactionID, char* szBuffer, size_t bufferSize);
 
 
-//constexpr uint32_t EQ_ASSIST          = 0x2529;        // 2022-03-03 (live) @ 0x140252E54
+//constexpr uint32_t EQ_ASSIST = 0x2529; // 2022-03-03 @ 0x140252E54
 
 // FIXME: Find a place for this
-constexpr uint32_t EQ_LoadingS__ArraySize = 0x5a;      // EQ_LoadingS__SetProgressBar_x+76
+constexpr uint32_t EQ_LoadingS__ArraySize = 0x5a; // EQ_LoadingS__SetProgressBar_x+76
 
 } // namespace eqlib
