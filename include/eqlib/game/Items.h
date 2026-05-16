@@ -1071,8 +1071,10 @@ class [[offsetcomments]] ItemBase : public IChildItemContainer
 {
 public:
 // @start: ItemBase Members
-// may11-test layout per work/may11_items_audit_2026-05-14.md (sizeof=0x118)
-// 35 SHIFTED fields below; UNVERIFIED fields (DontKnow, ConvertItemID, ConvertItemName) in #if 0 below.
+// may11-test layout per work/may11_items_audit_2026-05-14.md +
+//   work/may11_live_field_hunt_2026-05-16.md (sizeof=0x118)
+// DontKnow placed at 0x0a0 (VERIFIED int64-width handle via live ctor/dtor disasm).
+// Price displaced from 0x0a0 to UNVERIFIED — see #if 0 block.
 /*0x008*/ bool bConvertable;
 /*0x009*/ bool bRankDisabled;
 /*0x00a*/ bool bCopied;
@@ -1095,7 +1097,7 @@ public:
 /*0x094*/ int Open;
 /*0x098*/ int ID;
 /*0x09c*/ int ScriptIndex;
-/*0x0a0*/ int64_t Price;
+/*0x0a0*/ int64_t DontKnow;  // opaque handle/smart-pointer; QWORD-width; ctor zero-inits at va=0x14066b9ca; deserialize-copy at va=0x14067736b; refcounted teardown pairs with [+0x70] handle
 /*0x0a8*/ unsigned int LastCastTime;
 /*0x0b0*/ int64_t MerchantSlot;
 /*0x0b8*/ int NoteStatus;
@@ -1111,13 +1113,23 @@ public:
 /*0x118*/
 // @end: ItemBase Members
 
-#if 0  // may11: UNVERIFIED fields - carried forward per fields-dont-get-deleted rule
-       // DontKnow: per work/may11_items_audit_2026-05-14.md UNVERIFIED_STILL, may11 placement unknown
-       // ConvertItemID, ConvertItemName: not in may11 anchor TSV; apr07 corpus has them as zero-returning stubs
-       //   (no field-storage evidence); preserved for upstream-compatibility audit trail.
-	int64_t DontKnow;             // TODO: may11 unverified, apr07 0x30, verdict=UNVERIFIED_STILL
-	int ConvertItemID;            // TODO: may11 not anchored; apr07 returned literal 0 (no storage)
-	CXStr ConvertItemName;        // TODO: may11 not anchored; apr07 returned empty CXStr (no storage)
+#if 0  // may11: fields without active-layout placement
+       //
+       // Price: corpus had Price@may11 0x0a0 from apr07 ctor-pair, but live audit
+       //   2026-05-16 proves 0x0a0 is DontKnow (handle semantics, not a price).
+       //   No QWORD writes to [ItemBase-this+0x90] in may11 ItemBase code range
+       //   either, so apr07's Price@0x90 is also gone. GetItemValue reads
+       //   ItemDef.Cost (vtable dispatch), not [this+ANY]. Price may have been
+       //   renamed, widened, moved into a sub-struct, or eliminated as
+       //   compute-only — needs separate hunt (merchant-transaction handler).
+       //
+       // ConvertItemID, ConvertItemName: NO STORAGE — compute-only.
+       //   No symbol or string "ConvertItem" in may11 disasm. Apr07 and may11
+       //   accessors both return literal 0 / empty CXStr (already implemented
+       //   inline below). Upstream-declared but compiler-elided. Do not place.
+	int64_t Price;                // UNVERIFIED — moved from 0x0a0 (now DontKnow); location unknown
+	int ConvertItemID;            // NO STORAGE — compute-only literal-return in binary
+	CXStr ConvertItemName;        // NO STORAGE — compute-only literal-return in binary
 #endif
 
 	EQLIB_OBJECT ItemBase();

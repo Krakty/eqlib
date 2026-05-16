@@ -843,20 +843,23 @@ public:
 #if 0  // may11: fields with insufficient evidence to place in active layout
        // Preserved as declarations for upstream-compatibility audit trail.
        //
-       // bClickThroughMenuItemStatus: zero CXWnd-this BYTE access sites in either binary.
-       //   apr07 placeholder at 0x0cd; may11 placement undetermined.
-       //   See work/may11_cxwnd_2bools_trace_2026-05-14.md.
-       //
-       // Unknown0x034: apr07 placeholder with no upstream equivalent; may11 0x034 is bNeedsSaving.
-       //   See work/may11_cxwnd_audit_2026-05-14.md.
+       // bClickThroughMenuItemStatus: RUNTIME-DEAD in may11.
+       //   Live-binary audit 2026-05-16 (work/may11_live_field_hunt_2026-05-16.md) confirms
+       //   zero CXWnd-this writes at any candidate byte offset. CXWnd ctor at 0x1405c2dd0
+       //   does not init it. 707 live CXWnd instances scanned: bytes at 0x256-0x257 are
+       //   heap-allocator garbage, not bool-shaped. Upstream still declares the field so
+       //   we carry it forward per feedback_no_fields_deleted, but no storage can be placed.
        //
        // ClipRectClient: anchor TSV claims STABLE CXRect at may11 0x204..0x213 (16B),
        //   but Data int64_t at may11 0x208..0x20f (STABLE-anchored via BinDiff lockstep)
        //   occupies the middle of that range. CXRect is 4 ints (16B); cannot coexist.
        //   Slot-confusion FP suspected per feedback_slot_reassignment_false_positive.md.
        //   ClipRectClient flagged here for re-audit; Data placed in active layout.
-	bool bClickThroughMenuItemStatus;  // TODO: may11 unverified, no trace evidence
-	uint32_t Unknown0x034;             // TODO: may11 unverified, apr07-only placeholder
+       //
+       // (Unknown0x034 removed 2026-05-16: was an apr07-only placeholder. may11 0x034 is
+       //  bNeedsSaving, which is already in the active layout. No deletion of binary
+       //  storage occurred — only an obsolete name was retired.)
+	bool bClickThroughMenuItemStatus;  // runtime-dead in may11; carried forward, no storage
 	CXRect ClipRectClient;             // TODO: anchor TSV may11 0x204 conflicts with Data at 0x208
 #endif
 
