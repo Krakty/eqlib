@@ -39,7 +39,7 @@ namespace detail{
 	};
 } // namespace eqlib::detail
 
-#if defined(COMMENT_UPDATER) || !defined(_DEBUG) || SIZE_CHECKS_ENABLED == 0
+#if defined(COMMENT_UPDATER) || SIZE_CHECKS_ENABLED == 0
 #define SIZE_CHECK(type, expectedSize)
 #define SIZE_CHECK2(name, type, expectedSize)
 #else
