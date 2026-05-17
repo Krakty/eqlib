@@ -46,10 +46,12 @@ namespace detail{
 // Bare static_assert: fires unconditionally at compile time in every TU
 // that sees the macro. Previous template-helper form was inline + never
 // ODR-used, so MSVC never instantiated it and the assert never fired.
+// Trailing semicolon is baked in so existing call sites (which omit it,
+// since the old macro body ended with `}`) keep working.
 #define SIZE_CHECK(type, expectedSize) \
-	static_assert(sizeof(type) == (expectedSize), "Size of " #type " does not match expected size.")
+	static_assert(sizeof(type) == (expectedSize), "Size of " #type " does not match expected size.");
 #define SIZE_CHECK2(name, type, expectedSize) \
-	static_assert(sizeof(type) == (expectedSize), "Size of " #type " does not match expected size.")
+	static_assert(sizeof(type) == (expectedSize), "Size of " #type " does not match expected size.");
 #endif
 
 } // namespace eqlib
