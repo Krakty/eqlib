@@ -905,7 +905,7 @@ public:
 /*0x20a4*/ uint32_t                 BannerTint1;
 /*0x20a8*/ int                      MountAnimationRelated;
 /*0x20ac*/ bool                     bGuildShowAnim;
-/*0x20ad*/ uint32_t                 bWaitingForPort;
+/*0x20ad*/ bool                     bWaitingForPort;          // v3-fix: was uint32_t (caused +3B sizeof drift)
 /*0x20b0*/
 
 	void Initialize(PlayerClient*, unsigned char, unsigned int, unsigned char, char*);
