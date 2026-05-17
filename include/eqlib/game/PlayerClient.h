@@ -323,20 +323,12 @@ struct [[offsetcomments]] PZCPhysicsInfo
 };
 
 
-// v4: byte-buffer wrapper for mActorClient. Holds full 0x210 may11 slot, but
-// also names a few sub-fields (e.g. ActorDef) at known offsets so consumer code
-// can do `pSpawn->mActorClient.ActorDef` without us pulling the natural
-// ActorClient struct (which compiles to 0x2A8 vs may11 0x210).
-// Existing eqlib accessors (GetClass, GetRace etc.) keep doing
-// `reinterpret_cast<ActorClient*>(&mActorClient)` for byte-level pun access.
-struct [[offsetcomments]] mActorClient_t
-{
-/*0x000*/ uint8_t _pre_ActorDef[0x21];    // 33B padding before ActorDef (mActorClient+0x21 per pactor-runtime audit)
-/*0x021*/ char    ActorDef[0x40];          // FRF_ACTORDEF string (size from brainiac MQ2 historical layout)
-/*0x061*/ uint8_t _post_ActorDef[0x1AF];   // 431B padding to match may11 mActorClient slot 0x210
-/*0x210*/
-};
-static_assert(sizeof(mActorClient_t) == 0x210, "mActorClient_t must match may11 ActorClient slot 0x210");
+// v5: mActorClient declared as natural ActorClient type. Source Actors.h
+// declares ActorClient to sum to 0x210 bytes (matches may11 audit). The v4
+// mActorClient_t wrapper is removed; direct member access via mActorClient.X
+// replaces the reinterpret_cast pattern.
+// Tripwires at end of file enforce: sizeof(ActorClient)==0x210,
+// offsetof(ActorClient,pActor)==0x1B8.
 
 class PlayerHashTable
 {
@@ -666,7 +658,7 @@ public:
 /*0xfac*/ unsigned int             ParticleCastDuration;
 /*0xfb0*/ int                      ParticleVisualSpellNum;
 /*0xfb4*/ unsigned int             Unknown0xFD8;
-/*0xfb8*/ mActorClient_t           mActorClient;       // v4: struct wrapper, holds may11 0x210 slot AND exposes ActorDef
+/*0xfb8*/ ActorClient              mActorClient;       // v5: natural type; sizeof 0x210 per Actors.h source matches may11 audit
 /*0x11c8*/ PlayerAnimationBase*     pAnimation;
 /*0x11d0*/ float                    MeleeRadius;
 /*0x11d4*/ unsigned int             CollisionCounter;
@@ -698,7 +690,7 @@ public:
 			|| race == EQR_DRAKKIN;
 	}
 
-	CActorInterface* GetActor() { return (*reinterpret_cast<ActorClient*>(&mActorClient)).pActor; }
+	CActorInterface* GetActor() { return mActorClient.pActor; }
 
 	// Some methods that were from EQPlayer in the past
 	EQLIB_OBJECT bool AllowedToAttack(PlayerZoneClient*, int);
@@ -936,15 +928,15 @@ public:
 	PlayerClient(const PlayerClient&) = delete;
 	PlayerClient& operator=(const PlayerClient&) = delete;
 
-	inline int GetClass() const { return (*reinterpret_cast<const ActorClient*>(&mActorClient)).Class; }
+	inline int GetClass() const { return mActorClient.Class; }
 	EQLIB_OBJECT const char* GetClassString() const;
 	EQLIB_OBJECT const char* GetClassThreeLetterCode() const;
-	inline int GetRaceWithOverride() const { return (*reinterpret_cast<const ActorClient*>(&mActorClient)).RaceOverride ? (*reinterpret_cast<const ActorClient*>(&mActorClient)).RaceOverride : (*reinterpret_cast<const ActorClient*>(&mActorClient)).Race; }
-	inline int GetRace() const { return (*reinterpret_cast<const ActorClient*>(&mActorClient)).Race; }
+	inline int GetRaceWithOverride() const { return mActorClient.RaceOverride ? mActorClient.RaceOverride : mActorClient.Race; }
+	inline int GetRace() const { return mActorClient.Race; }
 	EQLIB_OBJECT const char* GetRaceString() const;
-	inline int GetGender() const { return (*reinterpret_cast<const ActorClient*>(&mActorClient)).Gender; }
+	inline int GetGender() const { return mActorClient.Gender; }
 	inline BYTE GetCharacterType() const { return Type; }
-	inline bool GetShowHelm() const { return (*reinterpret_cast<const ActorClient*>(&mActorClient)).bShowHelm; }
+	inline bool GetShowHelm() const { return mActorClient.bShowHelm; }
 	inline unsigned int GetId() const { return SpawnID; }
 	inline CharacterZoneClient* GetCharacter() const { return (CharacterZoneClient*)GetPcClient(); }
 	inline EQZoneIndex GetZoneID() const { return Zone; }
@@ -1046,5 +1038,9 @@ static_assert(offsetof(PlayerZoneClient, PZCLastPhysics) == 0xF8C, "PlayerZoneCl
 static_assert(offsetof(PlayerZoneClient, StaticCollision) == 0x11F8, "PlayerZoneClient::StaticCollision offset drift");
 static_assert(offsetof(PlayerClient, Fellowship) == 0x1550, "PlayerClient::Fellowship offset drift");
 static_assert(offsetof(PlayerClient, mPlayerPhysicsClient) == 0x2048, "PlayerClient::mPlayerPhysicsClient offset drift");
+
+// v5: ActorClient natural-type tripwires (catch Actors.h drift before parent layout breaks)
+static_assert(sizeof(ActorClient) == 0x210, "ActorClient sizeof drift -- expected 0x210 to match may11 mActorClient slot");
+static_assert(offsetof(ActorClient, pActor) == 0x1B8, "ActorClient::pActor offset drift -- expected 0x1B8");
 
 } // namespace eqlib
