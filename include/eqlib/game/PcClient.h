@@ -1123,7 +1123,7 @@ public:
 /*0x2848*/ int HeroicDEXBonus;
 /*0x284c*/ int HeroicSTABonus;
 /*0x2850*/ int HeroicCHABonus;
-/*0x2854*/ int HealAmountBonus;
+/*0x2854*/ int AC; // may11-test: runtime-forensics verified (Karaqus UI 6427, +994 buff delta, Priest-of-Discord recompute); legacy name HealAmountBonus retained as TLO alias
 /*0x2858*/ int SpellDamageBonus;
 /*0x285c*/ int ClairvoyanceBonus;
 /*0x2860*/ int AttackBonus;
