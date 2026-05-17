@@ -508,7 +508,7 @@ public:
 /*0x1d0*/ int64_t                  HPMax;
 /*0x1d8*/ int                      SpawnCategory;
 /*0x1dc*/ uint8_t                  InPvPArea;
-/*0x1dd*/ char                     Suffix[51]; // v4: char[] for strcpy_s; truncated from char[0x80] to fit gap
+/*0x1dd*/ char                     Title[51]; // may11-test: runtime-verified via TitleWnd Prefix tab (Assassin -> Shadow toggle). Was audit-labeled "Suffix" — inversion corrected. v4 truncation note retained: char[] for strcpy_s; truncated from char[0x80] to fit gap
 /*0x210*/ uint32_t                 Unknown0x210;
 /*0x214*/ uint8_t _pad_214[76];
 /*0x260*/ int                      PetID;
@@ -612,7 +612,7 @@ public:
 /*0x478*/ int                      StunTimer;
 /*0x47c*/ uint32_t                 LastCollision;
 /*0x480*/ uint8_t _pad_480[45];
-/*0x4ad*/ char                     Title[0x80];
+/*0x4ad*/ char                     Suffix[0x80]; // may11-test: runtime-verified via TitleWnd Suffix tab (no-suffix -> "of Test" toggle). Was audit-labeled "Title" — inversion corrected.
 /*0x52d*/ uint8_t _pad_52d[3];
 /*0x530*/ int                      ManaMax;
 /*0x534*/ int                      InvisLevel;
