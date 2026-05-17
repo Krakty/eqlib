@@ -20,7 +20,7 @@ namespace eqlib {
 // Size Checks
 //
 
-#define SIZE_CHECKS_ENABLED 0   // TEMP DISABLED 2026-05-16 to let Debug build complete for comment-update PDB capture
+#define SIZE_CHECKS_ENABLED 1
 
 namespace detail{
 	template <typename T>
@@ -39,22 +39,17 @@ namespace detail{
 	};
 } // namespace eqlib::detail
 
-#if defined(COMMENT_UPDATER) || !defined(_DEBUG) || SIZE_CHECKS_ENABLED == 0
+#if defined(COMMENT_UPDATER) || SIZE_CHECKS_ENABLED == 0
 #define SIZE_CHECK(type, expectedSize)
 #define SIZE_CHECK2(name, type, expectedSize)
 #else
-#define SIZE_CHECK(type, expectedSize)                                                                    \
-	template <typename TypeToCheck, std::size_t ExpectedSize, std::size_t RealSize = sizeof(TypeToCheck)> \
-	std::enable_if_t<ExpectedSize == RealSize, void> CheckSizeOf##type##__() {                            \
-		static_assert(ExpectedSize == RealSize, "Size of " #type " does not match expected size.");       \
-	}                                                                                                     \
-	inline void CheckSizeHelper##type##__() { CheckSizeOf##type##__<type, expectedSize>(); }
-#define SIZE_CHECK2(name, type, expectedSize)                                                             \
-	template <typename TypeToCheck, std::size_t ExpectedSize, std::size_t RealSize = sizeof(TypeToCheck)> \
-	std::enable_if_t<ExpectedSize == RealSize, void> CheckSizeOf##name##__() {                            \
-		static_assert(ExpectedSize == RealSize, "Size of " #type " does not match expected size.");       \
-	}                                                                                                     \
-	inline void CheckSizeHelper##name##__() { CheckSizeOf##name##__<type, expectedSize>(); }
+// Bare static_assert: fires unconditionally at compile time in every TU
+// that sees the macro. Previous template-helper form was inline + never
+// ODR-used, so MSVC never instantiated it and the assert never fired.
+#define SIZE_CHECK(type, expectedSize) \
+	static_assert(sizeof(type) == (expectedSize), "Size of " #type " does not match expected size.")
+#define SIZE_CHECK2(name, type, expectedSize) \
+	static_assert(sizeof(type) == (expectedSize), "Size of " #type " does not match expected size.")
 #endif
 
 } // namespace eqlib

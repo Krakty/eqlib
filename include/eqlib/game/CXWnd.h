@@ -771,10 +771,12 @@ public:
 /*0x0d4*/ COLORREF CRNormal;
 /*0x0d8*/ bool bUseInLayoutHorizontal;
 /*0x0dc*/ CXSize MaxClientSize;
+uint8_t _pad_0xe4[0xc];  // injected to enforce declared layout
 /*0x0f0*/ int BlinkState;
 /*0x0f4*/ bool bTiled;
 /*0x0f5*/ bool bHCenterTooltip;
 /*0x0f8*/ CXStr Tooltip;
+uint8_t _pad_0x100[0x4];  // injected to enforce declared layout
 /*0x104*/ int VScrollPos;
 /*0x108*/ int Transition;
 /*0x10c*/ bool bMarkedForDelete;
@@ -807,6 +809,7 @@ public:
 /*0x1a1*/ bool bRightAnchoredToLeft;
 /*0x1a2*/ bool bShowClickThroughMenuItem;
 /*0x1a4*/ int managerArrayIndex;
+uint8_t _pad_0x1a8[0x4];  // injected to enforce declared layout
 /*0x1ac*/ int LeftOffset;
 /*0x1b0*/ int BottomOffset;
 /*0x1b8*/ CStaticTintedBlendAnimationTemplate* TitlePiece;
@@ -823,6 +826,7 @@ public:
 /*0x1f8*/ CXSize MinClientSize;
 /*0x200*/ bool bClipToParent;
 /*0x208*/ int64_t Data;
+uint8_t _pad_0x210[0x4];  // injected to enforce declared layout
 /*0x214*/ uint8_t bResizableMask;
 /*0x215*/ bool MouseOver;
 /*0x218*/ CStaticTintedBlendAnimationTemplate* TitlePiece2;

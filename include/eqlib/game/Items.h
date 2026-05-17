@@ -1109,7 +1109,9 @@ public:
 /*0x0e8*/ EqItemGuid ItemGUID;
 /*0x0fc*/ int ArmorType;
 /*0x100*/ bool bItemNeedsUpdate;
+uint8_t _pad_0x104[0x4];  // injected to enforce declared layout
 /*0x108*/ uint32_t Unknown0x108_PerInstanceCounter; // NEW may11 field; sequential per-instance int observed across 32 live items (0x116dX..0x116eX). Semantic unknown; likely internal allocation counter / per-instance handle. Discovered via live audit 2026-05-16.
+uint8_t _pad_0x10c[0x4];  // injected to enforce declared layout
 /*0x110*/ unsigned int Tint;
 /*0x118*/
 // @end: ItemBase Members
