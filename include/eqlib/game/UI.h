@@ -5266,7 +5266,7 @@ public:
 	static VirtualFunctionTable* sm_vftable;
 };
 
-constexpr size_t CMapViewWnd_size = 0x848; // @sizeof(CMapViewWnd) :: 2026-03-10 @ 0x14019BD74
+constexpr size_t CMapViewWnd_size = 0x838; // @sizeof(CMapViewWnd) :: may11 allocator site mov ecx,0x838 @ 0x14019c1d4 -- 2x CXWnd-base shrink (outer + embedded MapViewMap CXWnd subobject) from apr07 0x858 :: 2026-05-15 audit
 
 class [[offsetcomments]] CMapViewWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -5344,7 +5344,7 @@ public:
 /*0x4a0*/ CXWnd* wndSpacer;
 /*0x4a8*/ bool bEditing;
 /*0x4b0*/ MapViewMap MapView; // a window component owned by CMapViewWnd
-/*0x848*/
+/*0x838*/
 	// alias the stupid
 	__declspec(property(get = getLines)) MapViewLine* pLines;
 	__declspec(property(get = getLabels)) MapViewLabel* pLabels;
