@@ -687,7 +687,7 @@ static_assert(offsetof(CharacterBase, Z) == 0x2f98, "CharacterBase::Z offset mis
 static_assert(offsetof(CharacterBase, Heading) == 0x2f9c, "CharacterBase::Heading offset mismatch (expected 0x2f9c)");
 static_assert(offsetof(CharacterBase, Name) == 0x2fa0, "CharacterBase::Name offset mismatch (expected 0x2fa0)");
 static_assert(offsetof(CharacterBase, Lastname) == 0x2fe0, "CharacterBase::Lastname offset mismatch (expected 0x2fe0)");
-static_assert(offsetof(CharacterBase, Title) == 0x3000, "CharacterBase::Title offset mismatch (expected 0x3000)");
+static_assert(offsetof(CharacterBase, Unknown_CB100) == 0x3000, "CharacterBase::Unknown_CB100 offset mismatch (expected 0x3000)");
 static_assert(offsetof(CharacterBase, VehicleName) == 0x3080, "CharacterBase::VehicleName offset mismatch (expected 0x3080)");
 static_assert(offsetof(CharacterBase, Status) == 0x30c0, "CharacterBase::Status offset mismatch (expected 0x30c0)");
 static_assert(offsetof(CharacterBase, currentZoneId) == 0x30c4, "CharacterBase::currentZoneId offset mismatch (expected 0x30c4)");

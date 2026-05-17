@@ -923,7 +923,7 @@ public:
 /*0x2f9c*/ float Heading;
 /*0x2fa0*/ char Name[EQ_MAX_NAME];
 /*0x2fe0*/ char Lastname[EQ_MAX_LASTNAME];
-/*0x3000*/ char Title[128];
+/*0x3000*/ char Unknown_CB100[128]; // may11-test: audit-inherited name was "Title" but the player-visible Title actually lives at PlayerClient+0x01DD (runtime-verified via TitleWnd Prefix tab). What's at CB+0x100 is something else, semantic unknown — needs writer trace if a consumer ever asks for it
 /*0x3080*/ char VehicleName[64];
 /*0x30c0*/ eCharacterStatus Status;
 /*0x30c4*/ EQZoneIndex currentZoneId;
