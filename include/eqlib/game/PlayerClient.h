@@ -878,8 +878,7 @@ public:
 /*0x1dd0*/ int                      CampType;
 /*0x1dd4*/ bool                     Campfire;
 /*0x1dd5*/ uint8_t _pad_1dd5[3];
-/*0x1dd8*/ uint32_t                 SeeInvis;
-/*0x1ddc*/ uint8_t _pad_1ddc[8];
+/*0x1dd8*/ int                      SeeInvis[3];          // TSafeArrayStatic<int,3> per audit; 12-byte slot
 /*0x1de4*/ uint32_t                 Equipment;
 /*0x1de8*/ uint8_t _pad_1de8[176];
 /*0x1e98*/ bool                     bIsPlacingItem;
