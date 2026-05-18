@@ -2977,7 +2977,15 @@ inline namespace deprecated {
 	using PCOMPASSDATAINFO DEPRECATE("Use CompassLineSource* instead of PCOMPASSDATAINFO") = CompassLineSource*;
 }
 
-// size 0x2a0 @ 0x56fda5 2021-05-14 
+// size 0x2a0 @ 0x56fda5 2021-05-14
+// may11 sizeof = 0x3C0 (audit's 0x340 is stale -- ctor allocator-site shows mov ecx,0x3C0).
+// See eq-builds/test/2026-05-11/forensics/UI_singletons_may11.md.
+// vftbl 0x140A6BD90, pinst 0x140DFAB30, ctor 0x1404BAEB0.
+// Secondary WndEventHandler MI vftbl at +0x358 = 0x140A6BD70 (shared with CTargetWnd).
+// lineAdventure / lineData layout below is may11-suspect: runtime shows sequential heap
+// pointers at +0x2FC..+0x334 (looks like inline 8x CompassLineSource* array) and speed
+// field at +0x2E8 does NOT track player movement (probably strip animation rate).
+// Field offsets +0x000/+0x2C8/+0x2D0/+0x358 confirmed; rest pending ctor/Draw trace.
 class [[offsetcomments]] CCompassWnd : public CSidlScreenWnd, public WndEventHandler
 {
 	FORCE_SYMBOLS
@@ -3001,11 +3009,11 @@ public:
 /*0x2d8*/ int Unknown0x244;
 /*0x2dc*/ int offset;
 /*0x2e0*/ int timestamp;
-/*0x2e8*/ double speed;
+/*0x2e8*/ double speed;                              // may11: NOT player movement speed
 /*0x2f0*/ int timer;
-/*0x2f4*/ CompassLineSource lineAdventure;
-/*0x328*/ ArrayClass<CompassLineSource*> lineData;
-/*0x340*/
+/*0x2f4*/ CompassLineSource lineAdventure;           // may11: layout suspect, see class comment
+/*0x328*/ ArrayClass<CompassLineSource*> lineData;   // may11: layout suspect, see class comment
+/*0x340*/                                            // may11: class extends to 0x3C0; tail TBD
 };
 
 inline namespace deprecated {
