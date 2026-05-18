@@ -32,7 +32,7 @@
 #define __bRenderSceneCalled_x                                     0x180370610
 
 #define C2DPrimitiveManager__AddCachedText_x                       0x1800F4710
-#define C2DPrimitiveManager__Render_x                              0x1800F51E0
+#define C2DPrimitiveManager__Render_x                              0x1800F6980
 
 #define ObjectPreviewView__Render_x                                0x180027560
 
