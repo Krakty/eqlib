@@ -4480,50 +4480,38 @@ public:
 /*0x310*/ CButtonWnd* PageLeftButton; // HB_PageLeftButton
 /*0x318*/ CLabel* VerticalCurrentPageLabel; // HB_VerticalCurrentPageLabel
 /*0x320*/ CButtonWnd* PageRightButton; // HB_PageRightButton
-/*0x328*/ int Page;                                  // may11: ctor writes; pages also tracked at HotButtonLayout+0x1F5 per-bar
-//
-// CHotButtonWnd may11 layout, derived from ctor 0x140428A30 + runtime evidence in
-// eq-builds/test/2026-05-11/forensics/CHotButtonWnd_layout_may11.md.
-//
-// Audit's old declarations `CHotButton* Buttons[12] @ +0x330` and `CXStr KeyMapStrings[12] @ +0x3b8`
-// are removed -- those concepts do not exist as CHotButtonWnd members in may11. The 12
-// CHotButton widgets are children of the HotButtonLayout sub-object at +0x2e0, accessed
-// via standard CXWnd child enumeration. Per-button labels live on each CHotButton
-// instance at +0x298 (LastLabel CXStr), not in a per-window string array. Plugin code
-// that enumerates buttons should use: HotButtonLayout->first-child-walk, or heap-scan
-// vftbl 0x140933FA8 filtered by BarIndex/ButtonIndex.
-//
-/*0x330*/ char Unknown_0x330[8];                     // may11: 8 bytes, ctor does not initialize
-/*0x338*/ char StringA[32];                          // may11: std::string SBO slot, identity TBD per laptop handoff-2026-05-18-0700
-/*0x358*/ char StringB[32];                          // may11: std::string SBO slot, identity TBD
-/*0x378*/ char StringC[32];                          // may11: std::string SBO slot, identity TBD
-/*0x398*/ char Unknown_0x398[8];                     // may11: 8 bytes between StringC end and +0x3A0 scalars
-/*0x3a0*/ int  UninitIndexSentinel;                  // may11: ctor sets -2 (= 0xFFFFFFFE), looks like uninitialized-index sentinel
-/*0x3a4*/ float UnknownF1;                           // may11: ctor sets -1.0f
-/*0x3a8*/ float UnknownF2;                           // may11: ctor sets -1.0f (audit's int ButtonPercent does not match -- ctor uses float)
-/*0x3ac*/ uint64_t Unknown_0x3ac;                    // may11: ctor zeros qword
-/*0x3b4*/ uint64_t Unknown_0x3b4;                    // may11: ctor zeros qword
-/*0x3bc*/ char Unknown_0x3bc[4];                     // may11: ctor does not initialize
-/*0x3c0*/ uint64_t Unknown_0x3c0;                    // may11: ctor zeros qword
-/*0x3c8*/ char Unknown_0x3c8[8];                     // may11: ctor does not initialize
-/*0x3d0*/ char Unknown_0x3d0[24];                    // may11: 16 bytes (ctor writes _Buf=0 + cap=0xF, looks string-shaped but _Mysize uninit) + 8 bytes follow
-/*0x3e8*/ uint64_t Unknown_0x3e8;                    // may11: ctor sets -1 (0xFFFFFFFFFFFFFFFF) sentinel
-/*0x3f0*/ uint16_t Unknown_0x3f0;                    // may11: ctor sets 0xFFFF sentinel + 6 bytes padding
-/*0x3f8*/ uint64_t Unknown_0x3f8;                    // may11: ctor zeros qword
-/*0x400*/ void* Unknown_0x400;                       // may11: refcount-tracked pointer (ctor releases existing then zeros)
-/*0x408*/ uint32_t CtorParam1;                       // may11: from ctor param[0x40], external-supplied
-/*0x40c*/ uint32_t CtorParam2;                       // may11: from ctor param[0x48], external-supplied
-/*0x410*/ uint64_t Unknown_0x410;                    // may11: ctor zeros qword
-/*0x418*/ uint32_t Unknown_0x418;                    // may11: ctor zeros u32 (audit said CButtonWnd* FileButton; ctor evidence does not support a pointer here)
-/*0x41c*/ uint16_t Unknown_0x41c;                    // may11: ctor zeros u16 + 6 bytes padding to next 8-byte boundary
-/*0x424*/ uint16_t Unknown_0x424;                    // may11: ctor sets 0x100 (some flag/version)
-/*0x430*/ void* RenderInterfaceObj;                  // may11: ctor result of (*pinstRenderInterface)[+0x90](...) -- render interface object
-/*0x438*/ uint32_t Unknown_0x438;                    // may11: ctor sets computed value from func_0x14033AE60 return
-/*0x43c*/ uint32_t Unknown_0x43c;                    // may11: ctor zeros u32
-/*0x440*/ uint32_t Color1;                           // may11: ctor sets 0xFFFFFFFF conditional (color, NOT bool HorizontalBar)
-/*0x444*/ uint32_t Color2;                           // may11: ctor sets 0xFFC0C0C0 conditional (color, NOT uint32_t Timer)
-/*0x448*/ uint32_t Unknown_0x448;                    // may11: ctor zeros u32 (audit's HotWindowIndex/ConfirmId/KeepCurrentSize past here are past sizeof 0x450)
-/*0x450*/                                            // may11 sizeof = 0x450 (allocator __eq_new_x(0x450); audit's old 0x454 included a phantom KeepCurrentSize past struct end)
+/*0x328*/ int Page;
+// MAY11 LAYOUT MISMATCH -- see eq-builds/test/2026-05-11/forensics/CHotButtonWnd_layout_may11.md
+// Ctor at 0x140428A30 initializes 3 std::string SBO slots at +0x338/+0x358/+0x378 (not
+// CHotButton*[12]). The 12 CHotButton widgets are CXWnd children in the standard child
+// linked list (vftbl-scan 0x140933FA8 + filter on BarIndex/ButtonIndex), not a member array.
+// KeyMapStrings[12] @ +0x3B8 also conflicts -- ctor writes scalars across that range.
+// Plugin enumeration MUST use vftbl-scan, not pHotButtonWnd->Buttons.
+/*0x330*/ CHotButton* Buttons[HOTBUTTONS_PER_PAGE]; // HB_Button%d  -- BROKEN IN MAY11, see comment above
+/*0x390*/ int LoadLoadoutContextIndex;
+/*0x394*/ int SaveLoadoutContextIndex;
+/*0x398*/ int DeleteLoadoutContextIndex;
+/*0x39c*/ int SaveLoadoutIndex;
+/*0x3a0*/ int ShowKeyMapIndex;
+/*0x3a4*/ int ShowSpinnerIndex;
+/*0x3a8*/ int ButtonPercent;
+/*0x3ac*/ int OpenNewBarIndex;
+/*0x3b0*/ bool ShowKeyMap;
+/*0x3b1*/ bool ShowSpinner;
+/*0x3b2*/ bool LastShowSpinner;
+/*0x3b4*/ FontStyles TextFontStyle;
+/*0x3b8*/ CXStr KeyMapStrings[HOTBUTTONS_PER_PAGE]; // BROKEN IN MAY11 -- see comment above Buttons
+/*0x418*/ CButtonWnd* FileButton; // HB_FileButton
+/*0x420*/ CContextMenu* MainMenu;
+/*0x428*/ CContextMenu* LoadMenu;
+/*0x430*/ CContextMenu* SaveMenu;
+/*0x438*/ CContextMenu* DeleteMenu;
+/*0x440*/ bool HorizontalBar;
+/*0x444*/ uint32_t Timer;
+/*0x448*/ int HotWindowIndex;
+/*0x44c*/ int ConfirmId;
+/*0x450*/ bool KeepCurrentSize;
+/*0x454*/
 };
 
 //============================================================================
