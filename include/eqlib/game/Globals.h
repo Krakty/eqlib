@@ -111,20 +111,27 @@ EQLIB_VAR uintptr_t pinstActiveCorpse;
 EQLIB_VAR uintptr_t pinstActiveGMaster;
 EQLIB_VAR uintptr_t pinstActiveMerchant;
 EQLIB_VAR uintptr_t pinstAltAdvManager;
+EQLIB_VAR uintptr_t pinstCActionsWnd;            // may11: window singleton
 EQLIB_VAR uintptr_t pinstCamActor;
 EQLIB_VAR uintptr_t pinstCChatWindowManager;
+EQLIB_VAR uintptr_t pinstCCompassWnd;            // may11: window singleton
 EQLIB_VAR uintptr_t pinstCContainerMgr;
 EQLIB_VAR uintptr_t pinstCContextMenuManager;
 EQLIB_VAR uintptr_t pinstCDBStr;
 EQLIB_VAR uintptr_t pinstCDisplay;
 EQLIB_VAR uintptr_t pinstCEverQuest;
+EQLIB_VAR uintptr_t pinstCExtendedTargetWnd;     // may11: window singleton
+EQLIB_VAR uintptr_t pinstCGroupWnd;              // may11: window singleton
 EQLIB_VAR uintptr_t pinstCInvSlotMgr;
 EQLIB_VAR uintptr_t pinstCItemDisplayManager;
 EQLIB_VAR uintptr_t pinstCMercenaryClientManager;
+EQLIB_VAR uintptr_t pinstCPetInfoWnd;            // may11: window singleton
 EQLIB_VAR uintptr_t pinstCPopupWndManager;
 EQLIB_VAR uintptr_t pinstCResolutionHandler;
+EQLIB_VAR uintptr_t pinstCSelectorWnd;           // may11: window singleton
 EQLIB_VAR uintptr_t pinstCSidlManager;
 EQLIB_VAR uintptr_t pinstCSpellDisplayMgr;
+EQLIB_VAR uintptr_t pinstCTargetWnd;             // may11: window singleton
 EQLIB_VAR uintptr_t pinstCTaskManager;
 EQLIB_VAR uintptr_t pinstCXWndManager;
 EQLIB_VAR uintptr_t pinstDZMember;
