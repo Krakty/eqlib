@@ -887,8 +887,7 @@ public:
 /*0x1dd4*/ bool                     Campfire;
 /*0x1dd5*/ uint8_t _pad_1dd5[3];
 /*0x1dd8*/ int                      SeeInvis[3];          // TSafeArrayStatic<int,3> per audit; 12-byte slot
-/*0x1de4*/ uint32_t                 Equipment;
-/*0x1de8*/ uint8_t _pad_1de8[176];
+/*0x1de4*/ EQUIPMENT                Equipment;            // 0xB4 bytes (9 ArmorProperties slots: Head/Chest/Arms/Wrists/Hands/Legs/Feet/Primary/Offhand); restored from Axel baseline 7b46605 -- was uint32_t + 176-byte _pad in v5+ regen, broke MQ2Main consumers
 /*0x1e98*/ bool                     bIsPlacingItem;
 /*0x1e99*/ bool                     bGMCreatedNPC;
 /*0x1e9a*/ uint8_t _pad_1e9a[2];
