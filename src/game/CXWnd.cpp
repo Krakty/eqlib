@@ -55,39 +55,9 @@ void CXWnd::SetClientRectDirty(bool dirty)
 	}
 }
 //----------------------------------------------------------------------------
-
-UIType eqmain::CXWnd::GetType() const
-{
-	CXMLDataManager* mgr = pSidlMgr->GetParamManager();
-	return mgr->GetWindowType(reinterpret_cast<const eqlib::CXWnd*>(this));
-}
-
-CXMLData* eqmain::CXWnd::GetXMLData(CXMLDataManager* dataMgr) const
-{
-	if (int xmlIndex = GetXMLIndex())
-	{
-		return dataMgr->GetXMLData(xmlIndex);
-	}
-
-	return nullptr;
-}
-
-CXMLData* eqmain::CXWnd::GetXMLData() const
-{
-	CXMLDataManager* mgr = pSidlMgr->GetParamManager();
-	return GetXMLData(mgr);
-}
-
-CXStr eqmain::CXWnd::GetXMLName() const
-{
-	if (CXMLData* pXMLData = GetXMLData())
-	{
-		return pXMLData->Name;
-	}
-
-	return CXStr();
-}
-
+// eqmain::CXWnd is now aliased to eqlib::CXWnd in LoginFrontend.h, so the
+// duplicate eqmain::CXWnd::GetType/GetXMLData/GetXMLName method definitions
+// were removed -- the eqlib::CXWnd versions below serve both namespaces.
 //----------------------------------------------------------------------------
 
 UIType CXWnd::GetType() const
