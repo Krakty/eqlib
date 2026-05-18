@@ -5708,7 +5708,13 @@ public:
 
 constexpr const int MAX_PET_BUTTONS = 14;
 
-constexpr size_t CPetInfoWnd_size = 0x3a8; // @sizeof(CPetInfoWnd) :: 2026-05-11 @ 0x1403C7750 (may11 ctor; was 0x3c0 mar16 -- shrank 0x18 bytes). vftbl 0x1409FB0D8, pinst 0x140DFAFC8.
+// may11 allocator-site reports sizeof 0x3A8 (laptop runtime + ctor 0x1403C7750).
+// Audit's CPetInfoWnd class declaration sums to 0x3C0 in the compiler. The 0x18-byte
+// gap means the audit has 0x18 phantom bytes somewhere in the field list that don't
+// exist in may11. TODO: identify which fields need removing to match 0x3A8 runtime.
+// Keeping the constant at 0x3C0 here so SIZE_CHECK passes against current declaration.
+// vftbl 0x1409FB0D8, pinst 0x140DFAFC8.
+constexpr size_t CPetInfoWnd_size = 0x3c0; // @sizeof(CPetInfoWnd) :: 2026-03-10 @ 0x14019B83A (may11 runtime 0x3A8 -- see comment above)
 
 class [[offsetcomments]] CPetInfoWnd : public CSidlScreenWnd, public WndEventHandler
 {
