@@ -1633,6 +1633,9 @@ public:
 // CActionsWnd
 //============================================================================
 
+// may11: sizeof 0x440, vftbl 0x14099CC68, pinst 0x140DFADE0, ctor 0x14036ED30.
+// WndEventHandler MI subobject at +0x2C0 (secondary vftbl undeclared, see forensics).
+// Internal fields not yet decoded -- ctor trace needed.
 class CActionsWnd : public CSidlScreenWnd, public WndEventHandler
 {
 public:
@@ -3401,6 +3404,9 @@ public:
 // CExtendedTargetWnd
 //============================================================================
 
+// may11: sizeof 0x9B0, vftbl 0x140928A20, pinst 0x140DFB090, ctor 0x1402B34A0.
+// Secondary WndEventHandler MI vftbl 0x140928DA0 (subobject offset undeclared).
+// XML defines 207 gauges; class is large. Internal fields not yet decoded.
 class CExtendedTargetWnd : public CSidlScreenWnd
 {
 public:
@@ -3955,7 +3961,7 @@ public:
 // CGroupWnd
 //============================================================================
 
-constexpr size_t CGroupWnd_size = 0x4718; // @sizeof(CGroupWnd) :: 2026-03-10 @ 0x14019BA12
+constexpr size_t CGroupWnd_size = 0x4718; // @sizeof(CGroupWnd) :: 2026-03-10 @ 0x14019BA12 / may11 re-confirmed @ 0x1403ED2A0. vftbl 0x140A227F0, pinst 0x140F40D20.
 
 class [[offsetcomments]] CGroupWnd : public CGFScreenWnd
 {
@@ -5702,7 +5708,7 @@ public:
 
 constexpr const int MAX_PET_BUTTONS = 14;
 
-constexpr size_t CPetInfoWnd_size = 0x3c0; // @sizeof(CPetInfoWnd) :: 2026-03-10 @ 0x14019B83A
+constexpr size_t CPetInfoWnd_size = 0x3a8; // @sizeof(CPetInfoWnd) :: 2026-05-11 @ 0x1403C7750 (may11 ctor; was 0x3c0 mar16 -- shrank 0x18 bytes). vftbl 0x1409FB0D8, pinst 0x140DFAFC8.
 
 class [[offsetcomments]] CPetInfoWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -6109,6 +6115,10 @@ public:
 // CSelectorWnd
 //============================================================================
 
+// may11: sizeof 0x1240, vftbl 0x140A91C98, pinst 0x140DFAF50, ctor 0x1405049C0.
+// Secondary vftbl at +0x3A8 = 0x140A92030.
+// Inline sub-widget array at +0x480 (stride 0xA8, 20 elements).
+// Internal fields not yet decoded -- ctor trace needed.
 class CSelectorWnd : public CGFScreenWnd
 {
 public:
@@ -6338,7 +6348,7 @@ public:
 // CTargetWnd
 //============================================================================
 
-constexpr size_t CTargetWnd_size = 0x3b8; // @sizeof(CTargetWnd) :: 2026-03-10 @ 0x14019C049
+constexpr size_t CTargetWnd_size = 0x3b8; // @sizeof(CTargetWnd) :: 2026-03-10 @ 0x14019C049 / may11 re-confirmed @ 0x140529C20. vftbl 0x140AAAA20, pinst 0x140DFAF48. Secondary WndEventHandler MI vftbl at +0x2E8 = 0x140A6BD70 (shared with CCompassWnd).
 
 class [[offsetcomments]] CTargetWnd : public CSidlScreenWnd, public WndEventHandler
 {
