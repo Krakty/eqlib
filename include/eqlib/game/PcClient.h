@@ -960,6 +960,8 @@ public:
 /*0x3200*/ int AGI;
 /*0x3204*/ int WIS;
 /*0x3208*/ int LCK;
+// NOTE: Save* fields hold LIVE/buffed resist values (not base saves). NoBuff* fields below hold the base values.
+// Verified via Major Shielding +14 MR buff: SaveMagic went 30->44 while NoBuffResistMagic stayed at 30.
 /*0x320c*/ int SavePoison;
 /*0x3210*/ int SaveMagic;
 /*0x3214*/ int SaveDisease;
@@ -980,22 +982,21 @@ public:
 /*0x3250*/ int UncappedResistCorruption;
 /*0x3254*/ int UncappedResistFire;
 /*0x3258*/ int UncappedResistCold;
-/*0x325c*/ int UncappedResistPhysical;
-/*0x3260*/ int NoBuffStr;
-/*0x3264*/ int NoBuffSta;
-/*0x3268*/ int NoBuffCha;
-/*0x326c*/ int NoBuffDex;
-/*0x3270*/ int NoBuffInt;
-/*0x3274*/ int NoBuffAgi;
-/*0x3278*/ int NoBuffWis;
-/*0x327c*/ int NoBuffResistPoison;
-/*0x3280*/ int NoBuffResistMagic;
-/*0x3284*/ int NoBuffResistDisease;
-/*0x3288*/ int NoBuffResistCorruption;
-/*0x328c*/ int NoBuffResistFire;
-/*0x3290*/ int NoBuffResistCold;
-/*0x3294*/ int NoBuffResistPhysical;
-/*0x3298*/
+/*0x325c*/ int NoBuffStr;
+/*0x3260*/ int NoBuffSta;
+/*0x3264*/ int NoBuffCha;
+/*0x3268*/ int NoBuffDex;
+/*0x326c*/ int NoBuffInt;
+/*0x3270*/ int NoBuffAgi;
+/*0x3274*/ int NoBuffWis;
+/*0x3278*/ int NoBuffResistPoison;
+/*0x327c*/ int NoBuffResistMagic;
+/*0x3280*/ int NoBuffResistDisease;
+/*0x3284*/ int NoBuffResistCorruption;
+/*0x3288*/ int NoBuffResistFire;
+/*0x328c*/ int NoBuffResistCold;
+/*0x3290*/ int NoBuffResistPhysical;
+/*0x3294*/
 
 	virtual void Copy(const CharacterBase& other) {}
 	virtual ~CharacterBase() {}
