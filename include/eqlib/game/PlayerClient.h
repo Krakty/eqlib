@@ -444,8 +444,7 @@ public:
 /*0x134*/ uint8_t                  PossiblyStuck;
 /*0x135*/ uint8_t                  Type;
 /*0x136*/ uint8_t _pad_136[2];
-/*0x138*/ uint32_t                 Properties;
-/*0x13c*/ uint8_t _pad_13c[20];
+/*0x138*/ CharacterPropertyHash    Properties;           // 0x18 bytes (HashTable<int>); restored from Axel baseline 7b46605 -- was uint32_t + 20-byte _pad in v5+ regen, broke MQ2Main consumers (WalkFirst/WalkNext)
 /*0x150*/ float                    AvatarHeight;
 /*0x154*/ float                    Height;
 /*0x158*/ float                    Width;
