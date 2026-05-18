@@ -4467,7 +4467,13 @@ public:
 /*0x318*/ CLabel* VerticalCurrentPageLabel; // HB_VerticalCurrentPageLabel
 /*0x320*/ CButtonWnd* PageRightButton; // HB_PageRightButton
 /*0x328*/ int Page;
-/*0x330*/ CHotButton* Buttons[HOTBUTTONS_PER_PAGE]; // HB_Button%d
+// MAY11 LAYOUT MISMATCH -- see eq-builds/test/2026-05-11/forensics/CHotButtonWnd_layout_may11.md
+// Ctor at 0x140428A30 initializes 3 std::string SBO slots at +0x338/+0x358/+0x378 (not
+// CHotButton*[12]). The 12 CHotButton widgets are CXWnd children in the standard child
+// linked list (vftbl-scan 0x140933FA8 + filter on BarIndex/ButtonIndex), not a member array.
+// KeyMapStrings[12] @ +0x3B8 also conflicts -- ctor writes scalars across that range.
+// Plugin enumeration MUST use vftbl-scan, not pHotButtonWnd->Buttons.
+/*0x330*/ CHotButton* Buttons[HOTBUTTONS_PER_PAGE]; // HB_Button%d  -- BROKEN IN MAY11, see comment above
 /*0x390*/ int LoadLoadoutContextIndex;
 /*0x394*/ int SaveLoadoutContextIndex;
 /*0x398*/ int DeleteLoadoutContextIndex;
@@ -4480,7 +4486,7 @@ public:
 /*0x3b1*/ bool ShowSpinner;
 /*0x3b2*/ bool LastShowSpinner;
 /*0x3b4*/ FontStyles TextFontStyle;
-/*0x3b8*/ CXStr KeyMapStrings[HOTBUTTONS_PER_PAGE];
+/*0x3b8*/ CXStr KeyMapStrings[HOTBUTTONS_PER_PAGE]; // BROKEN IN MAY11 -- see comment above Buttons
 /*0x418*/ CButtonWnd* FileButton; // HB_FileButton
 /*0x420*/ CContextMenu* MainMenu;
 /*0x428*/ CContextMenu* LoadMenu;
