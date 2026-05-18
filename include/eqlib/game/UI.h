@@ -4481,13 +4481,11 @@ public:
 /*0x318*/ CLabel* VerticalCurrentPageLabel; // HB_VerticalCurrentPageLabel
 /*0x320*/ CButtonWnd* PageRightButton; // HB_PageRightButton
 /*0x328*/ int Page;
-// MAY11 LAYOUT MISMATCH -- see eq-builds/test/2026-05-11/forensics/CHotButtonWnd_layout_may11.md
-// Ctor at 0x140428A30 initializes 3 std::string SBO slots at +0x338/+0x358/+0x378 (not
-// CHotButton*[12]). The 12 CHotButton widgets are CXWnd children in the standard child
-// linked list (vftbl-scan 0x140933FA8 + filter on BarIndex/ButtonIndex), not a member array.
-// KeyMapStrings[12] @ +0x3B8 also conflicts -- ctor writes scalars across that range.
-// Plugin enumeration MUST use vftbl-scan, not pHotButtonWnd->Buttons.
-/*0x330*/ CHotButton* Buttons[HOTBUTTONS_PER_PAGE]; // HB_Button%d  -- BROKEN IN MAY11, see comment above
+// Buttons[12]: REMOVED for may11. The 12 CHotButton widgets are not stored as a member
+// array of CHotButtonWnd. They are standalone heap allocations parented by the per-bar
+// data struct (CHotButton.pParent at +0x18). Plugins enumerate via vftbl-scan
+// 0x140933FA8 + BarIndex/ButtonIndex filter. See forensics/CHotButtonWnd_layout_may11.md.
+/*0x330*/ char Unknown_0x330[0x60];  // formerly Buttons[12]; bytes unverified in may11
 /*0x390*/ int LoadLoadoutContextIndex;
 /*0x394*/ int SaveLoadoutContextIndex;
 /*0x398*/ int DeleteLoadoutContextIndex;
@@ -4500,12 +4498,14 @@ public:
 /*0x3b1*/ bool ShowSpinner;
 /*0x3b2*/ bool LastShowSpinner;
 /*0x3b4*/ FontStyles TextFontStyle;
-/*0x3b8*/ CXStr KeyMapStrings[HOTBUTTONS_PER_PAGE]; // BROKEN IN MAY11 -- see comment above Buttons
-/*0x418*/ CButtonWnd* FileButton; // HB_FileButton
-/*0x420*/ CContextMenu* MainMenu;
-/*0x428*/ CContextMenu* LoadMenu;
-/*0x430*/ CContextMenu* SaveMenu;
-/*0x438*/ CContextMenu* DeleteMenu;
+// KeyMapStrings[12]: REMOVED for may11. Per-button labels live on each CHotButton
+// instance at +0x298 (LastLabel) and +0x2A0 (DefaultLabel), not in a per-window array.
+/*0x3b8*/ char Unknown_0x3b8[0x60];  // formerly KeyMapStrings[12]; bytes unverified in may11
+// FileButton + 4 CContextMenu* (MainMenu/LoadMenu/SaveMenu/DeleteMenu): REMOVED for may11.
+// User-confirmed visually: these UI elements do not exist in modern EQ hotbar window
+// (no file menu, no save/load/delete-loadout context menus). Audit names were inherited
+// from a pre-redesign era; modern EQ uses right-click context menus spawned dynamically.
+/*0x418*/ char Unknown_0x418[0x28];  // formerly FileButton + 4 menu pointers
 /*0x440*/ bool HorizontalBar;
 /*0x444*/ uint32_t Timer;
 /*0x448*/ int HotWindowIndex;
