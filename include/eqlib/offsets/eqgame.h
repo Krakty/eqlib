@@ -115,13 +115,20 @@
 ////
 //Section 2:  UI Related Offsets
 ////
+#define pinstCActionsWnd_x                                         0x140DFADE0  // may11: ctor 0x14036ED30, vftbl 0x14099CC68, sizeof 0x440
 #define pinstCChatWindowManager_x                                  0x140F40640
+#define pinstCCompassWnd_x                                         0x140DFAB30  // may11: vftbl 0x140A6BD90
 #define pinstCContainerMgr_x                                       0x140DFAF18
 #define pinstCContextMenuManager_x                                 0x140F55340
+#define pinstCExtendedTargetWnd_x                                  0x140DFB090  // may11: ctor 0x1402B34A0, vftbl 0x140928A20, sizeof 0x9B0
+#define pinstCGroupWnd_x                                           0x140F40D20  // may11: ctor 0x1403ED2A0, vftbl 0x140A227F0, sizeof 0x4718
 #define pinstCInvSlotMgr_x                                         0x140DFAF08
 #define pinstCItemDisplayManager_x                                 0x140F430C0
+#define pinstCPetInfoWnd_x                                         0x140DFAFC8  // may11: ctor 0x1403C7750, vftbl 0x1409FB0D8, sizeof 0x3A8
 #define pinstCPopupWndManager_x                                    0x140F43950
+#define pinstCSelectorWnd_x                                        0x140DFAF50  // may11: ctor 0x1405049C0, vftbl 0x140A91C98, sizeof 0x1240
 #define pinstCSpellDisplayMgr_x                                    0x140F43FA0
+#define pinstCTargetWnd_x                                          0x140DFAF48  // may11: ctor 0x140529C20, vftbl 0x140AAAA20, sizeof 0x3B8
 #define pinstCTaskManager_x                                        0x140C207A0
 #define pinstEQSuiteTextureLoader_x                                0x140D806D0
 #define pinstItemIconCache_x                                       0x140F409A8
