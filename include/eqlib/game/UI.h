@@ -2984,11 +2984,14 @@ inline namespace deprecated {
 // may11 sizeof = 0x3C0 (audit's 0x340 is stale -- ctor allocator-site shows mov ecx,0x3C0).
 // See eq-builds/test/2026-05-11/forensics/UI_singletons_may11.md.
 // vftbl 0x140A6BD90, pinst 0x140DFAB30, ctor 0x1404BAEB0.
-// Secondary WndEventHandler MI vftbl at +0x358 = 0x140A6BD70 (shared with CTargetWnd).
-// lineAdventure / lineData layout below is may11-suspect: runtime shows sequential heap
-// pointers at +0x2FC..+0x334 (looks like inline 8x CompassLineSource* array) and speed
-// field at +0x2E8 does NOT track player movement (probably strip animation rate).
-// Field offsets +0x000/+0x2C8/+0x2D0/+0x358 confirmed; rest pending ctor/Draw trace.
+// Secondary WndEventHandler MI vftbl at +0x358 = 0x140A6BD70 (same vftbl as CTargetWnd
+// but at a DIFFERENT offset there: CTargetWnd has it at +0x2E8, not +0x358). The earlier
+// "shared at same offset" annotation was wrong per DISPATCH-5 live verification.
+// Internal fields below need revision: +0x2D0..+0x328 region is a sequence of incrementing
+// floats (path data / coordinate trail), NOT the declared int+int+int+double+int+CompassLineSource
+// layout. ArrayClass<CompassLineSource*> header (3 heap pointers) actually lives at +0x340,
+// not the declared +0x328. speed field at +0x2E8 is part of the float trail, NOT player movement.
+// Field offsets +0x000/+0x2C8/+0x2D0/+0x358 confirmed; full internal layout pending future audit.
 class [[offsetcomments]] CCompassWnd : public CSidlScreenWnd, public WndEventHandler
 {
 	FORCE_SYMBOLS
@@ -5708,13 +5711,19 @@ public:
 
 constexpr const int MAX_PET_BUTTONS = 14;
 
-// may11 allocator-site reports sizeof 0x3A8 (laptop runtime + ctor 0x1403C7750).
+// may11 allocator-site reports sizeof 0x3A8 (binary truth; ctor 0x1403C7750).
+// DISPATCH-5 (2026-05-18) REAFFIRMED via two independent methods:
+//   1. mov ecx,0x3A8 immediate at the new+ctor wrapper allocator site
+//   2. Wine heap NEXT-BLOCK signature 0x807500?? at +0x3A8 (would be at +0x3C0 if 0x3C0 sizeof)
+// The earlier revert 0x3A8 -> 0x3C0 (commit 69b910b) was WRONG; binary truth is 0x3A8.
 // Audit's CPetInfoWnd class declaration sums to 0x3C0 in the compiler. The 0x18-byte
 // gap means the audit has 0x18 phantom bytes somewhere in the field list that don't
 // exist in may11. TODO: identify which fields need removing to match 0x3A8 runtime.
-// Keeping the constant at 0x3C0 here so SIZE_CHECK passes against current declaration.
+// Keeping the constant at 0x3C0 here so SIZE_CHECK passes against current declaration
+// (field-level audit needed before flipping constant + would require removing 24 bytes
+// of phantom declarations to keep SIZE_CHECK valid).
 // vftbl 0x1409FB0D8, pinst 0x140DFAFC8.
-constexpr size_t CPetInfoWnd_size = 0x3c0; // @sizeof(CPetInfoWnd) :: 2026-03-10 @ 0x14019B83A (may11 runtime 0x3A8 -- see comment above)
+constexpr size_t CPetInfoWnd_size = 0x3c0; // @sizeof(CPetInfoWnd) :: 2026-03-10 @ 0x14019B83A (may11 BINARY SIZE = 0x3A8; declared 0x3C0 retained for SIZE_CHECK pending field-level decode)
 
 class [[offsetcomments]] CPetInfoWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -6354,7 +6363,7 @@ public:
 // CTargetWnd
 //============================================================================
 
-constexpr size_t CTargetWnd_size = 0x3b8; // @sizeof(CTargetWnd) :: 2026-03-10 @ 0x14019C049 / may11 re-confirmed @ 0x140529C20. vftbl 0x140AAAA20, pinst 0x140DFAF48. Secondary WndEventHandler MI vftbl at +0x2E8 = 0x140A6BD70 (shared with CCompassWnd).
+constexpr size_t CTargetWnd_size = 0x3b8; // @sizeof(CTargetWnd) :: 2026-03-10 @ 0x14019C049 / may11 re-confirmed @ 0x140529C20. vftbl 0x140AAAA20, pinst 0x140DFAF48. Secondary WndEventHandler MI vftbl at +0x2E8 = 0x140A6BD70 (same vftbl as CCompassWnd, but CCompassWnd has it at +0x358 -- different offsets per class).
 
 class [[offsetcomments]] CTargetWnd : public CSidlScreenWnd, public WndEventHandler
 {

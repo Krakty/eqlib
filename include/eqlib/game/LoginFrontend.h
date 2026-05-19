@@ -249,12 +249,38 @@ public:
 /*0x158*/ int accountId;
 /*0x160*/ EQLS::EQClientServerData* selectedServer;
 /*0x168*/ int displayDeviceIndex;
-/*0x16c*/ bool isLoggingIn;
-/*0x170*/ uint32_t unknown1;
-/*0x174*/ uint32_t unknown2;
+/*0x16c*/ uint32_t isLoggingIn;          // may11: ctor writes DWORD, accessor returns DWORD; was declared bool
+/*0x170*/ uint8_t authSuccess;            // may11: byte, written by auth handler RVA 0x13cb0 (was uint32_t unknown1)
+/*0x171*/ uint8_t retryFlag;              // may11: byte, written by host-arrival retry handler
+/*0x172*/ uint8_t _pad172[2];             // ctor WORD-zero covers +0x170..+0x171 only
+/*0x174*/ uint32_t unknown2;              // UNFOUND_IN_CTOR; relies on operator-new zero-fill; live = UTF-16 overlay
 /*0x178*/ DoublyLinkedList<EQLS::EQClientServerData*> ServerList;
 /*0x1b0*/ EQLS::EQClientServerData QuickConnectServer;
-/*0x238*/
+/*0x238*/ // BEGIN UNDECLARED TRAILING REGION -- full sizeof is 0x508 per ctor + alloc+dealloc evidence.
+          // Production-header sizeof 0x238 is incomplete by 0x2D0 bytes. The ctor (eqmain RVA 0xd020)
+          // initializes the following named subregions; field-level decode pending future audit.
+/*0x238*/ uint64_t trailing238;           // CONSTANT across LoginClient lifecycle (UTF-16 "ndel" fragment observed);
+                                          // initial agent guess "lastResponseTime watchdog" was REFUTED by 45s live capture
+/*0x240*/ char _gap240[0x10];             // not probed
+/*0x250*/ char ChatBlacklist[0x20];       // chat-name blacklist container (lazy-init suspected)
+/*0x270*/ uint32_t state_flag1;           // ctor init = 0
+/*0x274*/ uint32_t state_flag2;           // ctor init = 1
+/*0x278*/ char _gap278[0xF9];             // not probed
+/*0x371*/ uint8_t quitPending;            // byte; agent claim "flips on /quit" (live-unverified)
+/*0x372*/ char _gap372[0x16];             // not probed
+/*0x388*/ uint64_t ChannelManager_vftbl;  // = eqmain RVA 0x12BCB0 (LIVE-VERIFIED)
+/*0x390*/ char ChannelManager_internals[0x98]; // nested HashTable + ChannelManager subobject body
+/*0x428*/ char Patcher_state[0xC8];       // process-spawn state: handle / exit-code / arg strings around +0x438..+0x470
+/*0x4f0*/ uint8_t authFlag1;              // auth handler writes; BYPASSED by MQ2AutoLogin /login: fast-path
+/*0x4f1*/ uint8_t authFlag2;
+/*0x4f2*/ uint8_t authFlag3;
+/*0x4f3*/ char _gap4f3[0xD];              // not probed
+/*0x500*/ uint8_t exitState;
+/*0x501*/ uint16_t runningFlag;
+/*0x503*/ uint8_t _pad503;
+/*0x504*/ int32_t sentinel504;            // ctor init = -1
+/*0x508*/                                 // class end -- sizeof PROVEN via mov ecx,0x508 (alloc) + mov edx,0x508 (dealloc)
+                                          // plus Wine heap NEXT-BLOCK signature 0x7500670000006a at +0x508
 };
 
 namespace eqmain {
