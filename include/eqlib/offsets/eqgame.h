@@ -328,6 +328,7 @@
 #define CDisplay__GetFloorHeight_x                                 0x140199790
 #define CDisplay__ToggleScreenshotMode_x                           0x1401ABB60
 #define CDisplay__RealRender_World_x                               0x1401A4780
+#define CDisplay__MoveLocalPlayerToSafeCoords_x                    0x140222180
 
 // CEditWnd
 #define CEditBaseWnd__SetSel_x                                     0x14060E910
