@@ -554,8 +554,8 @@
 
 // CStmlWnd
 #define CStmlWnd__AppendSTML_x                                     0x1405DE700
-#define CStmlWnd__CalculateHSBRange_x                              0x1405C8B10
-#define CStmlWnd__CalculateVSBRange_x                              0x1405DF630
+#define CStmlWnd__CalculateHSBRange_x                              0x1405DF630
+#define CStmlWnd__CalculateVSBRange_x                              0x1405DF5B0
 #define CStmlWnd__FastForwardToEndOfTag_x                          0x1405E00D0
 #define CStmlWnd__ForceParseNow_x                                  0x1405E0170
 #define CStmlWnd__GetVisibleText_x                                 0x1405E0840

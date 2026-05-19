@@ -55,9 +55,12 @@ void CXWnd::SetClientRectDirty(bool dirty)
 	}
 }
 //----------------------------------------------------------------------------
-// eqmain::CXWnd is now aliased to eqlib::CXWnd in LoginFrontend.h, so the
-// duplicate eqmain::CXWnd::GetType/GetXMLData/GetXMLName method definitions
-// were removed -- the eqlib::CXWnd versions below serve both namespaces.
+// eqmain::CXWnd is declared as a separate class in LoginFrontend.h (it has a
+// distinct vtable layout from eqlib::CXWnd; see that file for details) but
+// shares the byte-identical data layout. The eqlib::CXWnd::GetType/GetXMLData/
+// GetXMLName methods below act only on eqgame.exe-side CXWnd instances; eqmain
+// callers should reinterpret_cast to the appropriate eqmain subtype before
+// accessing per-instance metadata.
 //----------------------------------------------------------------------------
 
 UIType CXWnd::GetType() const

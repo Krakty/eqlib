@@ -748,16 +748,16 @@ public:
 /*0x058*/ CXRect TransitionRect;
 /*0x068*/ int TopOffset;
 /*0x06c*/ bool Minimized;
-/*0x070*/ CXStr WindowText;
+/*0x070*/ CXStr Tooltip;            // Binary-truth label (was WindowText); see may11_per_field/PcClient/106_CXWnd_complete_field_label_audit.md
 /*0x078*/ CLayoutStrategy* pLayoutStrategy;
 /*0x080*/ int BlinkDuration;
 /*0x084*/ uint32_t BGType;
 /*0x088*/ uint32_t XMLIndex;
-/*0x090*/ CXStr DataStr;
+/*0x090*/ CXStr WindowText;         // Binary-truth label (was DataStr); see may11_per_field/PcClient/106_CXWnd_complete_field_label_audit.md
 /*0x098*/ bool bBringToTopWhenClicked;
-/*0x09c*/ int VScrollMax;
+/*0x09c*/ int HScrollMax;           // Binary-truth label (was VScrollMax); DrawNC HScroll-drawer reads this; SetHScrollPos clamps to it
 /*0x0a0*/ uint32_t LastBlinkFadeRefreshTime;
-/*0x0a4*/ int HScrollMax;
+/*0x0a4*/ int VScrollMax;           // Binary-truth label (was HScrollMax); DrawNC VScroll-drawer reads this; SetVScrollPos clamps to it
 /*0x0a8*/ bool Fades;
 /*0x0a9*/ bool bBottomAnchoredToTop;
 /*0x0ac*/ int RightOffset;
@@ -765,8 +765,8 @@ public:
 /*0x0b8*/ CTextureFont* pFont;
 /*0x0c0*/ bool bClickThroughToBackground;
 /*0x0c1*/ uint8_t TargetAlpha;
-/*0x0c4*/ int HScrollPos;
-/*0x0c8*/ CXStr XMLToolTip;
+/*0x0c4*/ int VScrollPos;           // Binary-truth label (was HScrollPos); SetVScrollPos at slot 93 writes to this offset
+/*0x0c8*/ CXStr DataStr;            // Binary-truth label (was XMLToolTip); 3rd CXStr in CXWnd declaration order
 /*0x0d0*/ uint8_t Alpha;
 /*0x0d4*/ COLORREF CRNormal;
 /*0x0d8*/ bool bUseInLayoutHorizontal;
@@ -775,9 +775,9 @@ uint8_t _pad_0xe4[0xc];  // injected to enforce declared layout
 /*0x0f0*/ int BlinkState;
 /*0x0f4*/ bool bTiled;
 /*0x0f5*/ bool bHCenterTooltip;
-/*0x0f8*/ CXStr Tooltip;
+/*0x0f8*/ CXStr XMLToolTip;         // Binary-truth label (was Tooltip); SetKeyTooltip reads base from this offset before calling SetTooltip
 uint8_t _pad_0x100[0x4];  // injected to enforce declared layout
-/*0x104*/ int VScrollPos;
+/*0x104*/ int HScrollPos;           // Binary-truth label (was VScrollPos); SetHScrollPos at slot 94 writes to this offset
 /*0x108*/ int Transition;
 /*0x10c*/ bool bMarkedForDelete;
 /*0x110*/ int DeleteCount;
