@@ -520,30 +520,20 @@ public:
 	void SetFadeToAlpha(uint8_t Value) { FadeToAlpha = Value; }
 	uint8_t GetFadeToAlpha() const { return FadeToAlpha; }
 
-	// CXWnd::Data has NO STORAGE in may11 eqgame.exe (verdict C, agent afbce956).
-	// Proven by:
-	//   1. CXWnd ctor (0x1405c2dd0) zero-fills every named field; no unclaimed
-	//      QWORD slot in [0x30, 0x258) exists for an int64_t Data field.
-	//   2. CSidlScreenWnd, CButtonWnd, CCheckBoxWnd ctors add no new QWORD
-	//      storage slot suitable for arbitrary user data.
-	//   3. EQ's own CFindItemWnd::PickupSelectedItem (0x14014eb70) uses a
-	//      HashTable<ItemRecord, int> at CFindItemWnd+0x300 to map list rows
-	//      to item identities, NOT a per-checkbox Data field. This is the
-	//      architectural replacement for the historic per-widget Data store.
-	//   4. Whole-binary scan of 18,297 functions: no `mov [rcx+OFF],rdx;ret`
-	//      accessor function exists at any small size. SetData was never a
-	//      separately-compiled leaf -- it was always inlined into now-gone
-	//      callers.
-	//   5. Apr07 forensics: long-standing `Data @ 0xC0` claim was wrong
-	//      (0xC0 is TransitionStartTick). The header's later `Data @ 0x208`
-	//      retrofit was ALSO wrong (0x208 is ClipRectClient Y1).
+	// CXWnd::Data: api surface preserved via eqlib-side table while binary
+	// storage offset remains UNLOCATED in may11. NOT proven absent -- only
+	// proven not-found-by-current-methods. Per feedback_positive_proof_required,
+	// absence-of-evidence does not justify deleting the api. Hunt remains open.
 	//
-	// Consumers must use side-channel storage (local variable cached across
-	// the round-trip, or std::unordered_map<CXWnd*, T> file-scope).
-	// MQ2AutoInventory.cpp was migrated to use a local int64_t rowData in
-	// the same loop iteration -- see commit message.
-	//
-	// Do NOT re-add SetData/GetData here.
+	// Backing: a private unordered_map<const CXWnd*, int64_t> in CXWnd.cpp.
+	// Set/Get round-trip is semantically correct for any single-instance
+	// consumer; the only behavior we DON'T reproduce is binary-side mutation
+	// of the underlying field (since we don't know where it is or whether
+	// the binary still writes to it). If/when the real offset is located,
+	// replace the side-table with a direct `Data = Value` / `return Data;`
+	// against that offset.
+	void SetData(int64_t Value);
+	int64_t GetData() const;
 
 	DEPRECATE("Use GetClickThrough instead of GetClickable")
 	bool GetClickable() const { return bClickThrough; }
