@@ -808,6 +808,7 @@ uint8_t _pad_0x100[0x4];  // injected to enforce declared layout
 /*0x1a0*/ bool Faded;
 /*0x1a1*/ bool bRightAnchoredToLeft;
 /*0x1a2*/ bool bShowClickThroughMenuItem;
+/*0x1a3*/ bool bClickThroughMenuItemStatus; // STRUCTURALLY_ALLOCATED; 1-byte natural-alignment slot between bShowClickThroughMenuItem@0x1a2 and managerArrayIndex@0x1a4. C++ ABI forces 1 byte/bool (plain bool, not bit-field). No CXWnd-base writes/reads at 0x1a3 in may11; address-taken by plugin (MQ2WindowInspector.cpp:2503).
 /*0x1a4*/ int managerArrayIndex;
 uint8_t _pad_0x1a8[0x4];  // injected to enforce declared layout
 /*0x1ac*/ int LeftOffset;
@@ -847,12 +848,10 @@ uint8_t _pad_0x210[0x4];  // injected to enforce declared layout
 #if 0  // may11: fields with insufficient evidence to place in active layout
        // Preserved as declarations for upstream-compatibility audit trail.
        //
-       // bClickThroughMenuItemStatus: RUNTIME-DEAD in may11.
-       //   Live-binary audit 2026-05-16 (work/may11_live_field_hunt_2026-05-16.md) confirms
-       //   zero CXWnd-this writes at any candidate byte offset. CXWnd ctor at 0x1405c2dd0
-       //   does not init it. 707 live CXWnd instances scanned: bytes at 0x256-0x257 are
-       //   heap-allocator garbage, not bool-shaped. Upstream still declares the field so
-       //   we carry it forward per feedback_no_fields_deleted, but no storage can be placed.
+       // (bClickThroughMenuItemStatus resolved 2026-05-19: placed at 0x1a3 in active
+       //  layout via natural-alignment slot between bShowClickThroughMenuItem@0x1a2 and
+       //  managerArrayIndex@0x1a4. C++ ABI structurally forces 1 byte per plain bool;
+       //  bit-packing impossible. See agent report /tmp/may11_bClickThroughMenuItem_hunt_*.md)
        //
        // ClipRectClient: anchor TSV claims STABLE CXRect at may11 0x204..0x213 (16B),
        //   but Data int64_t at may11 0x208..0x20f (STABLE-anchored via BinDiff lockstep)
@@ -863,7 +862,6 @@ uint8_t _pad_0x210[0x4];  // injected to enforce declared layout
        // (Unknown0x034 removed 2026-05-16: was an apr07-only placeholder. may11 0x034 is
        //  bNeedsSaving, which is already in the active layout. No deletion of binary
        //  storage occurred — only an obsolete name was retired.)
-	bool bClickThroughMenuItemStatus;  // runtime-dead in may11; carried forward, no storage
 	CXRect ClipRectClient;             // TODO: anchor TSV may11 0x204 conflicts with Data at 0x208
 #endif
 

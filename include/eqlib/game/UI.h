@@ -5409,8 +5409,14 @@ enum eMerchantServices
 struct [[offsetcomments]] MerchantItemEntry
 {
 /*0x00*/ ItemPtr pItem;
-/*0x10*/ int Unknown;
-/*0x14*/
+/*0x10*/ void* pMerchantSlotData; // pointer to merchant-side pricing struct.
+                                  // Buy-price loaded as DWORD at [pMerchantSlotData + 0x8c4] in
+                                  // CMerchantWnd::PurchasePageHandler::DisplayBuyOrSellPrice
+                                  // (may11 VA 0x1404927A0, read sequence at 0x140492869-87d).
+                                  // Was 'int Unknown' (apr07 era); width corrected from int to
+                                  // pointer 2026-05-19 via Ghidra disasm of array-clear loop at
+                                  // may11 VA 0x140491F10 (stride 0x18 = 24 bytes confirmed).
+/*0x18*/
 
 	ALT_MEMBER_GETTER_DEPRECATED(ItemClient*, pItem, pCont, "Use pItem instead of pCont");
 };
@@ -5532,7 +5538,13 @@ public:
 /*0x2f4*/ ItemGlobalIndex ItemLocation;
 /*0x300*/ BYTE Unknown0x254[0x8];
 /*0x308*/ ItemPtr pSelectedItem;
-/*0x318*/ eqtime_t MailExpireTime;
+/*0x318*/ void* pSelectedItemMerchantData; // cached MerchantItemEntry.pMerchantSlotData for
+                                           // pSelectedItem. Written in CMerchantWnd::SelectBuySellSlot
+                                           // at may11 VA 0x14049D8B4 (MOV [rbx+0x318], rax) from the
+                                           // MerchantItemEntry+0x10 slot. Was eqtime_t MailExpireTime;
+                                           // rename 2026-05-19 -- that field never existed at this
+                                           // slot in may11 (the MailExpireTime label was an apr07-era
+                                           // misidentification). Buy-price = DWORD at [+0x8c4].
 /*0x320*/ bool bAutoRetrieveingMail;
 /*0x328*/ char* Labels[14]; // unknown - adjusted to align the next members
 /*0x398*/ CEditWnd* SearchEdit; // MW_ItemNameInput

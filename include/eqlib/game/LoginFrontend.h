@@ -532,6 +532,23 @@ public:
 	int GetZLayer() const { return ZLayer; }
 	CXStr GetWindowTextField() const { return WindowText; }
 
+	// Trivial accessor over /*0x088*/ XMLIndex. Inline -- no thunk needed.
+	int GetXMLIndex() const { return static_cast<int>(XMLIndex); }
+
+	// Trivial accessor over /*0x1c0*/ DisabledBackground (COLORREF).
+	COLORREF GetDisabledBackground() const { return DisabledBackground; }
+	void     SetDisabledBackground(COLORREF Value) { DisabledBackground = Value; }
+
+	// Inline wrapper around virtual slot 74 UpdateGeometry. Matches the
+	// eqlib::CXWnd::Move(CXRect) backwards-compat wrapper in CXWnd.h.
+	inline int Move(const CXRect& rect, bool updateLayout = true, bool forceUpdateLayout = false,
+		bool completeMoveOrResize = false, bool moveAutoStretch = false)
+	{
+		return UpdateGeometry(rect, updateLayout, forceUpdateLayout, completeMoveOrResize, moveAutoStretch);
+	}
+
+	// GetXMLName() and GetXMLData() not yet placed -- hunt in flight (agent #425).
+
 	//------------------------------------------------------------------------
 	// Data layout copied byte-for-byte from eqlib::CXWnd (sizeof 0x258).
 	// Offsets are identical because eqmain.dll and eqgame.exe share the same
