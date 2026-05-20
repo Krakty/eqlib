@@ -520,8 +520,16 @@ public:
 	void SetFadeToAlpha(uint8_t Value) { FadeToAlpha = Value; }
 	uint8_t GetFadeToAlpha() const { return FadeToAlpha; }
 
-	void SetData(int64_t Value) { Data = Value; }
-	int64_t GetData() const { return Data; }
+	// SetData / GetData DISABLED 2026-05-20: the underlying `Data int64_t @ 0x208` field
+	// was a binary-truth false positive (base-register confusion -- the cited reader was
+	// actually CXWndManager+0x208, not CXWnd+0x208). The slot at 0x204..0x213 is now
+	// occupied by CXRect ClipRectClient. Where Data's real may11 storage lives (if
+	// anywhere) is under active hunt. These accessors are intentionally NOT provided
+	// here -- any consumer that calls pWnd->SetData / pWnd->GetData will fail to
+	// compile until the hunt resolves. Known consumers (MQ2AutoInventory.cpp lines 147
+	// and 163) need either a stub or to wait for the hunt verdict.
+	// void SetData(int64_t Value) { Data = Value; }    // <-- intentionally disabled
+	// int64_t GetData() const { return Data; }         // <-- intentionally disabled
 
 	DEPRECATE("Use GetClickThrough instead of GetClickable")
 	bool GetClickable() const { return bClickThrough; }
