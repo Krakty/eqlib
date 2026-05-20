@@ -539,15 +539,54 @@ public:
 	COLORREF GetDisabledBackground() const { return DisabledBackground; }
 	void     SetDisabledBackground(COLORREF Value) { DisabledBackground = Value; }
 
-	// Inline wrapper around virtual slot 74 UpdateGeometry. Matches the
-	// eqlib::CXWnd::Move(CXRect) backwards-compat wrapper in CXWnd.h.
+	// Inline wrapper for UpdateGeometry. CRITICAL: this BYPASSES the class's virtual
+	// dispatch via a direct function-pointer call to the eqmain.dll binary VA. The
+	// class declaration in this header has 12 phantom virtuals between slot 58
+	// (GetWindowText) and slot 74 (declared UpdateGeometry); the binary only has 4
+	// real virtuals in that gap so UpdateGeometry lives at slot 62 in the eqmain.dll
+	// vtable. A naive `return UpdateGeometry(rect, ...)` call would dispatch through
+	// slot 74 which actually contains a CXStr operator= for the field at +0x90 --
+	// passing a CXRect& as the source would corrupt heap. Until the 12 phantom
+	// virtuals are removed and the class layout reconciled with binary truth, all
+	// Move/UpdateGeometry calls on an eqmain::CXWnd MUST go through this thunk.
+	// Verified 2026-05-19 via raw binary disasm (agent #a5dd1755). Slot 62 function
+	// = UpdateGeometry @ eqmain.dll RVA 0x7E5F0 (touches WindowStyle@+0x1C4 and
+	// DrawTemplate@+0x128).
 	inline int Move(const CXRect& rect, bool updateLayout = true, bool forceUpdateLayout = false,
 		bool completeMoveOrResize = false, bool moveAutoStretch = false)
 	{
-		return UpdateGeometry(rect, updateLayout, forceUpdateLayout, completeMoveOrResize, moveAutoStretch);
+		typedef int (__fastcall *PFUpdateGeometry)(void*, const CXRect&, bool, bool, bool, bool);
+		PFUpdateGeometry pfn = reinterpret_cast<PFUpdateGeometry>(EQMain__CXWnd__UpdateGeometry);
+		if (pfn == nullptr) return 0;
+		return pfn(this, rect, updateLayout, forceUpdateLayout, completeMoveOrResize, moveAutoStretch);
 	}
 
-	// GetXMLName() and GetXMLData() not yet placed -- hunt in flight (agent #425).
+	// GetXMLName() and GetXMLData() implementations -- real thunks through eqmain.dll's
+	// native CXMLDataManager (agent #425). pinstCSidlManager + 0x1B0 is the embedded
+	// CXMLDataManager sub-object; verified via FUN_18007D0D0 (RecurseAndFindName) which
+	// inlines the same lookup chain. Returned CXMLData->Name is at +0x20.
+	::eqlib::CXMLData* GetXMLData() const
+	{
+		const uint32_t xmlIndex = XMLIndex;
+		if (xmlIndex == 0) return nullptr;
+		void* pSidlMgr = reinterpret_cast<void*>(EQMain__pinstCSidlManager);
+		if (pSidlMgr == nullptr) return nullptr;
+		// CXMLDataManager is embedded at CSidlManager + 0x1B0 (verified by RecurseAndFindName disasm).
+		void* pXmlDataMgr = reinterpret_cast<uint8_t*>(pSidlMgr) + 0x1B0;
+		typedef ::eqlib::CXMLData* (__fastcall *PFGetXMLData)(void*, int, int);
+		PFGetXMLData pfn = reinterpret_cast<PFGetXMLData>(EQMain__CXMLDataManager__GetXMLData);
+		if (pfn == nullptr) return nullptr;
+		const int classIdx = static_cast<int>(xmlIndex >> 16);
+		const int itemIdx  = static_cast<int>(xmlIndex & 0xFFFF);
+		return pfn(pXmlDataMgr, classIdx, itemIdx);
+	}
+
+	CXStr GetXMLName() const
+	{
+		if (::eqlib::CXMLData* pXMLData = GetXMLData())
+			return pXMLData->Name;
+		return CXStr();
+	}
 
 	//------------------------------------------------------------------------
 	// Data layout copied byte-for-byte from eqlib::CXWnd (sizeof 0x258).

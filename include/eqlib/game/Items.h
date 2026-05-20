@@ -1085,12 +1085,12 @@ public:
 /*0x028*/ ItemDefinition* ItemDef;          // VESTIGIAL in may11 — always NULL across 32 live items; real ItemDef pointer lives in ItemClient::SharedItemDef at 0x118/0x120. Use GetItemDefinition() (virtual, thunked to binary's may11 native impl).
 /*0x030*/ int MerchantQuantity;
 /*0x038*/ ItemContainer Contents;
-/*0x060*/ unsigned int RespawnTime;          // AMBIGUOUS: 0x60 + 0x84 are both 4-byte int slots written by ItemBase deserialize (src+0x24 -> dst+0x60, src+0x38 -> dst+0x84). Name-to-slot pairing of RespawnTime vs ActorTag1 not disambiguated by static analysis; see work/may11_live_field_hunt_AB_2026-05-16.md.
+/*0x060*/ unsigned int DeserializeStamp;     // RESOLVED 2026-05-19: __MemChecker1_x checksum stamp written by ItemBase deserializer FUN_140676fb0 from final parser checksum at parser+0x14. NOT RespawnTime, NOT ActorTag1, NOT CursorAttachment (prior task #363's CursorAttachment verdict superseded -- the 32-bit observed values are too small for 64-bit pointers; static evidence shows write source is __MemChecker1_x return). See /tmp/may11_RespawnTime_ActorTag1_20260519_2110.md.
 /*0x064*/ int Power;
 /*0x068*/ bool bDisableAugTexture;
 /*0x070*/ ItemEvolutionDataPtr pEvolutionData;
 /*0x080*/ unsigned int ItemHash;
-/*0x084*/ int ActorTag1;
+/*0x084*/ unsigned int RespawnTime;          // RESOLVED 2026-05-19: deserializer writes DWORD at +0x84 from parser+0x28 (text field index 4, strtoll-parsed); gated by iVar5>=2. Was previously at 0x60 by exhaustion-reasoning that turned out invalid (0x60 is DeserializeStamp). See /tmp/may11_RespawnTime_ActorTag1_20260519_2110.md.
 /*0x088*/ int AugFlag;
 /*0x08c*/ unsigned int NewArmorID;
 /*0x090*/ int NoDropFlag;
@@ -1099,7 +1099,17 @@ public:
 /*0x09c*/ int ScriptIndex;
 /*0x0a0*/ int64_t DontKnow;  // opaque handle/smart-pointer; QWORD-width; ctor zero-inits at va=0x14066b9ca; deserialize-copy at va=0x14067736b; refcounted teardown pairs with [+0x70] handle
 /*0x0a8*/ unsigned int LastCastTime;
-/*0x0b0*/ int64_t MerchantSlot;
+/*0x0b0*/ int64_t MerchantSlot; // CONTEXT-DEPENDENT (verified 2026-05-19 via live walk at Angler_Winifred regular merchant):
+                                //   - In MerchantPageHandler.ItemContainer (merchant inventory): holds the displayed
+                                //     buy price in COPPER (e.g., 65 = .065p, 4086 = 4.086p). Direct accessor in
+                                //     binary: FUN_140670810 = `mov rax,[rcx+0xb0]; ret`. Called from the ALT branch
+                                //     of CMerchantWnd::DisplayBuyOrSellPrice@0x1404927a0 (0x140492a33).
+                                //   - In player inventory: original "slot index" semantic (UNVERIFIED -- needs separate
+                                //     audit, may also hold a different value).
+                                // The displayed price for an arbitrary merchant item is this field; no walk through
+                                // CMerchantWnd cache pointers is needed for regular merchants. CPointMerchantWnd
+                                // (LDoN/Loyalty) NOT YET verified -- may use same field or different (Step 2 pending).
+                                // See /tmp/laptop_merchant_findings_2026-05-19-2200.md.
 /*0x0b8*/ int NoteStatus;
 /*0x0c0*/ SoeUtil::String SaveString;
 /*0x0d8*/ int RealEstateID;
@@ -1118,21 +1128,26 @@ uint8_t _pad_0x10c[0x4];  // injected to enforce declared layout
 
 #if 0  // may11: fields without active-layout placement
        //
-       // Price: corpus had Price@may11 0x0a0 from apr07 ctor-pair, but live audit
-       //   2026-05-16 proves 0x0a0 is DontKnow (handle semantics, not a price).
-       //   No QWORD writes to [ItemBase-this+0x90] in may11 ItemBase code range
-       //   either, so apr07's Price@0x90 is also gone. GetItemValue reads
-       //   ItemDef.Cost (vtable dispatch), not [this+ANY]. Price may have been
-       //   renamed, widened, moved into a sub-struct, or eliminated as
-       //   compute-only — needs separate hunt (merchant-transaction handler).
+       // (Price RESOLVED 2026-05-19: no per-instance Price storage on ItemBase. For
+       //  regular merchants, the displayed buy price lives at pItem->MerchantSlot@+0xb0
+       //  (verified live across 4 items). For point merchants (CPointMerchantWnd) the
+       //  storage path is still unknown -- pending live walk Step 2. See
+       //  /tmp/laptop_merchant_findings_2026-05-19-2200.md.)
        //
        // ConvertItemID, ConvertItemName: NO STORAGE — compute-only.
        //   No symbol or string "ConvertItem" in may11 disasm. Apr07 and may11
        //   accessors both return literal 0 / empty CXStr (already implemented
        //   inline below). Upstream-declared but compiler-elided. Do not place.
-	int64_t Price;                // UNVERIFIED — moved from 0x0a0 (now DontKnow); location unknown
+       //
+       // ActorTag1: NO STORAGE in may11. RESOLVED 2026-05-19: apr07 had a field
+       //   at apr07+0x98 named ActorTag1, but may11+0x98 is now ID. ItemBase
+       //   deserializer writes only 2 DWORD data slots (+0x60 DeserializeStamp,
+       //   +0x84 RespawnTime) in the equivalent range. No third slot exists for
+       //   ActorTag1 in may11. ActorTag2 (+0xdc) still has storage.
+       //
 	int ConvertItemID;            // NO STORAGE — compute-only literal-return in binary
 	CXStr ConvertItemName;        // NO STORAGE — compute-only literal-return in binary
+	int ActorTag1;                // NO STORAGE in may11 — apr07 field at +0x98, no surviving slot in may11
 #endif
 
 	EQLIB_OBJECT ItemBase();

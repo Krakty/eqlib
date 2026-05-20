@@ -1591,6 +1591,8 @@ uintptr_t EQMain__pinstCXWndManager = 0;
 uintptr_t EQMain__pinstLoginController = 0;
 uintptr_t EQMain__pinstLoginServerAPI = 0;
 uintptr_t EQMain__pinstLoginClient = 0;
+uintptr_t EQMain__CXWnd__UpdateGeometry = 0;
+uintptr_t EQMain__CXMLDataManager__GetXMLData = 0;
 
 ForeignPointer<CLoginViewManager> g_pLoginViewManager;
 ForeignPointer<LoginClient> g_pLoginClient;
@@ -1618,6 +1620,8 @@ void InitializeEQMainOffsets(uintptr_t BaseAddress)
 	EQMain__pinstLoginController = FixEQMainOffset(EQMain__pinstLoginController_x);
 	EQMain__pinstLoginServerAPI = FixEQMainOffset(EQMain__pinstLoginServerAPI_x);
 	EQMain__pinstLoginClient = EQMain__pinstCLoginViewManager - sizeof(uintptr_t);
+	EQMain__CXWnd__UpdateGeometry = FixEQMainOffset(EQMain__CXWnd__UpdateGeometry_x);
+	EQMain__CXMLDataManager__GetXMLData = FixEQMainOffset(EQMain__CXMLDataManager__GetXMLData_x);
 
 	if (EQMain__LoginController__GiveTime)
 	{
@@ -1679,6 +1683,8 @@ void CleanupEQMainOffsets()
 	EQMain__pinstLoginController = 0;
 	EQMain__pinstLoginServerAPI = 0;
 	EQMain__pinstLoginClient = 0;
+	EQMain__CXWnd__UpdateGeometry = 0;
+	EQMain__CXMLDataManager__GetXMLData = 0;
 
 	g_pLoginController.reset();
 	g_pLoginViewManager.reset();

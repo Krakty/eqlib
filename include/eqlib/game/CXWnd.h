@@ -776,7 +776,10 @@ uint8_t _pad_0xe4[0xc];  // injected to enforce declared layout
 /*0x0f4*/ bool bTiled;
 /*0x0f5*/ bool bHCenterTooltip;
 /*0x0f8*/ CXStr XMLToolTip;         // Binary-truth label (was Tooltip); SetKeyTooltip reads base from this offset before calling SetTooltip
-uint8_t _pad_0x100[0x4];  // injected to enforce declared layout
+/*0x100*/ int Unknown0x100;         // HIDDEN FIELD (not padding) -- CXWnd ctor at 0x1405c2f58 explicitly writes
+                                    // MOV dword [+0x100], 0. ABI value-init for true padding does not generate
+                                    // explicit MOV instructions, so this slot is a real 4-byte field with unknown
+                                    // semantic. Discovered 2026-05-19 by audit agent. Needs identification.
 /*0x104*/ int HScrollPos;           // Binary-truth label (was VScrollPos); SetHScrollPos at slot 94 writes to this offset
 /*0x108*/ int Transition;
 /*0x10c*/ bool bMarkedForDelete;
@@ -826,8 +829,21 @@ uint8_t _pad_0x1a8[0x4];  // injected to enforce declared layout
 /*0x1f4*/ bool bIsParentOrContextMenuWindow;
 /*0x1f8*/ CXSize MinClientSize;
 /*0x200*/ bool bClipToParent;
-/*0x208*/ int64_t Data;
-uint8_t _pad_0x210[0x4];  // injected to enforce declared layout
+/*0x204*/ CXRect ClipRectClient;  // RESOLVED 2026-05-19 (Verdict B): the slot at 0x204..0x213
+                                  // is the cached client clip rect (4 ints X1/Y1/X2/Y2),
+                                  // NOT int64_t Data. FUN_1405c8d60 is the GetClientClipRect
+                                  // cached accessor that writes 0x204/0x208/0x20c/0x210 as
+                                  // four DWORDs with a four-way `CMP ... -1` check that sets
+                                  // bFullyScreenClipped at +0x37. Three independent consumers
+                                  // (CXWnd::DoAllDrawing, FUN_1405c5970, FUN_1402dfe10) all
+                                  // treat the span as {X1,Y1,X2,Y2}. The prior "Data int64_t @
+                                  // 0x208" anchor was a base-register confusion: the cited
+                                  // reader at 0x1405c74e7 has RBX = pinstCXWndManager (not
+                                  // CXWnd this); the read is CXWndManager+0x208. No CXWnd-this
+                                  // QWORD writer of 0x208 exists. See
+                                  // /tmp/may11_clipRectClient_vs_Data_20260519_2101.md.
+                                  // NOTE: upstream's CXWnd::SetData(int64_t) implies Data may
+                                  // still exist somewhere -- not yet relocated.
 /*0x214*/ uint8_t bResizableMask;
 /*0x215*/ bool MouseOver;
 /*0x218*/ CStaticTintedBlendAnimationTemplate* TitlePiece2;
@@ -853,16 +869,14 @@ uint8_t _pad_0x210[0x4];  // injected to enforce declared layout
        //  managerArrayIndex@0x1a4. C++ ABI structurally forces 1 byte per plain bool;
        //  bit-packing impossible. See agent report /tmp/may11_bClickThroughMenuItem_hunt_*.md)
        //
-       // ClipRectClient: anchor TSV claims STABLE CXRect at may11 0x204..0x213 (16B),
-       //   but Data int64_t at may11 0x208..0x20f (STABLE-anchored via BinDiff lockstep)
-       //   occupies the middle of that range. CXRect is 4 ints (16B); cannot coexist.
-       //   Slot-confusion FP suspected per feedback_slot_reassignment_false_positive.md.
-       //   ClipRectClient flagged here for re-audit; Data placed in active layout.
+       // (ClipRectClient RESOLVED 2026-05-19: placed at 0x204 in active layout per Verdict B.
+       //  The Data int64_t @0x208 anchor was a base-register confusion FP. See note on the
+       //  active-layout ClipRectClient declaration above. Data may still exist elsewhere --
+       //  upstream's CXWnd::SetData(int64_t) declaration implies storage; relocation TBD.)
        //
        // (Unknown0x034 removed 2026-05-16: was an apr07-only placeholder. may11 0x034 is
        //  bNeedsSaving, which is already in the active layout. No deletion of binary
        //  storage occurred — only an obsolete name was retired.)
-	CXRect ClipRectClient;             // TODO: anchor TSV may11 0x204 conflicts with Data at 0x208
 #endif
 
 	ALT_MEMBER_ALIAS(bool, bEscapable, CloseOnESC);

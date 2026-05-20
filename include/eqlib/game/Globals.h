@@ -1077,6 +1077,8 @@ EQLIB_VAR uintptr_t EQMain__pinstCXWndManager;
 EQLIB_VAR uintptr_t EQMain__pinstLoginController;
 EQLIB_VAR uintptr_t EQMain__pinstLoginServerAPI;
 EQLIB_VAR uintptr_t EQMain__pinstLoginClient;
+EQLIB_VAR uintptr_t EQMain__CXWnd__UpdateGeometry; // function pointer (NOT data) -- thunked at runtime to bypass misaligned vtable for Move() wrapper
+EQLIB_VAR uintptr_t EQMain__CXMLDataManager__GetXMLData; // function pointer -- thunked by GetXMLData() to walk CSidlManager+0x1B0 (embedded CXMLDataManager) for XML metadata lookup
 
 EQLIB_VAR ForeignPointer<CLoginViewManager> g_pLoginViewManager;
 EQLIB_VAR ForeignPointer<LoginClient> g_pLoginClient;
