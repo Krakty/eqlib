@@ -1883,7 +1883,7 @@ EQLIB_OBJECT void LockCXStrMutex();
 EQLIB_OBJECT void UnlockCXStrMutex();
 
 EQLIB_VAR size_t gStrRepAllocations;
-EQLIB_VAR size_t gStrRepActiveObjects;
+EQLIB_VAR size_t gStrRepLiveObjects;
 
 } // namespace internal
 } // namespace eqlib
