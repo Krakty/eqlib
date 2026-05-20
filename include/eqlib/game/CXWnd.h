@@ -520,16 +520,30 @@ public:
 	void SetFadeToAlpha(uint8_t Value) { FadeToAlpha = Value; }
 	uint8_t GetFadeToAlpha() const { return FadeToAlpha; }
 
-	// SetData / GetData DISABLED 2026-05-20: the underlying `Data int64_t @ 0x208` field
-	// was a binary-truth false positive (base-register confusion -- the cited reader was
-	// actually CXWndManager+0x208, not CXWnd+0x208). The slot at 0x204..0x213 is now
-	// occupied by CXRect ClipRectClient. Where Data's real may11 storage lives (if
-	// anywhere) is under active hunt. These accessors are intentionally NOT provided
-	// here -- any consumer that calls pWnd->SetData / pWnd->GetData will fail to
-	// compile until the hunt resolves. Known consumers (MQ2AutoInventory.cpp lines 147
-	// and 163) need either a stub or to wait for the hunt verdict.
-	// void SetData(int64_t Value) { Data = Value; }    // <-- intentionally disabled
-	// int64_t GetData() const { return Data; }         // <-- intentionally disabled
+	// CXWnd::Data has NO STORAGE in may11 eqgame.exe (verdict C, agent afbce956).
+	// Proven by:
+	//   1. CXWnd ctor (0x1405c2dd0) zero-fills every named field; no unclaimed
+	//      QWORD slot in [0x30, 0x258) exists for an int64_t Data field.
+	//   2. CSidlScreenWnd, CButtonWnd, CCheckBoxWnd ctors add no new QWORD
+	//      storage slot suitable for arbitrary user data.
+	//   3. EQ's own CFindItemWnd::PickupSelectedItem (0x14014eb70) uses a
+	//      HashTable<ItemRecord, int> at CFindItemWnd+0x300 to map list rows
+	//      to item identities, NOT a per-checkbox Data field. This is the
+	//      architectural replacement for the historic per-widget Data store.
+	//   4. Whole-binary scan of 18,297 functions: no `mov [rcx+OFF],rdx;ret`
+	//      accessor function exists at any small size. SetData was never a
+	//      separately-compiled leaf -- it was always inlined into now-gone
+	//      callers.
+	//   5. Apr07 forensics: long-standing `Data @ 0xC0` claim was wrong
+	//      (0xC0 is TransitionStartTick). The header's later `Data @ 0x208`
+	//      retrofit was ALSO wrong (0x208 is ClipRectClient Y1).
+	//
+	// Consumers must use side-channel storage (local variable cached across
+	// the round-trip, or std::unordered_map<CXWnd*, T> file-scope).
+	// MQ2AutoInventory.cpp was migrated to use a local int64_t rowData in
+	// the same loop iteration -- see commit message.
+	//
+	// Do NOT re-add SetData/GetData here.
 
 	DEPRECATE("Use GetClickThrough instead of GetClickable")
 	bool GetClickable() const { return bClickThrough; }
@@ -784,10 +798,16 @@ uint8_t _pad_0xe4[0xc];  // injected to enforce declared layout
 /*0x0f4*/ bool bTiled;
 /*0x0f5*/ bool bHCenterTooltip;
 /*0x0f8*/ CXStr XMLToolTip;         // Binary-truth label (was Tooltip); SetKeyTooltip reads base from this offset before calling SetTooltip
-/*0x100*/ int Unknown0x100;         // HIDDEN FIELD (not padding) -- CXWnd ctor at 0x1405c2f58 explicitly writes
-                                    // MOV dword [+0x100], 0. ABI value-init for true padding does not generate
-                                    // explicit MOV instructions, so this slot is a real 4-byte field with unknown
-                                    // semantic. Discovered 2026-05-19 by audit agent. Needs identification.
+/*0x100*/ int WindowType;           // RESOLVED 2026-05-20 (agent a3c47fa4): 4-byte int sort key used by
+                                    // CXWndManager as the SOLE comparator for three parallel insertion-sort
+                                    // routines: 0x1405eac50 (parent-or-context-menu list at mgr+0x20),
+                                    // 0x1405eae90 (transitioning list at mgr+0x38), 0x1405eb020 (main wnd
+                                    // list at mgr+0x8). All three read [wnd+0x100] and place the wnd in
+                                    // ascending order by it. Setter at 0x1405cb140 writes the value then
+                                    // tail-calls CXWndManager::RemoveFromAllLists. 23 setter callsites observed
+                                    // with values 0x14/0x64/0xc7/0xc8/0x178/0x3e7/0x3e8 -- small ints matching
+                                    // the eWndNotification space (XWM_MENUSELECT=20, XWM_USER_DEFINED=1000
+                                    // boundary appears as `>999` check in 0x1405eb020).
 /*0x104*/ int HScrollPos;           // Binary-truth label (was VScrollPos); SetHScrollPos at slot 94 writes to this offset
 /*0x108*/ int Transition;
 /*0x10c*/ bool bMarkedForDelete;
