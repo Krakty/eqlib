@@ -25,56 +25,7 @@
 
 #include "mq/base/String.h"
 
-#include <mutex>
-#include <unordered_map>
-
 namespace eqlib {
-
-//----------------------------------------------------------------------------
-// CXWnd::Data side-table.
-//
-// The original `int64_t CXWnd::Data` field's may11 storage offset has not been
-// located (see CXWnd.h comment block near the SetData/GetData declarations).
-// Until/unless it is positively located, the API surface is preserved by a
-// process-wide map keyed by CXWnd*. Set/Get round-trip is semantically correct
-// for any single-instance consumer; what we don't reproduce is binary-side
-// mutation of the underlying field (we don't know where it is, or whether the
-// binary still mutates it). Replace with a direct field access when located.
-//
-// Entries leak on CXWnd destruction -- bounded by total CXWnds created in a
-// process lifetime; cleared on process exit. If leakage becomes measurable,
-// add a cleanup hook to the CXWnd dtor.
-//----------------------------------------------------------------------------
-
-namespace {
-
-std::unordered_map<const CXWnd*, int64_t>& cxwnd_data_table()
-{
-	static std::unordered_map<const CXWnd*, int64_t> table;
-	return table;
-}
-
-std::mutex& cxwnd_data_mutex()
-{
-	static std::mutex m;
-	return m;
-}
-
-} // anonymous namespace
-
-void CXWnd::SetData(int64_t Value)
-{
-	std::lock_guard<std::mutex> lock(cxwnd_data_mutex());
-	cxwnd_data_table()[this] = Value;
-}
-
-int64_t CXWnd::GetData() const
-{
-	std::lock_guard<std::mutex> lock(cxwnd_data_mutex());
-	auto& table = cxwnd_data_table();
-	auto it = table.find(this);
-	return it == table.end() ? int64_t{0} : it->second;
-}
 
 //----------------------------------------------------------------------------
 
