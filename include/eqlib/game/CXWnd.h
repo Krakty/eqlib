@@ -520,18 +520,37 @@ public:
 	void SetFadeToAlpha(uint8_t Value) { FadeToAlpha = Value; }
 	uint8_t GetFadeToAlpha() const { return FadeToAlpha; }
 
-	// CXWnd::Data: api surface preserved via eqlib-side table while binary
-	// storage offset remains UNLOCATED in may11. NOT proven absent -- only
-	// proven not-found-by-current-methods. Per feedback_positive_proof_required,
-	// absence-of-evidence does not justify deleting the api. Hunt remains open.
+	// CXWnd::Data: api surface preserved via eqlib-side table. Data field has
+	// NO QWORD storage at +0x208 (or anywhere) in the may11 CXWnd base class.
+	// This is POSITIVE structural evidence, not absence-of-evidence (verified
+	// 2026-05-20 via 3 separate hunt agents, the third with raw-asm walking
+	// across 22 subclass ctors and 8 distinct methods):
 	//
-	// Backing: a private unordered_map<const CXWnd*, int64_t> in CXWnd.cpp.
-	// Set/Get round-trip is semantically correct for any single-instance
-	// consumer; the only behavior we DON'T reproduce is binary-side mutation
-	// of the underlying field (since we don't know where it is or whether
-	// the binary still writes to it). If/when the real offset is located,
-	// replace the side-table with a direct `Data = Value` / `return Data;`
-	// against that offset.
+	//   STRUCTURAL BLOCKER: CXWnd::CalcClipRect (FUN_1405c8d60) writes 4 DWORDs
+	//   to [CXWnd-this+0x204..0x210] every frame as the cached client clip rect
+	//   {X1, Y1, X2, Y2}. The base register is verified CXWnd-this via
+	//   co-occurring reads of ParentWindow@0x168, bClientClipRectChanged@0x194,
+	//   bClipToParent@0x200, bFullyScreenClipped@0x37. An int64_t Data at +0x208
+	//   would have its upper 4 bytes overwritten with clip_rect.Y1 every frame
+	//   -- Data and ClipRectClient physically cannot coexist at this offset.
+	//
+	//   CORROBORATING: 22 CXWnd subclass ctors walked, none extend a Data slot
+	//   at a CXWnd-base offset. eqgame.exe and eqmain.dll CXWnd ctors are
+	//   byte-identical (same compilation, same layout). 126 QWORD accesses to
+	//   [reg+0x208] across the binary, all either vtable calls, stack-relative,
+	//   or non-CXWnd subclass-this. apr07/mar16 corpus had no anchored Data
+	//   placement either. Sizeof matches the header.
+	//
+	// Side-table backing in CXWnd.cpp: a private unordered_map<const CXWnd*,
+	// int64_t>. Set/Get round-trip is semantically correct for any consumer.
+	// API surface preserved per the no-delete-TLOs principle even though no
+	// known engine consumer currently uses pCheck->SetData/GetData beyond the
+	// MQ2AutoInventory same-iteration pattern.
+	//
+	// Agent reports:
+	//   /tmp/may11_cxwnd_data_hunt_20260519_2110.md  (v1, retracted)
+	//   /tmp/may11_cxwnd_data_hunt_v2_20260520_0947.md
+	//   /tmp/may11_cxwnd_data_hunt_v3_20260520_1030.md (decisive)
 	void SetData(int64_t Value);
 	int64_t GetData() const;
 
