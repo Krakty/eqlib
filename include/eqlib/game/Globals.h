@@ -288,6 +288,7 @@ EQLIB_VAR uintptr_t CDisplay__GetClickedActor;
 EQLIB_VAR uintptr_t CDisplay__GetFloorHeight;
 EQLIB_VAR uintptr_t CDisplay__GetUserDefinedColor;
 EQLIB_VAR uintptr_t CDisplay__InitCharSelectUI;
+EQLIB_VAR uintptr_t CDisplay__MoveLocalPlayerToSafeCoords;
 EQLIB_VAR uintptr_t CDisplay__PreZoneMainUI;
 EQLIB_VAR uintptr_t CDisplay__RealRender_World;
 EQLIB_VAR uintptr_t CDisplay__ReloadUI;
