@@ -803,7 +803,7 @@ public:
 	}
 };
 
-constexpr size_t ItemDefinition_size = 0x640; // @sizeof(ItemDefinition) :: 2026-03-10 @ 0x140222F24
+constexpr size_t ItemDefinition_size = 0x688; // @sizeof(ItemDefinition) :: 2026-06-09 (test) -- factory __eq_new(0x688); 3-point stable apr07==may11==jun09. Prior 0x640 was stale (tail under-modeled). See work/cxwnd_jun09_rederive/ItemDefinition_may11_fullmap.md
 
 class [[offsetcomments]] ItemDefinition
 {
@@ -962,9 +962,11 @@ public:
 /*0x60c*/ float PlaceableDefPitch;
 /*0x610*/ float PlaceableDefRoll;
 /*0x614*/ bool bInteractiveObject;
-/*0x615*/ uint8_t SocketSubClassCount;
-/*0x618*/ int SocketSubClass[10];
-/*0x640*/
+/*0x618*/ int Unknown0x618;            // deserialized in ItemDefinition::deserialize tail; semantic TBD
+/*0x61c*/ char Unknown0x61c[0x40];     // deserialized trailing string (GetString 0x40); semantic TBD
+/*0x65c*/ uint8_t SocketSubClassCount; // gates the SocketSubClass copy loop
+/*0x660*/ int SocketSubClass[10];      // 0x660-0x687, fills to sizeof 0x688
+/*0x688*/
 
 	EQLIB_OBJECT ItemDefinition();
 
@@ -1071,83 +1073,63 @@ class [[offsetcomments]] ItemBase : public IChildItemContainer
 {
 public:
 // @start: ItemBase Members
-// may11-test layout per work/may11_items_audit_2026-05-14.md +
-//   work/may11_live_field_hunt_2026-05-16.md (sizeof=0x118)
-// DontKnow placed at 0x0a0 (VERIFIED int64-width handle via live ctor/dtor disasm).
-// Price displaced from 0x0a0 to UNVERIFIED — see #if 0 block.
-/*0x008*/ bool bConvertable;
-/*0x009*/ bool bRankDisabled;
-/*0x00a*/ bool bCopied;
-/*0x00c*/ int OrnamentationIcon;
-/*0x010*/ bool bCollected;
-/*0x014*/ ItemGlobalIndex GlobalIndex;
-/*0x020*/ int Charges;
-/*0x028*/ ItemDefinition* ItemDef;          // VESTIGIAL in may11 — always NULL across 32 live items; real ItemDef pointer lives in ItemClient::SharedItemDef at 0x118/0x120. Use GetItemDefinition() (virtual, thunked to binary's may11 native impl).
-/*0x030*/ int MerchantQuantity;
-/*0x038*/ ItemContainer Contents;
-/*0x060*/ unsigned int DeserializeStamp;     // RESOLVED 2026-05-19: __MemChecker1_x checksum stamp written by ItemBase deserializer FUN_140676fb0 from final parser checksum at parser+0x14. NOT RespawnTime, NOT ActorTag1, NOT CursorAttachment (prior task #363's CursorAttachment verdict superseded -- the 32-bit observed values are too small for 64-bit pointers; static evidence shows write source is __MemChecker1_x return). See /tmp/may11_RespawnTime_ActorTag1_20260519_2110.md.
-/*0x064*/ int Power;
-/*0x068*/ bool bDisableAugTexture;
-/*0x070*/ ItemEvolutionDataPtr pEvolutionData;
-/*0x080*/ unsigned int ItemHash;
-/*0x084*/ unsigned int RespawnTime;          // RESOLVED 2026-05-19: deserializer writes DWORD at +0x84 from parser+0x28 (text field index 4, strtoll-parsed); gated by iVar5>=2. Was previously at 0x60 by exhaustion-reasoning that turned out invalid (0x60 is DeserializeStamp). See /tmp/may11_RespawnTime_ActorTag1_20260519_2110.md.
-/*0x088*/ int AugFlag;
-/*0x08c*/ unsigned int NewArmorID;
-/*0x090*/ int NoDropFlag;
-/*0x094*/ int Open;
-/*0x098*/ int ID;
-/*0x09c*/ int ScriptIndex;
-/*0x0a0*/ int64_t DontKnow;  // opaque handle/smart-pointer; QWORD-width; ctor zero-inits at va=0x14066b9ca; deserialize-copy at va=0x14067736b; refcounted teardown pairs with [+0x70] handle
-/*0x0a8*/ unsigned int LastCastTime;
-/*0x0b0*/ int64_t MerchantSlot; // CONTEXT-DEPENDENT (verified 2026-05-19 via live walk at Angler_Winifred regular merchant):
-                                //   - In MerchantPageHandler.ItemContainer (merchant inventory): holds the displayed
-                                //     buy price in COPPER (e.g., 65 = .065p, 4086 = 4.086p). Direct accessor in
-                                //     binary: FUN_140670810 = `mov rax,[rcx+0xb0]; ret`. Called from the ALT branch
-                                //     of CMerchantWnd::DisplayBuyOrSellPrice@0x1404927a0 (0x140492a33).
-                                //   - In player inventory: original "slot index" semantic (UNVERIFIED -- needs separate
-                                //     audit, may also hold a different value).
-                                // The displayed price for an arbitrary merchant item is this field; no walk through
-                                // CMerchantWnd cache pointers is needed for regular merchants. CPointMerchantWnd
-                                // (LDoN/Loyalty) NOT YET verified -- may use same field or different (Step 2 pending).
-                                // See /tmp/laptop_merchant_findings_2026-05-19-2200.md.
-/*0x0b8*/ int NoteStatus;
-/*0x0c0*/ SoeUtil::String SaveString;
-/*0x0d8*/ int RealEstateID;
-/*0x0dc*/ int ActorTag2;
-/*0x0e0*/ int StackCount;
-/*0x0e4*/ int Luck;
-/*0x0e8*/ EqItemGuid ItemGUID;
-/*0x0fc*/ int ArmorType;
-/*0x100*/ bool bItemNeedsUpdate;
-uint8_t _pad_0x104[0x4];  // injected to enforce declared layout
-/*0x108*/ uint32_t Unknown0x108_PerInstanceCounter; // NEW may11 field; sequential per-instance int observed across 32 live items (0x116dX..0x116eX). Semantic unknown; likely internal allocation counter / per-instance handle. Discovered via live audit 2026-05-16.
-uint8_t _pad_0x10c[0x4];  // injected to enforce declared layout
-/*0x110*/ unsigned int Tint;
-/*0x118*/
+// jun09-test layout (sizeof=0x108) -- DERIVED from the jun09 binary; independently matches apr07
+//   (per-class shuffle: ItemBase reverted apr07<->jun09; may11 was the outlier at 0x118). Every offset
+//   read from jun09 ItemBase::deserialize @0x140677f90, ItemClient::CreateItemClient @0x1402c3ab0 and
+//   ~ItemClient @0x1402c3570. See work/items_jun09_build/Items_jun09_proposed.md +
+//   work/cxwnd_jun09_rederive/ItemClient_jun09_verified.md. NOTE: may11-only fields DeserializeStamp
+//   and Unknown0x108_PerInstanceCounter do NOT exist in jun09 (they were the may11 insertions).
+/*0x008*/ int ID;
+/*0x00c*/ int NoDropFlag;
+/*0x010*/ int OrnamentationIcon;
+/*0x014*/ int ScriptIndex;
+/*0x018*/ ItemGlobalIndex GlobalIndex;
+/*0x024*/ unsigned int ItemHash;
+/*0x028*/ int Luck;
+/*0x02c*/ bool bConvertable;
+/*0x030*/ int64_t DontKnow;  // opaque QWORD handle/smart-pointer; refcounted teardown pairs with pEvolutionData@0x68
+/*0x038*/ bool bCopied;
+/*0x03c*/ int ArmorType;
+/*0x040*/ bool bDisableAugTexture;
+/*0x044*/ int AugFlag;
+/*0x048*/ int StackCount;
+/*0x04c*/ int Charges;
+/*0x050*/ unsigned int Tint;
+/*0x054*/ unsigned int RespawnTime;
+/*0x058*/ int Open;
+/*0x05c*/ bool bCollected;
+/*0x060*/ int Power;
+/*0x068*/ ItemEvolutionDataPtr pEvolutionData;
+/*0x078*/ SoeUtil::String SaveString;
+/*0x090*/ int64_t Price;
+/*0x098*/ int ActorTag1;
+/*0x09c*/ int ActorTag2;
+/*0x0a0*/ int NoteStatus;
+/*0x0a4*/ bool bItemNeedsUpdate;
+/*0x0a8*/ ItemContainer Contents;
+/*0x0d0*/ ItemDefinition* ItemDef;          // VESTIGIAL/always-NULL; real ItemDef is ItemClient::SharedItemDef@0x108. Use GetItemDefinition().
+/*0x0d8*/ bool bRankDisabled;
+/*0x0d9*/ EqItemGuid ItemGUID;
+/*0x0f0*/ int64_t MerchantSlot;             // merchant-ctx: displayed buy price in copper (CMerchantWnd::DisplayBuyOrSellPrice path); player-inv: slot index
+/*0x0f8*/ unsigned int LastCastTime;
+/*0x0fc*/ int RealEstateID;
+/*0x100*/ unsigned int NewArmorID;
+/*0x104*/ int MerchantQuantity;
+/*0x108*/
 // @end: ItemBase Members
 
-#if 0  // may11: fields without active-layout placement
+#if 0  // jun09: fields without active-layout placement (compute-only)
        //
-       // (Price RESOLVED 2026-05-19: no per-instance Price storage on ItemBase. For
-       //  regular merchants, the displayed buy price lives at pItem->MerchantSlot@+0xb0
-       //  (verified live across 4 items). For point merchants (CPointMerchantWnd) the
-       //  storage path is still unknown -- pending live walk Step 2. See
-       //  /tmp/laptop_merchant_findings_2026-05-19-2200.md.)
+       // ConvertItemID, ConvertItemName: NO STORAGE — compute-only literal-return in the binary
+       //   (apr07/may11/jun09 accessors all return literal 0 / empty CXStr). Upstream-declared but
+       //   compiler-elided. Do not place.
        //
-       // ConvertItemID, ConvertItemName: NO STORAGE — compute-only.
-       //   No symbol or string "ConvertItem" in may11 disasm. Apr07 and may11
-       //   accessors both return literal 0 / empty CXStr (already implemented
-       //   inline below). Upstream-declared but compiler-elided. Do not place.
-       //
-       // ActorTag1: NO STORAGE in may11. RESOLVED 2026-05-19: apr07 had a field
-       //   at apr07+0x98 named ActorTag1, but may11+0x98 is now ID. ItemBase
-       //   deserializer writes only 2 DWORD data slots (+0x60 DeserializeStamp,
-       //   +0x84 RespawnTime) in the equivalent range. No third slot exists for
-       //   ActorTag1 in may11. ActorTag2 (+0xdc) still has storage.
+       // NOTE (jun09): Price (0x90) and ActorTag1 (0x98) ARE placed in the active jun09 layout above
+       //   (jun09 ItemBase == apr07). The prior may11 notes calling them "no storage" were may11-specific
+       //   (may11 inserted DeserializeStamp@0x60 and shifted the block); they do not apply to jun09.
        //
 	int ConvertItemID;            // NO STORAGE — compute-only literal-return in binary
 	CXStr ConvertItemName;        // NO STORAGE — compute-only literal-return in binary
-	int ActorTag1;                // NO STORAGE in may11 — apr07 field at +0x98, no surviving slot in may11
 #endif
 
 	EQLIB_OBJECT ItemBase();
@@ -1293,7 +1275,7 @@ uint8_t _pad_0x10c[0x4];  // injected to enforce declared layout
 	__declspec(property(get = get_Item2)) ItemDefinition* Item2;
 };
 
-constexpr size_t ItemClient_size = 0x130; // @sizeof(ItemClient) :: 2026-05-11 (test) per work/may11_items_audit_2026-05-14.md (__eq_new(0x140) at ItemClient::CreateItemClient; 0x10 is shared_ptr control header)
+constexpr size_t ItemClient_size = 0x120; // @sizeof(ItemClient) :: 2026-06-09 (test) -- jun09 ItemClient::CreateItemClient @0x1402c3ab0 __eq_new(0x130); 0x10 is shared_ptr control header. Ext offsets track jun09 ItemBase sizeof 0x108 (VERIFIED factory+dtor, work/cxwnd_jun09_rederive/ItemClient_jun09_verified.md)
 
 class [[offsetcomments]] ItemClient : public ItemBase
 {
@@ -1307,9 +1289,9 @@ public:
 
 	EQLIB_OBJECT static ItemPtr Create() { return eqstd::make_shared<ItemClient>(); }
 
-/*0x118*/ ItemDefinitionPtr SharedItemDef;
-/*0x128*/ CXStr ClientString;
-/*0x130*/
+/*0x108*/ ItemDefinitionPtr SharedItemDef;
+/*0x118*/ CXStr ClientString;
+/*0x120*/
 };
 
 SIZE_CHECK(ItemClient, ItemClient_size);
