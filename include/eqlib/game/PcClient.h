@@ -1495,8 +1495,8 @@ public:
 /*0x21e8*/ EqGuid Guid;
 /*0x21f0*/ bool bBetaBuffed;
 /*0x21f4*/ int Unknown0x1ee4;
-/*0x21f8*/ int MainLevel;
-/*0x21fc*/ bool bShowHelm;
+/*0x21f8*/ bool bShowHelm; // jun09: BYTE@0x21f8 (init=1; byte read/write/state-reset, 5 byte-accesses). Corrected: was mislabeled MainLevel.
+/*0x21fc*/ int MainLevel;  // jun09: int@0x21fc (shadow/computed, no direct write). Corrected: was mislabeled bShowHelm.
 /*0x2200*/ int64_t LastTestCopyTime;
 /*0x2208*/ CPlayerPointManager PointManager;
 /*0x2228*/ PointSystemBase PointSystem;
@@ -1805,5 +1805,10 @@ public:
 // PcClient
 // CharacterBase
 SIZE_CHECK(PcClient, PcClient_size);
+
+// jun09 tripwire: bShowHelm is the BYTE@0x21f8 (init=1), MainLevel the int@0x21fc. Binary-proven
+// vs prior swapped labels. If these drift, re-check PcClient+0x21f8 access width before re-labeling.
+static_assert(offsetof(PcClient, bShowHelm) == 0x21f8, "PcClient::bShowHelm offset drift");
+static_assert(offsetof(PcClient, MainLevel) == 0x21fc, "PcClient::MainLevel offset drift");
 
 } // namespace eqlib
