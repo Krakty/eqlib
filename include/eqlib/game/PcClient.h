@@ -442,13 +442,18 @@ public:
 /*0x30*/
 };
 
+// jun09: vector of INLINE Points (no vtable, no ArrayClass<Point*>). GetAltCurrency 0x14069dc40
+// iterates [*this..this[1]) stride 0x10 matching Point.PointType@0x00/PointSubtype@0x04, returns
+// CurrentCount@0x08; ClearPoints 0x14069dc30 sets end=begin. All consumers use GetAltCurrency() only.
 class [[offsetcomments]] CPlayerPointManager
 {
 public:
 	EQLIB_OBJECT unsigned long GetAltCurrency(unsigned long, unsigned long b = 1);
 
-/*0x00*/ void* vfTable;
-/*0x08*/ ArrayClass<Point*> Points;
+/*0x00*/ Point* PointsBegin;        // *this in GetAltCurrency/ClearPoints; inline Point array start
+/*0x08*/ Point* PointsEnd;          // this[1]; ClearPoints sets End=Begin
+/*0x10*/ Point* PointsCapacityEnd;  // vector capacity-end (inferred to fill size 0x20)
+/*0x18*/ void*  PointsAllocator;    // vector allocator/slack (inferred to fill size 0x20)
 /*0x20*/
 };
 using PlayerPointManager = CPlayerPointManager;
@@ -847,13 +852,14 @@ struct PersonaEquipmentSet
 	SoeUtil::EmbeddedArray<EquipmentItem, 23> Slots;
 };
 
-// Another struct like a map. need to figure this out.
+// jun09: intrusive doubly-linked list (NOT a map). Copy-op FUN_14014df20 walks param_1[1]=head,
+// sets param_1[2]=tail, increments param_1[3]=count; nodes have value@0x00, next@0x18, prev@0x20.
 struct LockedItemSet
 {
 /*0x00*/ void* vtable;
-/*0x08*/ void* a;
-/*0x10*/ void* b;
-/*0x18*/ void* c;
+/*0x08*/ void* head;   // param_1[1] in FUN_14014df20 (first node)
+/*0x10*/ void* tail;   // param_1[2] (last node)
+/*0x18*/ int   count;  // param_1[3] (incremented per node)
 /*0x20*/
 };
 
