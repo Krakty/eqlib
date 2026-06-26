@@ -867,6 +867,7 @@ public:
 /*0x264*/ bool                              bUsesClassicUI;
 /*0x265*/ bool                              bMouseOverEvent;
 /*0x266*/ uint8_t _pad_end[0x2];
+/*0x268*/ uint8_t Unknown0x268[0x8];   // 6-24 +8 DATA member (otto2 defsurgery): sizeof 0x268->0x270, ROOT of the UI +8 cascade; binary writes byte@0x26c/0x26d. Reserved pending reader-trace name.
 // @end: CXWnd Members
 
 	ALT_MEMBER_ALIAS(bool, bEscapable, CloseOnESC);

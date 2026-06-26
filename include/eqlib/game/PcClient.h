@@ -910,7 +910,7 @@ struct UnknownCharacterStruct1
 /*0x28*/
 };
 
-class [[offsetcomments(0x2e40)]] CharacterBase : public IFreeToPlayInfo
+class [[offsetcomments(0x2f00)]] CharacterBase : public IFreeToPlayInfo
 {
 	// +0: vftable
 public:
@@ -1084,7 +1084,7 @@ public:
 };
 
 // The starting offset is the size of PcBase
-class [[offsetcomments(0x2788)]] CharacterZoneClient : virtual public CharacterBase
+class [[offsetcomments(0x2838)]] CharacterZoneClient : virtual public CharacterBase
 {
 	virtual void vftableph() {}
 
@@ -1700,8 +1700,7 @@ public:
 /*0x2ee0*/ short                                 BaseKeyRingSlots[eKeyRingTypeCount];
 /*0x2eee*/ bool                                  bPickZoneFewest;
 /*0x2ef0*/ int                                   Unknown0x28a4;                // used in CContainerWnd::HandleCombine
-/*0x2ef4*/ uint8_t                               Unknown0x2ef4[0xC0];          // pad before virtual base CharacterBase
-/*0x2fb4*/
+/*0x2ef4*/  // 6/24: removed stale Unknown0x2ef4[0xC0] pad — vbase CharacterBase moved 0x2FC0->0x2F00 (-0xC0); PcClient 0x3358->0x3298 (winbuild /d1reportSingleClassLayout ground truth)
 
 	ALT_MEMBER_GETTER(ExtendedTargetList*, pExtendedTargetList, pXTargetMgr);  // cannot be null
 	ALT_MEMBER_GETTER(uint32_t, DowntimeStart, DowntimeStamp);

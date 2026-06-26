@@ -1265,7 +1265,7 @@ public:
 	__declspec(property(get = get_Item2)) ItemDefinition* Item2;
 };
 
-constexpr size_t ItemClient_size = 0x138; // 6/24 ctor-witness (otto_040, +0x8 from 6/9 0x130); pending otto2 bulk __eq_new cross-check
+constexpr size_t ItemClient_size = 0x130; // 6/24 compiler-confirmed sizeof (winbuild /d1reportSingleClassLayout); otto_040 +8 was the MI/sub-vtable new-size trap (phantom, like PcProfile)
 
 class [[offsetcomments]] ItemClient : public ItemBase
 {
