@@ -251,7 +251,7 @@ public:
 // CXWnd
 //============================================================================
 
-constexpr size_t CXWnd_size = 0x270 // 6-24 CXWnd +8 cascade (otto2_003, CXWnd 0x268->0x270 root); was 0x268
+constexpr size_t CXWnd_size = 0x270; // 6-24 CXWnd +8 cascade (otto2_003, CXWnd 0x268->0x270 root); was 0x268
 constexpr size_t CXWnd_vftable_size = 0x348;
 
 class [[offsetcomments]] CXWnd
@@ -902,7 +902,7 @@ enum eIniFlags
 	eIniFlag_All                     = 0xffffffff
 };
 
-constexpr size_t CSidlScreenWnd_size = 0x2D8 // 6-24 CXWnd +8 cascade (otto2_003, CXWnd 0x268->0x270 root); was 0x2D0
+constexpr size_t CSidlScreenWnd_size = 0x2D8; // 6-24 CXWnd +8 cascade (otto2_003, CXWnd 0x268->0x270 root); was 0x2D0
 constexpr size_t CSidlScreenWnd_vftable_size = 0x380;
 
 class [[offsetcomments]] CSidlScreenWnd : public CXWnd

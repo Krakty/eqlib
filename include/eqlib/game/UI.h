@@ -312,7 +312,7 @@ public:
 // CButtonWnd
 //============================================================================
 
-constexpr size_t CButtonWnd_size = 0x350 // 6-24 CXWnd +8 cascade (otto2_003, CXWnd 0x268->0x270 root); was 0x348
+constexpr size_t CButtonWnd_size = 0x350; // 6-24 CXWnd +8 cascade (otto2_003, CXWnd 0x268->0x270 root); was 0x348
 
 class [[offsetcomments]] CButtonWnd : public CXWnd
 {
@@ -1912,7 +1912,7 @@ public:
 // CBankWnd
 //============================================================================
 
-constexpr size_t CBankWnd_size = 0x2368 // 6-24 RM-ALLOC-SIZE+vtable-identity (otto2_002), +8 UI cascade; was 0x2360
+constexpr size_t CBankWnd_size = 0x2368; // 6-24 RM-ALLOC-SIZE+vtable-identity (otto2_002), +8 UI cascade; was 0x2360
 
 class [[offsetcomments]] CBankWnd : public CGFScreenWnd, public WndEventHandler
 {
@@ -2392,7 +2392,7 @@ enum BuffWindowType
 	BuffWindowShortDuration,
 };
 
-constexpr size_t CBuffWindow_size = 0x358 // 6-24 CXWnd +8 cascade (otto2_003, CXWnd 0x268->0x270 root); was 0x350
+constexpr size_t CBuffWindow_size = 0x358; // 6-24 CXWnd +8 cascade (otto2_003, CXWnd 0x268->0x270 root); was 0x350
 
 class [[offsetcomments]] CBuffWindow : public CSidlScreenWnd, public WndEventHandler
 {
@@ -3296,7 +3296,7 @@ enum ECursorAttachmentType
 	eCursorAttachment_EquipmentKeyRingLink,
 };
 
-constexpr size_t CCursorAttachment_size = 0x650 // 6-24 CXWnd +8 cascade (otto2_003, CXWnd 0x268->0x270 root); was 0x648
+constexpr size_t CCursorAttachment_size = 0x650; // 6-24 CXWnd +8 cascade (otto2_003, CXWnd 0x268->0x270 root); was 0x648
 
 class [[offsetcomments]] CCursorAttachment : public CGFScreenWnd, public WndEventHandler
 {
@@ -3462,7 +3462,7 @@ public:
 // CFindItemWnd
 //============================================================================
 
-constexpr size_t CFindItemWnd_size = 0x408 // 6-24 RM-ALLOC-SIZE+vtable-identity (otto2_002), +8 UI cascade; was 0x400
+constexpr size_t CFindItemWnd_size = 0x408; // 6-24 RM-ALLOC-SIZE+vtable-identity (otto2_002), +8 UI cascade; was 0x400
 
 class [[offsetcomments]] CFindItemWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -3548,7 +3548,7 @@ enum FindLocationType {
 };
 EQLIB_API const char* FindLocationTypeToString(FindLocationType type);
 
-constexpr size_t CFindLocationWnd_size = 0x7C8 // 6-24 CXWnd +8 cascade (otto2_003, CXWnd 0x268->0x270 root); was 0x7C0
+constexpr size_t CFindLocationWnd_size = 0x7C8; // 6-24 CXWnd +8 cascade (otto2_003, CXWnd 0x268->0x270 root); was 0x7C0
 
 class [[offsetcomments]] CFindLocationWnd : public CGFScreenWnd
 {
@@ -3762,7 +3762,7 @@ public:
 // CGiveWnd
 //============================================================================
 
-constexpr size_t CGiveWnd_size = 0xB58 // 6-24 RM-ALLOC-SIZE+vtable-identity (otto2_002), +8 UI cascade; was 0xB50
+constexpr size_t CGiveWnd_size = 0xB58; // 6-24 RM-ALLOC-SIZE+vtable-identity (otto2_002), +8 UI cascade; was 0xB50
 
 class [[offsetcomments]] CGiveWnd : public CGFScreenWnd, public PopDialogHandler, public WndEventHandler
 {
@@ -3951,7 +3951,7 @@ public:
 // CGroupWnd
 //============================================================================
 
-constexpr size_t CGroupWnd_size = 0x4730 // 6-24 RM-ALLOC-SIZE+vtable-identity (otto2_002), +8 UI cascade; was 0x4728
+constexpr size_t CGroupWnd_size = 0x4730; // 6-24 RM-ALLOC-SIZE+vtable-identity (otto2_002), +8 UI cascade; was 0x4728
 
 class [[offsetcomments]] CGroupWnd : public CGFScreenWnd
 {
@@ -4648,7 +4648,7 @@ SIZE_CHECK(CInvSlotMgr, CInvSlotMgr_size);
 
 //----------------------------------------------------------------------------
 
-constexpr size_t CInvSlotWnd_size = 0x468 // 6-24 CXWnd +8 cascade (otto2_003, CXWnd 0x268->0x270 root); was 0x460
+constexpr size_t CInvSlotWnd_size = 0x468; // 6-24 CXWnd +8 cascade (otto2_003, CXWnd 0x268->0x270 root); was 0x460
 
 class [[offsetcomments]] CInvSlotWnd : public CButtonWnd
 {
@@ -4747,7 +4747,7 @@ enum ItemDisplayFlags
 	FROM_BARTER_SEARCH = 0x00000010
 };
 
-constexpr size_t CItemDisplayWnd_size = 0xAB8 // 6-24 RM-ALLOC-SIZE+vtable-identity (otto2_002), +8 UI cascade; was 0xAB0
+constexpr size_t CItemDisplayWnd_size = 0xAB8; // 6-24 RM-ALLOC-SIZE+vtable-identity (otto2_002), +8 UI cascade; was 0xAB0
 
 class [[offsetcomments]] CItemDisplayWnd : public CSidlScreenWnd
 {
@@ -4928,7 +4928,7 @@ public:
 // CKeyRingWnd
 //============================================================================
 
-constexpr size_t CKeyRingWnd_size = 0x4B0 // 6-24 CXWnd +8 cascade (otto2_003, CXWnd 0x268->0x270 root); was 0x4A8
+constexpr size_t CKeyRingWnd_size = 0x4B0; // 6-24 CXWnd +8 cascade (otto2_003, CXWnd 0x268->0x270 root); was 0x4A8
 
 class [[offsetcomments]] CKeyRingWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -5054,7 +5054,7 @@ public:
 
 struct loot_msg;
 
-constexpr size_t CLootWnd_size = 0xCC8 // 6-24 RM-ALLOC-SIZE+vtable-identity (otto2_002), +8 UI cascade; was 0xCC0
+constexpr size_t CLootWnd_size = 0xCC8; // 6-24 RM-ALLOC-SIZE+vtable-identity (otto2_002), +8 UI cascade; was 0xCC0
 
 class [[offsetcomments]] CLootWnd : public CSidlScreenWnd, public PopDialogHandler, public WndEventHandler
 {
@@ -5693,7 +5693,7 @@ public:
 
 constexpr const int MAX_PET_BUTTONS = 14;
 
-constexpr size_t CPetInfoWnd_size = 0x3D8 // 6-24 CXWnd +8 cascade (otto2_003, CXWnd 0x268->0x270 root); was 0x3D0
+constexpr size_t CPetInfoWnd_size = 0x3D8; // 6-24 CXWnd +8 cascade (otto2_003, CXWnd 0x268->0x270 root); was 0x3D0
 
 class [[offsetcomments]] CPetInfoWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -5832,7 +5832,7 @@ enum ECombatState
 };
 
 
-constexpr size_t CPlayerWnd_size = 0x410 // 6-24 CXWnd +8 cascade (otto2_003, CXWnd 0x268->0x270 root); was 0x408
+constexpr size_t CPlayerWnd_size = 0x410; // 6-24 CXWnd +8 cascade (otto2_003, CXWnd 0x268->0x270 root); was 0x408
 
 class [[offsetcomments]] CPlayerWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -6227,7 +6227,7 @@ enum ESpellDisplayType
 	SpellDisplayType_TargetBuff,
 };
 
-constexpr size_t CSpellDisplayWnd_size = 0x3C0 // 6-24 CXWnd +8 cascade (otto2_003, CXWnd 0x268->0x270 root); was 0x3B8
+constexpr size_t CSpellDisplayWnd_size = 0x3C0; // 6-24 CXWnd +8 cascade (otto2_003, CXWnd 0x268->0x270 root); was 0x3B8
 
 class [[offsetcomments]] CSpellDisplayWnd : public CSidlScreenWnd
 {
@@ -6329,7 +6329,7 @@ public:
 // CTargetWnd
 //============================================================================
 
-constexpr size_t CTargetWnd_size = 0x3D0 // 6-24 RM-ALLOC-SIZE+vtable-identity (otto2_002), +8 UI cascade; was 0x3C8
+constexpr size_t CTargetWnd_size = 0x3D0; // 6-24 RM-ALLOC-SIZE+vtable-identity (otto2_002), +8 UI cascade; was 0x3C8
 
 class [[offsetcomments]] CTargetWnd : public CSidlScreenWnd, public WndEventHandler
 {
@@ -6637,7 +6637,7 @@ public:
 // CTradeWnd
 //============================================================================
 
-constexpr size_t CTradeWnd_size = 0x1750 // 6-24 RM-ALLOC-SIZE+vtable-identity (otto2_002), +8 UI cascade; was 0x1748
+constexpr size_t CTradeWnd_size = 0x1750; // 6-24 RM-ALLOC-SIZE+vtable-identity (otto2_002), +8 UI cascade; was 0x1748
 
 class [[offsetcomments]] CTradeWnd : public CGFScreenWnd, public WndEventHandler
 {
